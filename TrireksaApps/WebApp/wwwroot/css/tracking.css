@@ -1,0 +1,93 @@
+.header {
+  padding: 20px;
+  background: #f5e619;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f5e619), to(#ff8d0c));
+  background: linear-gradient(180deg, #f5e619 0%, #ff8d0c 100%);
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .service-body {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .service-body .service-icon {
+  margin: 20px;
+  padding: 30px;
+  height: 175px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: white;
+  -webkit-box-shadow: 4px 4px 13px -1px rgba(0, 0, 0, 0.32);
+          box-shadow: 4px 4px 13px -1px rgba(0, 0, 0, 0.32);
+}
+
+.header .service-body .service-icon img {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.header .service-body label {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.header .service-body .service-icon:hover {
+  margin: 20px;
+  padding: 30px;
+  height: 150px;
+  width: 150px;
+}
+
+.header .search-body {
+  padding: 5px;
+  background-color: white;
+  border-radius: 30px;
+  height: 45px;
+}
+
+.header .search-body input,
+.header .search-body button {
+  margin: 5px;
+  vertical-align: middle;
+  background-color: transparent;
+  border: transparent !important;
+}
+
+.header .search-body input:focus,
+.header .search-body button:focus {
+  border: transparent !important;
+}
+
+.header .search-body button img {
+  width: 25px;
+}
+
+.tracking {
+  padding: 20px;
+  min-height: 400px;
+}
+/*# sourceMappingURL=tracking.css.map */

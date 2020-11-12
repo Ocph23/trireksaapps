@@ -1,0 +1,29 @@
+﻿@page "/tracking"
+
+<div class="header">
+    <div class="service-body">
+        <div class="service-icon">
+            <img src="/images/info-icon.png" alt="">
+        </div>
+        <label>TRACKING SYSTEM</label>
+    </div>
+
+    <div class="search-body">
+        <input type="text" class="search-input" placeholder="AWB/SPB">
+        <button @onclick="IncrementCount"><img src="/images/search.png" alt=""></button>
+    </div>
+</div>
+
+<div class="tracking container">
+    <h4>Hasil Pencarian</h4>
+    <h5>@message</h5>
+</div>
+
+@code {
+    private string message = "";
+
+    private void IncrementCount()
+    {
+        this.message = "Not Found !";
+    }
+}

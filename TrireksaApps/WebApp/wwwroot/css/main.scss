@@ -1,0 +1,207 @@
+﻿.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .main-header {
+        background-image: url(../images/industrial-port-container-yard.jpg);
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        .logo-header {
+            background-size: cover;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            background-image: url(../images/logo1.png);
+        }
+
+        .title-header {
+            width: 100%;
+            top: 80vh;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            .title-body {
+                justify-self: center;
+                align-self: center;
+                font-size: 40px;
+                height: 30px;
+                font-weight: bold;
+                color: white;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .member-button {
+        position: absolute;
+        right: 0px;
+        top: 300px;
+        width: 100px;
+        height: 100px;
+        clip-path: circle(50% at 100% 50%);
+        background: #22c537;
+        background: linear-gradient(90deg, #22c537 0%, #0b4413 100%);
+        .member-button-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            img {
+                margin-left: 20px;
+                width: 10px;
+                height: 15px;
+                transform: rotate(180deg);
+            }
+
+            label {
+                display: none;
+            }
+        }
+    }
+
+    .member-button:hover {
+        width: 200px;
+        height: 200px;
+        clip-path: circle(50% at 100% 50%);
+        right: 0px;
+        justify-content: flex-end;
+        img {
+            display: none;
+        }
+        label {
+            display: block;
+            margin-left: 90px;
+            font-size: 20px;
+            color: white;
+        }
+    }
+
+    .main-service {
+        background: #f5e619;
+        background: linear-gradient(180deg, #f5e619 0%, #ff8d0c 100%);
+        padding: 20px;
+        width: 100%;
+        .service-title {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .main-body-services {
+            display: flex;
+            width: 100%;
+            height: 300px;
+            justify-content: center;
+            align-items: center;
+            .service-body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 200px;
+                .service-icon {
+                    margin: 20px;
+                    padding: 30px;
+                    height: 100px;
+                    width: 100px;
+                    border-radius: 50%;
+                    background-color: white;
+                    box-shadow: 4px 4px 13px -1px rgba(0, 0, 0, 0.32);
+                    img {
+                        width: 100%;
+                    }
+                }
+                label {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+
+                .service-icon:hover {
+                    margin: 20px;
+                    padding: 30px;
+                    height: 150px;
+                    width: 150px;
+                }
+            }
+        }
+    }
+
+    .main-description {
+        padding: 40px;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .description {
+            width: 40%;
+            span {
+                font-size: 20px;
+                font-style: italic;
+            }
+        }
+    }
+}
+
+.map-body {
+    text-align: center;
+}
+
+.footer {
+    background: #f5e619;
+    background: linear-gradient(180deg, #f5e619 0%, #ff8d0c 100%);
+    padding: 20px;
+    width: 100%;
+
+    .footer-item {
+        margin-bottom: 20px;
+        .footer-item-title {
+            padding: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(45, 55, 65);
+            border-bottom: 3px yellowgreen solid;
+        }
+
+        .footer-item-body {
+            margin-right: 10px;
+            color: rgb(45, 55, 65);
+        }
+    }
+}
+
+.logo-footer {
+    text-align: center;
+    background-size: cover;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    background-image: url(../images/logo1.png);
+}
+
+@media only screen and (max-width: 500px) {
+    .main-body-services {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+
+    .main-description {
+        height: auto;
+        .description {
+            width: 100% !important;
+            span {
+                font-size: 15px;
+                font-style: italic;
+            }
+        }
+    }
+
+    .title-body {
+        font-size: 18px !important;
+    }
+}
