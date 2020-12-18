@@ -1,0 +1,37 @@
+@controller=http://localhost:5000/api/City
+
+@Authorization=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY0NjRlMDc1LTE4NDktNGEyNC1hZTIxLTEzNmU0NTkzYmY2MCIsIm5hbWUiOiJhZG1pbiIsInJvbGVzIjoiU3lzdGVtLlN0cmluZ1tdIiwibmJmIjoxNjA1ODY2ODU0LCJleHAiOjE2MDY0NzE2NTQsImlhdCI6MTYwNTg2Njg1NH0.avYplMKooazChSjKlM_ncdZy4Uqo9VlDu0QMgzRNeQY
+
+GET {{controller}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+####
+
+POST {{controller}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+{
+  "id": 0,
+  "province": "Papua",
+  "regency": "Kabupaten Jayawijawa",
+  "cityName": "Wamena",
+  "cityCode": "WMX"
+}
+
+####
+PUT {{controller}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+{
+  "id": 1,
+  "province": "Papua",
+  "regency": "Kota Jayawijawa",
+  "cityName": "Wamena",
+  "cityCode": "WMX"
+}
+
+
+

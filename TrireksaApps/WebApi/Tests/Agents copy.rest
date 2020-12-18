@@ -1,0 +1,7 @@
+@controller=http://localhost:5001/api/customers
+
+@Authorization=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0NmU5OGI0LWEwZDYtNDgyOS04NTliLWIxODYyY2JjNjc4ZiIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwicm9sZXMiOiJTeXN0ZW0uU3RyaW5nW10iLCJuYmYiOjE2MDc5NzE4NjIsImV4cCI6MTYwODU3NjY2MiwiaWF0IjoxNjA3OTcxODYyfQ.SQ52dLQiavffIfZoF6hzFBzzQS1JO3bL8BtFyc8Gt2Y
+
+DELETE {controller}/3 HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}

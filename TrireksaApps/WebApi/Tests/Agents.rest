@@ -1,0 +1,72 @@
+@controller=http://localhost/api/Agents
+
+@Authorization=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0NmU5OGI0LWEwZDYtNDgyOS04NTliLWIxODYyY2JjNjc4ZiIsIm5hbWUiOiJBZG1pbmlzdHJhdG9yIiwicm9sZXMiOiJTeXN0ZW0uU3RyaW5nW10iLCJuYmYiOjE2MDc5NzE4NjIsImV4cCI6MTYwODU3NjY2MiwiaWF0IjoxNjA3OTcxODYyfQ.SQ52dLQiavffIfZoF6hzFBzzQS1JO3bL8BtFyc8Gt2Y
+
+
+GET {{controller}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+
+#####
+
+
+GET {{controller}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+
+#####
+
+POST {{controller}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+
+{
+  "id": 0,
+  "name": "Nabire Express 2",
+  "address": "jln. Andreas",
+  "npwp": "1234564",
+  "contactName": "Yanto",
+  "phone": "123212",
+  "handphone": "0814554",
+  "email": "nex@gmail.com"
+  
+}
+
+
+####
+PUT {{controller}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+{
+    "id": 1,
+    "name": "Nabire Expressssss",
+    "address": "Jln.",
+    "npwp": null,
+    "contactName": "Yanto Nabire",
+    "phone": "0967",
+    "handphone": "02121212",
+    "email": null,
+    "cityId": 3,
+    "cityagentcanaccess": [
+      {
+        "id": 2,
+        "agentId": 1,
+        "cityId": 2
+      }
+    ],
+    "manifestoutgoing": []
+  }
+
+###
+
+
+POST http://localhost:5000/api/CitiesAgentCanAccess/OnChangeItemTrue HTTP/1.1
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+
+{"Id":0,"AgentId":1,"CityId":3}

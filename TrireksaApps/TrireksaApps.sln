@@ -3,18 +3,51 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{2B580A66-69D9-4BD4-B422-B7434100C324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website", "Website\Website.csproj", "{78EF36BA-707C-4668-AA20-4C14625614E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{E0D1C4B0-BEC9-477E-8714-361F0C931159}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrireksaAppContext", "TrireksaAppContext\TrireksaAppContext.csproj", "{17ABEC46-B78E-4B94-917F-0F005C781AA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrireksaApp", "Desktop\TrireksaApp\TrireksaApp.csproj", "{E584E416-94E5-412B-95BF-4EDCE06289D4}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Desktop\Shared\Shared.shproj", "{EEDA74FC-CA5A-4C06-9654-2600B74E2D1D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Models", "Desktop\Models\Models.shproj", "{080D1AE5-D476-41C5-AF26-8483AAF30E1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstFloor.ModernUI", "Desktop\FirstFloor.ModernUI\FirstFloor.ModernUI.csproj", "{9A653A28-FE46-40E8-A14F-48B0E325165D}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Desktop\Models\Models.projitems*{080d1ae5-d476-41c5-af26-8483aaf30e1a}*SharedItemsImports = 13
+		Desktop\Shared\Shared.projitems*{9a653a28-fe46-40e8-a14f-48b0e325165d}*SharedItemsImports = 4
+		Desktop\Models\Models.projitems*{e584e416-94e5-412b-95bf-4edce06289d4}*SharedItemsImports = 4
+		Desktop\Shared\Shared.projitems*{eeda74fc-ca5a-4c06-9654-2600b74e2d1d}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2B580A66-69D9-4BD4-B422-B7434100C324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B580A66-69D9-4BD4-B422-B7434100C324}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B580A66-69D9-4BD4-B422-B7434100C324}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B580A66-69D9-4BD4-B422-B7434100C324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EF36BA-707C-4668-AA20-4C14625614E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EF36BA-707C-4668-AA20-4C14625614E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78EF36BA-707C-4668-AA20-4C14625614E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D1C4B0-BEC9-477E-8714-361F0C931159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D1C4B0-BEC9-477E-8714-361F0C931159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D1C4B0-BEC9-477E-8714-361F0C931159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D1C4B0-BEC9-477E-8714-361F0C931159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17ABEC46-B78E-4B94-917F-0F005C781AA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17ABEC46-B78E-4B94-917F-0F005C781AA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17ABEC46-B78E-4B94-917F-0F005C781AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17ABEC46-B78E-4B94-917F-0F005C781AA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E584E416-94E5-412B-95BF-4EDCE06289D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E584E416-94E5-412B-95BF-4EDCE06289D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E584E416-94E5-412B-95BF-4EDCE06289D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E584E416-94E5-412B-95BF-4EDCE06289D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
