@@ -76,7 +76,7 @@ namespace TrireksaApp.Models
                     {
 
                         Collies.Clear();
-                        foreach (var item in value.Details)
+                        foreach (var item in value.Colly)
                         {
                             if (item.STT == 0)
                             {

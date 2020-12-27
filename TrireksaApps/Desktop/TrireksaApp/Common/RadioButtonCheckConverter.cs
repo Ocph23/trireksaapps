@@ -6,6 +6,21 @@ using System.Windows.Data;
 
 namespace TrireksaApp.Common
 {
+
+    public class IsNotConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.Equals(true) ? parameter : Binding.DoNothing;
+        }
+    }
+
+
     public class RadioButtonCheckConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -49,8 +64,7 @@ namespace TrireksaApp.Common
                 return Visibility.Visible;
             else
             {
-                int paramValue = 0;
-                var param = Int32.TryParse(parameter.ToString(), out paramValue);
+                Int32.TryParse(parameter.ToString(), out int paramValue);
                 if (paramValue > 0)
                     return Visibility.Collapsed;
                 return Visibility.Hidden;
@@ -72,7 +86,7 @@ namespace TrireksaApp.Common
         {
             Customer data = (Customer)value;
             if(data!=null)
-            return string.Format("{0}\r{1}\rTlp:{2}/{3}/{4}", data.Address??"", data.City.CityName??"",data.Phone1??"",data.Phone2??"",data.Handphone??"");
+            return string.Format("{0}\r{1}\rTlp:{2}/{3}/{4}", data.Address??"", data.City==null?"":data.City.CityName,data.Phone1??"",data.Phone2??"",data.Handphone??"");
             return string.Empty;
         }
 

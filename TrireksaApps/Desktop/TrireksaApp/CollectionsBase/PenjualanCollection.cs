@@ -17,7 +17,7 @@ namespace TrireksaApp.CollectionsBase
     {
 
         public event RefreshComplete RefreshCompleted;
-        private Client client = new Client("Penjualans");
+        private readonly Client client = new Client("Penjualans");
 
         public ObservableCollection<Penjualan> Source { get; set; }
 
@@ -66,7 +66,7 @@ namespace TrireksaApp.CollectionsBase
             var result = this.Source.Where(O => O.STT == id).FirstOrDefault();
             if (result == null)
             {
-                result = await client.GetAsync<Penjualan>("", id);
+                result = await client.GetAsync<Penjualan>("GetBySTT", id);
                 if (result != null)
                 {
 
@@ -74,7 +74,6 @@ namespace TrireksaApp.CollectionsBase
                 
                 }
             }
-            SourceView.Refresh();
             return result;
         }
 
@@ -149,7 +148,7 @@ namespace TrireksaApp.CollectionsBase
             return res;
         }
 
-        internal Task<bool> IsSended(int id)
+        internal Task<bool> IsSended()
         {
             return client.GetAsync<bool>("IsSended");
         }
@@ -181,7 +180,7 @@ namespace TrireksaApp.CollectionsBase
             if (item!=default(Penjualan) && data!=null)
             {
                 data.CustomerIsPay = item.CustomerIsPay;
-                data.Details = item.Details;
+                data.Colly = item.Colly;
                 data.Etc = item.Etc;
                 data.FromCity = item.FromCity;
                 data.ToCity = item.ToCity;

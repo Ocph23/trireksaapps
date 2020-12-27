@@ -22,7 +22,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public DateTime ReciveDate
+        public DateTime? ReciveDate
         {
             get { return _recivedate; }
             set
@@ -77,7 +77,7 @@ namespace ModelsShared.Models
         }
 
         private int _id;
-        private DateTime _recivedate;
+        private DateTime? _recivedate;
         private string _recivename;
         private string _phone;
         private bool _issignin;

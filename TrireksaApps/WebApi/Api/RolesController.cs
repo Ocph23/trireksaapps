@@ -15,7 +15,7 @@ namespace WebApi.Api
     [ApiAuthorize]
     public class RolesController : ControllerBase
     {
-        RolesContext context;
+        readonly RolesContext context;
 
         public RolesController(RolesContext _context)
         {

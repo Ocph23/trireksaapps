@@ -146,7 +146,7 @@ namespace TrireksaApp
                 DoNumber = item.DoNumber,
                 Note = item.Note,
                 PayTypeName = item.PayType.ToString(),
-                Pcs = item.Details.Count,
+                Pcs = item.Colly.Count,
                 PortTypeName = item.PortType.ToString(),
                 Price = item.Price,
                 ChangeDate = item.ChangeDate,
@@ -156,7 +156,7 @@ namespace TrireksaApp
                 Etc = item.Etc,
 
             };
-            var weight = item.Details.Sum(O => O.Weight);
+            var weight = item.Colly.Sum(O => O.Weight);
             data.Costs = weight * item.Price;
             data.TaxValue = (item.Tax * data.Costs) / 100;
             if (item.TypeOfWeight == TypeOfWeight.Volume)
@@ -273,24 +273,24 @@ namespace TrireksaApp
                         if (item == TerbilangConstant.SATU)
                             sb.Append(TerbilangConstant.SERIBU);
                         else
-                            sb.bilangan(item, TerbilangConstant.RIBU);
+                            sb.Bilangan(item, TerbilangConstant.RIBU);
                     }
                     else if (x == 2)
-                        sb.bilangan(item, TerbilangConstant.JUTA);
+                        sb.Bilangan(item, TerbilangConstant.JUTA);
                     else if (x == 3)
-                        sb.bilangan(item, TerbilangConstant.MILYAR);
+                        sb.Bilangan(item, TerbilangConstant.MILYAR);
                     else if (x == 4)
-                        sb.bilangan(item, TerbilangConstant.TRILIUN);
+                        sb.Bilangan(item, TerbilangConstant.TRILIUN);
                     else if (x == 5)
-                        sb.bilangan(item, TerbilangConstant.KUADRILIUN);
+                        sb.Bilangan(item, TerbilangConstant.KUADRILIUN);
                     else if (x == 6)
-                        sb.bilangan(item, TerbilangConstant.KUANTILIUN);
+                        sb.Bilangan(item, TerbilangConstant.KUANTILIUN);
                     else if (x == 7)
-                        sb.bilangan(item, TerbilangConstant.SEKTILIUN);
+                        sb.Bilangan(item, TerbilangConstant.SEKTILIUN);
                     else if (x == 8)
-                        sb.bilangan(item, TerbilangConstant.SEPTILIUN);
+                        sb.Bilangan(item, TerbilangConstant.SEPTILIUN);
                     else if (x == 9)
-                        sb.bilangan(item, TerbilangConstant.OKTILIUN);
+                        sb.Bilangan(item, TerbilangConstant.OKTILIUN);
                 }
                 x--;
             }
@@ -313,7 +313,7 @@ namespace TrireksaApp
             }
         }
 
-        private static void bilangan(this StringBuilder sb, string value, string bilangan)
+        private static void Bilangan(this StringBuilder sb, string value, string bilangan)
         {
             sb.Append(value);
             sb.Append(bilangan);
@@ -350,11 +350,11 @@ namespace TrireksaApp
             {
                 if (s2 == TerbilangConstant.N_NOL) sb.Append(TerbilangConstant.SEPULUH);
                 else if (s2 == TerbilangConstant.N_SATU) sb.Append(TerbilangConstant.SEBELAS);
-                else sb.bilangan(ParseSatuan(s2), TerbilangConstant.BELAS);
+                else sb.Bilangan(ParseSatuan(s2), TerbilangConstant.BELAS);
             }
             else
             {
-                if (s1 != TerbilangConstant.N_NOL) sb.bilangan(ParseSatuan(s1), TerbilangConstant.PULUH);
+                if (s1 != TerbilangConstant.N_NOL) sb.Bilangan(ParseSatuan(s1), TerbilangConstant.PULUH);
                 sb.Append(ParseSatuan(s2));
             }
         }
@@ -364,7 +364,7 @@ namespace TrireksaApp
             string s1 = s.Substring(0, 1);
             string s2 = s.Substring(1, 2);
             if (s1 == TerbilangConstant.N_SATU) sb.Append(TerbilangConstant.SERATUS);
-            else if (s1 != TerbilangConstant.N_NOL) sb.bilangan(ParseSatuan(s1), TerbilangConstant.RATUS);
+            else if (s1 != TerbilangConstant.N_NOL) sb.Bilangan(ParseSatuan(s1), TerbilangConstant.RATUS);
             sb.ParsePuluhan(s2);
             return sb.ToString();
         }

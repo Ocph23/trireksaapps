@@ -36,9 +36,9 @@ namespace TrireksaAppContext.Models
         public int FromCity { get; set; }
         public int ToCity { get; set; }
 
-        public virtual City FromCityNavigation { get; set; }
         public virtual Customer Reciver { get; set; }
         public virtual Customer Shiper { get; set; }
+        public virtual City FromCityNavigation { get; set; }
         public virtual City ToCityNavigation { get; set; }
         public virtual ICollection<Colly> Colly { get; set; }
         public virtual ICollection<Deliverystatus> Deliverystatus { get; set; }

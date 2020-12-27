@@ -12,7 +12,6 @@ namespace TrireksaAppContext.Models
 
         public int Id { get; set; }
         public int Number { get; set; }
-        public int CustomerId { get; set; }
         public bool IsDelivery { get; set; }
         public InvoiceStatus InvoiceStatus { get; set; }
         public DateTime? DeliveryDate { get; set; }
@@ -23,6 +22,8 @@ namespace TrireksaAppContext.Models
         public int UserId { get; set; }
         public DateTime? PaidDate { get; set; }
         public DateTime? CreateDate { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
         
         public virtual ICollection<Invoicedetail> Invoicedetail { get; set; }
     }

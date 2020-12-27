@@ -78,7 +78,7 @@ namespace TrireksaApp.Contents.Penjualan
                 var uri = string.Format("{0}?Id={1}", Common.Helper.GetApiUrl<ModelsShared.Models.Penjualan>("IsSended"), SelectedItem.Id);
                 if (status.Key != SelectedItem.Id)
                 {
-                    MainVM.PenjualanCollection.IsSended(SelectedItem.Id).ContinueWith(async O =>
+                    MainVM.PenjualanCollection.IsSended().ContinueWith(async O =>
                     {
                         bool result = await O;
                         IsDeliverys.Add(SelectedItem.Id, result);
@@ -98,7 +98,7 @@ namespace TrireksaApp.Contents.Penjualan
 
         private async void UpdateDeliveryStatusAction(object obj)
         {
-            var success = await MainVM.PenjualanCollection.UpdateDeliveryStatus(SelectedItem.DeliveryStatus);
+            var success = await MainVM.PenjualanCollection.UpdateDeliveryStatus(SelectedItem.DeliveryStatus.FirstOrDefault());
             if (success)
             {
                 ModernDialog.ShowMessage("Status Tersimpan", "Success", MessageBoxButton.OK);
@@ -188,7 +188,7 @@ namespace TrireksaApp.Contents.Penjualan
                     GetSendedInformation(_selected);
                     if (_selected.DeliveryStatus == null)
                     {
-                        _selected.DeliveryStatus = new Deliverystatus { PenjualanId = _selected.Id };
+                        _selected.DeliveryStatus = new List<Deliverystatus> { new Deliverystatus { PenjualanId = _selected.Id } };
                     }
                 }
                 OnPropertyChanged("SelectedItem");

@@ -13,10 +13,10 @@ namespace TrireksaApp.CollectionsBase
     public class CustomerCollection
     {
         public ObservableCollection<Customer> Source { get; set; }
-        public CollectionView SourceView { get; set; }
-        private Client client = new Client("customers");
+        public  CollectionView SourceView { get; set; }
+        private readonly Client client = new Client("customers");
         public Customer SelectedItem { get; set; }
-        private SignalRClient signalRClient { get; set; }
+        private SignalRClient SignalRClient { get; set; }
 
         public CustomerCollection()
         {
@@ -63,8 +63,8 @@ namespace TrireksaApp.CollectionsBase
                 }
             }
 
-            signalRClient = ResourcesBase.GetSignalClient();
-            signalRClient.OnAddCustomer+= SignalRClient_OnUpdateCUstomer;
+            SignalRClient = ResourcesBase.GetSignalClient();
+            SignalRClient.OnAddCustomer+= SignalRClient_OnUpdateCUstomer;
 
 
         }
@@ -90,7 +90,9 @@ namespace TrireksaApp.CollectionsBase
         internal async Task<bool> RegisterCustomer(Customer selectedItem)
         {
             var respon = await client.PostAsync<Customer>("RegisterCustomer", selectedItem);
-            return true;
+            if(respon!=null)
+                return true;
+            return false;
         }
 
         internal async Task<bool> Update(int id, Customer customer)

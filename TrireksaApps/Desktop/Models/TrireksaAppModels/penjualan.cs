@@ -13,7 +13,7 @@ namespace ModelsShared.Models
             get { return _id; }
             set
             {
-            SetProperty(ref    _id , value);
+                SetProperty(ref _id, value);
             }
         }
 
@@ -22,7 +22,7 @@ namespace ModelsShared.Models
             get { return _stt; }
             set
             {
-            SetProperty(ref    _stt , value);
+                SetProperty(ref _stt, value);
 
             }
         }
@@ -33,7 +33,7 @@ namespace ModelsShared.Models
             get { return _shiperid; }
             set
             {
-            SetProperty(ref    _shiperid , value);
+                SetProperty(ref _shiperid, value);
                 if (CustomerIsPay == CustomerIsPay.Shiper)
                     CustomerIdIsPay = value;
                 if (Shiper != null && FromCity <= 0)
@@ -46,7 +46,7 @@ namespace ModelsShared.Models
             get { return _reciverid; }
             set
             {
-            SetProperty(ref    _reciverid , value);
+                SetProperty(ref _reciverid, value);
                 if (CustomerIsPay == CustomerIsPay.Reciver)
                     CustomerIdIsPay = value;
                 if (Reciver != null && ToCity <= 0)
@@ -59,7 +59,7 @@ namespace ModelsShared.Models
             get { return _price; }
             set
             {
-            SetProperty(ref    _price , value);
+                SetProperty(ref _price, value);
                 SetTotal();
             }
         }
@@ -69,7 +69,7 @@ namespace ModelsShared.Models
             get { return _changedate; }
             set
             {
-            SetProperty(ref    _changedate , value);
+                SetProperty(ref _changedate, value);
             }
         }
 
@@ -78,7 +78,7 @@ namespace ModelsShared.Models
             get { return _updatedate; }
             set
             {
-            SetProperty(ref    _updatedate , value);
+                SetProperty(ref _updatedate, value);
             }
         }
 
@@ -87,37 +87,34 @@ namespace ModelsShared.Models
             get { return _userid; }
             set
             {
-            SetProperty(ref    _userid , value);
+                SetProperty(ref _userid, value);
             }
         }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         public TypeOfWeight TypeOfWeight
         {
             get { return _typeofweight; }
             set
             {
-            SetProperty(ref    _typeofweight , value);
+                SetProperty(ref _typeofweight, value);
             }
         }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         public virtual PayType PayType
         {
             get { return _paytype; }
             set
             {
-            SetProperty(ref    _paytype , value);
+                SetProperty(ref _paytype, value);
             }
         }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         public virtual PortType PortType
         {
             get { return _portType; }
             set
             {
-            SetProperty(ref    _portType , value);
+                SetProperty(ref _portType, value);
             }
         }
         public int FromCity
@@ -125,7 +122,7 @@ namespace ModelsShared.Models
             get { return _fromCity; }
             set
             {
-            SetProperty(ref    _fromCity , value);
+                SetProperty(ref _fromCity, value);
             }
         }
 
@@ -134,17 +131,16 @@ namespace ModelsShared.Models
             get { return _toCity; }
             set
             {
-            SetProperty(ref    _toCity , value);
+                SetProperty(ref _toCity, value);
             }
         }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         public virtual CustomerIsPay CustomerIsPay
         {
             get { return _customerispay; }
             set
             {
-            SetProperty(ref    _customerispay , value);
+                SetProperty(ref _customerispay, value);
             }
         }
 
@@ -157,7 +153,7 @@ namespace ModelsShared.Models
 
             set
             {
-            SetProperty(ref    _customerIdIsPay , value);
+                SetProperty(ref _customerIdIsPay, value);
                 if (value == ShiperID)
                     _customerispay = CustomerIsPay.Shiper;
                 else if (value == ReciverID)
@@ -177,7 +173,7 @@ namespace ModelsShared.Models
             get { return _packingcosts; }
             set
             {
-            SetProperty(ref    _packingcosts , value);
+                SetProperty(ref _packingcosts, value);
                 SetTotal();
             }
         }
@@ -187,7 +183,7 @@ namespace ModelsShared.Models
             get { return _tax; }
             set
             {
-            SetProperty(ref    _tax , value);
+                SetProperty(ref _tax, value);
                 SetTotal();
             }
         }
@@ -197,7 +193,7 @@ namespace ModelsShared.Models
             get { return _etc; }
             set
             {
-            SetProperty(ref    _etc , value);
+                SetProperty(ref _etc, value);
                 SetTotal();
             }
         }
@@ -210,7 +206,7 @@ namespace ModelsShared.Models
             get { return _actived; }
             set
             {
-            SetProperty(ref    _actived , value);
+                SetProperty(ref _actived, value);
 
             }
         }
@@ -220,7 +216,7 @@ namespace ModelsShared.Models
             get { return _isPaid; }
             set
             {
-            SetProperty(ref    _isPaid , value);
+                SetProperty(ref _isPaid, value);
             }
         }
 
@@ -231,7 +227,7 @@ namespace ModelsShared.Models
             get { return _content; }
             set
             {
-            SetProperty(ref    _content , value);
+                SetProperty(ref _content, value);
             }
         }
 
@@ -242,7 +238,7 @@ namespace ModelsShared.Models
             get { return _do; }
             set
             {
-            SetProperty(ref    _do , value);
+                SetProperty(ref _do, value);
             }
         }
 
@@ -253,23 +249,23 @@ namespace ModelsShared.Models
             get { return _note; }
             set
             {
-            SetProperty(ref    _note , value);
+                SetProperty(ref _note, value);
             }
         }
 
 
 
-        public List<Colly> Details { get; set; }
+        public List<Colly> Colly { get; set; }
 
         public double Total
         {
             get
             {
 
-                if (Details != null && Details.Count > 0)
+                if (Colly != null && Colly.Count > 0)
                 {
                     double berat = 0;
-                    berat = Details.Sum(O => O.Weight);
+                    berat = Colly.Sum(O => O.Weight);
                     var biaya = (berat * this.Price) + this.PackingCosts + this.Etc;
                     var tax = biaya * (this.Tax / 100);
                     _total = biaya + tax;
@@ -278,7 +274,7 @@ namespace ModelsShared.Models
             }
             set
             {
-            SetProperty(ref    _total , value);
+                SetProperty(ref _total, value);
             }
 
 
@@ -286,13 +282,13 @@ namespace ModelsShared.Models
 
         public void SetTotal()
         {
-            if (Details != null && Details.Count > 0)
+            if (Colly != null && Colly.Count > 0)
             {
 
                 double berat = 0;
-                berat = Details.Sum(O => O.Weight);
+                berat = Colly.Sum(O => O.Weight);
                 Weight = berat;
-                Pcs = Details.Count;
+                Pcs = Colly.Count;
                 var biaya = (berat * this.Price) + this.PackingCosts + this.Etc;
                 var tax = biaya * (this.Tax / 100);
                 Total = biaya + tax;
@@ -305,7 +301,7 @@ namespace ModelsShared.Models
             get { return _reciever; }
             set
             {
-            SetProperty(ref    _reciever , value);
+                SetProperty(ref _reciever, value);
             }
         }
         public Customer Shiper
@@ -313,11 +309,11 @@ namespace ModelsShared.Models
             get { return _shiper; }
             set
             {
-            SetProperty(ref    _shiper , value);
+                SetProperty(ref _shiper, value);
             }
         }
 
-        public Deliverystatus DeliveryStatus { get; set; }
+        public List<Deliverystatus> DeliveryStatus { get; set; } = new List<Deliverystatus>();
 
         private int _pcs;
 
@@ -326,16 +322,16 @@ namespace ModelsShared.Models
             get
             {
 
-                if (this.Details != null && this.Details.Count > 0)
+                if (this.Colly != null && this.Colly.Count > 0)
                 {
-                    _pcs = Details.Count;
+                    _pcs = Colly.Count;
                 }
 
                 return _pcs;
             }
             set
             {
-            SetProperty(ref    _pcs , value);
+                SetProperty(ref _pcs, value);
             }
         }
 
@@ -347,19 +343,20 @@ namespace ModelsShared.Models
             get
             {
 
-                if (this.Details != null && this.Details.Count > 0)
+                if (this.Colly != null && this.Colly.Count > 0)
                 {
-                    _weight = Details.Sum<ModelsShared.Models.Colly>(O => O.Weight);
+                    _weight = Colly.Sum<ModelsShared.Models.Colly>(O => O.Weight);
                 }
 
                 return _weight;
             }
             set
             {
-            SetProperty(ref    _weight , value);
+                SetProperty(ref _weight, value);
             }
         }
-
+        public virtual City FromCityNavigation { get; set; }
+        public virtual City ToCityNavigation { get; set; }
 
         private int _stt;
         private int _shiperid;
@@ -383,6 +380,7 @@ namespace ModelsShared.Models
         private Customer _reciever;
         private Customer _shiper;
         private int _toCity;
+
     }
 
 }

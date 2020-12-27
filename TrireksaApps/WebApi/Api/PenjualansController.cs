@@ -12,7 +12,7 @@ namespace WebApi.Api
     public class PenjualansController : ControllerBase
     {
         // GET: api/Penjualans
-        PenjualanContext context;
+        readonly PenjualanContext  context;
         public PenjualansController(PenjualanContext _context)
         {
             context = _context;
@@ -48,7 +48,7 @@ namespace WebApi.Api
         }
 
 
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         [HttpPost]
         public async Task<IActionResult> Post(Penjualan value)
         {
@@ -65,7 +65,7 @@ namespace WebApi.Api
 
 
         [HttpPut("{id}")]
-        [ApiAuthorize(Roles = "Manager")]
+        [ApiAuthorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Put(int id, Penjualan value)
         {
             try
@@ -127,7 +127,7 @@ namespace WebApi.Api
         }
 
 
-        [ApiAuthorize(Roles = "Manager")]
+        [ApiAuthorize(Roles = "Administrator, Manager")]
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
@@ -135,7 +135,7 @@ namespace WebApi.Api
         }
 
 
-        [HttpGet("GetPenjualanNotPaid")]
+        [HttpGet("GetPenjualanNotPaid/{Id}")]
         public async Task<IActionResult> GetPenjualanNotPaid(int Id)
         {
             try
@@ -151,7 +151,7 @@ namespace WebApi.Api
 
 
 
-        [ApiAuthorize(Roles = "Agent, Operational")]
+        [ApiAuthorize(Roles = "Administrator, Agent, Operational")]
         [HttpPut("UpdateDeliveryStatus")]
         public async Task<IActionResult> UpdateDeliveryStatus(Deliverystatus obj)
         {
@@ -196,7 +196,7 @@ namespace WebApi.Api
             }
         }
 
-        [ApiAuthorize(Roles = "Admin, Manager")]
+        [ApiAuthorize(Roles = "Administrator, Admin, Manager")]
         [HttpGet("GetPenjualanFromTo")]
         public async Task<IActionResult> GetPenjualanFromTo(DateTime start, DateTime ended)
         {

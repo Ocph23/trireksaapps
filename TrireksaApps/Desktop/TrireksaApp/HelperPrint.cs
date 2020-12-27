@@ -42,10 +42,9 @@ namespace TrireksaApp
                 <MarginRight>0.25in</MarginRight>
                 <MarginBottom>0in</MarginBottom>
             </DeviceInfo>";
-            Warning[] warnings;
             m_streams = new List<Stream>();
             report.Render("Image", deviceInfo, CreateStream,
-               out warnings);
+               out Warning[] warnings);
             foreach (Stream stream in m_streams)
                 stream.Position = 0;
         }
@@ -104,8 +103,10 @@ namespace TrireksaApp
 
         internal void PrintDocument<T>(List<T> source, string layout, ReportParameter[] parameters)
         {
-            LocalReport report = new LocalReport();
-            report.ReportEmbeddedResource = layout;
+            LocalReport report = new LocalReport
+            {
+                ReportEmbeddedResource = layout
+            };
             var data = ToDataTable<T>(source);
             if (parameters != null)
                 report.SetParameters(parameters);
@@ -118,10 +119,10 @@ namespace TrireksaApp
 
         internal void PrintNota<T>(List<T> source, string layout, ReportParameter[] parameters)
         {
-            LocalReport report = new LocalReport();
-            report.ReportEmbeddedResource = layout;
-            var data = ToDataTable<T>(source);
-            List<MySetting> listSetting = new List<MySetting> { new MySetting() };
+            LocalReport report = new LocalReport
+            {
+                ReportEmbeddedResource = layout
+            };
 
             if (parameters != null)
                 report.SetParameters(parameters);
@@ -137,11 +138,11 @@ namespace TrireksaApp
         {
             var data = ToDataTable<T>(source);
             List<MySetting> listSetting = new List<MySetting> { new MySetting() };
-            List<ReportDataSource> list = new List<ReportDataSource>();
-            list.Add(
-               new ReportDataSource("DataSet1", data));
-            list.Add(
-              new ReportDataSource("DataSet2", listSetting));
+            List<ReportDataSource> list = new List<ReportDataSource>
+            {
+                new ReportDataSource("DataSet1", data),
+                new ReportDataSource("DataSet2", listSetting)
+            };
 
             return list;
         }

@@ -14,9 +14,9 @@ namespace TrireksaApp.Models
 
         public PenjualanView()
         {
-            if(this.Details==null)
+            if(this.Colly==null)
             {
-                this.Details = new List<ModelsShared.Models.Colly>();
+                this.Colly = new List<ModelsShared.Models.Colly>();
             }
         }
         private bool _isSelected;
@@ -44,9 +44,9 @@ namespace TrireksaApp.Models
             get
             {
 
-                if (this.Details != null || this.Details.Count > 0)
+                if (this.Colly != null || this.Colly.Count > 0)
                 {
-                    _pcsSim = Details.Count;
+                    _pcsSim = Colly.Count;
                 }
 
                 return _pcsSim;
@@ -65,9 +65,9 @@ namespace TrireksaApp.Models
             get
             {
 
-                if (this.Details != null || this.Details.Count > 0)
+                if (this.Colly != null || this.Colly.Count > 0)
                 {
-                    _weightSim = Details.Sum<ModelsShared.Models.Colly>(O => O.Weight);
+                    _weightSim = Colly.Sum<ModelsShared.Models.Colly>(O => O.Weight);
                 }
 
                 return _weightSim;

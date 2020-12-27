@@ -125,7 +125,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                 var selected = source.Find(O => O.Id == item.PenjualanId);
                 if (selected != null)
                 {
-                    selected.Details.Add(item);
+                    selected.Colly.Add(item);
                     if(selected.Id==SimulationPack.SelectedItem.Id)
                     {
                         SimulationPack.Collies.Add(item);
@@ -155,7 +155,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
             SimulationPack.PacksView.Refresh();
             SimulationPack.PackDetailsView.Refresh();
 
-            SimulationPack.SelectedItem.Details.Remove(SimulationPack.STTDetailSelected);
+            SimulationPack.SelectedItem.Colly.Remove(SimulationPack.STTDetailSelected);
             SimulationPack.Collies.Remove(SimulationPack.STTDetailSelected);
             SimulationPack.Source.Refresh();
             SimulationPack.SelectedItemDetailsView.Refresh();

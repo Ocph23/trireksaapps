@@ -53,16 +53,18 @@
                         <Grid>
                             <Expander >
                                 <Expander.Header>
-                                    <Grid Width="950">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Style="{StaticResource lbl}" Text="{Binding NumberView}"></TextBlock>
-                                        <TextBlock Grid.Column="1"  Style="{StaticResource lbl}" Text="{Binding CustomerName}"  Margin="5,0,30,0"></TextBlock>
-                                        <TextBlock HorizontalAlignment="Right" Grid.Column="2" Text="{Binding Total,StringFormat=Rp. {0:N2}}" Style="{StaticResource lbl}"/>
-                                    </Grid>
+                                    <StackPanel MinWidth="700">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Style="{StaticResource lbl}" Text="{Binding NumberView}"></TextBlock>
+                                            <TextBlock Grid.Column="1"  Style="{StaticResource lbl}" Text="{Binding Customer.Name}"  Margin="5,0,30,0"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" Grid.Column="2" Text="{Binding Total,StringFormat=Rp. {0:N2}}" Style="{StaticResource lbl}"/>
+                                        </Grid>
+                                    </StackPanel>
                                 </Expander.Header>
                                 <StackPanel Margin="25,10">
                                     <WrapPanel Margin="5">

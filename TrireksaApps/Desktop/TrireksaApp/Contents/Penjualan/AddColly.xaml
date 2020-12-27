@@ -2,16 +2,24 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TrireksaApp.Contents.Penjualan" 
-          xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:converter="clr-namespace:TrireksaApp.Common"
                   Style="{StaticResource BlankWindow}"
-             mc:Ignorable="d" xmlns:t="clr-namespace:ModelsShared;assembly=ModelsSharedDesktop"
+                  mc:Ignorable="d"
                   Title="Add Item" WindowStartupLocation="CenterScreen"
             Height="500" Width="650">
 
     <Window.Resources>
         <CollectionViewSource x:Key="weighttypes" Source="{Binding TypeOfWeights}"/>
+        <converter:VisibilityBoleanConverter x:Key="boleanVisibleConverter"></converter:VisibilityBoleanConverter>
+        <converter:IsNotConverter x:Key="isnotConverter"></converter:IsNotConverter>
+        <Style x:Key="isReadonly" TargetType="DataGridCell">
+            <Setter Property="UIElement.IsEnabled" Value="{Binding ReadonlyVolume}" />
+        </Style>
+        <Style x:Key="isNotReadonly" TargetType="DataGridCell">
+            <Setter Property="UIElement.IsEnabled" Value="{Binding ReadonlyVolume, Converter={StaticResource isnotConverter}}" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -23,10 +31,10 @@
             <DataGrid.Columns>
                 <DataGridComboBoxColumn x:Name="cmbType" Header="Weight Type"  ItemsSource="{Binding Source={StaticResource weighttypes}}" SelectedItemBinding="{Binding TypeOfWeight}"/>
                 <DataGridTextColumn Width="70" Binding="{Binding Jumlah}" Header="Pcs"/>
-                <DataGridTextColumn IsReadOnly="{Binding Source= EnabledVolume}" Width="70" Binding="{Binding Long,StringFormat='{}{0:N2}'}" Header="Long"/>
-                <DataGridTextColumn Width="70"  Binding="{Binding Wide,StringFormat='{}{0:N2}'}" Header="Wide"/>
-                <DataGridTextColumn Width="70"  Binding="{Binding Hight,StringFormat='{}{0:N2}'}" Header="Hight"/>
-                <DataGridTextColumn  Binding="{Binding Weight,StringFormat='{}{0:N2}'}" Header="Weight"/>
+                <DataGridTextColumn CellStyle="{StaticResource isReadonly}" Width="70"  Binding="{Binding Longer,StringFormat='{}{0:N2}'}" Header="Long"/>
+                <DataGridTextColumn CellStyle="{StaticResource isReadonly}" Width="70"  Binding="{Binding Wide,StringFormat='{}{0:N2}'}" Header="Wide"/>
+                <DataGridTextColumn CellStyle="{StaticResource isReadonly}" Width="70"  Binding="{Binding Hight,StringFormat='{}{0:N2}'}" Header="Hight"/>
+                <DataGridTextColumn CellStyle="{StaticResource isNotReadonly}" Binding="{Binding Weight,StringFormat='{}{0:N2}'}" Header="Weight"/>
                 <DataGridTextColumn IsReadOnly="True"  Binding="{Binding TWeight,StringFormat='{}{0:N2}'}" Header="Total"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>

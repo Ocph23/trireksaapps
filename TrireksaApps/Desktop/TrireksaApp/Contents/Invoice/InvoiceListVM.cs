@@ -96,7 +96,7 @@ namespace TrireksaApp.Contents.Invoice
         protected override void RefreshAction(object obj)
         {
             ProgressIsActive = true;
-            MainVM.InvoiceCollections.RefreshAction(obj);
+            MainVM.InvoiceCollections.RefreshAction();
         }
         private bool InvoiceFilter(object obj)
         {
@@ -243,30 +243,30 @@ namespace TrireksaApp.Contents.Invoice
             var selected = await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
             if(selected!=null)
             {
-                var result = from item in selected.Details
+                var result = from item in selected.Invoicedetail
                              select new Reports.Models.InvoiceReportModel
                              {
                                  Id = item.Id,
-                                 Pcs = item.Pcs, PortType=item.PortType,
-                                 Price = item.Price,
-                                 Reciver = item.Reciver,
-                                 Shiper = item.Shiper,
+                                 Pcs = item.Penjualan.Pcs, PortType=item.Penjualan.PortType,
+                                 Price = item.Penjualan.Price,
+                                 Reciver = item.Penjualan.Reciver.Name,
+                                 Shiper = item.Penjualan.Shiper.Name,
                                  PenjualanId = item.PenjualanId,
-                                 Total = item.Total,
-                                 DoNumber = item.DoNumber,
-                                 Tujuan = item.Tujuan,
-                                 Via = item.Via,
-                                 Weight = item.Weight,
-                                 Etc = item.Etc,
+                                 Total = item.Penjualan.Total,
+                                 DoNumber = item.Penjualan.DoNumber,
+                                 Tujuan = item.Penjualan.ToCityNavigation.CityName,
+                                 Via = item.Penjualan.PortType.ToString(),
+                                 Weight = item.Penjualan.Weight,
+                                 Etc = item.Penjualan.Etc,
                                  InvoiceId = item.InvoiceId,
-                                 PackingCosts = item.PackingCosts,
-                                 Tax = item.Tax,
+                                 PackingCosts = item.Penjualan.PackingCosts,
+                                 Tax = item.Penjualan.Tax,
                                  NumberView = MainVM.InvoiceCollections.SelectedItem.NumberView,
                                  CustomerName = MainVM.InvoiceCollections.SelectedItem.CustomerName,
                                  DeadLine = MainVM.InvoiceCollections.SelectedItem.DeadLine,
-                                  CreateDate=item.ChangeDate,
-                                 STT = item.STT,
-                                 Terbilang = selected.Details.Sum(O=>O.Total).Terbilang()
+                                  CreateDate=item.Penjualan.ChangeDate,
+                                 STT = item.Penjualan.STT,
+                                 Terbilang = selected.Invoicedetail.Sum(O=>O.Penjualan.Total).Terbilang()
                              };
                 return result.ToList();
             }

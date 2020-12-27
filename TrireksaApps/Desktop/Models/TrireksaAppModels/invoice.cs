@@ -150,7 +150,7 @@ namespace ModelsShared.Models
             set { SetProperty(ref _total , value); }
         }
 
-        public List<Invoicedetail> Details
+        public List<Invoicedetail> Invoicedetail
         {
             get
             {
@@ -179,6 +179,12 @@ namespace ModelsShared.Models
         }
 
 
+        public Customer Customer
+        {
+            get { return _customer; }
+            set { SetProperty(ref _customer, value); }
+        }
+
 
         private int _id;
         private int _number;
@@ -196,6 +202,7 @@ namespace ModelsShared.Models
         private List<Invoicedetail> _details;
         private string _numberView;
         private double _total;
+        private Customer _customer;
     }
 }
 

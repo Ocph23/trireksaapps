@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
-using FirstFloor.ModernUI.Presentation;
 using System.Collections.ObjectModel;
 using ModelsShared.Models;
 using TrireksaApp.Models;
 using TrireksaApp.Common;
+using ModelsShared;
 
 namespace TrireksaApp.Contents.Penjualan
 {
-    public class AddCollyVM :NotifyPropertyChanged, IDataErrorInfo, IDisposable
+    public class AddCollyVM :BaseNotify, IDataErrorInfo, IDisposable
     {
         public List<ModelsShared.Models.Colly> details;
         private string _tcolly;
@@ -44,22 +42,33 @@ namespace TrireksaApp.Contents.Penjualan
             if (value == ModelsShared.Models.TypeOfWeight.Volume)
             {
                 TypeOfWeights.Add(ModelsShared.Models.TypeOfWeight.Volume);
-
             }
             else
             {
                 TypeOfWeights.Add(ModelsShared.Models.TypeOfWeight.Weight);
                 TypeOfWeights.Add(ModelsShared.Models.TypeOfWeight.WeightVolume);
-
             }
 
             Source = new ObservableCollection<Newcolly>();
             SourceView = (CollectionView)CollectionViewSource.GetDefaultView(Source);
             if (details == null)
+            {
                 details = new List<ModelsShared.Models.Colly>();
+              
+            }
+
             SetDetailsToNewCollie(details);
 
+            this.PropertyChanged += (x, y) => {
+                CalculateTotal();
+            };
 
+
+        }
+
+        private void CalculateTotal()
+        {
+            TotalColly = Source.Sum(x => x.Jumlah).ToString();
         }
 
         private void RemoveAction(object obj)
@@ -78,14 +87,11 @@ namespace TrireksaApp.Contents.Penjualan
         {
             get
             {
-              
                 return _SelectedItem;
             }
             set
             {
-                _SelectedItem = value;
-                OnPropertyChanged("SelectedItem");
-
+               SetProperty(ref _SelectedItem , value);
             }
         }
 
@@ -99,9 +105,7 @@ namespace TrireksaApp.Contents.Penjualan
             }
             set
             {
-                _tcolly = value;
-                OnPropertyChanged("TotalColly");
-
+              SetProperty(ref  _tcolly , value);
             }
         }
         public string TotalWeight
@@ -109,16 +113,14 @@ namespace TrireksaApp.Contents.Penjualan
             get
             {
                 if (TypeOfWeightBase == ModelsShared.Models.TypeOfWeight.Weight || TypeOfWeightBase== ModelsShared.Models.TypeOfWeight.WeightVolume)
-                    _tweight ="Total Weight : "+ Source.Sum(O => O.TWeight).ToString() + " Kg";
+                    _tweight ="Total Weight : "+ Source.Sum(O => O.TWeight).ToString("N2") + " Kg";
                 else
-                    _tweight = "Total Weight : " + Source.Sum(O => O.TWeight).ToString() + " M3";
+                    _tweight = "Total Weight : " + Source.Sum(O => O.TWeight).ToString("N2") + " M3";
                 return _tweight;
             }
             set
             {
-                _tweight = value;
-                OnPropertyChanged("TotalWeight");
-
+              SetProperty(ref  _tweight , value);
             }
         }
 
@@ -134,18 +136,21 @@ namespace TrireksaApp.Contents.Penjualan
             Source.Clear();
            foreach (var item in details)
             {
-                Source.Add(new Newcolly()
+                var data = new Newcolly()
                 {
                     CollyNumber = item.CollyNumber,
                     Hight = item.Hight,
                     Id = item.Id,
                     IsSended = item.IsSended,
                     Longer = item.Longer,
-                     PenjualanId= item.Id,
+                    PenjualanId = item.Id,
                     TypeOfWeight = item.TypeOfWeight,
                     Weight = item.Weight,
-                    Wide = item.Wide, Jumlah=1
-                });
+                    Wide = item.Wide,
+                    Jumlah = 1
+                };
+                Source.Add(data);
+                item.PropertyChanged += (x, y) => { CalculateTotal(); };
             }
 
             SourceView.Refresh();
@@ -155,7 +160,7 @@ namespace TrireksaApp.Contents.Penjualan
         {
             get
             {
-                return null;
+                return string.Empty;
             }
         }
 

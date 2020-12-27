@@ -10,6 +10,15 @@ namespace TrireksaApp.Models
 {
     public class Newcolly :ModelsShared.Models.Colly
     {
+
+        public Newcolly()
+        {
+            this.PropertyChanged += (x, y) =>
+            {
+                CalculateWeight();
+            };
+        }
+
         private int _jlh;
         private double _tweight;
 
@@ -22,6 +31,11 @@ namespace TrireksaApp.Models
 
             set
             {
+
+                if (value == TypeOfWeight.Weight)
+                    ReadonlyVolume = false;
+                else
+                    ReadonlyVolume = true;
                 base.TypeOfWeight = value;
                
             }
@@ -57,11 +71,6 @@ namespace TrireksaApp.Models
                 CalculateWeight();
             }
         }
-
-  
-     
-
-     
 
         private void CalculateWeight()
         {
@@ -103,7 +112,7 @@ namespace TrireksaApp.Models
         private bool _volumeItemShow;
      
 
-        public bool EnabledVolume
+        public bool ReadonlyVolume
         {
             get { return _volumeItemShow; }
             set

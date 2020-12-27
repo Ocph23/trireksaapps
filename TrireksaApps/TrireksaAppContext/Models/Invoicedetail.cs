@@ -8,7 +8,7 @@ namespace TrireksaAppContext.Models
         public int Id { get; set; }
         public int InvoiceId { get; set; }
         public int PenjualanId { get; set; }
-        public virtual Invoices Invoice { get; set; }
+        public virtual Invoices Invoices { get; set; }
         public virtual Penjualan Penjualan { get; set; }
     }
 }

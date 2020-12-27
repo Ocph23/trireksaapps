@@ -264,7 +264,7 @@ namespace TrireksaAppContext
 
                 entity.Property(e => e.PenjualanId).HasColumnType("int(11)");
 
-                entity.HasOne(d => d.Invoice)
+                entity.HasOne(d => d.Invoices)
                     .WithMany(p => p.Invoicedetail)
                     .HasForeignKey(d => d.InvoiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -281,9 +281,8 @@ namespace TrireksaAppContext
             {
                 entity.ToTable("invoices");
 
-                entity.Property(e => e.Id).HasColumnType("int(11)");
-
-                entity.Property(e => e.CustomerId).HasColumnType("int(11)");
+                entity.HasIndex(e => e.CustomerId)
+                .HasName("fk_invoices_customer1_idx");
 
                 entity.Property(e => e.DeadLine)
                     .HasColumnType("date")
@@ -313,6 +312,14 @@ namespace TrireksaAppContext
                     .HasDefaultValueSql("''''''");
 
                 entity.Property(e => e.UserId).HasColumnType("int(11)");
+
+                entity.HasOne(d => d.Customer)
+                  .WithMany(p => p.Invoices)
+                  .HasForeignKey(d => d.CustomerId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("fk_invoices_customer1");
+
+
             });
 
             modelBuilder.Entity<Manifestinformation>(entity =>

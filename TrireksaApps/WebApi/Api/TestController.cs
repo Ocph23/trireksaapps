@@ -14,12 +14,6 @@ namespace WebApi.Api
             return null;
         }
 
-        // GET: api/Test/5
-        public IActionResult  Get(int id)
-        {
-            return Ok("Test");
-        }
-
 
         public IActionResult GetLocalIpAddress()
         {
@@ -43,19 +37,5 @@ namespace WebApi.Api
             }
         }
 
-        // POST: api/Test
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Test/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Test/5
-        public void Delete(int id)
-        {
-        }
     }
 }

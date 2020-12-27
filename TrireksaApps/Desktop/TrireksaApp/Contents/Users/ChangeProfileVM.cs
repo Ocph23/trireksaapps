@@ -58,14 +58,14 @@ namespace TrireksaApp.Contents.Users
                 UserName = this.UserName
             };
 
-            bool result = false;
+            bool result;
             if (IsNew)
             {
                result = await MainVM.UserProfileCollections.Add(item);
             }
             else
             {
-                result =await MainVM.UserProfileCollections.Update(this.UserId, item);
+                result =await MainVM.UserProfileCollections.Update(item);
             }
 
             if(result)

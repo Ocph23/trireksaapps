@@ -11,7 +11,8 @@ namespace TrireksaApp.CollectionsBase
 {
     public class InvoiceCollection :BaseCollection
     {
-        private Client client = new Client("Invoices");
+
+        private readonly Client client = new Client("Invoices");
         private Invoice _selected;
         public event RefreshComplete RefreshCompleted;
 
@@ -37,7 +38,7 @@ namespace TrireksaApp.CollectionsBase
         private async void InitAsync()
         {
             Source.Clear();
-            var url = string.Format("Get?start={0}-{1}-{2}&end={3}-{4}-{5}", StartDate.Date.Year,StartDate.Date.Month,StartDate.Day,
+            var url = string.Format("{0}-{1}-{2}/{3}-{4}-{5}", StartDate.Date.Year,StartDate.Date.Month,StartDate.Day,
                 EndDate.Year, EndDate.Month, EndDate.Day) ;
             var result = await client.GetAsync<List<Invoice>>(url);
             if(result!=null)
@@ -53,7 +54,7 @@ namespace TrireksaApp.CollectionsBase
 
         public async Task<bool> Add(Invoice item)
         {
-            var x = await client.PostAsync<Invoice>("Post",item);
+            var x = await client.PostAsync<Invoice>("",item);
             if (x != null)
             {
                 this.Source.Add(x);
@@ -98,7 +99,7 @@ namespace TrireksaApp.CollectionsBase
             return res;
         }
 
-        public Task RefreshAction(object obj)
+        public Task RefreshAction()
         {
             InitAsync();
             return Task.FromResult(0);

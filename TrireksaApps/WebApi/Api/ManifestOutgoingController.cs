@@ -15,14 +15,14 @@ namespace WebApi.Api
     [ApiAuthorize]
     public class ManifestOutgoingController : ControllerBase
     {
-        private OutgoingContext context;
+        private readonly OutgoingContext context;
         public ManifestOutgoingController(OutgoingContext _context)
         {
             context = _context;
         }
 
         [HttpDelete("{id}")]
-        [ApiAuthorize(Roles = "Manager")]
+        [ApiAuthorize(Roles = "Administrator, Manager")]
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -69,7 +69,7 @@ namespace WebApi.Api
         }
 
         [HttpPost]
-        [ApiAuthorize(Roles = "Operational")]
+        [ApiAuthorize(Roles = "Administrator, Operational")]
         public async Task<IActionResult> Post(Manifestoutgoing t)
         {
             try
@@ -83,7 +83,7 @@ namespace WebApi.Api
         }
 
         [HttpPost("UpdateInformation")]
-        [ApiAuthorize(Roles = "Operational")]
+        [ApiAuthorize(Roles = "Administrator, Operational")]
         public IActionResult UpdateInformation(Manifestinformation obj)
         {
             try
@@ -112,7 +112,7 @@ namespace WebApi.Api
         }
 
         [HttpPut("UpdateOrigin")]
-        [ApiAuthorize(Roles = "Operational")]
+        [ApiAuthorize(Roles = "Administrator, Operational")]
         public async Task<IActionResult> UpdateOrigin(Manifestoutgoing model)
         {
             try
@@ -127,7 +127,7 @@ namespace WebApi.Api
         }
 
         [HttpPut("UpdateDestination")]
-        [ApiAuthorize(Roles = "Operational, Agent")]
+        [ApiAuthorize(Roles = "Administrator, Operational, Agent")]
         public async Task<IActionResult> UpdateDestination(Manifestoutgoing model)
         {
             try

@@ -41,10 +41,7 @@ namespace TrireksaApp.Common
 
         public void Execute(object parameter)
         {
-            if (ExecuteAction != null)
-            {
-                ExecuteAction(parameter);
-            }
+            ExecuteAction?.Invoke(parameter);
         }
     }
 

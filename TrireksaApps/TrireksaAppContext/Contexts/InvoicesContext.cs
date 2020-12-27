@@ -37,8 +37,7 @@ namespace TrireksaAppContext
 
         public Task<IEnumerable<Invoices>> Get(DateTime start, DateTime end)
         {
-            var results = db.Invoices.Where(x => x.CreateDate.Value == start && x.CreateDate.Value == end)
-                .Include(x => x.Invoicedetail);
+            var results = db.Invoices;
             return Task.FromResult(results.AsEnumerable());
         }
 
@@ -64,6 +63,26 @@ namespace TrireksaAppContext
         {
             try
             {
+
+
+                if (t.Invoicedetail == null || t.Invoicedetail.Count <= 0)
+                    throw new SystemException("Lengkapi Data STT !");
+
+                if (!db.Invoices.Any())
+                    t.Number++;
+                else
+                {
+                    var lastINvoice = db.Invoices.Max(x=>x.Number);
+                    t.Number=lastINvoice+1;
+                }
+
+                db.Entry(t.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+
+                foreach (var item in t.Invoicedetail)
+                {
+                    db.Entry(item.Penjualan).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                }
+
                 db.Invoices.Add(t);
                 if (await db.SaveChangesAsync() <= 0)
                     throw new SystemException("Data Not Saved");

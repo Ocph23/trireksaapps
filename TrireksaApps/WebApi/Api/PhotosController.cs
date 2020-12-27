@@ -83,7 +83,7 @@ namespace WebApi.Api
 
         }
 
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         [HttpDelete]
         public async Task<IActionResult> DeletePhoto(int id)
         {

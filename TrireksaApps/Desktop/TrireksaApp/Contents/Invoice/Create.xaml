@@ -61,16 +61,17 @@
                       ItemsSource="{Binding SourceView}">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn  Binding="{Binding IsSelected}"/>
-                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" Header="STT" Binding="{Binding STT,StringFormat='D5'}"/>
-                    <DataGridTextColumn Width="*"  IsReadOnly="True" Header="Shiper" Binding="{Binding Shiper}"/>
-                    <DataGridTextColumn Width="*"  IsReadOnly="True" Header="Reciver" Binding="{Binding Reciver}"/>
-                    <DataGridTextColumn MinWidth="50" IsReadOnly="True" Header="Pcs" ElementStyle="{StaticResource RightNumber}" Binding="{Binding Pcs}"/>
-                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Weight"  Binding="{Binding Weight,StringFormat='{}{0:N2}'}"/>
-                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Price" Binding="{Binding Price,StringFormat='{}{0:N2}'}"/>
-                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Packing" Binding="{Binding PackingCosts,StringFormat='{}{0:N2}'}"/>
-                    <DataGridTextColumn MinWidth="50" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Lain2" Binding="{Binding Etc,StringFormat='{}{0:N2}'}"/>
-                    <DataGridTextColumn MinWidth="50" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Tax" Binding="{Binding Tax,StringFormat='{}{0:N2} %'}"/>
-                    <DataGridTextColumn MinWidth="125" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Total" Binding="{Binding Total,StringFormat='{}{0:N2}'}"/>
+                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" Header="STT" Binding="{Binding Penjualan.STT,StringFormat='D5'}"/>
+                    <DataGridTextColumn Width="*"  IsReadOnly="True" Header="Shiper" Binding="{Binding Penjualan.Shiper.Name}"/>
+                    <DataGridTextColumn Width="*"  IsReadOnly="True" Header="Reciver" Binding="{Binding Penjualan.Reciver.Name}"/>
+                    <DataGridTextColumn Width="*"  IsReadOnly="True" Header="To" Binding="{Binding Penjualan.ToCityNavigation.CityName}"/>
+                    <DataGridTextColumn MinWidth="50" IsReadOnly="True" Header="Pcs" ElementStyle="{StaticResource RightNumber}" Binding="{Binding Penjualan.Pcs}"/>
+                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Weight"  Binding="{Binding Penjualan.Weight,StringFormat='{}{0:N2}'}"/>
+                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Price" Binding="{Binding Penjualan.Price,StringFormat='{}{0:N2}'}"/>
+                    <DataGridTextColumn MinWidth="75" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Packing" Binding="{Binding Penjualan.PackingCosts,StringFormat='{}{0:N2}'}"/>
+                    <DataGridTextColumn MinWidth="50" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Lain2" Binding="{Binding Penjualan.Etc,StringFormat='{}{0:N2}'}"/>
+                    <DataGridTextColumn MinWidth="50" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Tax" Binding="{Binding Penjualan.Tax,StringFormat='{}{0:N2} %'}"/>
+                    <DataGridTextColumn MinWidth="125" IsReadOnly="True" ElementStyle="{StaticResource RightNumber}" Header="Total" Binding="{Binding Penjualan.Total,StringFormat='{}{0:N2}'}"/>
                     <DataGridTextColumn IsReadOnly="True" Width="auto" MinWidth="1"/>
 
                 </DataGrid.Columns>

@@ -15,7 +15,7 @@ namespace WebApi.Api
     [ApiAuthorize]
     public class CustomersController : ControllerBase
     {
-        private CustomersContext context;
+        private readonly CustomersContext context;
 
         // GET: api/customers
 
@@ -23,7 +23,7 @@ namespace WebApi.Api
         {
             context = _context;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -44,7 +44,7 @@ namespace WebApi.Api
         {
             try
             {
-                return Ok( context.Get(id));
+                return Ok(await context.Get(id));
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace WebApi.Api
         // POST: api/customers
 
         [HttpPost]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public async Task<IActionResult> Post([FromBody] Customer value)
         {
             try
@@ -66,19 +66,19 @@ namespace WebApi.Api
             }
             catch (Exception ex)
             {
-                 return BadRequest(new ErrorMessage(ex.Message));
+                return BadRequest(new ErrorMessage(ex.Message));
             }
         }
 
         // PUT: api/customers/5
 
         [HttpPut("{id}")]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public async Task<IActionResult> Put(int id, [FromBody] Customer value)
         {
             try
             {
-                return Ok(await context.Put(id,value));
+                return Ok(await context.Put(id, value));
             }
             catch (Exception ex)
             {

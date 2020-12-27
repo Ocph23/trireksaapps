@@ -15,7 +15,7 @@ namespace TrireksaApp.CollectionsBase
     public class UserPorfileCollection
     {
         //  private UserProfileContext client = new UserProfileContext();
-        Client client = new Client("UserProfile");
+        readonly Client client = new Client("UserProfile");
         public UserPorfileCollection()
         {
             Source = new ObservableCollection<Userprofile>();
@@ -131,7 +131,7 @@ namespace TrireksaApp.CollectionsBase
            // return client.Login(userName, password);
         }
 
-        internal async  Task<bool> Update(int v, Userprofile item)
+        internal async Task<bool> Update(Userprofile item)
         {
             var res = await client.PutAsync<bool>("", item.UserId, item);
             if (res)

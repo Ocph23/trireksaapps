@@ -14,7 +14,7 @@ namespace WebApi.Api
     [ApiAuthorize]
     public class PricesController : ControllerBase
     {
-        private PricesContext context;
+        private readonly PricesContext context;
         public PricesController(PricesContext _context)
         {
             context = _context;
@@ -34,7 +34,7 @@ namespace WebApi.Api
             }
         }
 
-        [ApiAuthorize(Roles = "Admin, Manager")]
+        [ApiAuthorize(Roles = "Administrator, Admin, Manager")]
         [HttpPost("SetPrices")]
         public async Task<IActionResult> SetPrices(Price model)
         {

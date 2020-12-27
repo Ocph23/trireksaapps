@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TrireksaAppContext.Models;
 using MySql.Data.MySqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrireksaAppContext
 {
@@ -22,11 +23,12 @@ namespace TrireksaAppContext
 
         public Task<IEnumerable<Customer>> Get()
         {
-            return Task.FromResult(db.Customer.AsEnumerable());
+            var results = db.Customer.Include(x => x.City);
+            return Task.FromResult(results.AsEnumerable());
         }
         public Task<Customer> Get(int id)
         {
-            return Task.FromResult(db.Customer.Where(x => x.Id == id).FirstOrDefault());
+            return Task.FromResult(db.Customer.Where(x => x.Id == id).Include(x => x.City).FirstOrDefault());
         }
 
         // POST: api/customers
@@ -37,7 +39,7 @@ namespace TrireksaAppContext
             {
                 db.Customer.Add(value);
                 var result = await db.SaveChangesAsync();
-                if(result<=0)
+                if (result <= 0)
                     throw new SystemException(MessageCollection.Message(MessageType.SaveFail));
                 return value;
             }
@@ -61,7 +63,7 @@ namespace TrireksaAppContext
                     throw new SystemException("Data Not Found !");
 
                 db.Entry(value).CurrentValues.SetValues(value);
-               var result = await db.SaveChangesAsync();
+                var result = await db.SaveChangesAsync();
 
                 if (result <= 0)
                     throw new SystemException("Data Not Saved !");
@@ -79,7 +81,7 @@ namespace TrireksaAppContext
         {
             try
             {
-                var existsData =await Get(id);
+                var existsData = await Get(id);
                 if (existsData == null)
                     throw new SystemException("Data Not Found !");
                 db.Customer.Remove(existsData);
@@ -89,11 +91,13 @@ namespace TrireksaAppContext
                     throw new SystemException("Data Not Saved !");
                 return true;
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
 
-                if(ex.InnerException!=null && ex.GetType()==typeof(MySqlException)){
+                if (ex.InnerException != null && ex.GetType() == typeof(MySqlException))
+                {
                     MySqlException mysqlEx = (MySqlException)ex.InnerException;
-                    if(mysqlEx.Number==1451)
+                    if (mysqlEx.Number == 1451)
                         throw new SystemException("Sorry, Data Have  Transaction !");
                     else
                         throw new SystemException("Sorry, Try Againt or Contact Your Administrator !");

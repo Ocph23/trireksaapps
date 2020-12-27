@@ -42,17 +42,12 @@ namespace TrireksaApp.Contents.Penjualan
                 ChangeDate = DateTime.Now
             };
 
-            ShiperControl=new CustomerControl();
-            RecieverControl=new CustomerControl();
-            WillPayControl=new CustomerControl();
+           // ShiperControl=new CustomerControl();
 
             CitiesSource = new ObservableCollection<ModelsShared.Models.City>(MainVM.CityCollection.Source);
 
             this.Origins = (CollectionView)CollectionViewSource.GetDefaultView(CitiesSource);
             this.Destinations = (CollectionView)CollectionViewSource.GetDefaultView(CitiesSource);
-
-            
-         
             Save = new CommandHandler { CanExecuteAction = x => SaveValidation(), ExecuteAction = SaveAction };
             Print = new CommandHandler { CanExecuteAction = x => PrintSelected != null, ExecuteAction = x => PrintAction() };
             PrintWithForm = new CommandHandler { CanExecuteAction = x => PrintSelected != null, ExecuteAction = x => PrintFormAction() };
@@ -71,7 +66,6 @@ namespace TrireksaApp.Contents.Penjualan
             get { return stt; }
             set
             {
-                stt = value;
                 SetProperty(ref stt, value);
             }
         }
@@ -91,17 +85,18 @@ namespace TrireksaApp.Contents.Penjualan
 
         }
 
-        private void RefreshSource()
+        private async void RefreshSource()
         {
-           ShiperControl.SourceView.Refresh();
-           RecieverControl.SourceView.Refresh();
-           WillPayControl.SourceView.Refresh();
+            await Task.Delay(1000);
+
+            if(MainVM.CustomerCollection.Source==null || MainVM.CustomerCollection.Source.Count<=0)
+                MainVM.CustomerCollection.Refresh();
         }
 
         private void STTModel_OnChangePrice(bool isOld)
         {
             if(!isOld)
-                this.GetPrices(STTModel.CustomerIsPay);
+                this.GetPrices();
         }
                
 
@@ -182,6 +177,7 @@ namespace TrireksaApp.Contents.Penjualan
             try
             {
                 await STTModel.Save();
+                CreateNewSTT();
             }
             catch (Exception ex)
             {
@@ -210,26 +206,33 @@ namespace TrireksaApp.Contents.Penjualan
 
         private void ChangeWeightAction()
         {
-            if (STTModel.Details == null)
-                STTModel.Details = new List<Colly>();
-            using (var vm = new Contents.Penjualan.AddCollyVM(STTModel.TypeOfWeight, STTModel.Details))
+            try
             {
-                if (STTModel.TypeOfWeight != TypeOfWeight.None)
+                if (STTModel.Colly == null)
+                    STTModel.Colly = new List<Colly>();
+                using (var vm = new Contents.Penjualan.AddCollyVM(STTModel.TypeOfWeight, STTModel.Colly))
                 {
-                    var form = new Contents.Penjualan.AddColly
+                    if (STTModel.TypeOfWeight != TypeOfWeight.None)
                     {
-                        DataContext = vm
-                    };
-                    form.ShowDialog();
+                        var form = new Contents.Penjualan.AddColly
+                        {
+                            DataContext = vm
+                        };
+                        form.ShowDialog();
 
+                    }
+                }
+                // this.Details = vm.Source;
+
+                if (STTModel.Colly != null && STTModel.Colly.Count > 0)
+                {
+                    STTModel.SetTotal();
+                    DetailsIsEmpty = true;
                 }
             }
-            // this.Details = vm.Source;
-
-            if (STTModel.Details != null && STTModel.Details.Count > 0)
+            catch (Exception ex)
             {
-                STTModel.SetTotal();
-                DetailsIsEmpty = true;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -300,15 +303,7 @@ namespace TrireksaApp.Contents.Penjualan
             }
         }
 
-       
-
-
         #endregion
-
-
-       
-
-
 
         public bool PriceIsSync
         {
@@ -328,10 +323,10 @@ namespace TrireksaApp.Contents.Penjualan
         {
             var value = (TypeOfWeight)sender;
 
-            if (STTModel.Details == null)
-                STTModel.Details = new List<Colly>();
+            if (STTModel.Colly == null)
+                STTModel.Colly = new List<Colly>();
 
-            using (var vm = new Contents.Penjualan.AddCollyVM(value, STTModel.Details))
+            using (var vm = new Contents.Penjualan.AddCollyVM(value, STTModel.Colly))
             {
 
                 if (value != TypeOfWeight.None)
@@ -353,7 +348,7 @@ namespace TrireksaApp.Contents.Penjualan
             STTModel.SetTotal();
             // this.Details = vm.Source;
 
-            if (STTModel.Details != null && STTModel.Details.Count > 0)
+            if (STTModel.Colly != null && STTModel.Colly.Count > 0)
             {
                 STTModel.TypeOfWeight = value;
                 DetailsIsEmpty = true;
@@ -384,13 +379,13 @@ namespace TrireksaApp.Contents.Penjualan
         {
             STTModel.Shiper = null;
             STTModel.Reciver = null;
-            ShiperControl.SearchText=string.Empty;
-            RecieverControl.SearchText = string.Empty; 
-            WillPayControl.SearchText = string.Empty; ;
+            //ShiperControl.SearchText=string.Empty;
+            //RecieverControl.SearchText = string.Empty; 
+            //WillPayControl.SearchText = string.Empty; ;
             DetailsIsEmpty = false;
         }
 
-        private void GetPrices(CustomerIsPay data)
+        private void GetPrices()
         {
             if (STTModel != null)
             {
@@ -440,7 +435,7 @@ namespace TrireksaApp.Contents.Penjualan
                 CustomerIdIsPay = result.CustomerIdIsPay;
                 CustomerIsPay = result.CustomerIsPay;
                 DeliveryStatus = result.DeliveryStatus;
-                Details = result.Details;
+                Colly = result.Colly;
                 DoNumber = result.DoNumber;
                 Etc = result.Etc;
                 Id = result.Id;
@@ -472,11 +467,41 @@ namespace TrireksaApp.Contents.Penjualan
                 if (this.Id <= 0)
                 {
                     this.Actived = true;
-                    var result = await MainVM.PenjualanCollection.Add(this);
+                    var result = await MainVM.PenjualanCollection.Add(
+                        new ModelsShared.Models.Penjualan
+                        {
+                            Actived = Actived,
+                            ChangeDate = ChangeDate,
+                            FromCity = FromCity,
+                            ToCity = ToCity,
+                            Content = Content,
+                            CustomerIdIsPay = CustomerIdIsPay,
+                            CustomerIsPay = CustomerIsPay,
+                            DeliveryStatus = DeliveryStatus,
+                            Colly = Colly,
+                            DoNumber = DoNumber,
+                            Etc = Etc,
+                            Id = Id,
+                            Note = Note,
+                            PackingCosts = PackingCosts,
+                            PayType = PayType,
+                            Pcs = Pcs,
+                            PortType = PortType,
+                            Price = Price,
+                            ShiperID = ShiperID,
+                            ReciverID = ReciverID,
+                            Shiper = Shiper,
+                            Reciver = Reciver,
+                            STT = STT,
+                            TypeOfWeight = TypeOfWeight,
+                            Tax = Tax,
+                            UpdateDate = UpdateDate,
+                            UserID = UserID,
+                            IsPaid = IsPaid
+                        });
                     if (result != null)
                     {
                         ModernDialog.ShowMessage("Data Is Saved !", "Information", System.Windows.MessageBoxButton.OK);
-
                     }
                     else
                     {
@@ -485,9 +510,9 @@ namespace TrireksaApp.Contents.Penjualan
                 }
                 else
                 {
-                    if (Id > 0 && Details != null && Details.Count > 0)
+                    if (Id > 0 && Colly != null && Colly.Count > 0)
                     {
-                        foreach (var dataItem in Details)
+                        foreach (var dataItem in Colly)
                         {
                             dataItem.PenjualanId = Id;
                         }
@@ -601,7 +626,7 @@ namespace TrireksaApp.Contents.Penjualan
                 if (this.FromCity == 0 || this.Price == 0 || this.ToCity==0)
                     return false;
 
-                if (this.Details == null || this.Details.Count == 0)
+                if (this.Colly == null || this.Colly.Count == 0)
                     return false;
 
                 if (PortType == PortType.None)

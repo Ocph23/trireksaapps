@@ -19,7 +19,7 @@ namespace WebApi.Api
     {
         // GET: api/Ports
 
-        private PortsContext context;
+        private readonly PortsContext context;
 
         // GET: api/customers
 
@@ -59,7 +59,7 @@ namespace WebApi.Api
 
         // POST: api/Ports
         [HttpPost]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public async Task<IActionResult> Post(Port value)
         {
             try
@@ -76,7 +76,7 @@ namespace WebApi.Api
 
         // PUT: api/Ports/5
         [HttpPut]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public async Task<IActionResult> Put(int id, Port value)
         {
             try
@@ -91,7 +91,7 @@ namespace WebApi.Api
 
         // DELETE: api/Ports/5
         [HttpDelete]
-        [ApiAuthorize(Roles = "Manager")]
+        [ApiAuthorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Delete(int id)
         {
             try

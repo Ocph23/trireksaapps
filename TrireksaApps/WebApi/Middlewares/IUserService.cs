@@ -46,7 +46,7 @@ namespace WebApi.Middlewares
                      .Include(x => x.Userrole).ThenInclude(x => x.Role).AsNoTracking().SingleOrDefault();
                 if (user != null)
                 {
-                    var token = await generateJwtToken(user);
+                    var token = await GenerateJwtToken(user);
 
                     return new AuthenticateResponse(user, token);
                 }
@@ -71,7 +71,7 @@ namespace WebApi.Middlewares
         {
             try
             {
-                var token = await generateJwtToken(user);
+                var token = await GenerateJwtToken(user);
                 if (string.IsNullOrEmpty(token))
                     throw new SystemException("You Not Have Access");
                 return token;
@@ -83,7 +83,7 @@ namespace WebApi.Middlewares
             }
         }
 
-        private Task<string> generateJwtToken(Users user)
+        private Task<string> GenerateJwtToken(Users user)
         {
             // generate token that is valid for 7 days
 
@@ -106,7 +106,7 @@ namespace WebApi.Middlewares
 
         public async Task<string> GenerateToken(Users user)
         {
-            return await generateJwtToken(user);
+            return await GenerateJwtToken(user);
         }
 
         public async Task<Users> Register(RegisterModel model)
@@ -129,7 +129,7 @@ namespace WebApi.Middlewares
             }
         }
 
-        private string GeneratePasswordHash(string password)
+        private static string GeneratePasswordHash(string password)
         {
 
             MD5 md5 = new MD5CryptoServiceProvider();

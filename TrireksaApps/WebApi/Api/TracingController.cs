@@ -13,7 +13,7 @@ namespace WebApi.Api
     [ApiController]
     public class TracingController : ControllerBase
     {
-        private TracingContext context;
+        private readonly TracingContext context;
 
         public TracingController(TracingContext _context)
         {

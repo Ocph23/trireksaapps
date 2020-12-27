@@ -10,7 +10,7 @@ namespace TrireksaApp.Contents.Penjualan
     /// </summary>
     public partial class Create : UserControl
     {
-        private PenjualanCreateVM viewmodel;
+        private readonly PenjualanCreateVM viewmodel;
 
         public Create()
         {
@@ -68,9 +68,10 @@ namespace TrireksaApp.Contents.Penjualan
             {
                 TextBox tb = (TextBox)sender;
                 string spb = tb.Text;
-                viewmodel.Search.Execute(tb.Text);
                 tb.Text = spb;
+                viewmodel.Search.Execute(tb.Text);
                 
+                via.Focus();
             }
                    
         }
@@ -80,10 +81,6 @@ namespace TrireksaApp.Contents.Penjualan
             ComboBox cmb = (ComboBox)sender;
             cmb.IsDropDownOpen = true;
         }
-
-        private void cmReciever_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+     
     }
 }

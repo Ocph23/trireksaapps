@@ -53,9 +53,9 @@ namespace TrireksaAppContext
                 throw new SystemException(MessageCollection.Message(MessageType.SaveFail));
         }
 
-        public async Task<Ships> UpdateAndGetItem(Ships t)
+        public async Task<Ships> UpdateAndGetItem(int id, Ships t)
         {
-            var existsShip = await GetById(t.Id);
+            var existsShip = await GetById(id);
             if (existsShip == null)
                 throw new SystemException("Data Not Found !");
 

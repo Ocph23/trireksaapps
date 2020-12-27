@@ -45,8 +45,8 @@
                 <DataGridTextColumn Header="STT/AWB" Binding="{Binding STT,StringFormat='D5'}"/>
                 <DataGridTextColumn Width="150" Header="Shiper" Binding="{Binding Shiper.Name}"/>
                 <DataGridTextColumn Width="150" Header="Reciver" Binding="{Binding Reciver.Name}"/>
-                <DataGridTextColumn Width="150" Header="From" Binding="{Binding Shiper.City.CityCode}"/>
-                <DataGridTextColumn Width="150" Header="To" Binding="{Binding Reciver.City.CityCode}"/>
+                <DataGridTextColumn Width="150" Header="From" Binding="{Binding FromCityNavigation.CityCode}"/>
+                <DataGridTextColumn Width="150" Header="To" Binding="{Binding ToCityNavigation.CityCode}"/>
                 <DataGridTextColumn Header="Pcs" Binding="{Binding Pcs}"/>
                 <DataGridTextColumn  Header="Type Of Weight" Binding="{Binding TypeOfWeight}"/>
                 <DataGridTextColumn Header="Weights" Binding="{Binding Weight}"/>
@@ -127,14 +127,14 @@
                                 <ControlTemplate >
                                     <StackPanel>
                                         <Label Content="Collies" Margin="10" FontSize="14" FontWeight="Bold"/>
-                                        <DataGrid  MaxHeight="650"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding SelectedItem.Details}" VerticalScrollBarVisibility="Visible" >
+                                        <DataGrid  MaxHeight="650"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding SelectedItem.Colly}" VerticalScrollBarVisibility="Visible" >
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Weight Type" Binding="{Binding TypeOfWeight}"/>
                                                 <DataGridTextColumn Width="70" Binding="{Binding CollyNumber}" Header="Colly Number"/>
-                                                <DataGridTextColumn Width="70" Binding="{Binding Long}" Header="Long"/>
+                                                <DataGridTextColumn Width="70" Binding="{Binding Longer}" Header="Long"/>
                                                 <DataGridTextColumn Width="70"  Binding="{Binding Wide}" Header="Wide"/>
                                                 <DataGridTextColumn Width="70"  Binding="{Binding Hight}" Header="Hight"/>
-                                                <DataGridTextColumn  Binding="{Binding Weight}" Header="Weight"/>
+                                                <DataGridTextColumn  Binding="{Binding Weight,StringFormat='{}{0:N2}'}" Header="Weight"/>
                                                 <DataGridCheckBoxColumn Header="Is Sended" Binding="{Binding IsSended}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>

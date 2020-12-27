@@ -192,7 +192,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                             if (item.STT == cly.STT)
                             {
                                 PackingList.Add(new Packinglist { PenjualanId=item.Id, CollyId=cly.Id, CollyNumber = cly.CollyNumber, PackNumber = pack.PackNumber, STT = item.STT, Weight = cly.Weight });
-                                a.Details.Add(cly);
+                                a.Colly.Add(cly);
                                 a.Pcs++;
                                 a.Weight += cly.Weight;
                             }
@@ -332,7 +332,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                     if (result != null && customers != null)
                     {
                         var a = from r in result
-                                select new Models.PenjualanView { Id = r.Id, STT = r.STT, Details = r.Details, Shiper = r.Shiper, Reciver = r.Reciver };
+                                select new Models.PenjualanView { Id = r.Id, STT = r.STT, Colly = r.Colly, Shiper = r.Shiper, Reciver = r.Reciver };
 
                         this.SourceFromDatabase.Clear();
                         foreach (var item in a)

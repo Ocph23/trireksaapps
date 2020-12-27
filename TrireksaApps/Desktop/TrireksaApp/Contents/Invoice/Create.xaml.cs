@@ -20,7 +20,7 @@ namespace TrireksaApp.Contents.Invoice
     /// </summary>
     public partial class Create : UserControl
     {
-        private InvoiceCreateVM viewmodel;
+        private readonly InvoiceCreateVM viewmodel;
 
         public Create()
         {

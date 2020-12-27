@@ -68,7 +68,7 @@ namespace WebApi.Api
 
 
         [HttpPost]
-        [ApiAuthorize(Roles = "Accounting")]
+        [ApiAuthorize(Roles = "Administrator, Accounting")]
         public async Task<IActionResult> Post(Invoices t)
         {
             try
@@ -82,7 +82,7 @@ namespace WebApi.Api
         }
 
         [HttpPut("UpdateDeliveryDataAction")]
-        [ApiAuthorize(Roles = "Accounting")]
+        [ApiAuthorize(Roles = "Administrator, Accounting")]
         public async Task<IActionResult> UpdateDeliveryDataAction(int Id, Invoices t)
         {
             try
@@ -96,7 +96,7 @@ namespace WebApi.Api
         }
 
         [HttpPut("UpdateInvoiceStatusAction")]
-        [ApiAuthorize(Roles = "Accounting")]
+        [ApiAuthorize(Roles = "Administrator, Accounting")]
         public async Task<IActionResult> UpdateInvoiceStatusAction(int Id, Invoices t)
         {
             try

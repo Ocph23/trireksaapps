@@ -23,8 +23,10 @@ namespace TrireksaAppContext.Models
         public string Email { get; set; }
         public int CityId { get; set; }
 
+        public virtual ICollection<Invoices> Invoices{ get; set; }
         public virtual ICollection<Penjualan> PenjualanReciver { get; set; }
         public virtual ICollection<Penjualan> PenjualanShiper { get; set; }
         public virtual ICollection<Price> Price { get; set; }
+        public virtual City City { get; set; }
     }
 }

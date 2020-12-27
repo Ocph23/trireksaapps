@@ -11,7 +11,7 @@ namespace WebApi.Api
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
@@ -42,7 +42,7 @@ namespace WebApi.Api
             try
             {
                 var response = await _userService.Register(user);
-                if (response==null)
+                if (response == null)
                     return BadRequest(new { message = "Register User Gagal !" });
                 return Ok(response);
             }

@@ -16,14 +16,14 @@ namespace WebApi.Api
     [ApiAuthorize]
     public class ShipsController : ControllerBase
     {
-        private ShipsContext context;
+        private readonly ShipsContext context;
         public ShipsController(ShipsContext _context)
         {
             context = _context;
 
         }
         // GET: api/Ships
-        [ApiAuthorize(Roles = "Manager")]
+        [ApiAuthorize(Roles = "Administrator, Manager")]
         [HttpDelete]
         public IActionResult Delete(int id)
         {
@@ -69,7 +69,7 @@ namespace WebApi.Api
 
 
         [HttpPost]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public IActionResult Post([FromBody] Ships t)
         {
             try
@@ -84,12 +84,12 @@ namespace WebApi.Api
 
 
         [HttpPut("{id}")]
-        [ApiAuthorize(Roles = "Admin, Manager")]
+        [ApiAuthorize(Roles = "Administrator, Admin, Manager")]
         public IActionResult Put(int id, [FromBody] Ships value)
         {
             try
             {
-                return Ok(context.UpdateAndGetItem(value));
+                return Ok(context.UpdateAndGetItem(id, value));
             }
             catch (Exception ex)
             {

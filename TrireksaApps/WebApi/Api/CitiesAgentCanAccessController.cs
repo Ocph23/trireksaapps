@@ -11,7 +11,7 @@ namespace WebApi.Api
     [ApiAuthorize(Roles = "Administrator, Admin")]
     public class CitiesAgentCanAccessController : ControllerBase
     {
-        private CitiesAgentCanAccessContext context;
+        private readonly CitiesAgentCanAccessContext context;
         public CitiesAgentCanAccessController(CitiesAgentCanAccessContext _context)
         {
             context = _context;
@@ -48,15 +48,6 @@ namespace WebApi.Api
             }
         }
 
-        // PUT: api/CitiesAgentCanAccess/5
-
-        [HttpPut]
-        public void Put(int id, [FromBody] string value)
-        {
-            throw new NotImplementedException();
-        }
-
-        // DELETE: api/CitiesAgentCanAccess/5
 
 
         [HttpDelete]

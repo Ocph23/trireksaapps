@@ -16,8 +16,8 @@ namespace TrireksaApp.Contents.Invoice
         {
             this.CreateDate = DateTime.Now;
             this.MainVM = Common.ResourcesBase.GetMainWindowViewModel();
-            this.Details = new List<Invoicedetail>();
-            this.SourceView = (CollectionView)CollectionViewSource.GetDefaultView(this.Details);
+            this.Invoicedetail = new List<Invoicedetail>();
+            this.SourceView = (CollectionView)CollectionViewSource.GetDefaultView(this.Invoicedetail);
             this.DeadLine = DateTime.Now.AddMonths(1);
             Save = new CommandHandler { CanExecuteAction = x => SaveValidation(), ExecuteAction = x => SaveAction() };
             PreviewManifest= new CommandHandler { CanExecuteAction = x => PreviewManifestValidation(), ExecuteAction = x => PreviewManifestAction() };
@@ -60,7 +60,14 @@ namespace TrireksaApp.Contents.Invoice
 
         private void SaveAndPrintAction()
         {
-            throw new NotImplementedException();
+            Save.Execute(null);
+
+            if (this.Number > 0)
+            {
+                var print = new HelperPrint();
+                var data = this.GetInvoiceReportModel();
+                print.PrintDocument<Reports.Models.InvoiceReportModel>(data.OrderBy(x => x.STT).ToList(), "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
+            }
         }
 
         private void PreviewManifestAction()
@@ -83,12 +90,12 @@ namespace TrireksaApp.Contents.Invoice
 
         private List<Reports.Models.InvoiceReportModel> GetInvoiceReportModel()
         {
-           var result = from item in this.Details.Where(o => o.IsSelected)
-                         select new Reports.Models.InvoiceReportModel { Id = item.Id, Pcs = item.Pcs, Price = item.Price, STT = item.STT, ChangeDate=item.ChangeDate,
-                             Tujuan = item.Tujuan, DoNumber = item.DoNumber, Via = item.Via,  PortType=item.PortType,  
-                          Reciver=item.Reciver, Shiper=item.Shiper,  PenjualanId=item.PenjualanId, Total=item.Total, Weight=item.Weight,
-                           Etc=item.Etc, Tax=item.Tax, PackingCosts=item.PackingCosts, InvoiceId=item.InvoiceId,   Terbilang=GrandTotal.Terbilang(),
-                         NumberView=this.NumberView, CustomerName=this.CustomerSelectedItem.Name, DeadLine=this.DeadLine,   CreateDate=item.ChangeDate};
+           var result = from item in this.Invoicedetail.Where(o => o.IsSelected)
+                         select new Reports.Models.InvoiceReportModel { Id =item.Penjualan.Id,  Pcs =item.Penjualan.Pcs, Price = item.Penjualan.Price, STT =item.Penjualan.STT, ChangeDate=item.Penjualan.ChangeDate,
+                             Tujuan =item.Penjualan.ToCityNavigation.CityName, DoNumber =item.Penjualan.DoNumber, Via =item.Penjualan.PortType.ToString(),  PortType=item.Penjualan.PortType,  
+                          Reciver=item.Penjualan.Reciver.Name, Shiper=item.Penjualan.Shiper.Name,  PenjualanId=item.PenjualanId, Total=item.Penjualan.Total, Weight=item.Penjualan.Weight,
+                           Etc=item.Penjualan.Etc, Tax=item.Penjualan.Tax, PackingCosts=item.Penjualan.PackingCosts, InvoiceId=item.InvoiceId,   Terbilang=GrandTotal.Terbilang(),
+                         NumberView=this.NumberView, CustomerName=this.CustomerSelectedItem.Name, DeadLine=this.DeadLine,   CreateDate=item.Penjualan.ChangeDate};
             return result.ToList();
         }
 
@@ -106,7 +113,7 @@ namespace TrireksaApp.Contents.Invoice
                 CustomerName = this.CustomerName,
                 DeadLine = this.DeadLine,
                 DeliveryDate = this.DeliveryDate,
-                Details = this.Details.Where(O=>O.IsSelected).ToList(), 
+                Invoicedetail = this.Invoicedetail.Where(O=>O.IsSelected).ToList(), 
                 Id = this.Id, 
                 InvoicePayType = this.InvoicePayType,
                 InvoiceStatus = this.InvoiceStatus,
@@ -172,7 +179,7 @@ namespace TrireksaApp.Contents.Invoice
             if(value!=null)
             {
                 ProgressIsActive = true;
-                this.Details.Clear();
+                this.Invoicedetail.Clear();
                 SourceView.Refresh();
                 var x = await MainVM.PenjualanCollection.GetPenjualanNotPaid(value.Id);
 
@@ -182,28 +189,17 @@ namespace TrireksaApp.Contents.Invoice
                              join c in MainVM.CityCollection.Source on item.Reciver.CityID equals c.Id
                              select new ModelsShared.Models.Invoicedetail
                              {
-                                 PenjualanId = item.Id,
-                                 Etc = item.Etc,
-                                 PackingCosts = item.PackingCosts,
-                                 Tax = item.Tax,
-                                 STT = item.STT,
-                                 Via = item.PortType.ToString(),
-                                 Reciver = item.Reciver.Name,
-                                 Shiper = item.Shiper.Name,
-                                 Pcs = item.Details.Count,
-                                 Weight = item.Details.Sum(O => O.Weight),
-                                 Price = item.Price,
-                                 Total = item.Total,
-                                 DoNumber = item.DoNumber, ChangeDate=item.ChangeDate, 
-                                 Tujuan = c.CityName,
-                                 PortType = item.PortType
+                                 PenjualanId =item.Id,
+                                Penjualan = item
                              }).ToList();
 
                     foreach (var item in r)
                     {
-
-                        item.TotalAction += Item_TotalAction;
-                        Details.Add(item);
+                        item.PropertyChanged += (m, y) => {
+                            Item_TotalAction();
+                            Save.CanExecute(null);
+                        } ;
+                        Invoicedetail.Add(item);
 
 
                     }
@@ -218,7 +214,7 @@ namespace TrireksaApp.Contents.Invoice
         private async void Item_TotalAction()
         {
             await Task.Delay(200);
-            GrandTotal = this.Details.Where(O=>O.IsSelected).Sum(O => O.Total);
+            GrandTotal = this.Invoicedetail.Where(O=>O.IsSelected).Sum(O => O.Penjualan.Total);
         }
         
 

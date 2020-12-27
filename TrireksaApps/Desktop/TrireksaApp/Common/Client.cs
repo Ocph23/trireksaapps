@@ -57,7 +57,7 @@ namespace TrireksaApp.Common
         {
             try
             {
-                uri = string.IsNullOrEmpty(uri) ? $"{id}" : $"/{uri}/{id}";
+                uri = string.IsNullOrEmpty(uri) ? $"{id}" : $"{uri}/{id}";
                 var response = await ClientContext.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {

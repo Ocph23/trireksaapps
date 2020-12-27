@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.Reporting.WinForms;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,12 @@ namespace TrireksaApp.Common
         internal static void ShowMessageError(string message)
         {
             var form = App.Current.Windows[0] as MainWindow;
+            if (message.Contains($"message"))
+            {
+                var msg = JsonConvert.DeserializeObject<ErrorMessage>(message);
+                if (msg != null)
+                    message = msg.Message;
+            }
             form.ShowMessageError(message);
         }
 

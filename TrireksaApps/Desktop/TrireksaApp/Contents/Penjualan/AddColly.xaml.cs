@@ -67,16 +67,6 @@ namespace TrireksaApp.Contents.Penjualan
          
         }
 
-        private void dg_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-
-        }
-
-        private void dg_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

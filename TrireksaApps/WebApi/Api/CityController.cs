@@ -11,7 +11,7 @@ namespace WebApi.Api
  //   [ApiAuthorize]
     public class CityController : ControllerBase
     {
-        private CityContext context;
+        private readonly CityContext context;
         public CityController(CityContext _context)
         {
             context = _context;
@@ -49,7 +49,7 @@ namespace WebApi.Api
         // POST: api/City
 
         [HttpPost]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public IActionResult Post([FromBody]City value)
         {
             try
@@ -67,7 +67,7 @@ namespace WebApi.Api
 
         // PUT: api/City/5
         [HttpPut("{id}")]
-        [ApiAuthorize(Roles = "Admin")]
+        [ApiAuthorize(Roles = "Administrator, Admin")]
         public IActionResult Put(int id, [FromBody]City value)
         {
             try
@@ -82,7 +82,7 @@ namespace WebApi.Api
 
         // DELETE: api/City/5
         [HttpDelete("{id}")]
-        [ApiAuthorize(Roles = "Manager, Admin")]
+        [ApiAuthorize(Roles = "Manager, Administrator, Admin")]
         public IActionResult Delete(int id)
         {
             try

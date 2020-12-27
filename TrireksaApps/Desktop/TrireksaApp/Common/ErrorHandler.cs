@@ -8,19 +8,19 @@ namespace TrireksaApp.Common
 {
     public class ErrorHandler
     {
-        private Dictionary<string, string> collection { get; set; }
+        private Dictionary<string, string> Collection { get; set; }
         public ErrorHandler()
         {
-            collection = new Dictionary<string, string>();
+            Collection = new Dictionary<string, string>();
         }
 
 
 
         public void AddError(string propertyName, string value)
         {
-            if (!collection.ContainsKey(propertyName))
+            if (!Collection.ContainsKey(propertyName))
             {
-                collection.Add(propertyName, value);
+                Collection.Add(propertyName, value);
 
             }
             
@@ -31,19 +31,22 @@ namespace TrireksaApp.Common
         {
             get
             {
-                return collection.Count;
+                return Collection.Count;
             }
         }
 
         public void DeleteError(string propertyName)
         {
-            if (collection.ContainsKey(propertyName))
+            if (Collection.ContainsKey(propertyName))
             {
-                collection.Remove(propertyName);
+                Collection.Remove(propertyName);
             }
 
         }
+    }
 
-
+    public class ErrorMessage
+    {
+        public string Message { get; set; }
     }
 }

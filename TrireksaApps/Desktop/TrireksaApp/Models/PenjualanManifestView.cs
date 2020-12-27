@@ -31,7 +31,7 @@ namespace TrireksaApp.Models
                 if(result!=null)
                 {
                     var detail = from b in item.ToList()
-                                 join c in result.Details on b.CollyNumber equals c.CollyNumber
+                                 join c in result.Colly on b.CollyNumber equals c.CollyNumber
                                  select c;
 
                     var newItem = new Models.ManifestView();

@@ -25,7 +25,7 @@ namespace TrireksaApp
     /// </summary>
     public partial class FormLogin :ModernWindow
     {
-        private FormLoginVM viewmodel;
+        private readonly FormLoginVM viewmodel;
 
         public FormLogin()
         {
@@ -93,7 +93,7 @@ namespace TrireksaApp
             ProgressIsActive = true;
             try
             {
-                var strcontent = new { UserName = UserName, Password = Password };
+                var strcontent = new { UserName, Password };
                 using (var client = new Client())
                 {
                     var response = await client.ClientContext.PostAsync("api/user/login", client.GetContent(strcontent));
