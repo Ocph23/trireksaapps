@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +20,7 @@ namespace TrireksaApp.Contents.Invoice
     /// <summary>
     /// Interaction logic for Create.xaml
     /// </summary>
-    public partial class Create : UserControl
+    public partial class Create : UserControl , IContent
     {
         private readonly InvoiceCreateVM viewmodel;
 
@@ -29,11 +31,31 @@ namespace TrireksaApp.Contents.Invoice
             this.DataContext = viewmodel;
         }
 
-     
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+            var data = Convert.ToInt32(e.Fragment);
+            viewmodel.SetInvoice(data);
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+          
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+           //var paramss= e.Source.OriginalString.Split('#')[1];
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+       
+        }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+           
         }
     }
 }

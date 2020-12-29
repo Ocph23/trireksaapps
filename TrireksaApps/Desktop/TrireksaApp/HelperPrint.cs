@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrireksaApp.Common;
 using TrireksaApp.Reports;
 
 namespace TrireksaApp
@@ -162,6 +163,21 @@ namespace TrireksaApp
                 table.Rows.Add(row);
             }
             return table;
+        }
+
+        internal static MySetting GetReportSetting()
+        {
+            var config = new AppConfiguration();
+
+            return new MySetting
+            {
+                Address = config.Address,
+                AccountName = config.AccountName,
+                BankName = config.BankName,
+                CompanyName = config.CompanyName,
+                NPWP = config.NPWP,
+                RekeningNumber = config.RekeningName
+            };
         }
     }
 }

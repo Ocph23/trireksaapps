@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-
+using System.Linq;
 
 namespace ModelsShared.Models
 {
@@ -145,7 +144,14 @@ namespace ModelsShared.Models
 
         public virtual double Total
         {
-            get { _total= Biaya + (Biaya * (Tax / 100)); return _total; }
+            get {
+                if (Invoicedetail != null)
+                {
+                    _total = Invoicedetail.Sum(x => x.Penjualan.Total);
+                }
+                _total+=Biaya; 
+                return _total; 
+            }
 
             set { SetProperty(ref _total , value); }
         }

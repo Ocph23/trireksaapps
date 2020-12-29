@@ -11,6 +11,8 @@ using System;
 using System.Text;
 using Microsoft.Reporting.WinForms;
 using TrireksaApp.Reports.Models;
+using FirstFloor.ModernUI.Windows.Navigation;
+using System.Windows.Input;
 
 namespace TrireksaApp.Contents.Invoice
 {
@@ -149,7 +151,7 @@ namespace TrireksaApp.Contents.Invoice
 
 
             var IsUpdate = false;
-            if (await MainVM.InvoiceCollections.UpdateInvoiceStatusAction(selected.Id, item)) 
+            if (await MainVM.InvoiceCollections.UpdateInvoiceStatusAction(selected.Id, selected)) 
             {
                 IsUpdate = true;
             }
@@ -180,18 +182,14 @@ namespace TrireksaApp.Contents.Invoice
 
         private async void UpdateDeliveryDataAction()
         {
-            var selected = MainVM.InvoiceCollections.SelectedItem;
-            var item = new ModelsShared.Models.Invoice
-            {
-                Id = selected.Id,
-                DeliveryDate = selected.DeliveryDate,
-                IsDelivery = true,
-                ReciveDate = selected.ReciveDate,
-                ReciverBy = selected.ReciverBy
-            };
 
+           
+
+
+            var selected = MainVM.InvoiceCollections.SelectedItem;
+       
             var IsUpdate = false;
-            if ( await MainVM.InvoiceCollections.UpdateDeliveryDataAction(selected.Id, item))
+            if ( await MainVM.InvoiceCollections.UpdateDeliveryDataAction(selected.Id, selected))
             {
                 IsUpdate = true;
             }

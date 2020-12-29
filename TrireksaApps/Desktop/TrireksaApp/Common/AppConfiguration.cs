@@ -48,22 +48,7 @@ namespace TrireksaApp.Common
         }
 
 
-        private string address;
-
-        public string Address
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(address))
-                    address = GetStringValue("Address");
-                return address;
-            }
-            set
-            {
-                UpdateKey("Address", value.ToString());
-                SetProperty(ref address, value);
-            }
-        }
+       
 
 
         private string theme;
@@ -102,28 +87,16 @@ namespace TrireksaApp.Common
             }
         }
 
-
-
-
-
         internal string GetUserName()
         {
             return GetStringValue("UserName");
         }
-
 
         internal async void UpdateUserName(string value)
         {
             await Task.Delay(2000);
             UpdateKey("UserName", value);
         }
-
-
-
-        
-
-
-
 
         //
         private int GetIntValue(string KeyName)
@@ -201,6 +174,115 @@ namespace TrireksaApp.Common
             return IsExists;
         }
 
+
+        //Account 
+
+        private string address;
+
+        public string Address
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(address))
+                    address = GetStringValue("Address");
+                return address;
+            }
+            set
+            {
+                UpdateKey("Address", value.ToString());
+                SetProperty(ref address, value);
+            }
+        }
+
+
+        private string companyName;
+
+        public string CompanyName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(companyName))
+                    companyName = GetStringValue("CompanyName");
+                return companyName;
+            }
+            set
+            {
+                UpdateKey("CompanyName", value.ToString());
+                SetProperty(ref companyName, value);
+            }
+        }
+
+
+        private string bankName;
+
+        public string BankName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(bankName))
+                    bankName = GetStringValue("BankName");
+                return bankName;
+            }
+            set
+            {
+                UpdateKey("BankName", value.ToString());
+                SetProperty(ref bankName, value);
+            }
+        }
+
+
+        private string accountName;
+
+        public string AccountName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(accountName))
+                    accountName = GetStringValue("AccountName");
+                return accountName;
+            }
+            set
+            {
+                UpdateKey("AccountName", value.ToString());
+                SetProperty(ref accountName, value);
+            }
+        }
+
+
+        private string rekeningName;
+
+        public string RekeningName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(rekeningName))
+                    rekeningName = GetStringValue("RekeningName");
+                return rekeningName;
+            }
+            set
+            {
+                UpdateKey("RekeningName", value.ToString());
+                SetProperty(ref rekeningName, value);
+            }
+        }
+
+
+        private string npwp;
+
+        public string NPWP
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(npwp))
+                    npwp = GetStringValue("NPWP");
+                return npwp;
+            }
+            set
+            {
+                UpdateKey("NPWP", value.ToString());
+                SetProperty(ref npwp, value);
+            }
+        }
 
     }
 }

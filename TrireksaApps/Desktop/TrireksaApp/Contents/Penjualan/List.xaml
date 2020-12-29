@@ -100,7 +100,7 @@
                                         </StackPanel>
                                         <StackPanel Style="{StaticResource OPanel}">
                                             <Label Content="Date"/>
-                                            <dp:DateTimePicker Format="Custom" FormatString="dd-MMM-yy hh:mm:ss" Margin="5" Value="{Binding SelectedItem.DeliveryStatus.ReciveDate}" Background="{x:Null}" Foreground="White"/>
+                                            <DatePicker SelectedDate="{Binding SelectedItem.DeliveryStatus.ReciveDate}" Background="{x:Null}" Foreground="White"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Style="{StaticResource OPanel}">
                                             <Label Content="Have Sign"/>

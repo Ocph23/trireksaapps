@@ -87,7 +87,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public List<CityAgentCanAccess> CitiesCanAccess { get; set; }
+        public List<CityAgentCanAccess> Cityagentcanaccess { get; set; }
 
         public bool IsValid
         {

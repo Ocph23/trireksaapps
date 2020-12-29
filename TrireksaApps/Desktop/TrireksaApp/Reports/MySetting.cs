@@ -9,21 +9,11 @@ namespace TrireksaApp.Reports
 {
    public class MySetting
     {
-
-        private static string GetAddress()
-        {
-            var app = new AppConfiguration();
-            return app.Address;
-        }
-
-
-        public string Address
-        {
-            get
-            {
-                return GetAddress();
-            }
-        }
-
+        public string CompanyName { get; set; }
+        public string Address { get; set; }
+        public string BankName { get; set; }
+        public string AccountName { get; set; }
+        public string RekeningNumber { get; set; }
+        public string NPWP { get; set; }
     }
 }

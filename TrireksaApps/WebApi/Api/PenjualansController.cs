@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TrireksaAppContext;
 using TrireksaAppContext.Models;
 
+
 namespace WebApi.Api
 {
     [Route("api/[controller]")]
@@ -81,7 +82,7 @@ namespace WebApi.Api
 
 
 
-        [HttpGet("GetByParameter")]
+        [HttpGet("GetByParameter/{agentId}/{type}")]
         public async Task<IActionResult> GetByParameter(int agentId, PortType type)
         {
             try

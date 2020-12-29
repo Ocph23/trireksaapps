@@ -25,20 +25,19 @@ namespace TrireksaAppContext
                 .Include(x => x.DestinationNavigation)
                 .Include(x => x.OriginNavigation)
                 .Include(x => x.Packinglist)
-                .Include(x => x.Manifestinformation);
+                .Include(x => x.Information);
             return results;
         }
 
 
         public IEnumerable<Manifestoutgoing> GetByMount(int month)
         {
-           
              var results = db.Manifestoutgoing.Where(O => O.CreatedDate.Value.Month == month)
                 .Include(x => x.Agent)
                 .Include(x => x.DestinationNavigation)
                 .Include(x => x.OriginNavigation)
                 .Include(x => x.Packinglist)
-                .Include(x => x.Manifestinformation);
+                .Include(x => x.Information);
             return results;
         }
 
@@ -68,7 +67,7 @@ namespace TrireksaAppContext
                        .Include(x => x.DestinationNavigation)
                        .Include(x => x.OriginNavigation)
                        .Include(x => x.Packinglist)
-                       .Include(x => x.Manifestinformation);
+                       .Include(x => x.Information);
             return Task.FromResult(results.FirstOrDefault());
         }
 
@@ -79,8 +78,15 @@ namespace TrireksaAppContext
             var transaction = db.Database.BeginTransaction();
             try
             {
-                var last = db.Manifestoutgoing.LastOrDefault();
-                model.Code = last==null ?1:last.Code+1 ;
+                if(!db.Manifestoutgoing.Any())
+                    model.Code = 1 ;
+                else
+                {
+                    var last = db.Manifestoutgoing.Max(x=>x.Code);
+                    model.Code = last+1;
+                }
+
+
                 var date = DateTime.Now;
                 model.CreatedDate = date;
                 model.UpdateDate = date;

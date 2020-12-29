@@ -33,7 +33,7 @@ namespace TrireksaApp.CollectionsBase
         public async void InitAsync()
         {
             Source.Clear();
-            var result = await client.GetAsync<List<Manifestoutgoing>>("Get");
+            var result = await client.GetAsync<List<Manifestoutgoing>>("");
             if (result != null)
             {
                 var results = result.Where(O => O.CreatedDate >= StartDate && O.CreatedDate <= EndDate).ToList();
@@ -54,7 +54,7 @@ namespace TrireksaApp.CollectionsBase
 
         public async Task<Manifestoutgoing> Add(Manifestoutgoing item)
         {
-            var result = await client.PostAsync<Manifestoutgoing>("Post",item);
+            var result = await client.PostAsync<Manifestoutgoing>("",item);
             if (result != null)
                 Source.Add(result);
             return result;

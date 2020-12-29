@@ -22,8 +22,8 @@ namespace TrireksaApp.Contents.Agent
             this.selectedItem = selectedItem;
             this.AgentName = selectedItem.Name;
            
-           if(selectedItem.CitiesCanAccess==null)
-                selectedItem.CitiesCanAccess= new List<CityAgentCanAccess>();
+           if(selectedItem.Cityagentcanaccess==null)
+                selectedItem.Cityagentcanaccess= new List<CityAgentCanAccess>();
             this.CitiesView = new List<Models.CityAgentCanAccessView>();
             GetCitiesAgentCanAccess();
         }
@@ -38,12 +38,12 @@ namespace TrireksaApp.Contents.Agent
             var cities = Common.ResourcesBase.GetMainWindowViewModel().CityCollection.Source;
             foreach(var item in cities)
             {
-                CitiesView.Add(new Models.CityAgentCanAccessView(selectedItem.CitiesCanAccess) {AgentID=selectedItem.Id, CityCode = item.CityCode, CityName = item.CityName, Province = item.Province,
+                CitiesView.Add(new Models.CityAgentCanAccessView(selectedItem.Cityagentcanaccess) {AgentID=selectedItem.Id, CityCode = item.CityCode, CityName = item.CityName, Province = item.Province,
                     Regency = item.Regency, Id = item.Id, AccessID = 0 });
             }
 
 
-            foreach(var item in selectedItem.CitiesCanAccess)
+            foreach(var item in selectedItem.Cityagentcanaccess)
             {
                var a = CitiesView.Where(O => O.Id == item.CityId).FirstOrDefault();
                 if (a != null)

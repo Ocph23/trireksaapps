@@ -188,14 +188,20 @@ namespace TrireksaAppContext
         public Task<IEnumerable<Penjualan>> GetByParameter(int agentId, PortType type)
         {
             var results = from c in db.Cityagentcanaccess.Where(O => O.AgentId == agentId)
-                          join p in db.Penjualan.Where(O => O.PortType == type)
+                          join p in db.Penjualan.Where(O => O.PortType == type) 
                           .Include(x => x.Shiper)
                           .Include(x => x.Reciver)
-                          .Include(x => x.Colly.Any(m => m.IsSended))
+                          .Include(x => x.Colly)
                           on c.CityId equals p.ToCity
                           select p;
 
-            return Task.FromResult(results.AsEnumerable());
+            var result = results.Select(x => new { x, collies = x.Colly.Where(z => !z.IsSended).ToList() }).AsEnumerable().Where(x => x.collies.Count() > 0);
+            foreach (var item in result)
+            {
+                item.x.Colly = item.collies;
+            }
+
+            return Task.FromResult(result.Select(x=>x.x).Where(x=>x.Colly.Count>0).AsEnumerable());
         }
 
         public Task<Penjualan> GetBySTT(int STT)

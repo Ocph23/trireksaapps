@@ -123,8 +123,8 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                 this.PortType = result.PortType;
                 this.UpdateDate = result.UpdateDate;
                 this.UserId = result.UserId;
-                result.OriginPort = this.PortCollection.Source.Where(O => O.Id == Origin).FirstOrDefault();
-                result.DestinationPort = this.PortCollection.Source.Where(O => O.Id == Destination).FirstOrDefault();
+                result.OriginNavigation = result.OriginNavigation;
+                result.DestinationNavigation = result.DestinationNavigation;
                 result.Agent = this.Agent;
                 result.PackingList = item.PackingList;
 
@@ -228,9 +228,9 @@ namespace TrireksaApp.Contents.ManifestOutgoing
             DestinationSource.Clear();
            foreach(var item in PortCollection.Source)
             {
-                if(Agent!=null && Agent.CitiesCanAccess!=null)
+                if(Agent!=null && Agent.Cityagentcanaccess!=null)
                 {
-                    var CityCanAccess = Agent.CitiesCanAccess.Where(O => O.CityId == item.CityID).FirstOrDefault();
+                    var CityCanAccess = Agent.Cityagentcanaccess.Where(O => O.CityId == item.CityID).FirstOrDefault();
                     if (CityCanAccess != null)
                         DestinationSource.Add(item);
                 }

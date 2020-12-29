@@ -29,7 +29,7 @@
                             Orientation="Vertical"  >
 
                 <StackPanel Style="{StaticResource OPanel}">
-                    <mi:PackIcon Kind="Office"/>
+                    <mi:PackIcon Kind="OfficeBuilding"/>
                     <Label Content="Organitation" />
                     <TextBox   Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True}" />
                 </StackPanel>

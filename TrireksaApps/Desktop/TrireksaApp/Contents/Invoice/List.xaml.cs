@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FirstFloor.ModernUI.Windows.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,5 +29,12 @@ namespace TrireksaApp.Contents.Invoice
             this.viewmodel = new InvoiceListVM();
             this.DataContext = viewmodel;
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var data = ((ListView)sender).SelectedItem;
+            NavigationCommands.GoToPage.Execute($"/Contents/Invoice/Create.xaml#1", this);
+        }
+       
     }
 }

@@ -139,7 +139,7 @@ namespace ModelsShared.Models
             SetProperty(ref    _agent , value);
             }
         }
-        public Port OriginPort
+        public Port OriginNavigation
         {
             get { return _originPort; }
             set
@@ -148,7 +148,8 @@ namespace ModelsShared.Models
             }
         }
 
-        public Port DestinationPort {
+        public Port DestinationNavigation
+        {
             get { return _destionationPort; }
             set
             {

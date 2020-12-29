@@ -21,10 +21,42 @@ namespace TrireksaApp.Contents.Invoice
             this.DeadLine = DateTime.Now.AddMonths(1);
             Save = new CommandHandler { CanExecuteAction = x => SaveValidation(), ExecuteAction = x => SaveAction() };
             PreviewManifest= new CommandHandler { CanExecuteAction = x => PreviewManifestValidation(), ExecuteAction = x => PreviewManifestAction() };
-            SaveAndPrint = new CommandHandler { CanExecuteAction = x => SaveAndPrintValidation(), ExecuteAction = x => SaveAndPrintAction() };
+            SaveAndPrint = new CommandHandler { CanExecuteAction = x => SaveValidation(), ExecuteAction = x => SaveAndPrintAction() };
             MainVM.CustomerCollection.SourceView.Filter = ShiperFilter;
         }
 
+        internal async Task SetInvoice(int data)
+        {
+            var invoice = MainVM.InvoiceCollections.SelectedItem;
+            if (invoice != null)
+            {
+
+                this.CreateDate = invoice.CreateDate;
+                this.Customer = invoice.Customer;
+                this.CustomerId = invoice.CustomerId;
+                this.CustomerSelectedItem = invoice.Customer;
+                this.DeadLine = invoice.DeadLine;
+                this.DeliveryDate = invoice.DeliveryDate;
+                this.Id = invoice.Id;
+                this.InvoicePayType = invoice.InvoicePayType;
+                this.InvoiceStatus = invoice.InvoiceStatus;
+                this.IsDelivery = invoice.IsDelivery;
+                this.Number = invoice.Number;
+                this.PaidDate = invoice.PaidDate;
+                this.ReciveDate = invoice.ReciveDate;
+                this.ReciverBy = invoice.ReciverBy;
+                this.Tax = invoice.Tax;
+                await Task.Delay(3000);
+                foreach (var item in invoice.Invoicedetail)
+                {
+                    item.IsSelected = true;
+                    this.Invoicedetail.Add(item);
+                }
+
+                this.SourceView.Refresh();
+            }
+            
+        }
 
         private string searchText;
 
@@ -48,13 +80,6 @@ namespace TrireksaApp.Contents.Invoice
                 var data = obj.Name.ToUpper();
                 return data.Contains(scr);
             }
-            return true;
-        }
-
-        private bool SaveAndPrintValidation()
-        {
-            if (this.Number > 0)
-                return false;
             return true;
         }
 
@@ -107,7 +132,8 @@ namespace TrireksaApp.Contents.Invoice
         private async void SaveAction()
         {
             var item = new ModelsShared.Models.Invoice
-            {
+            {                         
+                Customer=CustomerSelectedItem,
                 CustomerId = this.CustomerId,
                 CreateDate = this.CreateDate,
                 CustomerName = this.CustomerName,
@@ -137,9 +163,9 @@ namespace TrireksaApp.Contents.Invoice
 
         private bool SaveValidation()
         {
-            if (this.Number > 0)
-                return false;
-            return true;
+            if (this.Invoicedetail!=null && this.Invoicedetail.Where(x=>x.IsSelected).Count()>0)
+                return true;
+            return false;
         }
 
         //private bool AddItemValidated()
@@ -209,7 +235,6 @@ namespace TrireksaApp.Contents.Invoice
             }
         }
 
-        
 
         private async void Item_TotalAction()
         {

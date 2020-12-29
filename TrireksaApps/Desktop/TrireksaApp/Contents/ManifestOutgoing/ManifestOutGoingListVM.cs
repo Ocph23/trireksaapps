@@ -5,6 +5,7 @@ using System.Windows;
 using TrireksaApp.Models;
 using TrireksaApp.Common;
 using System.Collections.Generic;
+using TrireksaApp.Reports;
 
 namespace TrireksaApp.Contents.ManifestOutgoing
 {
@@ -176,7 +177,15 @@ namespace TrireksaApp.Contents.ManifestOutgoing
 
         private void PreviewAction()
         {
-            var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value = Manifest.Source },
+
+            var listSource = new List<Microsoft.Reporting.WinForms.ReportDataSource>();
+            var setting = HelperPrint.GetReportSetting();
+
+
+            listSource.Add(new Microsoft.Reporting.WinForms.ReportDataSource() { Value = Manifest.Source, Name="DataSet1" });
+            listSource.Add(new Microsoft.Reporting.WinForms.ReportDataSource() { Value = new List<MySetting>() {setting }, Name= "Config" });
+
+            var content = new Reports.Contents.ReportContent(listSource,
               "TrireksaApp.Reports.Layouts.ManifestOutgoingLayout.rdlc", null);
             var dlg = new ModernWindow
             {

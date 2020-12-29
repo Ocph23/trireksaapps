@@ -82,7 +82,7 @@ namespace TrireksaApp.CollectionsBase
             var result = this.Source.Where(O => O.Id == id).FirstOrDefault();
             if (result == null)
             {
-                result = await client.GetAsync<Penjualan>("GetById", id);
+                result = await client.GetAsync<Penjualan>("", id);
                 if (result != null)
                 {
 
@@ -132,7 +132,8 @@ namespace TrireksaApp.CollectionsBase
 
         internal Task<List<Penjualan>> GetByParameter(Manifestoutgoing manifestoutgoing)
         {
-            var uri = "GetByParameter?agentId=" + manifestoutgoing.AgentId + "&type=" + manifestoutgoing.PortType;
+            var type = (Int32)manifestoutgoing.PortType;
+            var uri = $"GetByParameter/{manifestoutgoing.AgentId}/{type}";
             return client.GetAsync<List<Penjualan>>(uri);
         }
 

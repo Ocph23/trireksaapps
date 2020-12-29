@@ -15,7 +15,7 @@
     <Grid>
         <StackPanel>
             <StackPanel Style="{StaticResource OPanel}">
-                <mi:PackIcon Kind="Office"/>
+                <mi:PackIcon Kind="OfficeBuilding"/>
                 <Label Content="Name"></Label>
                 <TextBlock Text="{Binding Name}"></TextBlock>
             </StackPanel>

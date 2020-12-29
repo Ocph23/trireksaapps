@@ -7,7 +7,7 @@ namespace TrireksaAppContext.Models
     {
         public Manifestoutgoing()
         {
-            Manifestinformation = new HashSet<Manifestinformation>();
+           // Manifestinformation = new HashSet<Manifestinformation>();
             Packinglist = new HashSet<Packinglist>();
         }
 
@@ -28,7 +28,7 @@ namespace TrireksaAppContext.Models
         public virtual Agent Agent { get; set; }
         public virtual Port DestinationNavigation { get; set; }
         public virtual Port OriginNavigation { get; set; }
-        public virtual ICollection<Manifestinformation> Manifestinformation { get; set; }
+        public virtual Manifestinformation Information { get; set; }
         public virtual ICollection<Packinglist> Packinglist { get; set; }
     }
 }

@@ -12,7 +12,7 @@
             <!-- actual form starts here -->
             <StackPanel x:Name="Form" Orientation="Vertical">
                 <StackPanel Style="{StaticResource OPanel}">
-                    <mi:PackIcon Kind="Office"/> <Label Content="Name" />
+                    <mi:PackIcon Kind="OfficeBuilding"/> <Label Content="Name" />
                     <TextBox  Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True}" />
                 </StackPanel>
 

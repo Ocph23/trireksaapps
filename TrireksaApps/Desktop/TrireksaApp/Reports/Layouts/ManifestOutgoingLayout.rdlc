@@ -6,24 +6,24 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.79445in</Width>
+              <Width>1.88049in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.56058in</Width>
+              <Width>2.06264in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>1.01607in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.81293in</Width>
+              <Width>0.68901in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.80252in</Width>
+              <Width>0.69002in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.31771in</Height>
+              <Height>0.25521in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -37,7 +37,6 @@
                               <Value>Shiper Name</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>White</Color>
                               </Style>
@@ -75,7 +74,6 @@
                               <Value>Reciver Name</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>White</Color>
                               </Style>
@@ -113,7 +111,6 @@
                               <Value>Pay Type</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>White</Color>
                               </Style>
@@ -151,7 +148,6 @@
                               <Value>Pcs</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>White</Color>
                               </Style>
@@ -189,7 +185,6 @@
                               <Value>Weight</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>White</Color>
                               </Style>
@@ -205,7 +200,6 @@
                               <Value />
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>White</Color>
                               </Style>
@@ -232,7 +226,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.30729in</Height>
+              <Height>0.21652in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -246,6 +240,7 @@
                               <Value>=Fields!ShiperName.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -279,6 +274,7 @@
                               <Value>=Fields!ReciverName.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -309,9 +305,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PayType.Value</Value>
+                              <Value>=IIF(Fields!PayType.Value=0,"Tunai",IIF(Fields!PayType.Value=1,"Kredit","BT"))</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -345,11 +342,14 @@
                               <Value>=Sum(Fields!Pcs.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Pcs</rd:DefaultName>
@@ -378,11 +378,15 @@
                               <Value>=Fields!WeightView.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>N2</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>WeightView</rd:DefaultName>
@@ -416,7 +420,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>0.88688in</Size>
                 <CellContents>
                   <Textbox Name="Textbox16">
                     <CanGrow>true</CanGrow>
@@ -428,7 +432,6 @@
                             <Value>STT</Value>
                             <Style>
                               <FontFamily>Tahoma</FontFamily>
-                              <FontSize>11pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                               <Color>White</Color>
                             </Style>
@@ -471,7 +474,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.98425in</Size>
+                <Size>0.88688in</Size>
                 <CellContents>
                   <Textbox Name="STT1">
                     <CanGrow>true</CanGrow>
@@ -483,11 +486,14 @@
                             <Value>=Fields!STT.Value</Value>
                             <Style>
                               <FontFamily>Tahoma</FontFamily>
+                              <FontSize>8pt</FontSize>
                               <Color>#4d4d4d</Color>
                             </Style>
                           </TextRun>
                         </TextRuns>
-                        <Style />
+                        <Style>
+                          <TextAlign>Center</TextAlign>
+                        </Style>
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>STT1</rd:DefaultName>
@@ -516,10 +522,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.16667in</Top>
-        <Left>0.10892in</Left>
-        <Height>0.625in</Height>
-        <Width>6.93898in</Width>
+        <Top>0.06944in</Top>
+        <Left>0.02825in</Left>
+        <Height>0.47173in</Height>
+        <Width>7.22511in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -534,17 +540,19 @@
             <TextRuns>
               <TextRun>
                 <Value>Created By :</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>0.93414in</Top>
-        <Left>0.09317in</Left>
-        <Height>0.21875in</Height>
-        <Width>1in</Width>
+        <Top>0.61805in</Top>
+        <Left>4.99542in</Left>
+        <Height>0.19643in</Height>
+        <Width>2.25794in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -557,13 +565,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>3.24584cm</Height>
+    <Height>2.2253cm</Height>
     <Style />
   </Body>
-  <Width>18.38353cm</Width>
+  <Width>18.42354cm</Width>
   <Page>
     <PageHeader>
-      <Height>5.43914cm</Height>
+      <Height>4.72099cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -574,8 +582,16 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Value>: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
                   <Value>=First(Fields!AgentName.Value, "DataSet1")</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -584,18 +600,15 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>AgentName</rd:DefaultName>
-          <Top>0.97347in</Top>
-          <Left>1.26388in</Left>
-          <Height>0.25in</Height>
+          <Top>0.95958in</Top>
+          <Left>0.99492in</Left>
+          <Height>0.18719in</Height>
           <Width>3.07421in</Width>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="ManifestCode">
@@ -605,8 +618,16 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Value>: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
                   <Value>=First(Fields!ManifestCode.Value, "DataSet1")</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -615,19 +636,16 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ManifestCode</rd:DefaultName>
-          <Top>1.25125in</Top>
-          <Left>1.26388in</Left>
-          <Height>0.25in</Height>
+          <Top>1.17517in</Top>
+          <Left>0.99492in</Left>
+          <Height>0.18719in</Height>
           <Width>3.07421in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="Textbox22">
@@ -638,26 +656,25 @@
               <TextRuns>
                 <TextRun>
                   <Value>Agent</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>0.97694in</Top>
-          <Left>0.15971in</Left>
-          <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Top>0.96305in</Top>
+          <Left>0.025in</Left>
+          <Height>0.18719in</Height>
+          <Width>0.93622in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="Textbox23">
@@ -668,26 +685,25 @@
               <TextRuns>
                 <TextRun>
                   <Value>Manifest Code</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>1.22347in</Top>
-          <Left>0.15971in</Left>
-          <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Top>1.17208in</Top>
+          <Left>0.02825in</Left>
+          <Height>0.18719in</Height>
+          <Width>0.93622in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="Textbox24">
@@ -698,26 +714,25 @@
               <TextRuns>
                 <TextRun>
                   <Value>Date</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>1.77903in</Top>
-          <Left>0.15971in</Left>
-          <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Top>1.60264in</Top>
+          <Left>0.02825in</Left>
+          <Height>0.18719in</Height>
+          <Width>0.93622in</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="Textbox26">
@@ -728,26 +743,25 @@
               <TextRuns>
                 <TextRun>
                   <Value>Port Type</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>1.51513in</Top>
-          <Left>0.15971in</Left>
-          <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Top>1.38874in</Top>
+          <Left>0.02825in</Left>
+          <Height>0.18719in</Height>
+          <Width>0.93622in</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="AgentName2">
@@ -757,8 +771,16 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Value>: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
                   <Value>=First(Fields!PortType.Value, "DataSet1")</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -767,19 +789,16 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>AgentName</rd:DefaultName>
-          <Top>1.50125in</Top>
-          <Left>1.26388in</Left>
-          <Height>0.25in</Height>
+          <Top>1.38736in</Top>
+          <Left>0.99492in</Left>
+          <Height>0.18719in</Height>
           <Width>3.07421in</Width>
           <ZIndex>6</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Textbox Name="ManifestCode2">
@@ -789,8 +808,16 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Value>: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
                   <Value>=First(Fields!CreatedDate.Value, "DataSet1")</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -799,25 +826,22 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ManifestCode</rd:DefaultName>
-          <Top>1.77903in</Top>
-          <Left>1.26388in</Left>
-          <Height>0.25in</Height>
+          <Top>1.60264in</Top>
+          <Left>0.99492in</Left>
+          <Height>0.18719in</Height>
           <Width>3.07421in</Width>
           <ZIndex>7</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
+            <VerticalAlign>Top</VerticalAlign>
           </Style>
         </Textbox>
         <Rectangle Name="Rectangle1">
           <KeepTogether>true</KeepTogether>
           <Top>0.03472in</Top>
-          <Left>0.21751in</Left>
+          <Left>0.23326in</Left>
           <Height>0.61299in</Height>
           <Width>0.53052in</Width>
           <ZIndex>8</ZIndex>
@@ -833,6 +857,7 @@
         <Rectangle Name="Rectangle3">
           <KeepTogether>true</KeepTogether>
           <Top>0.18875in</Top>
+          <Left>0.04cm</Left>
           <Height>0.45896in</Height>
           <Width>0.46876in</Width>
           <ZIndex>9</ZIndex>
@@ -848,7 +873,7 @@
         <Rectangle Name="Rectangle4">
           <KeepTogether>true</KeepTogether>
           <Top>0.38319in</Top>
-          <Left>0.39584in</Left>
+          <Left>0.41159in</Left>
           <Height>0.50695in</Height>
           <Width>0.70834in</Width>
           <ZIndex>10</ZIndex>
@@ -863,7 +888,7 @@
         </Rectangle>
         <Line Name="Line1">
           <Top>0.18875in</Top>
-          <Left>0.81747in</Left>
+          <Left>0.83322in</Left>
           <Height>0.57292in</Height>
           <Width>0in</Width>
           <ZIndex>11</ZIndex>
@@ -876,7 +901,7 @@
         </Line>
         <Line Name="Line2">
           <Top>0.45486in</Top>
-          <Left>0.61334in</Left>
+          <Left>0.62909in</Left>
           <Height>0in</Height>
           <Width>6.62427in</Width>
           <ZIndex>12</ZIndex>
@@ -890,7 +915,7 @@
           <Source>Embedded</Source>
           <Value>LOGO3rp1</Value>
           <Sizing>FitProportional</Sizing>
-          <Left>6.17343in</Left>
+          <Left>6.18918in</Left>
           <Height>0.38542in</Height>
           <Width>1.06418in</Width>
           <ZIndex>13</ZIndex>
@@ -910,7 +935,7 @@
                   <Value>MANIFEST OUTGOING</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontSize>16pt</FontSize>
+                    <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -919,10 +944,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.5868in</Top>
-          <Left>1.21529in</Left>
-          <Height>0.30334in</Height>
-          <Width>3.48959in</Width>
+          <Top>0.48958in</Top>
+          <Left>1.18937in</Left>
+          <Height>0.27209in</Height>
+          <Width>3.23291in</Width>
           <ZIndex>14</ZIndex>
           <Style>
             <Border>
@@ -942,7 +967,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.85208cm</Height>
+      <Height>1.74599cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -953,7 +978,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Trireksa Papua Cargo</Value>
+                  <Value>=First(Fields!CompanyName.Value, "Config")</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>
@@ -964,19 +989,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Contact : 0811 ()</Value>
-                  <Style>
-                    <FontSize>9pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Email :trireksa@gmail.com</Value>
+                  <Value>=First(Fields!Address.Value, "Config")</Value>
                   <Style>
                     <FontSize>9pt</FontSize>
                     <FontWeight>Normal</FontWeight>
@@ -999,8 +1012,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox85</rd:DefaultName>
-          <Top>0.06944in</Top>
-          <Left>0.10892in</Left>
+          <Top>0.08056in</Top>
+          <Left>0.01575in</Left>
           <Height>0.5625in</Height>
           <Width>4.22917in</Width>
           <Style>
@@ -1013,6 +1026,17 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
+        <Line Name="Line5">
+          <Top>0.07761cm</Top>
+          <Height>0cm</Height>
+          <Width>18.42354cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
       </ReportItems>
       <Style>
         <Border>
@@ -1037,6 +1061,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>299f0983-4e27-4b96-9ec2-a07fffdfc9bd</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="TrireksaAppReports">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>e0e54cb5-065c-45dc-9993-c3c260a49d76</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1096,6 +1127,43 @@
         <rd:TableName>PenjualanManifestView</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>Source</rd:ObjectDataSourceSelectMethod>
         <rd:ObjectDataSourceType>TrireksaApp.Models.PenjualanManifestView, TrireksaApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="Config">
+      <Query>
+        <DataSourceName>TrireksaAppReports</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NPWP">
+          <DataField>NPWP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RekeningNumber">
+          <DataField>RekeningNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>TrireksaApp.Reports</rd:DataSetName>
+        <rd:TableName>MySetting</rd:TableName>
+        <rd:ObjectDataSourceType>TrireksaApp.Reports.MySetting, TrireksaApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

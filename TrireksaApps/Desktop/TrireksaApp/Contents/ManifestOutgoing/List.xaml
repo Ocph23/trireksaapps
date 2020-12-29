@@ -157,11 +157,11 @@
                                 <StackPanel>
                                     <StackPanel Style="{StaticResource OPanel}">
                                         <Label Content="Origin"/>
-                                        <TextBlock   Text="{Binding SelectedItem.OriginPort.Name}"/>
+                                        <TextBlock   Text="{Binding SelectedItem.OriginNavigation.Name}"/>
                                     </StackPanel>
                                     <StackPanel Style="{StaticResource OPanel}">
                                         <Label Content="Destination"/>
-                                        <TextBlock  Text="{Binding SelectedItem.DestinationPort.Name}"/>
+                                        <TextBlock  Text="{Binding SelectedItem.DestinationNavigation.Name}"/>
                                     </StackPanel>
                                     <StackPanel Style="{StaticResource OPanel}">
                                         <Label Content="Agent Name"/>
@@ -246,7 +246,7 @@
                                                 <DataGridTextColumn Header="Shiper" Binding="{Binding ShiperName}"/>
                                                 <DataGridTextColumn Header="Reciver" Binding="{Binding ReciverName}"/>
                                                 <DataGridTextColumn Header="Pcs" Binding="{Binding Pcs}"/>
-                                                <DataGridTextColumn Header="Weight" Binding="{Binding WeightView}"/>
+                                                <DataGridTextColumn Header="Weight" Binding="{Binding WeightView, StringFormat='{}{0:N2}'}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </StackPanel>

@@ -355,8 +355,7 @@ namespace TrireksaAppContext
                     .HasDefaultValueSql("'NULL'");
 
                 entity.HasOne(d => d.Manifest)
-                    .WithMany(p => p.Manifestinformation)
-                    .HasForeignKey(d => d.ManifestId)
+                    .WithOne(p => p.Information)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_manifestinformation_manifestoutgoing1");
             });

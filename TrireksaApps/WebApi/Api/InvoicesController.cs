@@ -81,7 +81,7 @@ namespace WebApi.Api
             }
         }
 
-        [HttpPut("UpdateDeliveryDataAction")]
+        [HttpPut("UpdateDeliveryDataAction/{Id}")]
         [ApiAuthorize(Roles = "Administrator, Accounting")]
         public async Task<IActionResult> UpdateDeliveryDataAction(int Id, Invoices t)
         {
@@ -95,7 +95,7 @@ namespace WebApi.Api
             }
         }
 
-        [HttpPut("UpdateInvoiceStatusAction")]
+        [HttpPut("UpdateInvoiceStatusAction/{Id}")]
         [ApiAuthorize(Roles = "Administrator, Accounting")]
         public async Task<IActionResult> UpdateInvoiceStatusAction(int Id, Invoices t)
         {
@@ -110,7 +110,7 @@ namespace WebApi.Api
         }
 
 
-        [HttpGet("GetInvoiceForPenjualanInfo")]
+        [HttpGet("GetInvoiceForPenjualanInfo/{Id}")]
         public async Task<IActionResult> GetInvoiceForPenjualanInfo(int Id)
         {
             try

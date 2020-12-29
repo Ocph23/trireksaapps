@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using TrireksaAppContext.Models;
@@ -37,8 +37,21 @@ namespace TrireksaAppContext
 
         public Task<IEnumerable<Invoices>> Get(DateTime start, DateTime end)
         {
-            var results = db.Invoices;
-            return Task.FromResult(results.AsEnumerable());
+            var results = db.Invoices
+                .Include(x => x.Customer)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+                .ThenInclude(x=>x.Penjualan).ThenInclude(x=>x.ToCityNavigation)
+                .Include(x=>x.Invoicedetail)
+                .ThenInclude(x=>x.Penjualan).ThenInclude(x=>x.FromCityNavigation)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Reciver)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Shiper)
+                ;
+            var datas = results.ToList();
+
+            return Task.FromResult(results.ToList().AsEnumerable());
         }
 
 
@@ -47,7 +60,10 @@ namespace TrireksaAppContext
             try
             {
                 var inv = db.Invoices.Where(O => O.Id == Id)
-                    .Include(x => x.Invoicedetail).FirstOrDefault();
+                    .Include(x => x.Invoicedetail)
+                    .ThenInclude(x => x.Penjualan)
+                    .ThenInclude(x => x.Colly)
+                    .FirstOrDefault();
                 return Task.FromResult(inv);
 
             }
@@ -68,14 +84,6 @@ namespace TrireksaAppContext
                 if (t.Invoicedetail == null || t.Invoicedetail.Count <= 0)
                     throw new SystemException("Lengkapi Data STT !");
 
-                if (!db.Invoices.Any())
-                    t.Number++;
-                else
-                {
-                    var lastINvoice = db.Invoices.Max(x=>x.Number);
-                    t.Number=lastINvoice+1;
-                }
-
                 db.Entry(t.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
 
                 foreach (var item in t.Invoicedetail)
@@ -83,7 +91,45 @@ namespace TrireksaAppContext
                     db.Entry(item.Penjualan).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
                 }
 
-                db.Invoices.Add(t);
+
+                if (t.Id <= 0)
+                {
+                    if (!db.Invoices.Any())
+                        t.Number++;
+                    else
+                    {
+                        var lastINvoice = db.Invoices.Max(x => x.Number);
+                        t.Number = lastINvoice + 1;
+                    }
+
+                    db.Invoices.Add(t);
+
+
+                }
+                else
+                {
+                    var existInvoice = db.Invoices.Where(x => x.Id == t.Id).Include(x=>x.Invoicedetail).FirstOrDefault();
+                    db.Entry(existInvoice).CurrentValues.SetValues(t);
+
+                    foreach (var item in t.Invoicedetail)
+                    {
+                        if (item.Id <= 0)
+                        {
+                            db.Invoicedetail.Add(item);
+                        }
+                    }
+
+
+                    foreach (var item in existInvoice.Invoicedetail)
+                    {
+                        var itemExists = t.Invoicedetail.SingleOrDefault(x => x.Id == item.Id);
+                        if (itemExists == null)
+                        {
+                            db.Invoicedetail.Remove(item);
+                        }
+                    }
+                }
+
                 if (await db.SaveChangesAsync() <= 0)
                     throw new SystemException("Data Not Saved");
                 return t;
@@ -99,28 +145,44 @@ namespace TrireksaAppContext
 
         public async Task<Invoices> UpdateDeliveryDataAction(int Id, Invoices t)
         {
-            var existsData = db.Invoices.Where(x => x.Id == Id).FirstOrDefault();
-            if (existsData == null)
-                throw new SystemException("Data Not Found !");
+            try
+            {
+                var existsData = db.Invoices.Where(x => x.Id == Id).FirstOrDefault();
+                if (existsData == null)
+                    throw new SystemException("Data Not Found !");
 
-            db.Entry(t).CurrentValues.SetValues(t);
+                db.Entry(existsData).CurrentValues.SetValues(t);
 
-            if (await db.SaveChangesAsync() <= 0)
-                throw new SystemException("Data Not Saved");
-            return t;
+                if (await db.SaveChangesAsync() <= 0)
+                    throw new SystemException("Data Not Saved");
+                return t;
+            }
+            catch (Exception ex)
+            {
+
+                throw new SystemException(ex.Message);
+            }
         }
 
 
         public async Task<Invoices> UpdateInvoiceStatusAction(int Id, Invoices t)
         {
-            var existsData = await Get(Id);
-            if (existsData == null)
-                throw new SystemException("Data Not Found !");
-            db.Entry(t).CurrentValues.SetValues(t);
-            if (await db.SaveChangesAsync() <= 0)
-                throw new SystemException("Data Not Saved");
+            try
+            {
+                var existsData = await Get(Id);
+                if (existsData == null)
+                    throw new SystemException("Data Not Found !");
+                db.Entry(existsData).CurrentValues.SetValues(t);
+                if (await db.SaveChangesAsync() <= 0)
+                    throw new SystemException("Data Not Saved");
 
-            return existsData;
+                return existsData;
+            }
+            catch (Exception ex)
+            {
+
+                throw new SystemException(ex.Message);
+            }
         }
 
 
