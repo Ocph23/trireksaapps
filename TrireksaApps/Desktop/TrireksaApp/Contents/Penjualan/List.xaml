@@ -48,10 +48,9 @@
                 <DataGridTextColumn Width="150" Header="From" Binding="{Binding FromCityNavigation.CityCode}"/>
                 <DataGridTextColumn Width="150" Header="To" Binding="{Binding ToCityNavigation.CityCode}"/>
                 <DataGridTextColumn Header="Pcs" Binding="{Binding Pcs}"/>
-                <DataGridTextColumn  Header="Type Of Weight" Binding="{Binding TypeOfWeight}"/>
                 <DataGridTextColumn Header="Weights" Binding="{Binding Weight}"/>
                 <DataGridTextColumn Header="Prices" Binding="{Binding Price,StringFormat='{}{0:N0}'}"/>
-                <DataGridTextColumn Header="Weights" Binding="{Binding Total,StringFormat='{}{0:N0}'}"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total,StringFormat='{}{0:N0}'}"/>
                 <DataGridTextColumn Header="Payment" Binding="{Binding PayType}"/>
                 <DataGridTextColumn  Header="Via" Binding="{Binding PortType}"/>
                 <DataGridTextColumn  Header="Date" Binding="{Binding ChangeDate}"/>

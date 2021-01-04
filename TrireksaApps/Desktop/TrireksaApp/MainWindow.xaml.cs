@@ -28,7 +28,6 @@ namespace TrireksaApp
             InitializeComponent();
             viewmodel = new MainWindowVM();
             this.DataContext = viewmodel;
-            viewmodel.SystemConfiguration.UpdateUserName(ResourcesBase.UserIsLogin.Email);
             Loaded += MainWindow_Loaded;
         }
 

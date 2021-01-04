@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ModelsShared.Models
 {
@@ -22,7 +23,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int EmailConfirmed
+        public bool EmailConfirmed
         {
             get { return _emailconfirmed; }
             set
@@ -58,7 +59,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int PhoneNumberConfirmed
+        public bool PhoneNumberConfirmed
         {
             get { return _phonenumberconfirmed; }
             set
@@ -67,7 +68,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int TwoFactorEnabled
+        public bool TwoFactorEnabled
         {
             get { return _twofactorenabled; }
             set
@@ -85,7 +86,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int LockoutEnabled
+        public bool LockoutEnabled
         {
             get { return _lockoutenabled; }
             set
@@ -111,17 +112,21 @@ namespace ModelsShared.Models
             SetProperty(ref    _username , value);
             }
         }
+        public virtual ICollection<Userclaims> Userclaims { get; set; }
+        public virtual ICollection<Userlogins> Userlogins { get; set; }
+        public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public virtual ICollection<Userrole> Userrole { get; set; }
 
         private string _id;
         private string _email;
-        private int _emailconfirmed;
+        private bool _emailconfirmed;
         private string _passwordhash;
         private string _securitystamp;
         private string _phonenumber;
-        private int _phonenumberconfirmed;
-        private int _twofactorenabled;
+        private bool _phonenumberconfirmed;
+        private bool _twofactorenabled;
         private DateTime _lockoutenddateutc;
-        private int _lockoutenabled;
+        private bool _lockoutenabled;
         private int _accessfailedcount;
         private string _username;
     }

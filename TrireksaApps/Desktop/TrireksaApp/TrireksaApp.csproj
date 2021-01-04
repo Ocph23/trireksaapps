@@ -119,7 +119,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="ZKWeb.System.Drawing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZKWeb.System.Drawing.4.0.1\lib\net45\ZKWeb.System.Drawing.dll</HintPath>
+      <HintPath>..\..\packages\ZKWeb.System.Drawing.4.0.1\lib\net45\ZKWeb.System.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +345,9 @@
     </Compile>
     <Compile Include="Pages\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\CompanyProfileSetting.xaml.cs">
+      <DependentUpon>CompanyProfileSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\Nota.xaml.cs">
       <DependentUpon>Nota.xaml</DependentUpon>
@@ -711,6 +714,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Pages\Settings\CompanyProfileSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Settings\Nota.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

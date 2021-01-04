@@ -3,10 +3,8 @@
 namespace ModelsShared.Models
 {
 
-    public class Userprofile : User
+    public class Userprofile :  BaseNotify
     {
-
-
         public int UserId
         {
             get { return _userid; }
@@ -64,6 +62,8 @@ namespace ModelsShared.Models
         }
 
         public List<Roles> Roles { get; set; }
+        public virtual User UserCodeNavigation { get; set; }
+
 
         private int _userid;
         private string _firstname;

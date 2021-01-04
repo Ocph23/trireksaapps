@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ModelsShared.Models;
+using TrireksaApp.Common;
 
 namespace TrireksaApp.Models
 {
@@ -80,7 +81,9 @@ namespace TrireksaApp.Models
             }
             else if (this.TypeOfWeight ==ModelsShared. Models.TypeOfWeight.WeightVolume)
             {
-               TWeight = Jumlah *(this.Longer * this.Wide * this.Hight) / 6000;
+                if (WeightVolume <= 0)
+                    WeightVolume = new ApplicationConfig().DevideWeightVolume;
+               TWeight = Jumlah *(this.Longer * this.Wide * this.Hight) / WeightVolume;
             }
             else
             {

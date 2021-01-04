@@ -12,8 +12,6 @@ namespace TrireksaApp.Contents.Users
             this.MainVM = Common.ResourcesBase.GetMainWindowViewModel();
             Save = new CommandHandler { CanExecuteAction = x => SaveValidate(), ExecuteAction = x => SaveAction() };
             GetProfile();
-
-            
         }
 
         private async void GetProfile()
@@ -29,21 +27,15 @@ namespace TrireksaApp.Contents.Users
                 }
                 else
                 {
-
                     this.UserId = result.UserId;
                     this.FirstName = result.FirstName;
                     this.LastName = result.LastName;
-                    this.Email = result.Email;
-                    this.UserId = result.UserId;
-                    this.PhoneNumber = result.PhoneNumber;
+                    this.UserCode = result.UserCode;
                     this.Address = result.Address;
                     this.Photo = result.Photo;
+
                 }
             }
-
-
-
-
         }
 
         private async void SaveAction()
@@ -54,8 +46,7 @@ namespace TrireksaApp.Contents.Users
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 UserId = this.UserId,
-                Photo = this.Photo,
-                UserName = this.UserName
+                Photo = this.Photo,   UserCode=this.UserCode           
             };
 
             bool result;

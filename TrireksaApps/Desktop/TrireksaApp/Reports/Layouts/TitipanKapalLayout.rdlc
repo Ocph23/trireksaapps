@@ -4,7 +4,7 @@
     <ReportItems>
       <Rectangle Name="Rectangle1">
         <KeepTogether>true</KeepTogether>
-        <Top>0.48264in</Top>
+        <Top>0.10764in</Top>
         <Left>0.28671in</Left>
         <Height>0.61299in</Height>
         <Width>0.53052in</Width>
@@ -19,7 +19,7 @@
       </Rectangle>
       <Rectangle Name="Rectangle3">
         <KeepTogether>true</KeepTogether>
-        <Top>0.63667in</Top>
+        <Top>0.26167in</Top>
         <Left>0.0692in</Left>
         <Height>0.45896in</Height>
         <Width>0.46876in</Width>
@@ -35,7 +35,7 @@
       </Rectangle>
       <Rectangle Name="Rectangle4">
         <KeepTogether>true</KeepTogether>
-        <Top>0.83111in</Top>
+        <Top>0.45611in</Top>
         <Left>0.46504in</Left>
         <Height>0.50695in</Height>
         <Width>0.70834in</Width>
@@ -50,7 +50,7 @@
         </Style>
       </Rectangle>
       <Line Name="Line1">
-        <Top>0.63667in</Top>
+        <Top>0.26167in</Top>
         <Left>0.88667in</Left>
         <Height>0.57292in</Height>
         <Width>0in</Width>
@@ -63,10 +63,10 @@
         </Style>
       </Line>
       <Line Name="Line2">
-        <Top>0.90278in</Top>
+        <Top>0.52778in</Top>
         <Left>0.68254in</Left>
         <Height>0in</Height>
-        <Width>6.85219in</Width>
+        <Width>6.77896in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -108,7 +108,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.48264in</Top>
+        <Top>0.17569in</Top>
         <Left>1.28449in</Left>
         <Height>0.30334in</Height>
         <Width>2.78125in</Width>
@@ -138,9 +138,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>1.46883in</Top>
+        <Top>1.09383in</Top>
         <Left>0.09004in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20833in</Height>
         <Width>1.45833in</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -168,9 +168,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>1.71536in</Top>
+        <Top>1.31536in</Top>
         <Left>0.09004in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20833in</Height>
         <Width>1.45833in</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -198,9 +198,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>1.72924in</Top>
+        <Top>1.32924in</Top>
         <Left>4.50318in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20833in</Height>
         <Width>1.04167in</Width>
         <ZIndex>9</ZIndex>
         <Style>
@@ -228,9 +228,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>1.46534in</Top>
+        <Top>1.09034in</Top>
         <Left>4.50318in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20833in</Height>
         <Width>1.04167in</Width>
         <ZIndex>10</ZIndex>
         <Style>
@@ -258,7 +258,6 @@
                           <TextRun>
                             <Value>PELABUHAN ASAL</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -272,26 +271,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -307,7 +307,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.64859in</Width>
+              <Width>3.70873in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -336,26 +336,27 @@
                       <Style>
                         <Border>
                           <Style>Solid</Style>
+                          <Width>0.25pt</Width>
                         </Border>
                         <TopBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </TopBorder>
                         <BottomBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </LeftBorder>
                         <RightBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -392,26 +393,27 @@
                       <Style>
                         <Border>
                           <Style>Solid</Style>
+                          <Width>0.25pt</Width>
                         </Border>
                         <TopBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </TopBorder>
                         <BottomBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </LeftBorder>
                         <RightBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -445,7 +447,6 @@
                           <TextRun>
                             <Value>PELABUHAN TUJUAN</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -459,26 +460,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -505,7 +507,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>3.64859in</Size>
+                <Size>3.70873in</Size>
                 <CellContents>
                   <Textbox Name="Origin1">
                     <CanGrow>true</CanGrow>
@@ -527,26 +529,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -559,7 +562,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>3.64859in</Size>
+                <Size>3.70873in</Size>
                 <CellContents>
                   <Textbox Name="OriginCode1">
                     <CanGrow>true</CanGrow>
@@ -581,26 +584,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -615,10 +619,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>2.11681in</Top>
+        <Top>1.62931in</Top>
         <Left>0.04837in</Left>
         <Height>0.75in</Height>
-        <Width>7.29718in</Width>
+        <Width>7.41746in</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -641,7 +645,6 @@
                           <TextRun>
                             <Value>PENERIMA TITIPAN</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -690,10 +693,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.18012in</Width>
+              <Width>2.22021in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.68694in</Width>
+              <Width>2.72703in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -835,7 +838,6 @@
                           <TextRun>
                             <Value>TELEPON</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -892,7 +894,6 @@
                           <TextRun>
                             <Value>JUMLAH BARANG</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -952,7 +953,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>2.43012in</Size>
+                <Size>2.47021in</Size>
                 <CellContents>
                   <Textbox Name="CrewName1">
                     <CanGrow>true</CanGrow>
@@ -1007,10 +1008,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.83903in</Top>
-        <Left>0.0692in</Left>
+        <Top>3.35153in</Top>
+        <Left>0.04837in</Left>
         <Height>0.52083in</Height>
-        <Width>7.29718in</Width>
+        <Width>7.41745in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -1035,9 +1036,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>AgentName1</rd:DefaultName>
-        <Top>1.46883in</Top>
+        <Top>1.09383in</Top>
         <Left>1.61781in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20833in</Height>
         <Width>2.44793in</Width>
         <ZIndex>13</ZIndex>
         <Style>
@@ -1067,10 +1068,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>AgentPhone1</rd:DefaultName>
-        <Top>1.45008in</Top>
+        <Top>1.08758in</Top>
         <Left>5.6143in</Left>
-        <Height>0.25in</Height>
-        <Width>1.75209in</Width>
+        <Height>0.20833in</Height>
+        <Width>1.8307in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1099,9 +1100,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>AgentName2</rd:DefaultName>
-        <Top>1.72924in</Top>
+        <Top>1.32924in</Top>
         <Left>1.61781in</Left>
-        <Height>0.25in</Height>
+        <Height>0.20833in</Height>
         <Width>2.44793in</Width>
         <ZIndex>15</ZIndex>
         <Style>
@@ -1129,10 +1130,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ArmadaName1</rd:DefaultName>
-        <Top>1.71536in</Top>
+        <Top>1.32786in</Top>
         <Left>5.6164in</Left>
-        <Height>0.25in</Height>
-        <Width>1.74999in</Width>
+        <Height>0.20833in</Height>
+        <Width>1.8286in</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -1159,7 +1160,6 @@
                           <TextRun>
                             <Value>ISI TITIPAN, CATATAN</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -1208,7 +1208,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.64859in</Width>
+              <Width>3.70873in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1290,7 +1290,6 @@
                           <TextRun>
                             <Value>POSISI BARANG</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -1350,7 +1349,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>3.64859in</Size>
+                <Size>3.70873in</Size>
                 <CellContents>
                   <Textbox Name="Textbox58">
                     <CanGrow>true</CanGrow>
@@ -1405,10 +1404,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>2.93625in</Top>
-        <Left>0.0692in</Left>
+        <Top>2.44875in</Top>
+        <Left>0.04837in</Left>
         <Height>0.83333in</Height>
-        <Width>7.29718in</Width>
+        <Width>7.41746in</Width>
         <ZIndex>17</ZIndex>
         <Style>
           <Border>
@@ -1423,7 +1422,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!Code.Value, "DataSet1").ToString()+"/TRP-TK/"</Value>
+                <Value>=Sum(Fields!Code.Value, "DataSet1").ToString()+"/TRP-TK/"+Month(Now()).ToString()+"/"+Year(Now()).ToString()</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>14pt</FontSize>
@@ -1437,7 +1436,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.97222in</Top>
+        <Top>0.59722in</Top>
         <Left>1.28449in</Left>
         <Height>0.30334in</Height>
         <Width>3.09375in</Width>
@@ -1456,7 +1455,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.52359in</Width>
+              <Width>3.58373in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1559,7 +1558,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>3.77359in</Size>
+                <Size>3.83373in</Size>
                 <CellContents>
                   <Textbox Name="Textbox92">
                     <CanGrow>true</CanGrow>
@@ -1636,10 +1635,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>4.41542in</Top>
-        <Left>0.0692in</Left>
+        <Top>3.92792in</Top>
+        <Left>0.04837in</Left>
         <Height>0.75in</Height>
-        <Width>7.29718in</Width>
+        <Width>7.41746in</Width>
         <ZIndex>19</ZIndex>
         <Style>
           <Border>
@@ -1647,56 +1646,43 @@
           </Border>
         </Style>
       </Tablix>
-      <Line Name="Line5">
-        <Top>5.45806in</Top>
-        <Left>0.00342in</Left>
-        <Height>0in</Height>
-        <Width>7.53131in</Width>
-        <ZIndex>20</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Textbox Name="Textbox85">
+      <Textbox Name="Textbox86">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Contact : 0811 ()</Value>
+                <Label>companyname</Label>
+                <Value>=First(Fields!CompanyName.Value, "Config")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Label>address</Label>
+                <Value>=First(Fields!Address.Value, "Config")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
+            <Style />
           </Paragraph>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Email :trireksa@gmail.com</Value>
+                <Label>phone</Label>
+                <Value>=First(Fields!Phone.Value, "Config") + "/" + First(Fields!Handphone.Value, "Config")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontSize>9pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -1705,11 +1691,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox85</rd:DefaultName>
-        <Top>0.48264in</Top>
-        <Left>5.93374in</Left>
-        <Height>0.39236in</Height>
-        <Width>1.52776in</Width>
-        <ZIndex>21</ZIndex>
+        <Top>4.73348in</Top>
+        <Left>0.04837in</Left>
+        <Height>0.5625in</Height>
+        <Width>4.22917in</Width>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1722,11 +1708,11 @@
       </Textbox>
       <Rectangle Name="Rectangle2">
         <KeepTogether>true</KeepTogether>
-        <Top>5.97084in</Top>
-        <Left>0.23834in</Left>
+        <Top>5.65972in</Top>
+        <Left>0.28719in</Left>
         <Height>0.61299in</Height>
         <Width>0.53052in</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Color>#911b09</Color>
@@ -1738,11 +1724,11 @@
       </Rectangle>
       <Rectangle Name="Rectangle5">
         <KeepTogether>true</KeepTogether>
-        <Top>6.12487in</Top>
-        <Left>0.02083in</Left>
+        <Top>5.81376in</Top>
+        <Left>0.06968in</Left>
         <Height>0.45896in</Height>
         <Width>0.46876in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Color>#243904</Color>
@@ -1754,11 +1740,11 @@
       </Rectangle>
       <Rectangle Name="Rectangle6">
         <KeepTogether>true</KeepTogether>
-        <Top>6.31931in</Top>
-        <Left>0.41667in</Left>
+        <Top>6.0082in</Top>
+        <Left>0.46552in</Left>
         <Height>0.50695in</Height>
         <Width>0.70834in</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Color>#fd755e</Color>
@@ -1769,11 +1755,11 @@
         </Style>
       </Rectangle>
       <Line Name="Line3">
-        <Top>6.12487in</Top>
-        <Left>0.8383in</Left>
+        <Top>5.81376in</Top>
+        <Left>0.88715in</Left>
         <Height>0.57292in</Height>
         <Width>0in</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1782,11 +1768,11 @@
         </Style>
       </Line>
       <Line Name="Line4">
-        <Top>6.39098in</Top>
-        <Left>0.63417in</Left>
+        <Top>6.07986in</Top>
+        <Left>0.68302in</Left>
         <Height>0in</Height>
-        <Width>6.85219in</Width>
-        <ZIndex>26</ZIndex>
+        <Width>6.77896in</Width>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1796,12 +1782,12 @@
       <Image Name="Image2">
         <Source>Embedded</Source>
         <Value>LOGO3rp1</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>5.58889in</Top>
-        <Left>6.22827in</Left>
-        <Height>0.66667in</Height>
-        <Width>1.16835in</Width>
-        <ZIndex>27</ZIndex>
+        <Sizing>Fit</Sizing>
+        <Top>5.65278in</Top>
+        <Left>5.93422in</Left>
+        <Height>0.35417in</Height>
+        <Width>1.51126in</Width>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1827,11 +1813,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.97084in</Top>
-        <Left>1.23612in</Left>
+        <Top>5.72777in</Top>
+        <Left>1.28497in</Left>
         <Height>0.30334in</Height>
         <Width>2.78125in</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1857,11 +1843,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>6.95703in</Top>
-        <Left>0.04167in</Left>
-        <Height>0.25in</Height>
+        <Top>6.64592in</Top>
+        <Left>0.09052in</Left>
+        <Height>0.20833in</Height>
         <Width>1.45833in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1887,11 +1873,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>7.20356in</Top>
-        <Left>0.04167in</Left>
-        <Height>0.25in</Height>
+        <Top>6.86744in</Top>
+        <Left>0.09052in</Left>
+        <Height>0.20833in</Height>
         <Width>1.45833in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1917,11 +1903,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>7.21744in</Top>
-        <Left>4.45481in</Left>
-        <Height>0.25in</Height>
+        <Top>6.88132in</Top>
+        <Left>4.50366in</Left>
+        <Height>0.20833in</Height>
         <Width>1.04167in</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1947,11 +1933,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>6.95354in</Top>
-        <Left>4.45481in</Left>
-        <Height>0.25in</Height>
+        <Top>6.64242in</Top>
+        <Left>4.50366in</Left>
+        <Height>0.20833in</Height>
         <Width>1.04167in</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1977,7 +1963,6 @@
                           <TextRun>
                             <Value>PELABUHAN ASAL</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -1991,26 +1976,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -2026,7 +2012,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.64859in</Width>
+              <Width>3.70873in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2055,26 +2041,27 @@
                       <Style>
                         <Border>
                           <Style>Solid</Style>
+                          <Width>0.25pt</Width>
                         </Border>
                         <TopBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </TopBorder>
                         <BottomBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </LeftBorder>
                         <RightBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -2111,26 +2098,27 @@
                       <Style>
                         <Border>
                           <Style>Solid</Style>
+                          <Width>0.25pt</Width>
                         </Border>
                         <TopBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </TopBorder>
                         <BottomBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </LeftBorder>
                         <RightBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>0.25pt</Width>
                         </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -2164,7 +2152,6 @@
                           <TextRun>
                             <Value>PELABUHAN TUJUAN</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -2178,26 +2165,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -2224,7 +2212,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>3.64859in</Size>
+                <Size>3.70873in</Size>
                 <CellContents>
                   <Textbox Name="Origin2">
                     <CanGrow>true</CanGrow>
@@ -2246,26 +2234,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -2278,7 +2267,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>3.64859in</Size>
+                <Size>3.70873in</Size>
                 <CellContents>
                   <Textbox Name="OriginCode2">
                     <CanGrow>true</CanGrow>
@@ -2300,26 +2289,27 @@
                     <Style>
                       <Border>
                         <Style>Solid</Style>
+                        <Width>0.25pt</Width>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </TopBorder>
                       <BottomBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </LeftBorder>
                       <RightBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
-                        <Width>1pt</Width>
+                        <Width>0.25pt</Width>
                       </RightBorder>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
@@ -2334,10 +2324,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>7.60501in</Top>
+        <Top>7.18139in</Top>
+        <Left>0.04885in</Left>
         <Height>0.75in</Height>
-        <Width>7.29718in</Width>
-        <ZIndex>33</ZIndex>
+        <Width>7.41746in</Width>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2359,7 +2350,6 @@
                           <TextRun>
                             <Value>PENERIMA TITIPAN</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -2408,10 +2398,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.18012in</Width>
+              <Width>2.22021in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.68694in</Width>
+              <Width>2.72703in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2553,7 +2543,6 @@
                           <TextRun>
                             <Value>TELEPON</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -2610,7 +2599,6 @@
                           <TextRun>
                             <Value>JUMLAH BARANG</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -2670,7 +2658,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>2.43012in</Size>
+                <Size>2.47021in</Size>
                 <CellContents>
                   <Textbox Name="CrewName2">
                     <CanGrow>true</CanGrow>
@@ -2725,11 +2713,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>9.32723in</Top>
-        <Left>0.02083in</Left>
+        <Top>8.90361in</Top>
+        <Left>0.04885in</Left>
         <Height>0.52083in</Height>
-        <Width>7.29718in</Width>
-        <ZIndex>34</ZIndex>
+        <Width>7.41745in</Width>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2753,11 +2741,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>AgentName1</rd:DefaultName>
-        <Top>6.95703in</Top>
-        <Left>1.56944in</Left>
-        <Height>0.25in</Height>
+        <Top>6.64592in</Top>
+        <Left>1.61829in</Left>
+        <Height>0.20833in</Height>
         <Width>2.44793in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2785,11 +2773,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>AgentPhone1</rd:DefaultName>
-        <Top>6.93828in</Top>
-        <Left>5.56592in</Left>
-        <Height>0.25in</Height>
-        <Width>1.75209in</Width>
-        <ZIndex>36</ZIndex>
+        <Top>6.63966in</Top>
+        <Left>5.61478in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.8307in</Width>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2817,11 +2805,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>AgentName2</rd:DefaultName>
-        <Top>7.21744in</Top>
-        <Left>1.56944in</Left>
-        <Height>0.25in</Height>
+        <Top>6.88132in</Top>
+        <Left>1.61829in</Left>
+        <Height>0.20833in</Height>
         <Width>2.44793in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2847,11 +2835,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ArmadaName1</rd:DefaultName>
-        <Top>7.20356in</Top>
-        <Left>5.56802in</Left>
-        <Height>0.25in</Height>
-        <Width>1.74999in</Width>
-        <ZIndex>38</ZIndex>
+        <Top>6.87994in</Top>
+        <Left>5.61688in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.8286in</Width>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2877,7 +2865,6 @@
                           <TextRun>
                             <Value>ISI TITIPAN, CATATAN</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -2926,7 +2913,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.64859in</Width>
+              <Width>3.70873in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -3008,7 +2995,6 @@
                           <TextRun>
                             <Value>POSISI BARANG</Value>
                             <Style>
-                              <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -3068,7 +3054,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>3.64859in</Size>
+                <Size>3.70873in</Size>
                 <CellContents>
                   <Textbox Name="Textbox59">
                     <CanGrow>true</CanGrow>
@@ -3123,11 +3109,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>8.42445in</Top>
-        <Left>0.02083in</Left>
+        <Top>8.00084in</Top>
+        <Left>0.04885in</Left>
         <Height>0.83333in</Height>
-        <Width>7.29718in</Width>
-        <ZIndex>39</ZIndex>
+        <Width>7.41746in</Width>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3141,7 +3127,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!Code.Value, "DataSet1").ToString() + "/TRP-TK/"</Value>
+                <Value>=Sum(Fields!Code.Value, "DataSet1").ToString + "/TRP-TK/" + Month(Now).ToString + "/" + Year(Now).ToString</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>14pt</FontSize>
@@ -3155,11 +3141,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>6.46042in</Top>
-        <Left>1.23612in</Left>
+        <Top>6.1493in</Top>
+        <Left>1.28497in</Left>
         <Height>0.30334in</Height>
         <Width>3.09375in</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3174,7 +3160,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.52359in</Width>
+              <Width>3.58373in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -3277,7 +3263,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>3.77359in</Size>
+                <Size>3.83373in</Size>
                 <CellContents>
                   <Textbox Name="Textbox94">
                     <CanGrow>true</CanGrow>
@@ -3354,55 +3340,54 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>9.90362in</Top>
-        <Left>0.02083in</Left>
+        <Top>9.48in</Top>
+        <Left>0.04885in</Left>
         <Height>0.75in</Height>
-        <Width>7.29718in</Width>
-        <ZIndex>41</ZIndex>
+        <Width>7.41746in</Width>
+        <ZIndex>40</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox86">
+      <Textbox Name="Textbox87">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Contact : 0811 ()</Value>
+                <Label>companyname</Label>
+                <Value>=First(Fields!CompanyName.Value, "Config")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Label>address</Label>
+                <Value>=First(Fields!Address.Value, "Config")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
+            <Style />
           </Paragraph>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Email :trireksa@gmail.com</Value>
+                <Label>phone</Label>
+                <Value>=First(Fields!Phone.Value, "Config") + "/" + First(Fields!Handphone.Value, "Config")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontSize>9pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -3411,11 +3396,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox85</rd:DefaultName>
-        <Top>5.97084in</Top>
-        <Left>5.88536in</Left>
-        <Height>0.39236in</Height>
-        <Width>1.52776in</Width>
-        <ZIndex>42</ZIndex>
+        <Top>10.28556in</Top>
+        <Left>0.04885in</Left>
+        <Height>0.5625in</Height>
+        <Width>3.83373in</Width>
+        <ZIndex>41</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3426,11 +3411,43 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Line Name="Line5">
+        <Top>13.91469cm</Top>
+        <Height>0cm</Height>
+        <Width>18.9103cm</Width>
+        <ZIndex>42</ZIndex>
+        <Style>
+          <Border>
+            <Style>Dotted</Style>
+            <Width>0.25pt</Width>
+          </Border>
+          <TopBorder>
+            <Color>Black</Color>
+            <Style>Dotted</Style>
+            <Width>0.25pt</Width>
+          </TopBorder>
+          <BottomBorder>
+            <Color>Black</Color>
+            <Style>Dotted</Style>
+            <Width>0.25pt</Width>
+          </BottomBorder>
+          <LeftBorder>
+            <Color>Black</Color>
+            <Style>Dotted</Style>
+            <Width>0.25pt</Width>
+          </LeftBorder>
+          <RightBorder>
+            <Color>Black</Color>
+            <Style>Dotted</Style>
+            <Width>0.25pt</Width>
+          </RightBorder>
+        </Style>
+      </Line>
     </ReportItems>
-    <Height>13.00084in</Height>
+    <Height>10.95917in</Height>
     <Style />
   </Body>
-  <Width>7.61932in</Width>
+  <Width>7.49568in</Width>
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
@@ -3448,6 +3465,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>ad43dd74-a63e-4f0c-b3ec-8d140059df5f</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="TrireksaAppReports">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>d46969ce-08de-472e-be35-e62dc10f40a4</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -3534,6 +3558,55 @@
         <rd:DataSetName>ModelsShared.Models</rd:DataSetName>
         <rd:TableName>titipankapal</rd:TableName>
         <rd:ObjectDataSourceType>ModelsShared.Models.titipankapal, ModelsSharedDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="Config">
+      <Query>
+        <DataSourceName>TrireksaAppReports</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Handphone">
+          <DataField>Handphone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NPWP">
+          <DataField>NPWP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RekeningNumber">
+          <DataField>RekeningNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SignName">
+          <DataField>SignName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>TrireksaApp.Reports</rd:DataSetName>
+        <rd:TableName>MySetting</rd:TableName>
+        <rd:ObjectDataSourceType>TrireksaApp.Reports.MySetting, TrireksaApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

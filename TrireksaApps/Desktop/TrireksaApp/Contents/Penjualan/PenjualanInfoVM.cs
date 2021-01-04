@@ -7,6 +7,9 @@ using System.Windows.Media.Imaging;
 using ModelsShared;
 using System.IO;
 using System;
+using Microsoft.Reporting.WinForms;
+using FirstFloor.ModernUI.Windows.Controls;
+using System.Windows;
 
 namespace TrireksaApp.Contents.Penjualan
 {
@@ -80,9 +83,27 @@ namespace TrireksaApp.Contents.Penjualan
 
         private void PrintPictureAction(object obj)
         {
+            var settingData = HelperPrint.GetReportSetting();
+            SelectedPhoto.STT = PenjualanItem.STT;
+            var listSource = new List<ReportDataSource> {
+                new ReportDataSource { Value = new List<ModelsShared.Photo> { SelectedPhoto }, Name="DataSet1" },
+                new ReportDataSource { Value = settingData, Name="Config" }
+            };
 
-            ResourcesBase.PrintPreview("Print Photo", "TrireksaApp.Reports.Layouts.PrintImageLayout.rdlc", 
-                new Microsoft.Reporting.WinForms.ReportDataSource { Value = new List<ModelsShared.Photo> { SelectedPhoto } },null);
+            var content = new Reports.Contents.ReportContent(listSource,
+           "TrireksaApp.Reports.Layouts.PrintImageLayout.rdlc", null);
+            var dlg = new ModernWindow
+            {
+                Content = content,
+                Title = "Manifest Outgoing",
+                Style = (Style)App.Current.Resources["BlankWindow"],
+                ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip,
+                WindowState = WindowState.Maximized,
+            };
+
+            dlg.ShowDialog();
+
+
         }
 
         private async void AddNewPictureAction(object obj)
@@ -159,11 +180,13 @@ namespace TrireksaApp.Contents.Penjualan
             var x = await context.GetInvoiceForPenjualanInfo(selected.Id);
             if (x != null)
             {
-                this.InvoiceStatusView = new ModelsShared.Models.Invoice();
-                this.InvoiceStatusView.Number = x.Number;
-                this.InvoiceStatusView.CreateDate = x.CreateDate;
-                this.InvoiceStatusView.IsDelivery = x.IsDelivery;
-                this.InvoiceStatusView.InvoiceStatus = x.InvoiceStatus;
+                this.InvoiceStatusView = new ModelsShared.Models.Invoice
+                {
+                    Number = x.Number,
+                    CreateDate = x.CreateDate,
+                    IsDelivery = x.IsDelivery,
+                    InvoiceStatus = x.InvoiceStatus
+                };
             }
         }
 

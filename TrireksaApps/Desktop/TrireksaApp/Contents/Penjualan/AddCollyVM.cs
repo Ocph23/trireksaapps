@@ -133,21 +133,23 @@ namespace TrireksaApp.Contents.Penjualan
     
         private void SetDetailsToNewCollie(List<ModelsShared.Models.Colly> details)
         {
+            var config = new ApplicationConfig();
             Source.Clear();
            foreach (var item in details)
             {
                 var data = new Newcolly()
                 {
+                    TypeOfWeight = item.TypeOfWeight,
                     CollyNumber = item.CollyNumber,
-                    Hight = item.Hight,
                     Id = item.Id,
                     IsSended = item.IsSended,
-                    Longer = item.Longer,
                     PenjualanId = item.Id,
-                    TypeOfWeight = item.TypeOfWeight,
-                    Weight = item.Weight,
-                    Wide = item.Wide,
-                    Jumlah = 1
+                    Weight = item.Weight,   
+                    Wide= item.Wide,   
+                    Hight= item.Hight,   
+                    Longer = item.Longer,
+                    WeightVolume = config.DevideWeightVolume, 
+                    Jumlah = 1 , 
                 };
                 Source.Add(data);
                 item.PropertyChanged += (x, y) => { CalculateTotal(); };

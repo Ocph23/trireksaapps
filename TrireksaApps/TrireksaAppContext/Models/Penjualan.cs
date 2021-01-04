@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TrireksaAppContext.Models
 {
@@ -8,7 +9,6 @@ namespace TrireksaAppContext.Models
         public Penjualan()
         {
             Colly = new HashSet<Colly>();
-            Deliverystatus = new HashSet<Deliverystatus>();
             Invoicedetail = new HashSet<Invoicedetail>();
             Photo = new HashSet<Photo>();
         }
@@ -36,12 +36,29 @@ namespace TrireksaAppContext.Models
         public int FromCity { get; set; }
         public int ToCity { get; set; }
 
+        public double Total
+        {
+            get
+            {
+
+                if (Colly != null && Colly.Count > 0)
+                {
+                    double berat = 0;
+                    berat = Colly.Sum(O => O.Weight);
+                    var biaya = (berat * this.Price) + this.PackingCosts + this.Etc;
+                    var tax = biaya * (this.Tax / 100);
+                    return  biaya + tax;
+                }
+                return 0;
+            }
+        }
+
         public virtual Customer Reciver { get; set; }
         public virtual Customer Shiper { get; set; }
         public virtual City FromCityNavigation { get; set; }
         public virtual City ToCityNavigation { get; set; }
+        public virtual Deliverystatus Deliverystatus { get; set; }
         public virtual ICollection<Colly> Colly { get; set; }
-        public virtual ICollection<Deliverystatus> Deliverystatus { get; set; }
         public virtual ICollection<Invoicedetail> Invoicedetail { get; set; }
         public virtual ICollection<Photo> Photo { get; set; }
     }

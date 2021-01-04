@@ -153,13 +153,13 @@ namespace WebApi.Api
 
 
         [ApiAuthorize(Roles = "Administrator, Agent, Operational")]
-        [HttpPut("UpdateDeliveryStatus")]
-        public async Task<IActionResult> UpdateDeliveryStatus(Deliverystatus obj)
+        [HttpPut("UpdateDeliveryStatus/{Id}")]
+        public async Task<IActionResult> UpdateDeliveryStatus(int id, Deliverystatus obj)
         {
 
             try
             {
-                return Ok(await context.UpdateDeliveryStatus(obj));
+                return Ok(await context.UpdateDeliveryStatus(id, obj));
             }
             catch (Exception ex)
             {
@@ -198,7 +198,7 @@ namespace WebApi.Api
         }
 
         [ApiAuthorize(Roles = "Administrator, Admin, Manager")]
-        [HttpGet("GetPenjualanFromTo")]
+        [HttpGet("GetPenjualanFromTo/{start}/{ended}")]
         public async Task<IActionResult> GetPenjualanFromTo(DateTime start, DateTime ended)
         {
             try

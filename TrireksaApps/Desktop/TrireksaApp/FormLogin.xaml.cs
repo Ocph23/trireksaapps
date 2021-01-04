@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
+using ModelsShared;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace TrireksaApp
         
     }
 
-    public class FormLoginVM : NotifyPropertyChanged, IDataErrorInfo
+    public class FormLoginVM : BaseNotify, IDataErrorInfo
     {
         private string _username;
         private string _password;
@@ -58,16 +59,16 @@ namespace TrireksaApp
             set
             {
 
-                _isActive = value;
-                OnPropertyChanged("ProgressIsActive");
+              SetProperty(ref  _isActive , value);
             }
         }
 
         public FormLoginVM()
         {
+            appConfig = new ApplicationConfig();
             Login = new CommandHandler { CanExecuteAction = LoginValidate, ExecuteAction = LoginAction };
             Close = new CommandHandler { CanExecuteAction = x => true, ExecuteAction = x => CloseAction() };
-            var config = new Common.AppConfiguration();
+            var config = new Common.ApplicationConfig();
 
             UserName = config.GetUserName();
             //Password = "Sony@77";
@@ -99,11 +100,10 @@ namespace TrireksaApp
                     var response = await client.ClientContext.PostAsync("api/user/login", client.GetContent(strcontent));
                     if (response.IsSuccessStatusCode)
                     {
-                        this.Token = JsonConvert.DeserializeObject<AuthenticationToken>(response.Content.ReadAsStringAsync().Result);
-                        if (Token.Token != null)
+                        var result = JsonConvert.DeserializeObject<AuthenticationToken>(response.Content.ReadAsStringAsync().Result);
+                        if (result!=null )
                         {
-                            ResourcesBase.Token = Token;
-                            ResourcesBase.UserIsLogin = new ModelsShared.Models.Userprofile { Email = this.UserName };
+                            ResourcesBase.User =result;
                             var form = new MainWindow();
                             form.Show();
                             this.CloseWindow();
@@ -127,34 +127,13 @@ namespace TrireksaApp
                 this.Message = ex.Message;
             }
 
-
-            //try
-            //{
-            //    var MainVM = new UserPorfileCollection();
-            //    if (await MainVM.Login(UserName, Password))
-            //    {
-            //        ResourcesBase.UserIsLogin = new ModelsShared.Models.userprofile { Email = this.UserName };
-            //        var form = new MainWindow();
-            //        form.Show();
-            //        this.CloseWindow();
-            //    }
-            //    else
-            //    {
-            //        this.Message = "You Not Connect to Server";
-            //    }
-            //}
-            //catch (Exception)
-            //{
-
-            //    this.Message = "You Not Connect to Server";
-            //}
-
             ProgressIsActive = false;
 
 
 
         }
 
+        private readonly ApplicationConfig appConfig;
 
         public CommandHandler Login { get; set; }
         public CommandHandler Close { get; set; }
@@ -166,9 +145,8 @@ namespace TrireksaApp
             get { return _username; }
             set
             {
-                _username = value;
+               SetProperty(ref _username , value);
                 Message = string.Empty;
-                OnPropertyChanged("UserName");
             }
         }
         public string Password
@@ -176,20 +154,17 @@ namespace TrireksaApp
             get { return _password; }
             set
             {
-                _password = value;
+               SetProperty(ref _password , value);
                 Message = string.Empty;
-                OnPropertyChanged("Password");
             }
         }
 
-        public AuthenticationToken Token { get; private set; }
         public string Message
         {
             get { return _message; }
             set
             {
-                _message = value;
-                OnPropertyChanged("Message");
+                SetProperty(ref _message , value);
             }
         }
 
@@ -213,6 +188,21 @@ namespace TrireksaApp
                 return null;
             }
         }
+
+        private string host;
+
+        public string Host
+        {
+            get {
+                if (string.IsNullOrEmpty(host))
+                    host = appConfig.Host;
+                return host; }
+            set {
+                SetProperty(ref host , value);
+                appConfig.Host = value;
+            }
+        }
+
 
 
     }

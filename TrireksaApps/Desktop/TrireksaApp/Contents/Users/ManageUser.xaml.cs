@@ -21,7 +21,7 @@ namespace TrireksaApp.Contents.Users
     /// </summary>
     public partial class ManageUser : UserControl
     {
-        ManageUserViewModel vm = new ManageUserViewModel();
+        readonly ManageUserViewModel vm = new ManageUserViewModel();
         public ManageUser()
         {
             InitializeComponent();

@@ -144,6 +144,7 @@ namespace TrireksaAppContext
         {
             try
             {
+
                 return null;
             }
             catch (Exception ex)
@@ -167,9 +168,10 @@ namespace TrireksaAppContext
         }
 
 
-        public async Task<Manifestoutgoing> UpdateOrigin(Manifestoutgoing manifest)
+        public async Task<Manifestoutgoing> UpdateOrigin(int id, Manifestoutgoing manifest)
         {
-            db.Entry(manifest).CurrentValues.SetValues(manifest);
+            var existsData = db.Manifestoutgoing.SingleOrDefault(x => x.Id == id);
+            db.Entry(existsData).CurrentValues.SetValues(manifest);
             var result =await db.SaveChangesAsync();
             if (result>0)
                 return manifest;
@@ -177,9 +179,10 @@ namespace TrireksaAppContext
                 throw new SystemException("Data Tidak tersimpan");
         }
 
-        public async Task<Manifestoutgoing> UpdateDestination(Manifestoutgoing manifest)
+        public async Task<Manifestoutgoing> UpdateDestination(int id, Manifestoutgoing manifest)
         {
-            db.Entry(manifest).CurrentValues.SetValues(manifest);
+            var existsData = db.Manifestoutgoing.SingleOrDefault(x => x.Id == id);
+            db.Entry(existsData).CurrentValues.SetValues(manifest);
             var result = await db.SaveChangesAsync();
             if (result > 0)
                 return manifest;

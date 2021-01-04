@@ -22,7 +22,7 @@ namespace TrireksaApp
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var config = new AppConfiguration();
+            var config = new ApplicationConfig();
             string theme = "papua";
             if (config != null && !string.IsNullOrEmpty(config.Theme))
             {

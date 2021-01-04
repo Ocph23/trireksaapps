@@ -25,7 +25,7 @@
             </StackPanel>
             <StackPanel Style="{StaticResource OPanel}" Height="auto" >
                 <Label VerticalAlignment="Top"  Content="Address"  Width="178"></Label>
-                <TextBox VerticalContentAlignment="Top" Height="100" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Config.Address}" ></TextBox>
+                <TextBox VerticalContentAlignment="Top" Height="100" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Address}" ></TextBox>
             </StackPanel>
         </StackPanel>
 

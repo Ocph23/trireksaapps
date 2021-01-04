@@ -26,9 +26,9 @@ namespace TrireksaApp.Common
             ClientContext.BaseAddress = ClientContext.BaseAddress = new Uri(BaseUri);
             ClientContext.DefaultRequestHeaders.Accept.Clear();
             ClientContext.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            if (ResourcesBase.Token != null)
+            if (ResourcesBase.User != null)
             {
-                ClientContext.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(ResourcesBase.Token.Token, ResourcesBase.Token.Token);
+                ClientContext.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(ResourcesBase.User.Token, ResourcesBase.User.Token);
             }
         }
 
@@ -40,9 +40,9 @@ namespace TrireksaApp.Common
             ClientContext.DefaultRequestHeaders.Accept.Clear();
             ClientContext.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            if (ResourcesBase.Token != null)
+            if (ResourcesBase.User != null)
             {
-                ClientContext.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ResourcesBase.Token.Token);
+                ClientContext.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ResourcesBase.User.Token);
             }
         }
 

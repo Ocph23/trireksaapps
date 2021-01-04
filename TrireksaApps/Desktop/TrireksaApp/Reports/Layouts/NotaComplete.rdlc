@@ -43,7 +43,7 @@
         <Top>3.56022in</Top>
         <Left>0.02305in</Left>
         <Height>0in</Height>
-        <Width>7.71284in</Width>
+        <Width>7.69155in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1757,7 +1757,8 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Address.Value, "DataSet2")</Value>
+                <Label>address</Label>
+                <Value>=First(Fields!Address.Value, "Config")</Value>
                 <Style>
                   <FontSize>6pt</FontSize>
                   <FontWeight>Normal</FontWeight>
@@ -2054,7 +2055,7 @@
             <TextRuns>
               <TextRun>
                 <Label>ShiperCity</Label>
-                <Value>Website :www.trireksacargo.com; Email:3reksa@gmail.com </Value>
+                <Value>website :www.trireksapapua.com; Email:3reksa@gmail.com </Value>
                 <Style>
                   <FontSize>6pt</FontSize>
                   <Color>MidnightBlue</Color>
@@ -2285,7 +2286,7 @@
         <Top>7.31002in</Top>
         <Left>0.02615in</Left>
         <Height>0in</Height>
-        <Width>7.71284in</Width>
+        <Width>7.68845in</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -3926,7 +3927,8 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Address.Value, "DataSet2")</Value>
+                <Label>address</Label>
+                <Value>=First(Fields!Address.Value, "Config")</Value>
                 <Style>
                   <FontSize>6pt</FontSize>
                   <FontWeight>Normal</FontWeight>
@@ -4223,7 +4225,7 @@
             <TextRuns>
               <TextRun>
                 <Label>ShiperCity</Label>
-                <Value>Website :www.trireksacargo.com; Email:3reksa@gmail.com </Value>
+                <Value>website :www.trireksacargo.com; Email:3reksa@gmail.com </Value>
                 <Style>
                   <FontSize>6pt</FontSize>
                   <Color>MidnightBlue</Color>
@@ -4488,32 +4490,6 @@
           <VerticalAlign>Middle</VerticalAlign>
         </Style>
       </Textbox>
-      <Line Name="Line6">
-        <Top>11.10136in</Top>
-        <Left>0.02615in</Left>
-        <Height>0in</Height>
-        <Width>7.71284in</Width>
-        <ZIndex>32</ZIndex>
-        <Style>
-          <Border>
-            <Color>Gray</Color>
-            <Style>Dotted</Style>
-            <Width>0.25pt</Width>
-          </Border>
-          <TopBorder>
-            <Style>Dotted</Style>
-          </TopBorder>
-          <BottomBorder>
-            <Style>Dotted</Style>
-          </BottomBorder>
-          <LeftBorder>
-            <Style>Dotted</Style>
-          </LeftBorder>
-          <RightBorder>
-            <Style>Dotted</Style>
-          </RightBorder>
-        </Style>
-      </Line>
       <Image Name="Image5">
         <Source>Database</Source>
         <Value>=First(Fields!STTQRCode.Value, "DataSet1")</Value>
@@ -4523,7 +4499,7 @@
         <Left>6.57661in</Left>
         <Height>1.0299in</Height>
         <Width>1.14109in</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Color>Silver</Color>
@@ -4570,7 +4546,7 @@
         <Left>2.74962in</Left>
         <Height>0.30902in</Height>
         <Width>3.79922in</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4975,7 +4951,7 @@
         <Left>2.41183in</Left>
         <Height>0.74568in</Height>
         <Width>5.30921in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5505,7 +5481,7 @@
         <Left>2.40126in</Left>
         <Height>0.98311in</Height>
         <Width>5.31722in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5825,7 +5801,7 @@
         <Left>2.39794in</Left>
         <Height>0.38909in</Height>
         <Width>5.32052in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6090,7 +6066,7 @@
         <Left>0.01574in</Left>
         <Height>0.49572in</Height>
         <Width>2.349in</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6105,7 +6081,7 @@
         <Left>0.01574in</Left>
         <Height>0.31598in</Height>
         <Width>1.5252in</Width>
-        <ZIndex>39</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6133,7 +6109,8 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Address.Value, "DataSet2")</Value>
+                <Label>address</Label>
+                <Value>=First(Fields!Address.Value, "Config")</Value>
                 <Style>
                   <FontSize>6pt</FontSize>
                   <FontWeight>Normal</FontWeight>
@@ -6151,7 +6128,7 @@
         <Left>0.01574in</Left>
         <Height>0.43864in</Height>
         <Width>2.30949in</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6357,7 +6334,7 @@
         <Left>0.01574in</Left>
         <Height>2.00573in</Height>
         <Width>2.3505in</Width>
-        <ZIndex>41</ZIndex>
+        <ZIndex>40</ZIndex>
         <Style>
           <Border>
             <Color>Silver</Color>
@@ -6411,7 +6388,7 @@
         <Left>4.34638in</Left>
         <Height>0.28125in</Height>
         <Width>2.20245in</Width>
-        <ZIndex>42</ZIndex>
+        <ZIndex>41</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6430,7 +6407,7 @@
             <TextRuns>
               <TextRun>
                 <Label>ShiperCity</Label>
-                <Value>Website :www.trireksacargo.com; Email:3reksa@gmail.com </Value>
+                <Value>website :www.trireksacargo.com; Email:3reksa@gmail.com </Value>
                 <Style>
                   <FontSize>6pt</FontSize>
                   <Color>MidnightBlue</Color>
@@ -6447,7 +6424,7 @@
         <Left>0.01574in</Left>
         <Height>0.18056in</Height>
         <Width>7.7053in</Width>
-        <ZIndex>43</ZIndex>
+        <ZIndex>42</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6602,7 +6579,7 @@
         <Left>2.39765in</Left>
         <Height>0.28027in</Height>
         <Width>4.15426in</Width>
-        <ZIndex>44</ZIndex>
+        <ZIndex>43</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6635,7 +6612,7 @@
         <Left>0.05868in</Left>
         <Height>0.1433in</Height>
         <Width>2.26645in</Width>
-        <ZIndex>45</ZIndex>
+        <ZIndex>44</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6648,7 +6625,7 @@
         <Left>0.00422in</Left>
         <Height>0in</Height>
         <Width>6.52237in</Width>
-        <ZIndex>46</ZIndex>
+        <ZIndex>45</ZIndex>
         <Style>
           <Border>
             <Color>LightGrey</Color>
@@ -6658,14 +6635,14 @@
         </Style>
       </Line>
     </ReportItems>
-    <Height>11.10136in</Height>
+    <Height>10.99954in</Height>
     <Style>
       <Border>
         <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>7.74321in</Width>
+  <Width>7.72858in</Width>
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
@@ -6689,6 +6666,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>d05b74e2-1412-4523-a18e-bb6910286fca</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="TrireksaAppReports1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>b23288fc-83da-4fef-bba6-64f310212401</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -6809,14 +6793,46 @@
         <rd:ObjectDataSourceType>TrireksaApp.Reports.Models.NotaReportModel, TrireksaApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
-    <DataSet Name="DataSet2">
+    <DataSet Name="Config">
       <Query>
-        <DataSourceName>TrireksaAppReports</DataSourceName>
+        <DataSourceName>TrireksaAppReports1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Address">
           <DataField>Address</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Handphone">
+          <DataField>Handphone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NPWP">
+          <DataField>NPWP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RekeningNumber">
+          <DataField>RekeningNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SignName">
+          <DataField>SignName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

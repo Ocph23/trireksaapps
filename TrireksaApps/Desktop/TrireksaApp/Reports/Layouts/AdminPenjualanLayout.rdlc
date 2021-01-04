@@ -1010,6 +1010,7 @@
                                   <Style>
                                     <FontSize>7pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
+                                    <Format>N2</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -1212,7 +1213,6 @@
               <Value>ID3rp</Value>
               <Sizing>Fit</Sizing>
               <Top>0.69336cm</Top>
-              <Left>0cm</Left>
               <Height>1.2925cm</Height>
               <Width>19.32526cm</Width>
               <Style>

@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Presentation;
+using ModelsShared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TrireksaApp.Common
 {
-    public class ViewModelBase:NotifyPropertyChanged
+    public class ViewModelBase:BaseNotify
     {
         private bool _isActive;
 
@@ -15,13 +16,9 @@ namespace TrireksaApp.Common
         {
             this.MainVM = Common.ResourcesBase.GetMainWindowViewModel();
             RefreshCommand = new CommandHandler { CanExecuteAction = x => true, ExecuteAction = RefreshAction };
-            
         }
 
-        protected virtual void RefreshAction(object obj)
-        {
-           
-        }
+        protected virtual void RefreshAction(object obj) { }
 
         public MainWindowVM MainVM { get; private set; }
         public CommandHandler RefreshCommand { get; }
@@ -31,9 +28,7 @@ namespace TrireksaApp.Common
             get { return _isActive; }
             set
             {
-
-                _isActive = value;
-              OnPropertyChanged("ProgressIsActive");
+             SetProperty(ref   _isActive , value);
             }
         }
     }

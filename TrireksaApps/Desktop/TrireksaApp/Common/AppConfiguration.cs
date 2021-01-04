@@ -9,97 +9,12 @@ using System.Xml;
 
 namespace TrireksaApp.Common
 {
-    public class AppConfiguration : BaseNotify
+    public abstract class AppConfiguration : BaseNotify
     {
         private readonly Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        private int _EliminateCityId;
-
-        public int EliminateCityId
-        {
-            get
-            {
-                if (_EliminateCityId <= 0)
-                    _EliminateCityId = GetIntValue("EliminateCityId");
-                return _EliminateCityId;
-            }
-            set
-            {
-                UpdateKey("EliminateCityId", value.ToString());
-                SetProperty(ref _EliminateCityId, value);
-            }
-        }
-
-
-        private int _WitoutCityId;
-
-        public int WitoutCityId
-        {
-            get
-            {
-                if (_WitoutCityId <= 0)
-                    _WitoutCityId = GetIntValue("WitoutCityId");
-                return _WitoutCityId;
-            }
-            set
-            {
-                UpdateKey("WitoutCityId", value.ToString());
-                SetProperty(ref _WitoutCityId, value);
-            }
-        }
-
-
        
-
-
-        private string theme;
-
-        public string Theme
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(theme))
-                    theme = GetStringValue("Theme");
-                return theme;
-            }
-            set
-            {
-                UpdateKey("Theme", value.ToString());
-                SetProperty(ref theme, value);
-            }
-        }
-
-
-        private string apparanceColor;
-
-        public string ApparanceColor
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(apparanceColor))
-                    apparanceColor = GetStringValue("ApparanceColor");
-                return apparanceColor;
-            }
-            set
-            {
-
-                UpdateKey("ApparanceColor", value.ToString());
-                SetProperty(ref apparanceColor, value);
-            }
-        }
-
-        internal string GetUserName()
-        {
-            return GetStringValue("UserName");
-        }
-
-        internal async void UpdateUserName(string value)
-        {
-            await Task.Delay(2000);
-            UpdateKey("UserName", value);
-        }
-
         //
-        private int GetIntValue(string KeyName)
+        public int GetIntValue(string KeyName)
         {
             int vResult = 0;
 
@@ -111,7 +26,7 @@ namespace TrireksaApp.Common
             return vResult;
         }
 
-        private string GetStringValue(string KeyName)
+        public string GetStringValue(string KeyName)
         {
             string vResult = string.Empty;
             if (this.KeyExists(KeyName))
@@ -173,24 +88,151 @@ namespace TrireksaApp.Common
             }
             return IsExists;
         }
+    }
+
+    public class ApplicationConfig:AppConfiguration
+    {
+        private int _EliminateCityId;
+
+        public int EliminateCityId
+        {
+            get
+            {
+                if (_EliminateCityId <= 0)
+                    _EliminateCityId = GetIntValue("EliminateCityId");
+                return _EliminateCityId;
+            }
+            set
+            {
+                UpdateKey("EliminateCityId", value.ToString());
+                SetProperty(ref _EliminateCityId, value);
+            }
+        }
 
 
-        //Account 
+        private int _WitoutCityId;
 
-        private string address;
+        public int WitoutCityId
+        {
+            get
+            {
+                if (_WitoutCityId <= 0)
+                    _WitoutCityId = GetIntValue("WitoutCityId");
+                return _WitoutCityId;
+            }
+            set
+            {
+                UpdateKey("WitoutCityId", value.ToString());
+                SetProperty(ref _WitoutCityId, value);
+            }
+        }
+
+        
+        private int _DevideWeightVolume;
+
+        public int DevideWeightVolume
+        {
+            get
+            {
+                if (_DevideWeightVolume <= 0)
+                    _DevideWeightVolume = GetIntValue("DevideWeightVolume");
+                return _DevideWeightVolume;
+            }
+            set
+            {
+                UpdateKey("DevideWeightVolume", value.ToString());
+                SetProperty(ref _DevideWeightVolume, value);
+            }
+        }
+
+
+
+        private string theme;
+
+        public string Theme
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(theme))
+                    theme = GetStringValue("Theme");
+                return theme;
+            }
+            set
+            {
+                UpdateKey("Theme", value.ToString());
+                SetProperty(ref theme, value);
+            }
+        }
+
+
+        private string apparanceColor;
+
+        public string ApparanceColor
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(apparanceColor))
+                    apparanceColor = GetStringValue("ApparanceColor");
+                return apparanceColor;
+            }
+            set
+            {
+
+                UpdateKey("ApparanceColor", value.ToString());
+                SetProperty(ref apparanceColor, value);
+            }
+        }
+
+        internal string GetUserName()
+        {
+            return GetStringValue("UserName");
+        }
+
+        internal async void UpdateUserName(string value)
+        {
+            await Task.Delay(2000);
+            UpdateKey("UserName", value);
+        }
+
+
+        private string host;
+
+        public string Host
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(host))
+                    host = GetStringValue("Host");
+                return host;
+            }
+            set
+            {
+                UpdateKey("Host", value.ToString());
+                SetProperty(ref host, value);
+            }
+        }
+
+
+
+    }
+
+    public class CompanyProfile : AppConfiguration
+    {
+        
+        private string host;
 
         public string Address
         {
             get
             {
-                if (string.IsNullOrEmpty(address))
-                    address = GetStringValue("Address");
-                return address;
+                if (string.IsNullOrEmpty(host))
+                    host = GetStringValue("Address");
+                return host;
             }
             set
             {
                 UpdateKey("Address", value.ToString());
-                SetProperty(ref address, value);
+                SetProperty(ref host, value);
             }
         }
 
@@ -268,7 +310,6 @@ namespace TrireksaApp.Common
 
 
         private string npwp;
-
         public string NPWP
         {
             get
@@ -284,5 +325,59 @@ namespace TrireksaApp.Common
             }
         }
 
+
+
+        private string phone;
+        public string Phone
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(phone))
+                    phone = GetStringValue("Phone");
+                return phone;
+            }
+            set
+            {
+                UpdateKey("Phone", value.ToString());
+                SetProperty(ref phone, value);
+            }
+        }
+
+
+        private string handphone;
+        public string Handphone
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(handphone))
+                    handphone = GetStringValue("Handphone");
+                return handphone;
+            }
+            set
+            {
+                UpdateKey("Handphone", value.ToString());
+                SetProperty(ref handphone, value);
+            }
+        }
+
+
+        private string email;
+        public string Email
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(email))
+                    email = GetStringValue("Email");
+                return email;
+            }
+            set
+            {
+                UpdateKey("Email", value.ToString());
+                SetProperty(ref email, value);
+            }
+        }
+
     }
+
+
 }

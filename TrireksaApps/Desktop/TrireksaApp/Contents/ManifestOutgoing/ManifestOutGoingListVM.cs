@@ -6,6 +6,7 @@ using TrireksaApp.Models;
 using TrireksaApp.Common;
 using System.Collections.Generic;
 using TrireksaApp.Reports;
+using System.Linq;
 
 namespace TrireksaApp.Contents.ManifestOutgoing
 {
@@ -64,16 +65,31 @@ namespace TrireksaApp.Contents.ManifestOutgoing
 
         }
 
-        private async void PrintTitipanKapalAction(object obj)
+        private void PrintTitipanKapalAction(object obj)
         {
-            var item = await MainVM.ManifestOutgoingCollection.GetTitipanKapal(SelectedItem.Id);
-            if(item!=null)
+            var item = SelectedItem;
+            if(item!=null && item.Information!=null)
             {
                 var list = new List<Titipankapal>
                 {
-                    item
+                    new Titipankapal{ AgentContactName= item.Agent.ContactName,  AgentName =   item.Agent.Name, AgentHandphone=item.Agent.Handphone, AgentPhone=item.Agent.Phone,
+                     ArmadaName=item.Information.ArmadaName, Code = item.Id, CrewAddress= item.Information.Address, Jumlah=item.PackingList.Count, CrewContact=item.Information.Contact,  CrewName=item.Information.CrewName,
+                     Destination=item.DestinationNavigation.Name, Origin=item.OriginNavigation.Name, PackNumber=item.PackingList.Count,
+                        DestinationCode=item.DestinationNavigation.Code, OriginCode=item.OriginNavigation.Code, PortType=item.PortType, ReferenceNumber=item.Information.ReferenceNumber}
                 };
-                var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value = list },
+
+                var config = HelperPrint.GetReportSetting();
+                
+
+
+                var sources = new List<Microsoft.Reporting.WinForms.ReportDataSource>() {
+                new Microsoft.Reporting.WinForms.ReportDataSource(){ Name="DataSet1", Value=list},
+                new Microsoft.Reporting.WinForms.ReportDataSource(){ Name="Config", Value=config}
+                };
+
+
+
+                var content = new Reports.Contents.ReportContent(sources,
                   "TrireksaApp.Reports.Layouts.TitipanKapalLayout.rdlc", null);
                 var dlg = new ModernWindow
                 {
@@ -163,7 +179,6 @@ namespace TrireksaApp.Contents.ManifestOutgoing
         {
             OnDestinationPortIsSync = true;
             bool res = await MainVM.ManifestOutgoingCollection.UpdateDestination(SelectedItem);
-            if(res)
                 OnDestinationPortIsSync = false;
 
         }
@@ -181,9 +196,9 @@ namespace TrireksaApp.Contents.ManifestOutgoing
             var listSource = new List<Microsoft.Reporting.WinForms.ReportDataSource>();
             var setting = HelperPrint.GetReportSetting();
 
-
+            setting.FirstOrDefault().SignName = ResourcesBase.User.FullName ?? ResourcesBase.User.UserName;
             listSource.Add(new Microsoft.Reporting.WinForms.ReportDataSource() { Value = Manifest.Source, Name="DataSet1" });
-            listSource.Add(new Microsoft.Reporting.WinForms.ReportDataSource() { Value = new List<MySetting>() {setting }, Name= "Config" });
+            listSource.Add(new Microsoft.Reporting.WinForms.ReportDataSource() { Value = setting, Name= "Config" });
 
             var content = new Reports.Contents.ReportContent(listSource,
               "TrireksaApp.Reports.Layouts.ManifestOutgoingLayout.rdlc", null);

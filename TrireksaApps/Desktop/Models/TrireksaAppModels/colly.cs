@@ -25,9 +25,15 @@ namespace ModelsShared.Models
           {
             get { return _collynumber; }
             set => SetProperty(ref _collynumber, value);
-        } 
+            }
 
-          public virtual double Weight 
+        public double WeightVolume
+        {
+            get { return _devideWeightVolume; }
+            set => SetProperty(ref _devideWeightVolume, value);
+        }
+
+        public virtual double Weight 
           {
                 get
                 {
@@ -38,7 +44,7 @@ namespace ModelsShared.Models
                     }
                     else if (this.TypeOfWeight == TypeOfWeight.WeightVolume)
                     {
-                        _weight = (this.Longer * this.Wide * this.Hight) / 6000;
+                        _weight = (this.Longer * this.Wide * this.Hight) / WeightVolume;
                         return _weight;
                     }
                     return _weight;
@@ -48,8 +54,8 @@ namespace ModelsShared.Models
             }
          
 
-          public virtual double Longer 
-          {
+          public virtual double Longer
+        {
             get { return _long; }
             set => SetProperty(ref _long, value);
         } 
@@ -89,9 +95,6 @@ namespace ModelsShared.Models
             set
             {
 
-                this.Longer = value.Long;
-                this.Wide = value.Wide;
-                this.Hight = value.Hight;
                 SetProperty(ref _dimention, value);
             }
         }
@@ -107,6 +110,7 @@ namespace ModelsShared.Models
            private bool _issended;
         private int _penjualanId;
         private int _id;
+        private double _devideWeightVolume;
 
         public object Clone()
         {

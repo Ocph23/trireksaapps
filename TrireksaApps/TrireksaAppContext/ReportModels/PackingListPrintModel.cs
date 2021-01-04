@@ -97,6 +97,5 @@ namespace TrireksaAppContext.ReportModels
         private int _collynumber;
         private int _STT;
         private int _Code;
-        private DateTime _createddate;
     }
 }

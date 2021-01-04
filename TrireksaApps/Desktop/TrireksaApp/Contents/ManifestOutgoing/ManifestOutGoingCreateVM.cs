@@ -340,11 +340,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                             this.SourceFromDatabase.Add(item);
                         }
                     }
-
-
                 }
-
-
             }
         }
     }

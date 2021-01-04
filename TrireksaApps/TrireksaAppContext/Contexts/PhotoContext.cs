@@ -11,19 +11,18 @@ namespace TrireksaAppContext
 {
     public class PhotoContext
     {
+
+
+       // private readonly string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/bukti/thumbs/");
+        private readonly string picturePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/bukti/pictures/");
         private readonly ApplicationDbContext db;
 
-        public PhotoContext(string Path)
-        {
-            this.AppPath = Path;
-        }
 
         public PhotoContext(ApplicationDbContext _db)
         {
             db = _db;
         }
 
-        public string AppPath { get; }
 
         public List<Photo> GetPhotoByPenjualanId(int Id)
         {
@@ -42,15 +41,13 @@ namespace TrireksaAppContext
         {
             try
             {
-                var path = string.Format(@"{0}{1}.{2}", AppPath, item.File, item.Ext);
-                using (var ms = new MemoryStream())
-                {
-                    var stream = new FileStream(path, FileMode.Open);
-                    stream.CopyTo(ms);
-                    byte[] data = ms.ToArray();
-                    stream.Close();
-                    return Task.FromResult(data);
-                }
+                var path = string.Format(@"{0}{1}.{2}", picturePath, item.File, item.Ext);
+                using var ms = new MemoryStream();
+                var stream = new FileStream(path, FileMode.Open);
+                stream.CopyTo(ms);
+                byte[] data = ms.ToArray();
+                stream.Close();
+                return Task.FromResult(data);
 
             }
             catch (Exception ex)
@@ -74,29 +71,25 @@ namespace TrireksaAppContext
 
         public Task<byte[]> GetThumb(Photo item)
         {
-            var path = string.Format(@"{0}{1}.{2}", AppPath, item.File, item.Ext);
-            //@"D:\Trireksa\JustDesktop\Trireksa\TrireksaWebsite\TrireksaWebsite\PenjualanPhotoGalery\gambar.jpg";
-            using (var ms = new MemoryStream())
-            {
-                var stream = new FileStream(path, FileMode.Open);
-                stream.CopyTo(ms);
-                byte[] data = ms.ToArray();
-                stream.Close();
-                return Task.FromResult(Scale(data));
-
-            }
+            var path = string.Format(@"{0}{1}.{2}", picturePath, item.File, item.Ext);
+            using var ms = new MemoryStream();
+            var stream = new FileStream(path, FileMode.Open);
+            stream.CopyTo(ms);
+            byte[] data = ms.ToArray();
+            stream.Close();
+            return Task.FromResult(Scale(data));
         }
 
-        public async Task<Photo> AddNewPhoto(Photo ph, string dir)
+        public async Task<Photo> AddNewPhoto(Photo ph)
         {
 
             DateTime date = DateTime.Now;
             var random = new Random(DateTime.Now.Second);
             try
             {
-                if (ph.PenjualanId == 0 && ph.Stt > 0)
+                if (ph.PenjualanId == 0)
                 {
-                    var penj = db.Penjualan.Where(O => O.Stt == ph.Stt).FirstOrDefault();
+                    var penj = db.Penjualan.Where(O => O.Id== ph.PenjualanId).FirstOrDefault();
                     if (penj != null)
                         ph.PenjualanId = penj.Id;
                     else
@@ -108,7 +101,7 @@ namespace TrireksaAppContext
                 if (ph.PenjualanId > 0)
                 {
                     string fileName = string.Format("{0:D10}-{1}", ph.PenjualanId, random.Next(1000000, 9999999));
-                    string fullFileName = string.Format("{0}{1}.{2}", AppPath, fileName, ph.Ext);
+                    string fullFileName = string.Format("{0}{1}.{2}", picturePath, fileName, ph.Ext);
 
                     using (FileStream file = new FileStream(fullFileName, FileMode.Create, System.IO.FileAccess.Write))
                     {
@@ -120,8 +113,9 @@ namespace TrireksaAppContext
                     }
 
                     ph.File = fileName;
-
-                    db.Photo.Add(new Photo { Ext = ph.Ext, File = fileName, Path = dir, PenjualanId = ph.PenjualanId });
+                    ph.Path = "wwwroot/bukti/pictures/";
+                    db.Photo.Add(ph);
+                    await  db.SaveChangesAsync();
                     if (ph.Id > 0)
                     {
                         ph.Thumb = await GetThumb(ph);
@@ -149,7 +143,7 @@ namespace TrireksaAppContext
 
         public async Task<bool> DeletePhoto(Photo result)
         {
-            string fullFileName = string.Format("{0}{1}.{2}", AppPath, result.File, result.Ext);
+            string fullFileName = string.Format("{0}{1}.{2}", picturePath, result.File, result.Ext);
             var trans = db.Database.BeginTransaction();
             try
             {

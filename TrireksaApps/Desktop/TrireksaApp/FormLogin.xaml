@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrireksaApp"
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d"  WindowStartupLocation="CenterScreen" Height="443.145" Width="379.094">
+             mc:Ignorable="d"  WindowStartupLocation="CenterScreen" Height="504.504" Width="379.094">
     <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <StackPanel   Margin="30,0,30,30" >
             <Image Source="Assets/Trireksa.png" Stretch="Fill" Height="68" Width="150" Margin="10" HorizontalAlignment="Center" ></Image>
             <TextBlock Margin="10,0" FontSize="20" Text="LOGIN" FontWeight="Bold"></TextBlock>
@@ -20,6 +24,11 @@
 
         </StackPanel>
         <mui:ModernProgressRing IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
-
+        <Expander Grid.Row="1" Margin="15,10" Header="Host" >
+            <StackPanel>
+                <TextBox VerticalContentAlignment="Center" Name="txthost" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                         Margin="10" Height="30" ></TextBox>
+            </StackPanel>
+        </Expander>
     </Grid>
 </mui:ModernWindow>

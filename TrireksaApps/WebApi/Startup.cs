@@ -1,12 +1,16 @@
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net;
 using System.Text;
 using TrireksaAppContext;
 using WebApi.Middlewares;
@@ -26,6 +30,12 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.KnownProxies.Add(IPAddress.Parse("194.31.53.118"));
+            });
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -37,7 +47,7 @@ namespace WebApi
             {
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
-
+                            
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<AgentsContext>();
@@ -54,8 +64,8 @@ namespace WebApi
             services.AddScoped<RolesContext>();
             services.AddScoped<ShipsContext>();
             services.AddScoped<TracingContext>();
-            // services.AddScoped<UserProfileContext>();
-
+            services.AddScoped<PhotoContext>();
+            services.AddScoped<UserProfileContext>();
 
             services.AddSwaggerGen(c =>
             {
@@ -80,7 +90,7 @@ namespace WebApi
                                     Id = "Bearer"
                                 }
                             },
-                            new string[] {}
+                            System.Array.Empty<string>()
 
                     }
                 });
@@ -104,6 +114,7 @@ namespace WebApi
                 };
             });
 
+          
             services.AddSignalR();
 
         }
@@ -111,26 +122,42 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
-
-            app.UseHttpsRedirection();
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            //app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapBlazorHub();
                 endpoints.MapControllers();
+                endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapHub<TrireksaAppHub>("/hubtrireksa");
             });
+
         }
     }
 }

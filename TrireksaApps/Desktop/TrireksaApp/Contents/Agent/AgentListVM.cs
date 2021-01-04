@@ -12,7 +12,7 @@ using TrireksaApp.Common;
 
 namespace TrireksaApp.Contents.Agent
 {
-    public class AgentListVM:Common.ViewModelBase
+    public class AgentListVM:ViewModelBase
     {
         public AgentListVM()
         {
@@ -134,8 +134,14 @@ namespace TrireksaApp.Contents.Agent
             }
         }
 
-      
 
+        private string search;
+
+        public string Search
+        {
+            get { return search; }
+            set {SetProperty(ref search , value); }
+        }
 
         //validation
         private bool ViewDetailValidation()

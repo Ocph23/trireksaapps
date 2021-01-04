@@ -67,11 +67,12 @@ namespace TrireksaApp.Reports.Models
     {
         public InvoiceReport(Invoice item)
         {
+            this.Number = item.Number;
             this.InvoiceStatus = item.InvoiceStatus;
             this.InvoicePayType = item.InvoicePayType;
             this.Biaya = item.Biaya;
             this.CreateDate = item.CreateDate;
-            this.CustomerName = item.CustomerName;
+            this.CustomerName = item.Customer==null?item.CustomerName:item.Customer.Name;
             this.Tax = item.Tax;
             this.Biaya = item.Biaya;
             Total = item.Total;

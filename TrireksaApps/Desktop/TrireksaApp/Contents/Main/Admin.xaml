@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrireksaApp.Contents.Main"
              xmlns:mi="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:Pages="clr-namespace:TrireksaApp.Pages" x:Class="TrireksaApp.Contents.Main.Admin"
+             xmlns:Pages="clr-namespace:TrireksaApp.Pages" 
+            xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+            x:Class="TrireksaApp.Contents.Main.Admin"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="750">
 
@@ -14,6 +16,7 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <mui:ModernProgressRing Name="busy" Grid.RowSpan="2"  Width="80" Height="20"  />
 
         <StackPanel Margin="10" HorizontalAlignment="Right" Grid.Row="0">
             <mi:MaterialDateDisplay />
@@ -35,10 +38,10 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Pages:MainBoxItem Grid.Row="0"  Grid.Column="0" Height="auto" x:Name="invoiceNotDelivery" Background="#FF1B8080" Grid.ColumnSpan="2" />
-                <Pages:MainBoxItem Grid.Row="1"  Grid.Column="0" Height="auto" x:Name="invoiceNotRecive" Background="#FF515109" Grid.ColumnSpan="2" />
-                <Pages:MainBoxItem Grid.Row="2" Grid.Column="0" Height="auto" x:Name="invoiceNotPaid" Background="#FF930B55"/>
-                <Pages:MainBoxItem Grid.Row="2" Grid.Column="1" Height="auto" x:Name="invoiceJatuhTempo" Background="#FF145C6C"/>
+                <Pages:MainBoxItem MouseDoubleClick="InvoicePreview" Grid.Row="0"  Grid.Column="0" Height="auto" x:Name="invoiceNotDelivery" Background="#FF1B8080" Grid.ColumnSpan="2" />
+                <Pages:MainBoxItem MouseDoubleClick="InvoicePreview" Grid.Row="1"  Grid.Column="0" Height="auto" x:Name="invoiceNotRecive" Background="#FF515109" Grid.ColumnSpan="2" />
+                <Pages:MainBoxItem MouseDoubleClick="InvoicePreview" Grid.Row="2" Grid.Column="0" Height="auto" x:Name="invoiceNotPaid" Background="#FF930B55"/>
+                <Pages:MainBoxItem MouseDoubleClick="InvoicePreview" Grid.Row="2" Grid.Column="1" Height="auto" x:Name="invoiceJatuhTempo" Background="#FF145C6C"/>
 
                 <Pages:MainBoxItem MouseDoubleClick="PenjualanPreview" Grid.Row="0" Grid.Column="2" Height="auto" x:Name="spbbelumdikirim" Background="#FF937A0B" />
                 <Pages:MainBoxItem MouseDoubleClick="PenjualanPreview"  Grid.Row="1" Grid.Column="2" Height="auto" x:Name="spbbelumditagih" Background="#FF346C14" />

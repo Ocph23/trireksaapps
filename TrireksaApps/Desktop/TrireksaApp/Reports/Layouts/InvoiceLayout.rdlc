@@ -1550,7 +1550,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.0383in</Height>
+              <Height>0.94455in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1561,8 +1561,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>
-Mohon ditransfer ke :</Value>
+                              <Value>Mohon ditransfer ke :</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1575,7 +1574,16 @@ Mohon ditransfer ke :</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Bank Mandiri KC.Jayapura</Value>
+                              <Value>Bank </Value>
+                              <Style>
+                                <FontFamily>tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Label>BankName</Label>
+                              <Value>=First(Fields!BankName.Value, "Config")</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1588,7 +1596,16 @@ Mohon ditransfer ke :</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>An.CV.Trireksa Papua Cargo</Value>
+                              <Value>An. </Value>
+                              <Style>
+                                <FontFamily>tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Label>AccountName</Label>
+                              <Value>=First(Fields!AccountName.Value, "Config")</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1601,7 +1618,16 @@ Mohon ditransfer ke :</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No.Rek :154-00-14752566</Value>
+                              <Value>No.Rek : </Value>
+                              <Style>
+                                <FontFamily>tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Label>RekNumber</Label>
+                              <Value>=First(Fields!RekeningNumber.Value, "Config")</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1614,7 +1640,7 @@ Mohon ditransfer ke :</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Setelah ditransfer mohon menghubungi di </Value>
+                              <Value>Setelah ditransfer mohon dapat diinformasikan ke </Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1627,7 +1653,33 @@ Mohon ditransfer ke :</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>No. Hp. 08114835690; 08124056974</Value>
+                              <Value>No. Hp. </Value>
+                              <Style>
+                                <FontFamily>tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Label>phone</Label>
+                              <Value>=First(Fields!Phone.Value, "Config")</Value>
+                              <Style>
+                                <FontFamily>tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>/</Value>
+                              <Style>
+                                <FontFamily>tahoma</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Label>handphone</Label>
+                              <Value>=First(Fields!Handphone.Value, "Config")</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1725,25 +1777,11 @@ Mohon ditransfer ke :</Value>
                               </Style>
                             </TextRun>
                             <TextRun>
-                              <Value>=Now()</Value>
+                              <Value>=First(Fields!CreateDate.Value, "DataSet1")</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <Format>d MMMM, yyyy</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontFamily>tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1797,7 +1835,7 @@ Mohon ditransfer ke :</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ERHAM HARAHAP,SH</Value>
+                              <Value>=First(Fields!SignName.Value, "Config")</Value>
                               <Style>
                                 <FontFamily>tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1887,7 +1925,7 @@ Mohon ditransfer ke :</Value>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.05209in</Top>
         <Left>0.02083in</Left>
-        <Height>1.79334in</Height>
+        <Height>1.69958in</Height>
         <Width>7.68976in</Width>
         <Style>
           <Border>
@@ -1896,7 +1934,7 @@ Mohon ditransfer ke :</Value>
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>5.08939cm</Height>
+    <Height>4.54258cm</Height>
     <Style />
   </Body>
   <Width>19.72358cm</Width>
@@ -2082,6 +2120,8 @@ Mohon ditransfer ke :</Value>
               <Style>None</Style>
             </Border>
             <BackgroundColor>#e0dcdc</BackgroundColor>
+            <PaddingLeft>1pt</PaddingLeft>
+            <PaddingTop>1pt</PaddingTop>
           </Style>
         </Textbox>
         <Textbox Name="Textbox7">
@@ -2229,6 +2269,125 @@ Mohon ditransfer ke :</Value>
         </Border>
       </Style>
     </PageHeader>
+    <PageFooter>
+      <Height>1.69333cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox85">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>companyname</Label>
+                  <Value>=First(Fields!CompanyName.Value, "Config")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>address</Label>
+                  <Value>=First(Fields!Address.Value, "Config")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Label>phone</Label>
+                  <Value>=First(Fields!Phone.Value, "Config")+"/"+First(Fields!Handphone.Value, "Config")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox85</rd:DefaultName>
+          <Top>0.06944in</Top>
+          <Left>0.02083in</Left>
+          <Height>0.5625in</Height>
+          <Width>4.22917in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Line Name="Line5">
+          <Top>0.09525cm</Top>
+          <Height>0cm</Height>
+          <Width>19.56039cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>page: </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Label>page</Label>
+                  <Value>=Globals!PageNumber+"/"+Globals!TotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.27164cm</Top>
+          <Left>15.47289cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.0875cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>0.5cm</LeftMargin>
@@ -2246,6 +2405,13 @@ Mohon ditransfer ke :</Value>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>1a05b288-dc07-41a7-b9f0-7ef64b6291b1</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="TrireksaAppReports">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>2dd12c56-36cc-4a64-bb93-b81aa687494e</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -2348,6 +2514,55 @@ Mohon ditransfer ke :</Value>
         <rd:DataSetName>TrireksaApp.Reports.Models</rd:DataSetName>
         <rd:TableName>InvoiceReportModel</rd:TableName>
         <rd:ObjectDataSourceType>TrireksaApp.Reports.Models.InvoiceReportModel, TrireksaApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="Config">
+      <Query>
+        <DataSourceName>TrireksaAppReports</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Handphone">
+          <DataField>Handphone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NPWP">
+          <DataField>NPWP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RekeningNumber">
+          <DataField>RekeningNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SignName">
+          <DataField>SignName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>TrireksaApp.Reports</rd:DataSetName>
+        <rd:TableName>MySetting</rd:TableName>
+        <rd:ObjectDataSourceType>TrireksaApp.Reports.MySetting, TrireksaApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

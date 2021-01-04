@@ -18,6 +18,7 @@ using ModelsShared.Models;
 using ModelsShared.ReportModels;
 using TrireksaApp.CollectionsBase;
 using TrireksaApp.Pages;
+using TrireksaApp.Reports.Models;
 
 namespace TrireksaApp.Contents.Main
 {
@@ -38,11 +39,12 @@ namespace TrireksaApp.Contents.Main
 
         private void Admin_Loaded(object sender, RoutedEventArgs e)
         {
-            penjualan_Loaded();
+            Penjualan_Loaded();
         }
 
-        private void penjualan_Loaded()
+        private async void Penjualan_Loaded()
         {
+            busy.IsActive = true;
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
             penjualanIni.Title.Text = "Bulan Ini";
             penjualanLalu.Title.Text = "Bulan Lalu";
@@ -63,13 +65,14 @@ namespace TrireksaApp.Contents.Main
 
             DateTime date = DateTime.Now;
 
-
             PenjualanBulan(Board.GetPenjualanBulan(date),penjualanIni);
             PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-1)), penjualanLalu);
             PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-2)), penjualanLalunya);
             OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotPaid(), spbbelumditagih);
             OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotStatus(), spbNotStatus);
             OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotYetSend(), spbbelumdikirim);
+            await Task.Delay(5000);
+            busy.IsActive = false;
         }
 
         private async void OnCompleteInvoice(Task<List<ModelsShared.Models.Invoice>> task, MainBoxItem obj)
@@ -90,7 +93,7 @@ namespace TrireksaApp.Contents.Main
         private async void PenjualanBulan(Task<double> task, MainBoxItem obj)
         {
             double res = await task;
-            if (res >0)
+            if (res >= 0)
                 obj.ContentItem.Text = string.Format("Rp. {0:N}", res);
         }
 
@@ -124,6 +127,60 @@ namespace TrireksaApp.Contents.Main
         {
             var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value = list },
                 "TrireksaApp.Reports.Layouts.AdminPenjualanLayout.rdlc",new Microsoft.Reporting.WinForms.ReportParameter[] { new Microsoft.Reporting.WinForms.ReportParameter("Title",new string[] { title}) });
+            var dlg = new ModernWindow
+            {
+                Content = content,
+                Title = "Nota",
+                Style = (Style)App.Current.Resources["BlankWindow"],
+                ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip,
+                WindowState = WindowState.Maximized,
+            };
+
+            dlg.ShowDialog();
+        }
+
+        private async void InvoicePreview(object sender, MouseButtonEventArgs e)
+        {
+            var mainbox = (MainBoxItem)sender;
+            List<ModelsShared.Models.Invoice> list;
+            switch (mainbox.Name)
+            {
+
+                case "invoiceNotDelivery":
+                    list = await Board.GetInvoiceNotYetDelivery();
+                    CallReportInvoice("Invoice Belum Dikirim", list);
+                    break;
+                case "invoiceNotRecive":
+                    list = await Board.GetInvoiceNotYetRecive();
+                    CallReportInvoice("Invoice Belum Diterima", list);
+                    break;
+                case "invoiceNotPaid":
+                    list = await Board.GetInvoiceNotYetPaid();
+                    CallReportInvoice("Invoice Belum Dibayar", list);
+                    break;
+                case "invoiceJatuhTempo":
+                    list = await Board.GetInvoiceJatuhTempo();
+                    CallReportInvoice("Invoice Jatuh Tempo", list);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void CallReportInvoice(string title, List<ModelsShared.Models.Invoice> data)
+        {
+           
+            var list = new List<InvoiceReport>();
+            foreach (var item in data)
+            {
+                list.Add(new InvoiceReport(item));
+            }
+
+
+
+            var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value = list },
+                "TrireksaApp.Reports.Layouts.InvoiceReportLayout.rdlc", new Microsoft.Reporting.WinForms.ReportParameter[] { new Microsoft.Reporting.WinForms.ReportParameter("Title", new string[] { title }) });
             var dlg = new ModernWindow
             {
                 Content = content,

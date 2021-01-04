@@ -12,18 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrireksaApp.Common;
 
 namespace TrireksaApp.Pages.Settings
 {
     /// <summary>
-    /// Interaction logic for About.xaml
+    /// Interaction logic for CompanyProfile.xaml
     /// </summary>
-    public partial class About : UserControl
+    public partial class CompanyProfileSetting: UserControl
     {
-        public About()
+        public CompanyProfileSetting()
         {
             InitializeComponent();
-            this.copyRight.Content = $"@Ocph23  2016 - {DateTime.Now.Year}";
+            DataContext = new CompanyProfileVieModel();
         }
+    }
+
+
+
+    public class CompanyProfileVieModel : CompanyProfile
+    {
+
     }
 }

@@ -20,4 +20,18 @@
   <ItemGroup>
     <ProjectReference Include="..\TrireksaAppContext\TrireksaAppContext.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Index.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\MainLayout.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\bukti\pictures\" />
+    <Folder Include="wwwroot\bukti\thumbs\" />
+  </ItemGroup>
 </Project>

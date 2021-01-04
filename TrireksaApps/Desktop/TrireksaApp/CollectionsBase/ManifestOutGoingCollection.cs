@@ -11,7 +11,7 @@ namespace TrireksaApp.CollectionsBase
     public class ManifestOutGoingCollection:BaseCollection
     {
         public event RefreshComplete RefreshCompleted;
-        private Client client = new Client("ManifestOutgoing");
+        private readonly Client client = new Client("ManifestOutgoing");
         public ObservableCollection<ModelsShared.Models.Manifestoutgoing> Source { get; set; }
         public CollectionView SourceView { get; set; }
 

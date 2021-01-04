@@ -27,11 +27,11 @@ namespace TrireksaApp.Pages
             Inittial();
         }
 
-        private async void Inittial()
+        private  void Inittial()
         {
-            var clien = new Client("Test");
-            var res =  await clien.GetAsync<string>("GetLocalIpAddress");
-            IPAdress = res;
+            //var clien = new Client("Test");
+            //var res =  await clien.GetAsync<string>("GetLocalIpAddress");
+            //IPAdress = res;
         }
 
         

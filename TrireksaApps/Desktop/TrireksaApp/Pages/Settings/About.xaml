@@ -27,7 +27,7 @@
             </StackPanel>
             <StackPanel Margin="10" Grid.Row="2">
                 <Image  Source="../../Assets/Trireksa.png" Stretch="Fill" Height="61" Width="200" />
-                <Label HorizontalAlignment="Center" Width="auto" Content="@Ocph23  2016 - 2018"/>
+                <Label x:Name="copyRight" HorizontalAlignment="Center" Width="auto" Content="@Ocph23  2016 - 2018"/>
             </StackPanel>
         </Grid>
     </Grid>

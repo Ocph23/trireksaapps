@@ -138,11 +138,14 @@ namespace TrireksaApp
         internal List<ReportDataSource> CreateNotaDataSource<T>(List<T> source)
         {
             var data = ToDataTable<T>(source);
-            List<MySetting> listSetting = new List<MySetting> { new MySetting() };
+            var configs = HelperPrint.GetReportSetting();
+            var config = configs.FirstOrDefault();
+            config.Address = config.Address + "\n\r" + config.Phone;
+            config.SignName = ResourcesBase.UserIsLogin.FirstName?? ResourcesBase.User.UserName;
             List<ReportDataSource> list = new List<ReportDataSource>
             {
                 new ReportDataSource("DataSet1", data),
-                new ReportDataSource("DataSet2", listSetting)
+                new ReportDataSource("Config", configs)
             };
 
             return list;
@@ -165,19 +168,23 @@ namespace TrireksaApp
             return table;
         }
 
-        internal static MySetting GetReportSetting()
+        internal static List<MySetting> GetReportSetting()
         {
-            var config = new AppConfiguration();
-
-            return new MySetting
+            var config = new CompanyProfile();
+            return new List<MySetting>() {
+             new MySetting
             {
                 Address = config.Address,
                 AccountName = config.AccountName,
                 BankName = config.BankName,
                 CompanyName = config.CompanyName,
                 NPWP = config.NPWP,
-                RekeningNumber = config.RekeningName
-            };
+                RekeningNumber = config.RekeningName,
+                SignName = ResourcesBase.User.FullName,
+                Handphone = config.Handphone,
+                Phone = config.Phone
+
+            }};
         }
     }
 }

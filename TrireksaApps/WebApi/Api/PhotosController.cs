@@ -14,7 +14,7 @@ namespace WebApi.Api
     public class PhotosController : ControllerBase
     {
 
-        private PhotoContext context;
+        private readonly PhotoContext context;
         public PhotosController(PhotoContext _context)
         {
             context = _context;
@@ -28,8 +28,6 @@ namespace WebApi.Api
 
             foreach (var item in photos)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/bukti/images/");
-                context = new PhotoContext(path);
                 item.Thumb = await context.GetThumb(item);
             }
             return Ok(photos);
@@ -41,8 +39,6 @@ namespace WebApi.Api
             try
             {
                 var result = context.GetPhotoById(id);
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/bukti/images/");
-                context = new PhotoContext(path);
                 return Ok(await context.GetPicture(result));
             }
             catch (Exception ex)
@@ -54,22 +50,14 @@ namespace WebApi.Api
 
         [ApiAuthorize]
         [HttpPost]
-        public async Task<IActionResult> AddNewPhoto(Photo ph)
+        public async Task<IActionResult> Post(Photo ph)
         {
-            var pathName = "PenjualanPhotoGalery";
-            ph.Path = pathName;
-            var path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/bukti/{pathName}/");
-            //if (!Request.Content.IsMimeMultipartContent())
-            //    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable,
-            //    "This request is not properly formatted"));
-            //var streamProvider = new MultipartFileStreamProvider(path);
-            //var res= await Request.Content.ReadAsMultipartAsync(streamProvider);
+            ph.Path = $"wwwroot/bukti/pictures/";
             try
             {
                 if (ph != null)
                 {
-                    var context = new PhotoContext(path);
-                    return Ok(await context.AddNewPhoto(ph, pathName));
+                    return Ok(await context.AddNewPhoto(ph));
                 }
                 else
                     throw new SystemException("Tidak ada gambar yang dikirim");
@@ -77,7 +65,6 @@ namespace WebApi.Api
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
 
@@ -90,8 +77,6 @@ namespace WebApi.Api
             try
             {
                 var result = context.GetPhotoById(id);
-                var path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/bukti/{result.Path}/");
-                context = new PhotoContext(path);
                 return Ok(await context.DeletePhoto(result));
             }
             catch (Exception ex)

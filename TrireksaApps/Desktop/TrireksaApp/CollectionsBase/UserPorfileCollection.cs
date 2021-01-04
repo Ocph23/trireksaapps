@@ -25,7 +25,7 @@ namespace TrireksaApp.CollectionsBase
 
         private async void InitAsync()
         {
-            var result = await client.GetAsync<List<Userprofile>>("Get");
+            var result = await client.GetAsync<List<Userprofile>>("");
             if(result!=null)
                 foreach(var item in result)
                 {
@@ -33,6 +33,8 @@ namespace TrireksaApp.CollectionsBase
                 }
 
             SourceView.Refresh();
+
+            ResourcesBase.UserIsLogin = await GetProfile();
         }
 
         internal async Task<Userprofile> GetProfile()
@@ -45,13 +47,13 @@ namespace TrireksaApp.CollectionsBase
 
         internal async Task<Roles> AddNewUserRole(Userprofile selectedItem, Roles role)
         {
-            string url = string.Format("AddNewRole?userId={0}", selectedItem.Id);
+            string url = string.Format("AddNewRole?userId={0}", selectedItem.UserCodeNavigation.Id);
             return await client.PostAsync<Roles>(url,role);
         }
 
         internal async Task<Roles> RemoveRole(Userprofile selectedItem, Roles roleSelected)
         {
-            string url = string.Format("RemoveRole?userId={0}&roleId={1}", selectedItem.Id, roleSelected.Id); ;
+            string url = string.Format("RemoveRole?userId={0}&roleId={1}", selectedItem.UserCodeNavigation.Id, roleSelected.Id); ;
             var result= await client.ClientContext.DeleteAsync(url);
             if (result.IsSuccessStatusCode)
             {
@@ -98,7 +100,7 @@ namespace TrireksaApp.CollectionsBase
         {
             using (var client = new Client("Roles"))
             {
-                return await client.GetAsync<List<Roles>>("GET");
+                return await client.GetAsync<List<Roles>>("");
             }
         }
 
@@ -115,7 +117,7 @@ namespace TrireksaApp.CollectionsBase
                   var   Token = JsonConvert.DeserializeObject<AuthenticationToken>(x);
                     if (Token.Token != null)
                     {
-                        ResourcesBase.Token = Token;
+                        ResourcesBase.User = Token;
                         return true;
                     }
                     else
@@ -142,7 +144,6 @@ namespace TrireksaApp.CollectionsBase
                    item.FirstName= userProfile.FirstName;
                     item.LastName = userProfile.LastName;
                     item.Address = userProfile.Address;
-                    item.PhoneNumber = userProfile.PhoneNumber;
                 }
                 return true;
             }

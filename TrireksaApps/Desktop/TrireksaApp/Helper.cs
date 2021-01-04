@@ -17,6 +17,8 @@ namespace TrireksaApp
 {
     public class Helper
     {
+
+
         public static string GenerateManifestOutGoingCode(int Code, DateTime created)
         {
             var result = string.Format("{0:D5}/OUTGOING/TRP-DJJ/{1}/{2}",
@@ -27,6 +29,15 @@ namespace TrireksaApp
         public static string GenerateInvoiceCode(int Code, DateTime created)
         {
             var result = string.Format("{0:D5}/INV/TRP-DJJ/{1}/{2}",
+                Code, GetRomawiNumber(created.Month), created.Year);
+            return result;
+        }
+
+
+        public static string GenerateTitipanKapalCode(int Code)
+        {
+            var created = DateTime.Now;
+            var result = string.Format("{0:D5}/TTK/TRP-DJJ/{1}/{2}",
                 Code, GetRomawiNumber(created.Month), created.Year);
             return result;
         }
@@ -137,7 +148,7 @@ namespace TrireksaApp
         {
             var MainVM = Common.ResourcesBase.GetMainWindowViewModel();
             var item = obj;
-            var userP = ResourcesBase.UserIsLogin.Email.Split('@');
+            var userP = ResourcesBase.UserIsLogin.FirstName;
             List<Reports.Models.NotaReportModel> list = new List<Reports.Models.NotaReportModel>();
             var data = new Reports.Models.NotaReportModel
             {
@@ -150,7 +161,7 @@ namespace TrireksaApp
                 PortTypeName = item.PortType.ToString(),
                 Price = item.Price,
                 ChangeDate = item.ChangeDate,
-                UserName = userP[0].ToString(),
+                UserName = userP,
                 Tax = item.Tax,
                 PackingCosts = item.PackingCosts,
                 Etc = item.Etc,

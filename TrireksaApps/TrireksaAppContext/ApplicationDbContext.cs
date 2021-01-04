@@ -41,7 +41,7 @@ namespace TrireksaAppContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=;database=trireksapenjualan");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=ocph23;password=Sony@7777;database=trireksapenjualan");
             }
         }
 
@@ -154,7 +154,7 @@ namespace TrireksaAppContext
 
                 entity.Property(e => e.Hight).HasDefaultValueSql("'0'");
 
-                entity.Property(e => e.Long).HasDefaultValueSql("'0'");
+                entity.Property(e => e.Longer).HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.PenjualanId).HasColumnType("int(11)");
 
@@ -242,8 +242,7 @@ namespace TrireksaAppContext
                     .HasDefaultValueSql("''''''");
 
                 entity.HasOne(d => d.Penjualan)
-                    .WithMany(p => p.Deliverystatus)
-                    .HasForeignKey(d => d.PenjualanId)
+                    .WithOne(p => p.Deliverystatus)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("deliveryStatus");
             });
@@ -494,6 +493,7 @@ namespace TrireksaAppContext
                 entity.Property(e => e.ChangeDate)
                     .HasColumnType("date")
                     .HasDefaultValueSql("'NULL'");
+
 
                 entity.Property(e => e.Content)
                     .IsRequired()

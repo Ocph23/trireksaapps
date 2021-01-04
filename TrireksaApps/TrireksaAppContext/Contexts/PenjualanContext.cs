@@ -251,10 +251,10 @@ namespace TrireksaAppContext
             return Task.FromResult(result.AsEnumerable());
         }
 
-        public async Task<Deliverystatus> UpdateDeliveryStatus(Deliverystatus obj)
+        public async Task<Deliverystatus> UpdateDeliveryStatus(int id,  Deliverystatus obj)
         {
-            var exitsdb = db.Deliverystatus.Where(x => x.Id == obj.Id).FirstOrDefault();
-            db.Entry(obj).CurrentValues.SetValues(obj);
+            var exitsdb = db.Deliverystatus.Where(x => x.Id == id).FirstOrDefault();
+            db.Entry(exitsdb).CurrentValues.SetValues(obj);
             if (await db.SaveChangesAsync() <= 0)
                 throw new SystemException("Data Not Saved !");
             return obj;
@@ -273,34 +273,39 @@ namespace TrireksaAppContext
 
 
 
-        public Task<List<PenjualanReportModel>> GetPenjualanFromTo(DateTime startDate, DateTime ended)
+        public Task<IEnumerable<PenjualanReportModel>> GetPenjualanFromTo(DateTime startDate, DateTime ended)
         {
 
-            throw new NotImplementedException();
-            //try
-            //{
-            //    var sp = string.Format("GetPenjualanFromTo");
-            //    var cmd = db.CreateCommand();
-            //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //    cmd.CommandText = sp;
-            //    cmd.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("startDate", startDate));
-            //    cmd.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("ended", ended));
-            //    var dr = cmd.ExecuteReader();
+            var results = db.Penjualan.Where(x => x.ChangeDate.Value >= startDate && x.ChangeDate.Value <= ended)
+                .Include(x => x.Colly)
+                .Include(x => x.Shiper)
+                .Include(x => x.Reciver)
+                .Include(x => x.ToCityNavigation)
+                .Include(x => x.FromCityNavigation)
+                .Include(x => x.Invoicedetail)
+                .Include(x => x.Deliverystatus).AsNoTracking();
 
-            //    var list = MappingProperties<PenjualanReportModel>.MappingTable(dr);
-            //    dr.Close();
-            //    foreach (var item in list)
-            //    {
-            //        item.From = startDate;
-            //        item.To = ended;
-            //    }
-            //    return list;
-            //}
-            //catch (Exception ex)
-            //{
+            var data = from a in results
+                       select new PenjualanReportModel
+                       {
+                          Biaya = a.Total,
+                           ChangeDate=a.ChangeDate.Value,
+                            DoNumber=a.DoNumber, 
+                             From=startDate,
+                              To=ended,
+                               Id=a.Id,
+                                PayStatus=  a.IsPaid?"Pay Off":"Not Paid" ,
+                                 PayType=a.PayType.ToString(), Pcs=a.Colly.Count.ToString(),
+                                  STT=a.Stt.ToString("D6"), 
+                           ShiperCity=a.FromCityNavigation.CityName,
+                           ReciverCity= a.ToCityNavigation.CityName,
+                           Shiper= a.Shiper.Name,
+                           Reciver= a.Reciver.Name,
+                            Price=a.Price,
+                        PortType=a.PortType.ToString()   , Weight= a.Colly.Sum(x=>x.Weight)
+                       };
 
-            //    throw new SystemException(ex.Message);
-            //}
+            return Task.FromResult(data.AsEnumerable());
         }
     }
 }

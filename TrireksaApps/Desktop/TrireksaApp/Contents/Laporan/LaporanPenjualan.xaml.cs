@@ -25,8 +25,8 @@ namespace TrireksaApp.Contents.Laporan
     /// </summary>
     public partial class LaporanPenjualan : UserControl
     {
-        ReportDataSource reportDataSource = new ReportDataSource();
-       private LaporanPenjualanViewModel vm= new LaporanPenjualanViewModel();
+       private readonly ReportDataSource reportDataSource = new ReportDataSource();
+       private readonly LaporanPenjualanViewModel vm= new LaporanPenjualanViewModel();
         public LaporanPenjualan()
         {
             InitializeComponent();
@@ -45,8 +45,10 @@ namespace TrireksaApp.Contents.Laporan
             reportViewer.ZoomPercent = 120;
             reportViewer.LocalReport.ReportEmbeddedResource = "TrireksaApp.Reports.Layouts.PenjualanFromToLayout.rdlc";
             reportViewer.LocalReport.DataSources.Add(reportDataSource);
-            customers = ResourcesBase.GetMainWindowViewModel().CustomerCollection;
-            shiper.ItemsSource = customers.Source;
+            customers= ResourcesBase.GetMainWindowViewModel().CustomerCollection;
+            if(customers.Source.Where(x=>x.Id==0).FirstOrDefault()==null)
+                customers.Source.Add(new ModelsShared.Models.Customer { Id = 0, Name = "None" });
+            shiper.ItemsSource = customers.Source.OrderBy(x=>x.Id);
         }
 
         private PenjualanCollection context;
@@ -90,7 +92,7 @@ namespace TrireksaApp.Contents.Laporan
                 if(result!=null)
                 {
 
-                    if (vm.ShiperSelected != null)
+                    if (vm.ShiperSelected != null && vm.ShiperSelected.Id!=0)
                     {
                         reportDataSource.Value = result.Where(O => O.Shiper == vm.ShiperSelected.Name).ToList();
                     }

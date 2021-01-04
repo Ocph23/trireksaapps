@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,7 @@ namespace WebApi
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var userManager = services.GetRequiredService<IUserService>();
                     await DbInitializer.Initialize(context, userManager);
+
                 }
                 catch (Exception ex)
                 {
@@ -38,10 +40,12 @@ namespace WebApi
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>()
-                 //.UseKestrel(options =>
-                 //   {
-                 //       options.Limits.MaxRequestBodySize = 52428800; //50MB
-                 //   });
+                // .UseKestrel(options =>
+                //    {
+                //        options.Limits.MaxRequestBodySize = 52428800; //50MB
+                //    })
+                // ;
+                //webBuilder.UseUrls("http://localhost:5004")
                 ;
             });
     }

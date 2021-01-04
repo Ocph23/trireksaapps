@@ -11,7 +11,6 @@ namespace TrireksaAppContext.Models
         public string Address { get; set; }
         public byte[] Photo { get; set; }
         public string UserCode { get; set; }
-
         public virtual Users UserCodeNavigation { get; set; }
     }
 }

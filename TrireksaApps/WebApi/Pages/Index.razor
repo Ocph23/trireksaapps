@@ -1,5 +1,7 @@
 ﻿@page "/"
 
+@inject NavigationManager nav
+
 <div class="main-header">
     <div class="logo-header"></div>
     <div class="title-header">
@@ -37,7 +39,7 @@
             </div>
             <label>DARAT</label>
         </div>
-        <div class="service-body">
+        <div class="service-body" @onclick="@(()=>nav.NavigateTo("/tracking"))">
             <div class="service-icon">
                 <img src="/images/info-icon.png" alt="">
             </div>

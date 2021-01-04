@@ -11,13 +11,10 @@ namespace TrireksaAppContext
 
     public class PortsContext
     {
-
-        private readonly IHubContext<TrireksaAppHub> _hubContext;
         private readonly ApplicationDbContext db;
 
-        public PortsContext(IHubContext<TrireksaAppHub> hubContext, ApplicationDbContext _db)
+        public PortsContext( ApplicationDbContext _db)
         {
-            _hubContext = hubContext;
             db = _db;
         }
 

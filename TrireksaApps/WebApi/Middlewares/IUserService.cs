@@ -21,6 +21,7 @@ namespace WebApi.Middlewares
         Task<string> AuthenticateUSerProvider(Users user);
         Task<string> GenerateToken(Users user);
         Task<Users> Register(RegisterModel user);
+        Task<bool> AddToRole(Users administrator, string v);
     }
 
     public class UserService : IUserService
@@ -95,6 +96,7 @@ namespace WebApi.Middlewares
                 {
                     new Claim("id", user.Id.ToString()),
                     new Claim("name", user.UserName),
+                    new Claim("fullname", user.FullName??user.UserName),
                     new Claim("roles", user.Userrole.Select(x=>x.Role.Name).ToArray().ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
@@ -113,7 +115,7 @@ namespace WebApi.Middlewares
         {
             try
             {
-                Users user = new Users{  Email = model.Email, UserName = model.UserName, PasswordHash = GeneratePasswordHash(model.Password) };
+                Users user = new Users{ Id=GeneratePasswordHash(DateTime.Now.ToString()), Email = model.Email, UserName = model.UserName, FullName=model.FullName, PasswordHash = GeneratePasswordHash(model.Password) };
                 _context.Users.Add(user);
 
                 var savedResult = await _context.SaveChangesAsync();
@@ -149,6 +151,24 @@ namespace WebApi.Middlewares
             }
 
             return strBuilder.ToString();
+        }
+
+        public Task<bool> AddToRole(Users user, string roleName)
+        {
+            try
+            {
+                var role = _context.Role.SingleOrDefault(x => x.Name.ToLower() == roleName.ToLower());
+                if(role!=null)
+                {
+                    _context.Userrole.Add(new Userrole { RoleId = role.Id, UserId = user.Id });
+                    return Task.FromResult(true);
+                }
+                throw new SystemException();
+            }
+            catch 
+            {
+                return Task.FromResult(false);
+            }
         }
     }
 }

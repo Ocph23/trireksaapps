@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrireksaAppContext.Models
 {
@@ -11,8 +12,10 @@ namespace TrireksaAppContext.Models
         public string Path { get; set; }
         public int PenjualanId { get; set; }
         public virtual Penjualan Penjualan { get; set; }
+        [NotMapped]
         public virtual byte[] Thumb { get; set; }
-        public virtual byte[] Picture { get; internal set; }
-        public virtual int Stt { get; internal set; }
+        [NotMapped]
+        public virtual byte[] Picture { get; set; }
+        
     }
 }

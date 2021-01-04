@@ -1,162 +1,169 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrireksaAppContext.Models;
+using TrireksaAppContext.ReportModels;
 
 namespace TrireksaAppContext
 {
     public class DashboardContext
     {
 
-        //private ApplicationDbContext db;
+        private ApplicationDbContext db;
 
-        //public DashboardContext(ApplicationDbContext dbContext)
-        //{
-        //    db = dbContext;
-        //}
-        //public Task<List<Invoice>> GetInvoiceNotYetPaid()
-        //{
+        public DashboardContext(ApplicationDbContext dbContext)
+        {
+            db = dbContext;
+        }
+        public Task<IEnumerable<Invoices>> GetInvoiceNotYetPaid()
+        {
 
-        //    var sp = string.Format("InvoiceNotYetPaid");
-        //    var cmd = db.CreateCommand();
-        //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //    cmd.CommandText = sp;
-        //    var dr = cmd.ExecuteReader();
-
-        //    var ent = new EntityInfo(typeof(ModelsShared.Models.Invoice));
-        //    var list = new MappingColumn(ent).MappingWithoutInclud<Invoice>(dr);
-        //    dr.Close();
-
-        //    return Task.FromResult(list);
-
-        //}
-        //public Task<double> GetPenjualanBulan(int month, int year)
-        //{
-
-        //    var result = db.Penjualans.Where(O => O.ChangeDate.Month == month && O.ChangeDate.Year == year);
-        //    foreach (var item in result)
-        //    {
-        //        item.Details = db.Collies.Where(O => O.PenjualanId == item.Id).ToList();
-        //        item.Shiper = db.Customers.Where(O => O.Id == item.ShiperID).FirstOrDefault();
-        //        item.Reciver = db.Customers.Where(O => O.Id == item.ReciverID).FirstOrDefault();
-        //        item.DeliveryStatus = db.DeliveryStatusses.Where(O => O.PenjualanId == item.Id).FirstOrDefault();
-        //    }
-
-        //    return Task.FromResult(result.Sum(O => O.Total));
-        //}
+            var result = db.Invoices.Where(x => x.PaidDate == null)
+                .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+                .Include(x => x.Customer).AsEnumerable();
+            return Task.FromResult(result);
+        }
 
 
-        //private Task<List<PenjualanReportModel>> GetPenjualan(string sp)
-        //{
-        //    try
-        //    {
-        //        var cmd = db.CreateCommand();
-        //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //        cmd.CommandText = sp;
-        //        var dr = cmd.ExecuteReader();
-        //        var list = MappingProperties<PenjualanReportModel>.MappingTable(dr);
-        //        dr.Close();
+        public Task<double> GetPenjualanBulan(int month, int year)
+        {
 
-        //        return Task.FromResult(list);
-        //    }
-        //    catch (Exception ex)
-        //    {
+            var result = db.Penjualan.Where(O => O.ChangeDate.Value.Month == month && O.ChangeDate.Value.Year == year)
+                .Include(x=>x.Colly).AsEnumerable()
+                ;
 
-        //        throw new SystemException(ex.Message);
-        //    }
+            var total = result.Sum(x => x.Total);
 
-        //}
+            return Task.FromResult(total);
+        }
 
-        //public Task<List<PenjualanReportModel>> GetPenjualanNotHaveStatus()
-        //{
-
-        //    try
-        //    {
-        //        return GetPenjualan("PenjualanNotHaveDeliveryStatus");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new SystemException(ex.Message);
-        //    }
-        //}
-
-
-        //public Task<List<PenjualanReportModel>> GetPenjualanNotYetSend()
-        //{
-        //    try
-        //    {
-        //        return GetPenjualan("PenjualanNotYetSend");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new SystemException(ex.Message);
-        //    }
-
-        //}
+        public Task<IEnumerable<PenjualanReportModel>> GetPenjualanNotHaveStatus()
+        {
+            try
+            {
+                var result = db.Penjualan
+                    .Include(x=>x.Colly)
+                     .Include(x => x.Shiper)
+                     .Include(x => x.Reciver)
+                     .Include(x => x.FromCityNavigation)
+                     .Include(x => x.ToCityNavigation)
+                     .Include(x => x.Deliverystatus).Where(x => x.Deliverystatus == null || x.Deliverystatus.ReciveDate==null)
+                     .Select(p => new PenjualanReportModel() {
+                         STT = p.Stt.ToString("D5"),
+                         ChangeDate = p.ChangeDate.Value,
+                         DoNumber = p.DoNumber,
+                         Pcs = p.Colly.Count.ToString(),
+                         Reciver = p.Reciver.Name,
+                         Shiper = p.Shiper.Name,
+                         ReciverCity = p.ToCityNavigation.CityName,
+                         ShiperCity = p.FromCityNavigation.CityName , PayType= p.PayType.ToString(),
+                          Weight= p.Colly.Sum(x=>x.Weight)
+                     });
+                return Task.FromResult(result.AsEnumerable());
+            }
+            catch (Exception ex)
+            {
+                throw new SystemException(ex.Message);
+            }
+        }
 
 
-        //public Task<List<PenjualanReportModel>> GetPenjualanNotPaid()
-        //{
-        //    try
-        //    {
-        //        return GetPenjualan("PenjualanNotPaid");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new SystemException(ex.Message);
-        //    }
+        public Task<IEnumerable<PenjualanReportModel>> GetPenjualanNotYetSend()
+        {
 
-        //}
+            try
+            {
+                var result = from p in db.Penjualan.Where(x => x.Colly.Any(x => !x.IsSended))
+                     .Include(x => x.Colly)
+                     .Include(x => x.Shiper)
+                     .Include(x => x.Reciver)
+                     .Include(x => x.FromCityNavigation)
+                     .Include(x => x.ToCityNavigation)
+                        select new PenjualanReportModel
+                    {
+                        
+                        STT = p.Stt.ToString("D5"),
+                        ChangeDate = p.ChangeDate.Value,
+                        DoNumber = p.DoNumber,    Pcs=p.Colly.Count.ToString(),
+                          Reciver= p.Reciver.Name, Shiper= p.Shiper.Name, 
+                        ReciverCity = p.ToCityNavigation.CityName,
+                        ShiperCity = p.FromCityNavigation.CityName
 
-        //public Task<List<Invoice>> GetInvoiceNotYetDelivery()
-        //{
+                    };
+                return Task.FromResult(result.AsEnumerable());
+            }
+            catch (Exception ex)
+            {
+                throw new SystemException(ex.Message);
+            }
 
-        //    var sp = string.Format("InvoiceNotYetDelivery");
-        //    var cmd = db.CreateCommand();
-        //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //    cmd.CommandText = sp;
-        //    var dr = cmd.ExecuteReader();
+        }
 
-        //    var ent = new EntityInfo(typeof(ModelsShared.Models.Invoice));
-        //    var list = new MappingColumn(ent).MappingWithoutInclud<Invoice>(dr);
-        //    dr.Close();
 
-        //    return Task.FromResult(list);
-        //}
+        public Task<IEnumerable<PenjualanReportModel>> GetPenjualanNotPaid()
+        {
+            try
+            {
+                var result = from p in db.Penjualan.Where(x => !x.IsPaid)
+                     .Include(x => x.Colly)
+                     .Include(x => x.Shiper)
+                     .Include(x => x.Reciver)
+                     .Include(x => x.FromCityNavigation)
+                     .Include(x => x.ToCityNavigation)
+                             select new PenjualanReportModel
+                             {
 
-        //public Task<List<Invoice>> GetInvoiceJatuhTempo()
-        //{
+                                 STT = p.Stt.ToString("D5"),
+                                 ChangeDate = p.ChangeDate.Value,
+                                 DoNumber = p.DoNumber,
+                                 Pcs = p.Colly.Count.ToString(),
+                                 Reciver = p.Reciver.Name,
+                                 Shiper = p.Shiper.Name,
+                                 ReciverCity = p.ToCityNavigation.CityName,
+                                 ShiperCity = p.FromCityNavigation.CityName
 
-        //    var sp = string.Format("InvoiceJatuhTempo");
-        //    var cmd = db.CreateCommand();
-        //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //    cmd.CommandText = sp;
-        //    cmd.Parameters.Add(new MySql.Data.MySqlClient.MySqlParameter("Tanggal", DateTime.Now));
-        //    var dr = cmd.ExecuteReader();
+                             };
+                return Task.FromResult(result.AsEnumerable());
+            }
+            catch (Exception ex)
+            {
+                throw new SystemException(ex.Message);
+            }
+        }
 
-        //    var ent = new EntityInfo(typeof(ModelsShared.Models.Invoice));
-        //    var list = new MappingColumn(ent).MappingWithoutInclud<Invoice>(dr);
-        //    dr.Close();
+        public Task<IEnumerable<Invoices>> GetInvoiceNotYetDelivery()
+        {
 
-        //    return Task.FromResult(list);
+            var invoices = db.Invoices.Where(x => !x.IsDelivery)
+                .Include(x=>x.Invoicedetail).ThenInclude(x=>x.Penjualan).ThenInclude(x=>x.Colly)
+                .Include(x=>x.Customer)
+                ;
+            return Task.FromResult(invoices.AsEnumerable());
 
-        //}
+        }
 
-        //public Task<List<Invoice>> GetInvoiceNotYetRecive()
-        //{
+        public Task<IEnumerable<Invoices>> GetInvoiceJatuhTempo()
+        {
 
-        //    var sp = string.Format("InvoiceNotYetRecive");
-        //    var cmd = db.CreateCommand();
-        //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //    cmd.CommandText = sp;
-        //    var dr = cmd.ExecuteReader();
+            var invoices = db.Invoices.Where(x => x.DeadLine <= DateTime.Now)
+                .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+                .Include(x => x.Customer)
+                ;
+            return Task.FromResult(invoices.AsEnumerable());
 
-        //    var ent = new EntityInfo(typeof(ModelsShared.Models.Invoice));
-        //    var list = new MappingColumn(ent).MappingWithoutInclud<Invoice>(dr);
-        //    dr.Close();
+        }
 
-        //    return Task.FromResult(list);
-        //}
+        public Task<IEnumerable<Invoices>> GetInvoiceNotYetRecive()
+        {
+
+            var invoices = db.Invoices.Where(x => x.ReciveDate == null || string.IsNullOrEmpty(x.ReciverBy))
+                .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+                .Include(x => x.Customer)
+                ;
+            return Task.FromResult(invoices.AsEnumerable());
+        }
 
 
         //public async Task<List<PenjualanOfYear>> GetPenjualanThreeYear()

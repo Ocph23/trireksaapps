@@ -59,7 +59,7 @@ namespace TrireksaApp.Pages.Settings
         private Color selectedAccentColor;
         private Link selectedTheme;
         private string selectedFontSize;
-        private AppConfiguration config = Common.ResourcesBase.GetMainWindowViewModel().SystemConfiguration;
+        private ApplicationConfig config = Common.ResourcesBase.GetMainWindowViewModel().SystemConfiguration;
         public AppearanceViewModel()
         {
             // add the default themes

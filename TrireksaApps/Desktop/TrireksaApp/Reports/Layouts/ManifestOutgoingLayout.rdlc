@@ -539,13 +539,22 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Created By :</Value>
+                <Value>Created By : </Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Label>Sign</Label>
+                <Value>=First(Fields!SignName.Value, "Config")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
@@ -971,15 +980,27 @@
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox85">
+        <Line Name="Line5">
+          <Top>0.07761cm</Top>
+          <Height>0cm</Height>
+          <Width>18.42354cm</Width>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
+        <Textbox Name="Textbox86">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Label>companyname</Label>
                   <Value>=First(Fields!CompanyName.Value, "Config")</Value>
                   <Style>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -989,9 +1010,10 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Label>address</Label>
                   <Value>=First(Fields!Address.Value, "Config")</Value>
                   <Style>
-                    <FontSize>9pt</FontSize>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Normal</FontWeight>
                   </Style>
                 </TextRun>
@@ -1001,9 +1023,10 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value />
+                  <Label>phone</Label>
+                  <Value>=First(Fields!Phone.Value, "Config") + "/" + First(Fields!Handphone.Value, "Config")</Value>
                   <Style>
-                    <FontSize>9pt</FontSize>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Normal</FontWeight>
                   </Style>
                 </TextRun>
@@ -1012,10 +1035,11 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox85</rd:DefaultName>
-          <Top>0.08056in</Top>
-          <Left>0.01575in</Left>
+          <Top>0.06245in</Top>
+          <Left>0.02825in</Left>
           <Height>0.5625in</Height>
           <Width>4.22917in</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1026,17 +1050,43 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Line Name="Line5">
-          <Top>0.07761cm</Top>
-          <Height>0cm</Height>
-          <Width>18.42354cm</Width>
-          <ZIndex>1</ZIndex>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>page: </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Label>page</Label>
+                  <Value>=Globals!PageNumber+"/"+Globals!TotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.17639cm</Top>
+          <Left>14.27253cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.0875cm</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
           </Style>
-        </Line>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -1068,6 +1118,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>e0e54cb5-065c-45dc-9993-c3c260a49d76</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="TrireksaAppReports1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>df8a71b0-9523-4701-b4f6-23bfb6e208ef</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1131,7 +1188,7 @@
     </DataSet>
     <DataSet Name="Config">
       <Query>
-        <DataSourceName>TrireksaAppReports</DataSourceName>
+        <DataSourceName>TrireksaAppReports1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -1151,12 +1208,24 @@
           <DataField>CompanyName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Handphone">
+          <DataField>Handphone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="NPWP">
           <DataField>NPWP</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="RekeningNumber">
           <DataField>RekeningNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SignName">
+          <DataField>SignName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

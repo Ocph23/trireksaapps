@@ -111,13 +111,13 @@ namespace WebApi.Api
             }
         }
 
-        [HttpPut("UpdateOrigin")]
+        [HttpPut("UpdateOrigin/{id}")]
         [ApiAuthorize(Roles = "Administrator, Operational")]
-        public async Task<IActionResult> UpdateOrigin(Manifestoutgoing model)
+        public async Task<IActionResult> UpdateOrigin(int id, Manifestoutgoing model)
         {
             try
             {
-                return Ok(await context.UpdateOrigin(model));
+                return Ok(await context.UpdateOrigin(id, model));
 
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@ namespace WebApi.Api
             }
         }
 
-        [HttpPut("UpdateDestination")]
+        [HttpPut("UpdateDestination/{id}")]
         [ApiAuthorize(Roles = "Administrator, Operational, Agent")]
-        public async Task<IActionResult> UpdateDestination(Manifestoutgoing model)
+        public async Task<IActionResult> UpdateDestination(int id, Manifestoutgoing model)
         {
             try
             {
-                return Ok(await context.UpdateDestination(model));
+                return Ok(await context.UpdateDestination(id, model));
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace WebApi.Api
             }
         }
 
-        [HttpGet("GetTitipanKapal")]
+        [HttpGet("GetTitipanKapal/{Id}")]
         public async Task<IActionResult> GetTitipanKapal(int Id)
         {
             try
@@ -155,7 +155,7 @@ namespace WebApi.Api
         }
 
 
-        [HttpGet("GetPackingList")]
+        [HttpGet("GetPackingList/{Id}")]
         public async Task<IActionResult> GetPackingList(int Id)
         {
             try

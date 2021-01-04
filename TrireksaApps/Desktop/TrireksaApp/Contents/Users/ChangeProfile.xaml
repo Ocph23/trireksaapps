@@ -32,7 +32,7 @@
                 </StackPanel>
                 <StackPanel Style="{StaticResource OPanel}" Height="100">
                     <Label VerticalAlignment="Top" Content="Address"/>
-                    <TextBox VerticalContentAlignment="Top" Text="{Binding Address,Mode=TwoWay,ValidatesOnDataErrors=True}" Height="80" Margin="2,10"/>
+                    <TextBox AcceptsReturn="True" VerticalContentAlignment="Top" Text="{Binding Address,Mode=TwoWay,ValidatesOnDataErrors=True}" Height="80" Margin="2,10"/>
                 </StackPanel>
 
 

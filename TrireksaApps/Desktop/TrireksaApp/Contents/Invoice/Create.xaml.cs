@@ -32,10 +32,10 @@ namespace TrireksaApp.Contents.Invoice
         }
 
 
-        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        public async void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             var data = Convert.ToInt32(e.Fragment);
-            viewmodel.SetInvoice(data);
+           await viewmodel.SetInvoice(data);
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)

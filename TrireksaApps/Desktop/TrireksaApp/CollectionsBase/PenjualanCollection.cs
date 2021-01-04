@@ -29,8 +29,8 @@ namespace TrireksaApp.CollectionsBase
 
         internal async Task<List<PenjualanReportModel>> GetPenjualanFromTo(DateTime start, DateTime end)
         {
-            var url = string.Format("GetPenjualanFromTo?start={0}-{1}-{2}&ended={3}-{4}-{5}",start.Year,start.Month,start.Day,
-                end.Year,end.Month,end.Day);
+            var url = string.Format("GetPenjualanFromTo/{0}-{1}-{2}/{3}-{4}-{5}", start.Year, start.Month, start.Day,
+             end.Year, end.Month, end.Day);
             var result = await client.GetAsync<List<PenjualanReportModel>>(url);
             return result;
         }
@@ -169,7 +169,7 @@ namespace TrireksaApp.CollectionsBase
         internal async Task<ModelsShared.Photo> AddNewPhoto(ModelsShared.Photo ph)
         {
             var clientPhoto = new Client("Photos");
-            var res = await clientPhoto.PostAsync<ModelsShared.Photo>("AddNewPhoto", ph);
+            var res = await clientPhoto.PostAsync<ModelsShared.Photo>("", ph);
             
             return res;
         }

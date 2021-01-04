@@ -35,9 +35,9 @@ namespace TrireksaAppContext
         }
 
 
-        public Task<IEnumerable<Invoices>> Get(DateTime start, DateTime end)
+        public Task<IEnumerable<Invoices>> Get(DateTime startDate, DateTime endDate)
         {
-            var results = db.Invoices
+            var results = db.Invoices.Where(x=>x.CreateDate>=startDate && x.CreateDate<= endDate)
                 .Include(x => x.Customer)
                 .Include(x => x.Invoicedetail)
                 .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
@@ -147,6 +147,11 @@ namespace TrireksaAppContext
         {
             try
             {
+                if (t.DeliveryDate != null)
+                    t.IsDelivery = true;
+
+                if (t.ReciveDate != null && string.IsNullOrEmpty(t.ReciverBy))
+                    throw new SystemException("Reciver Name Can't Empty");
                 var existsData = db.Invoices.Where(x => x.Id == Id).FirstOrDefault();
                 if (existsData == null)
                     throw new SystemException("Data Not Found !");

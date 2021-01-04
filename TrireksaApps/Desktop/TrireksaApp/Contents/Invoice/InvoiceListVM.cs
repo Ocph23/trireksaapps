@@ -13,6 +13,7 @@ using Microsoft.Reporting.WinForms;
 using TrireksaApp.Reports.Models;
 using FirstFloor.ModernUI.Windows.Navigation;
 using System.Windows.Input;
+using TrireksaApp.Reports;
 
 namespace TrireksaApp.Contents.Invoice
 {
@@ -140,15 +141,7 @@ namespace TrireksaApp.Contents.Invoice
         private async void UpdateInvoiceStatusAction()
         {
             var selected = MainVM.InvoiceCollections.SelectedItem;
-            var item = new ModelsShared.Models.Invoice
-            {
-                Id = selected.Id,
-                InvoiceStatus = selected.InvoiceStatus,
-                InvoicePayType = selected.InvoicePayType, PaidDate=selected.PaidDate
-
-            };
-
-
+           
 
             var IsUpdate = false;
             if (await MainVM.InvoiceCollections.UpdateInvoiceStatusAction(selected.Id, selected)) 
@@ -220,8 +213,14 @@ namespace TrireksaApp.Contents.Invoice
             var data = await this.GetInvoiceReportModel();
            if(data!=null)
             {
-                var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value = data.OrderBy(O => O.STT) },
-               "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
+
+                var config = HelperPrint.GetReportSetting();
+                var dataSource = new ReportDataSource { Value = data.OrderBy(x => x.STT), Name="DataSet1" };
+                var configSource = new ReportDataSource { Value = config , Name="Config" };
+                config.FirstOrDefault().SignName = ResourcesBase.User.FullName??ResourcesBase.User.UserName;
+                var datasources = new List<ReportDataSource> { dataSource, configSource };
+
+                var content = new Reports.Contents.ReportContent(datasources , "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
                 var dlg = new FirstFloor.ModernUI.Windows.Controls.ModernWindow
                 {
                     Content = content,
@@ -238,7 +237,8 @@ namespace TrireksaApp.Contents.Invoice
         private async Task<List<Reports.Models.InvoiceReportModel>> GetInvoiceReportModel()
         {
 
-            var selected = await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
+            var selected = MainVM.InvoiceCollections.SelectedItem;
+            await Task.Delay(100); //await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
             if(selected!=null)
             {
                 var result = from item in selected.Invoicedetail
@@ -259,9 +259,9 @@ namespace TrireksaApp.Contents.Invoice
                                  InvoiceId = item.InvoiceId,
                                  PackingCosts = item.Penjualan.PackingCosts,
                                  Tax = item.Penjualan.Tax,
-                                 NumberView = MainVM.InvoiceCollections.SelectedItem.NumberView,
-                                 CustomerName = MainVM.InvoiceCollections.SelectedItem.CustomerName,
-                                 DeadLine = MainVM.InvoiceCollections.SelectedItem.DeadLine,
+                                 NumberView = selected.NumberView,
+                                 CustomerName = selected.Customer.Name,
+                                 DeadLine = selected.DeadLine,
                                   CreateDate=item.Penjualan.ChangeDate,
                                  STT = item.Penjualan.STT,
                                  Terbilang = selected.Invoicedetail.Sum(O=>O.Penjualan.Total).Terbilang()

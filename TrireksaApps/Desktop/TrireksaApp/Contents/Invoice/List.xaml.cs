@@ -33,7 +33,7 @@ namespace TrireksaApp.Contents.Invoice
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var data = ((ListView)sender).SelectedItem;
-            NavigationCommands.GoToPage.Execute($"/Contents/Invoice/Create.xaml#1", this);
+     //       NavigationCommands.GoToPage.Execute($"/Contents/Invoice/Create.xaml#1", this);
         }
        
     }

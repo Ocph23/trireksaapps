@@ -14,7 +14,7 @@ namespace TrireksaAppContext.Models
         public int PenjualanId { get; set; }
         public int? CollyNumber { get; set; }
         public double Weight { get; set; }
-        public double? Long { get; set; }
+        public double? Longer { get; set; }
         public double? Hight { get; set; }
         public double? Wide { get; set; }
         public TypeOfWeight TypeOfWeight { get; set; }

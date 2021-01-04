@@ -15,7 +15,7 @@ namespace TrireksaApp.CollectionsBase
 
         internal Task<double> GetPenjualanBulan(DateTime date)
         {
-            var uri = "GetPenjualanBulan?month="+date.Month+"&year=" + date.Year;
+            var uri = $"GetPenjualanBulan/{date.Month}/{date.Year}";
             return client.GetAsync<double>(uri);
         }
 

@@ -313,7 +313,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public List<Deliverystatus> DeliveryStatus { get; set; } = new List<Deliverystatus>();
+        public Deliverystatus DeliveryStatus { get; set; } 
 
         private int _pcs;
 

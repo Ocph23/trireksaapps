@@ -17,7 +17,7 @@ namespace TrireksaApp.Common
 
         public static ModelsShared.Models.Userprofile UserIsLogin { get; set; }
 
-        public static AuthenticationToken Token { get; set; }
+        public static AuthenticationToken User { get; set; }
 
         public static HomeMainViewModel HomeVM { get; set; }
 

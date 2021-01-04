@@ -53,7 +53,7 @@
                         <Grid>
                             <Expander >
                                 <Expander.Header>
-                                    <StackPanel MinWidth="700">
+                                    <StackPanel MinWidth="900">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
@@ -186,7 +186,7 @@
                         </MenuItem.Icon>
                         <MenuItem.Template>
                             <ControlTemplate>
-                                <Button Content="Edit" Command="NavigationCommands.GoToPage" CommandTarget="{Binding ElementName=ContentFrame}" CommandParameter="/Contents/Invoice/Create.xaml"></Button>
+                                <Button Content="Edit" Width="auto" Command="NavigationCommands.GoToPage" CommandTarget="{Binding ElementName=ContentFrame}" CommandParameter="/Contents/Invoice/Create.xaml"></Button>
                             </ControlTemplate>
                         </MenuItem.Template>
                     </MenuItem>

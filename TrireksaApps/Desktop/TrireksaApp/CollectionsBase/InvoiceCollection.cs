@@ -71,7 +71,7 @@ namespace TrireksaApp.CollectionsBase
 
         public async Task<Invoice> GetItemById(int Id)
         {
-            var result = await client.GetAsync<Invoice>("Get", Id);
+            var result = await client.GetAsync<Invoice>("", Id);
             return result;
         }
 

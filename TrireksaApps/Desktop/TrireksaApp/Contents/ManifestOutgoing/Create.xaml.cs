@@ -38,10 +38,6 @@ namespace TrireksaApp.Contents.ManifestOutgoing
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             viewmodel.PortCollection.SourceView.Refresh();
-            var cmb = (ComboBox)sender;
-            var t = cmb.SelectedItem.ToString();
-          
-
             viewmodel.GetPenjualan();
            
         }
