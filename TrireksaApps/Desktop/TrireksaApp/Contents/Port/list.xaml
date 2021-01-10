@@ -35,13 +35,11 @@
                 <DataGridTextColumn MinWidth="200" Width="*" Header="Port Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn MinWidth="200"  Header="Port Type" Binding="{Binding PortType}"/>
                 <DataGridTextColumn MinWidth="200"  Header="Port Code" Binding="{Binding Code}"/>
-                <DataGridTextColumn MinWidth="200"  Header="City" Binding="{Binding CityName}"/>
-
-
+                <DataGridTextColumn MinWidth="200"  Header="City" Binding="{Binding City.CityName}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Refresh" Command="{Binding RefreshAction}">
+                    <MenuItem Header="Refresh" Command="{Binding RefreshCommand}">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="Refresh"/>
                         </MenuItem.Icon>

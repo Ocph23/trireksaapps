@@ -2,7 +2,7 @@ namespace ModelsShared.Models
 {
     public class Userrole : BaseNotify
     {
-        public int RoleId
+        public string RoleId
         {
             get { return _roleid; }
             set
@@ -20,7 +20,10 @@ namespace ModelsShared.Models
             }
         }
 
-        private int _roleid;
+        public virtual Roles Role { get; set; }
+        public virtual User User { get; set; }
+
+        private string _roleid;
         private string _userid;
     }
 }

@@ -56,6 +56,14 @@ namespace TrireksaAppContext
         {
             try
             {
+
+                var updatedCity = true;
+                if (value.Cityagentcanaccess == null)
+                {
+                    updatedCity = false;
+                    value.Cityagentcanaccess = new List<Cityagentcanaccess>();
+                }
+
                 var existsData = await db.Agent.Where(x=>x.Id==id).Include(x=>x.Cityagentcanaccess).FirstAsync();
                 if (existsData == null)
                     throw new SystemException("Data Not Found !");
@@ -65,27 +73,32 @@ namespace TrireksaAppContext
 
                 //delete childs
 
-                foreach (var existingChild in existsData.Cityagentcanaccess)
+                if (value.Cityagentcanaccess != null && updatedCity)
                 {
-                    if (!value.Cityagentcanaccess.Any(c => c.Id == existingChild.Id))
-                        db.Cityagentcanaccess.Remove(existingChild);
-                }
 
 
-                foreach (var childModel in value.Cityagentcanaccess)
-                {
-                    var existingChild = existsData.Cityagentcanaccess
-                        .Where(c => c.Id == childModel.Id)
-                        .SingleOrDefault();
 
-                    if (existingChild != null)
-                        db.Entry(existingChild).CurrentValues.SetValues(childModel);
-                    else
+                    foreach (var existingChild in existsData.Cityagentcanaccess)
                     {
-                        existsData.Cityagentcanaccess.Add(childModel);
+                        if (!value.Cityagentcanaccess.Any(c => c.Id == existingChild.Id))
+                            db.Cityagentcanaccess.Remove(existingChild);
+                    }
+
+
+                    foreach (var childModel in value.Cityagentcanaccess)
+                    {
+                        var existingChild = existsData.Cityagentcanaccess
+                            .Where(c => c.Id == childModel.Id)
+                            .SingleOrDefault();
+
+                        if (existingChild != null)
+                            db.Entry(existingChild).CurrentValues.SetValues(childModel);
+                        else
+                        {
+                            existsData.Cityagentcanaccess.Add(childModel);
+                        }
                     }
                 }
-
                 db.SaveChanges();
                 return true;
             }

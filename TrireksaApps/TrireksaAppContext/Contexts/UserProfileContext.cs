@@ -18,14 +18,14 @@ namespace TrireksaAppContext
         }
         public Task<IEnumerable<Userprofile>> Get()
         {
-            var result = db.Userprofile.Include(x => x.UserCodeNavigation).ThenInclude(x => x.Userrole).ThenInclude(x => x.Role); 
+            var result = db.Userprofile.Include(x => x.User).ThenInclude(x => x.Userrole).ThenInclude(x => x.Role); 
             return Task.FromResult(result.AsEnumerable());
         }
 
         public Task<Userprofile> GetProfile(string userid)
         {
-            var profile =  db.Userprofile.Include(x => x.UserCodeNavigation).ThenInclude(x => x.Userrole).ThenInclude(x => x.Role);
-            return Task.FromResult(profile.Where(x=>x.UserCodeNavigation.UserName==userid).FirstOrDefault());
+            var profile =  db.Userprofile.Include(x => x.User).ThenInclude(x => x.Userrole).ThenInclude(x => x.Role);
+            return Task.FromResult(profile.Where(x=>x.User.UserName==userid).FirstOrDefault());
         }
 
         public async Task<Role> AddNewRole(string userId, string Id)
@@ -87,7 +87,7 @@ namespace TrireksaAppContext
         {
             try
             {
-                var profile = db.Userprofile.Where(x => x.UserId ==id).FirstOrDefault();
+                var profile = db.Userprofile.Where(x => x.Id ==id).FirstOrDefault();
                 if (profile != null)
                 {
                     db.Entry(profile).CurrentValues.SetValues(value);

@@ -14,7 +14,7 @@ namespace WebApi.Models
             this.FullName = user.FullName;
             this.Email = user.Email;
             this.Token = token;
-           // this.Roles = user.Roles.Select(x => x.Role.Name);
+            this.Roles = user.Userrole.Select(x => x.Role.Name);
         }
 
         public string UserName { get; set; }

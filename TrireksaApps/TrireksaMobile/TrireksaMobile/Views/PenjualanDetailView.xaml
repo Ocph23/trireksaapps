@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrireksaMobile.Views.PenjualanDetailView"
+             Title="{Binding Title}"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding Source}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame BackgroundColor="WhiteSmoke" CornerRadius="8" Margin="3" HasShadow="True">
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label WidthRequest="75" FontAttributes="Bold" Text="STT" />
+                                        <Label Text="{Binding STT}" />
+                                        <Label HorizontalOptions="EndAndExpand" FontSize="12" Text="{Binding ChangeDate,StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label WidthRequest="75" FontAttributes="Bold" Text="Pengirim" />
+                                        <Label Text="{Binding Shiper}" />
+                                        <Label HorizontalOptions="EndAndExpand" FontSize="12" Text="{Binding Pcs,StringFormat='{}{0} Coly'}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label WidthRequest="75" FontAttributes="Bold" Text="Penerima" />
+                                        <Label Text="{Binding Reciver}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

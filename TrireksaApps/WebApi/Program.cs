@@ -39,14 +39,15 @@ namespace WebApi
             Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
+
                 webBuilder.UseStartup<Startup>()
-                // .UseKestrel(options =>
-                //    {
-                //        options.Limits.MaxRequestBodySize = 52428800; //50MB
-                //    })
-                // ;
-                //webBuilder.UseUrls("http://localhost:5004")
-                ;
+                .UseKestrel(options =>
+                    {
+                        options.Limits.MaxRequestBodySize = 52428800; //50MB
+                    })
+                 ;
+                webBuilder.UseUrls("http://localhost:5004")
+               ;
             });
     }
 

@@ -9,8 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
-            <Style x:Key="lbl"  TargetType="TextBlock">
-                <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Style x:Key="lbl"  TargetType="TextBlock" BasedOn="{StaticResource Heading1}" >
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="MinWidth" Value="100"/>
             </Style>
@@ -37,7 +36,7 @@
                 <Label Width="auto" Margin="10,0" VerticalAlignment="Center" Content="S/D"/>
                 <DatePicker SelectedDate="{Binding MainVM.InvoiceCollections.EndDate}"></DatePicker>
                 <Button Margin="5,0"  Width="30" Padding="0" Command="{Binding RefreshCommand}">
-                    <mi:PackIcon Foreground="White" Kind="FileFind"/>
+                    <mi:PackIcon Kind="FileFind"/>
                 </Button>
             </WrapPanel>
         </Grid>
@@ -46,7 +45,7 @@
                       IsSynchronizedWithCurrentItem="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="10" BorderThickness="1">
+                    <Border Padding="10" BorderThickness="0.5">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
                         </Border.BorderBrush>
@@ -58,30 +57,28 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
                                                 <ColumnDefinition />
-                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Style="{StaticResource lbl}" Text="{Binding NumberView}"></TextBlock>
-                                            <TextBlock Grid.Column="1"  Style="{StaticResource lbl}" Text="{Binding Customer.Name}"  Margin="5,0,30,0"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" Grid.Column="2" Text="{Binding Total,StringFormat=Rp. {0:N2}}" Style="{StaticResource lbl}"/>
+                                            <TextBlock Grid.Column="0" FontSize="14" MinWidth="100" Text="{Binding NumberView}"></TextBlock>
+                                            <TextBlock Grid.Column="1"  FontSize="14" MinWidth="100" Text="{Binding Customer.Name}"  Margin="5,0,30,0"></TextBlock>
                                         </Grid>
                                     </StackPanel>
                                 </Expander.Header>
                                 <StackPanel Margin="25,10">
                                     <WrapPanel Margin="5">
-                                        <TextBlock Text="Total Invoice" Style="{StaticResource lbl}"/>
-                                        <TextBlock Text="{Binding Total,StringFormat=Rp. {0:N2}}" Style="{StaticResource lbl}"/>
+                                        <TextBlock Text="Total Invoice"  FontSize="14" MinWidth="100"/>
+                                        <TextBlock Text="{Binding Total,StringFormat=Rp. {0:N2}}" FontSize="14" MinWidth="100"/>
                                     </WrapPanel>
                                     <WrapPanel Margin="5" >
-                                        <TextBlock Text="Status" Style="{StaticResource lbl}"/>
-                                        <TextBlock  Text="{Binding InvoiceStatus}" Style="{StaticResource lbl}"/>
+                                        <TextBlock Text="Status" FontSize="14" MinWidth="100"/>
+                                        <TextBlock  Text="{Binding InvoiceStatus}" FontSize="14" MinWidth="100"/>
                                     </WrapPanel>
                                     <WrapPanel Margin="5" >
-                                        <TextBlock Text="Dead Line" Style="{StaticResource lbl}"/>
-                                        <TextBlock  Text="{Binding DeadLine}" Style="{StaticResource lbl}"/>
+                                        <TextBlock Text="Dead Line" FontSize="14" MinWidth="100"/>
+                                        <TextBlock  Text="{Binding DeadLine}" FontSize="14" MinWidth="100"/>
                                     </WrapPanel>
                                     <WrapPanel Margin="5">
-                                        <TextBlock Text="Tanggal" Style="{StaticResource lbl}"/>
-                                        <TextBlock  Text="{Binding CreateDate}" Style="{StaticResource lbl}"/>
+                                        <TextBlock Text="Tanggal" FontSize="14" MinWidth="100"/>
+                                        <TextBlock  Text="{Binding CreateDate}" FontSize="14" MinWidth="100"/>
                                     </WrapPanel>
                                 </StackPanel>
                             </Expander>
@@ -93,13 +90,13 @@
             </ListView.ItemTemplate>
 
             <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Refresh" Command="{Binding RefreshCommand}">
+                <ContextMenu >
+                    <MenuItem Margin="5,1" Header="Refresh" Command="{Binding RefreshCommand}">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="Refresh"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Sort By">
+                    <MenuItem Margin="5,1" Header="Sort By">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="Sort"/>
                         </MenuItem.Icon>
@@ -118,16 +115,16 @@
                             </MenuItem.Template>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="PrintPreview" Command="{Binding PreviewManifest}">
+                    <MenuItem Margin="5,1" Header="PrintPreview" Command="{Binding PreviewManifest}">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="ViewAgenda"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Set Delivery Data">
+                    <MenuItem Margin="5,1" Header="Set Delivery Data">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="TruckDelivery"/>
                         </MenuItem.Icon>
-                        <MenuItem>
+                        <MenuItem Margin="10">
                             <MenuItem.Template>
                                 <ControlTemplate>
                                     <StackPanel>
@@ -149,11 +146,11 @@
                             </MenuItem.Template>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Set Invoice Status">
+                    <MenuItem Margin="5,1"  Header="Set Invoice Status">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="Coin"/>
                         </MenuItem.Icon>
-                        <MenuItem>
+                        <MenuItem Margin="10">
                             <MenuItem.Template>
                                 <ControlTemplate>
                                     <StackPanel>
@@ -175,12 +172,12 @@
                             </MenuItem.Template>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Print Preview Report" Command="{Binding PreviewReport}">
+                    <MenuItem Margin="5,1" Header="Print Preview Report" Command="{Binding PreviewReport}">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="Printer"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Edit">
+                    <MenuItem Margin="5,1" Header="Edit">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="ViewAgenda"/>
                         </MenuItem.Icon>

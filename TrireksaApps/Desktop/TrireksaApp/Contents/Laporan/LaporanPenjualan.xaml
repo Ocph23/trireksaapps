@@ -31,7 +31,7 @@
                         <Label  Content="Pengirim"  Width="auto"></Label>
                         <ComboBox Name="shiper" IsEditable="True" Width="200" DisplayMemberPath="Name"  Text="Pengirim" SelectedItem="{Binding ShiperSelected}"></ComboBox>
                     </StackPanel>
-                    <Button Margin="0,3" Name="cari" Click="cari_Click"  Padding="0">
+                    <Button Margin="0,3" Name="cari" Click="Cari_Click"  Padding="0">
                         <mi:PackIcon Foreground="White" Kind="FileFind"/>
                     </Button>
                 </WrapPanel>

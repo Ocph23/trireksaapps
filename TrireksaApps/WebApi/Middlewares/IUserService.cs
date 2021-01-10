@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using TrireksaAppContext.Models;
 using TrireksaAppContext;
+using Newtonsoft.Json;
 
 namespace WebApi.Middlewares
 {
@@ -87,9 +88,10 @@ namespace WebApi.Middlewares
         private Task<string> GenerateJwtToken(Users user)
         {
             // generate token that is valid for 7 days
-
+            var data =user.Userrole.Select(x => x.Role.Name).ToArray();
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var roles = JsonConvert.SerializeObject(user.Userrole.Select(x => x.Role.Name));
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]

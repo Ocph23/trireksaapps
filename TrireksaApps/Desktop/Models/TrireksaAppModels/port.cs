@@ -82,6 +82,8 @@ namespace ModelsShared.Models
 
         }
 
+        public virtual City City { get; set; }
+
         private int _id;
         private string _name;
         private PortType _porttype;

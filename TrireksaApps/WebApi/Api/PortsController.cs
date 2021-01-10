@@ -75,7 +75,7 @@ namespace WebApi.Api
         }
 
         // PUT: api/Ports/5
-        [HttpPut]
+        [HttpPut("{id}")]
         [ApiAuthorize(Roles = "Administrator, Admin")]
         public async Task<IActionResult> Put(int id, Port value)
         {
@@ -90,7 +90,7 @@ namespace WebApi.Api
         }
 
         // DELETE: api/Ports/5
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ApiAuthorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Delete(int id)
         {

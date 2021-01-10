@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
              xmlns:m="clr-namespace:TrireksaApp.Common"
+             mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="1000" >
     <UserControl.Resources>
-        <m:VisibilityConverter x:Key="VisibilityConverter"/>
+        <m:VisibilityConverter  x:Key="VisibilityConverter"></m:VisibilityConverter>
         <Style  TargetType="UserControl">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
@@ -42,7 +41,12 @@
                     <DataGridTextColumn Header="Phone" Binding="{Binding UserCodeNavigation.PhoneNumber}"/>
 
                 </DataGrid.Columns>
-
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Refresh" Command="{Binding RefreshCommand}"/>
+                        <MenuItem Header="Create New User" Command="{Binding CreateUserCommand}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
             <DataGrid Margin="20" CanUserAddRows="False" SelectedItem="{Binding RoleSelected}" CanUserDeleteRows="False"  Visibility="{Binding IsShowData,Converter={StaticResource VisibilityConverter},ConverterParameter=0}"
                          Grid.Column="1" ItemsSource="{Binding RolesView}">

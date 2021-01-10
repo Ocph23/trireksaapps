@@ -33,8 +33,8 @@ namespace TrireksaAppContext.Models
         }
 
 
-        private DateTime _reciveDate;
-        public DateTime ReciveDate
+        private DateTime? _reciveDate;
+        public DateTime? ReciveDate
         {
             get { return _reciveDate; }
             set { _reciveDate = value; }
@@ -284,7 +284,16 @@ namespace TrireksaAppContext.Models
             set { SetProperty(ref _note, value); }
         }
 
-        
+
+        private string reciveCondition;
+
+        public string ReciveCondition
+        {
+            get { return reciveCondition; }
+            set {SetProperty(ref reciveCondition , value); }
+        }
+
+
         public double Total
         {
             get
@@ -341,6 +350,8 @@ namespace TrireksaAppContext.Models
                 SetProperty(ref _id, value);
             }
         }
+
+        public string RecievePhone { get; internal set; }
 
         private int _stt;
         private int _shiperid;

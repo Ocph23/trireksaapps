@@ -27,15 +27,17 @@ namespace TrireksaApp.Contents.Port
         protected  override void RefreshAction(object obj)
         {
             ProgressIsActive = true;
-            MainVM.CityCollection.Refresh();
+            MainVM.PortCollection.Refresh();
         }
 
 
         private async void EditAction()
         {
-            var vm = new Contents.Port.PortEditVM(Collection.SelectedItem);
-            var cnt = new Contents.Port.Edit();
-            cnt.DataContext = vm;
+            var vm = new PortEditVM(Collection.SelectedItem);
+            var cnt = new Edit
+            {
+                DataContext = vm
+            };
             var dlg = new ModernDialog
             {
                 Title = "Edit",
@@ -44,7 +46,7 @@ namespace TrireksaApp.Contents.Port
             dlg.Buttons = new Button[] { dlg.OkButton, dlg.CancelButton };
             dlg.ShowDialog();
 
-            if (dlg.DialogResult.HasValue)
+            if (dlg.DialogResult.Value)
             {
                 ModelsShared.Models.Port port = new ModelsShared.Models.Port
                 {
@@ -56,7 +58,7 @@ namespace TrireksaApp.Contents.Port
                     CityName =MainVM.CityCollection.Source.Where(O => O.Id == vm.CityID).FirstOrDefault().CityName
                 };
                 var isUpdated = await Collection.Update(port.Id, port);
-                if (isUpdated!=default(ModelsShared.Models.Port))
+                if (isUpdated)
                 {
                     Collection.SourceView.Refresh();
                     ModernDialog.ShowMessage("Data Is Updated !", "Message Dialog", System.Windows.MessageBoxButton.OK);

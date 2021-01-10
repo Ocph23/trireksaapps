@@ -36,9 +36,11 @@ namespace TrireksaApp.Contents.City
 
         private async void EditAction()
         {
-            var vm = new Contents.City.CityEditVM(Collection.SelectedItem);
-            var cnt = new Contents.City.Edit();
-            cnt.DataContext = vm;
+            var vm = new CityEditVM(Collection.SelectedItem);
+            var cnt = new Edit
+            {
+                DataContext = vm
+            };
             var dlg = new ModernDialog
             {
                 Title = "Common dialog",
@@ -96,11 +98,9 @@ namespace TrireksaApp.Contents.City
 
         private bool FilterItem(object x)
         {
-            var scr = string.Empty;
-           
             if (!String.IsNullOrEmpty(this.Search))
             {
-                scr = this.Search.ToUpper();
+                string scr = this.Search.ToUpper();
                 var obj = (ModelsShared.Models.City)x;
                 return (obj.CityCode.ToUpper().Contains(scr)
                     || obj.CityName.ToUpper().Contains(scr)

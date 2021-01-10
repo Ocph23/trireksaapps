@@ -104,6 +104,7 @@ namespace TrireksaApp
                         if (result!=null )
                         {
                             ResourcesBase.User =result;
+                            appConfig.UpdateUserName(UserName);
                             var form = new MainWindow();
                             form.Show();
                             this.CloseWindow();

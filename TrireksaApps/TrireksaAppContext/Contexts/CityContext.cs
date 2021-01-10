@@ -10,13 +10,13 @@ namespace TrireksaAppContext
     public class CityContext
     {
 
-        private ApplicationDbContext db;
+        private readonly ApplicationDbContext db;
 
         //SignalR
-        private IHubContext<TrireksaAppHub> _hubContext;
-        public CityContext(IHubContext<TrireksaAppHub> hubContext, ApplicationDbContext _dbContext)
+      //  private readonly IHubContext<TrireksaAppHub> _hubContext;
+        public CityContext(ApplicationDbContext _dbContext)
         {
-            _hubContext = hubContext;
+            //_hubContext = hubContext;
             db = _dbContext;
         }
 

@@ -129,7 +129,7 @@ namespace TrireksaApp.Contents.Laporan
             }
         }
 
-        private void cari_Click(object sender, RoutedEventArgs e)
+        private void Cari_Click(object sender, RoutedEventArgs e)
         {
             GetDataPenjualanAsync(StartDate, EndDate);
         }

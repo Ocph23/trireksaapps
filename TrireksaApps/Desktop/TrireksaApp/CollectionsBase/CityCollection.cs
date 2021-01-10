@@ -12,7 +12,7 @@ namespace TrireksaApp.CollectionsBase
     public class CityCollection
     {
         public event RefreshComplete RefreshCompleted;
-        private Client client = new Client("city");
+        private readonly Client client = new Client("city");
         private SignalRClient signalRClient;
 
         public ObservableCollection<ModelsShared.Models.City> Source { get; set; }

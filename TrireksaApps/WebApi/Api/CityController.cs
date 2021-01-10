@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TrireksaAppContext;
 using TrireksaAppContext.Models;
@@ -34,11 +35,11 @@ namespace WebApi.Api
 
         // GET: api/City/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                return Ok(context.Get(id));
+                return Ok(await context.Get(id));
             }
             catch (Exception ex)
             {
@@ -50,11 +51,11 @@ namespace WebApi.Api
 
         [HttpPost]
         [ApiAuthorize(Roles = "Administrator, Admin")]
-        public IActionResult Post([FromBody]City value)
+        public async Task<IActionResult> Post([FromBody]City value)
         {
             try
             {
-                var result = context.Post(value);
+                var result =await context.Post(value);
                 string username = User.Identity.Name;
                 return Ok(result);
             }
@@ -68,11 +69,11 @@ namespace WebApi.Api
         // PUT: api/City/5
         [HttpPut("{id}")]
         [ApiAuthorize(Roles = "Administrator, Admin")]
-        public IActionResult Put(int id, [FromBody]City value)
+        public async Task<IActionResult> Put(int id, [FromBody]City value)
         {
             try
             {
-                return Ok(context.Put(id,value));
+                return Ok(await context.Put(id,value));
             }
             catch (Exception ex)
             {
@@ -83,11 +84,11 @@ namespace WebApi.Api
         // DELETE: api/City/5
         [HttpDelete("{id}")]
         [ApiAuthorize(Roles = "Manager, Administrator, Admin")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                return Ok(context.Delete(id));
+                return Ok( await context.Delete(id));
             }
             catch (Exception ex)
             {

@@ -178,8 +178,8 @@ namespace TrireksaApp.Contents.ManifestOutgoing
         private async void UpdateDepartureAction(object obj)
         {
             OnDestinationPortIsSync = true;
-            bool res = await MainVM.ManifestOutgoingCollection.UpdateDestination(SelectedItem);
-                OnDestinationPortIsSync = false;
+            await MainVM.ManifestOutgoingCollection.UpdateDestination(SelectedItem);
+            OnDestinationPortIsSync = false;
 
         }
 

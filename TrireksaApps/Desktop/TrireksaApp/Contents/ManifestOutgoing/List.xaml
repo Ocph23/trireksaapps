@@ -13,7 +13,7 @@
             <StackPanel>
                 <StackPanel Style="{StaticResource OPanel}">
                     <Label Content="Manifest Type"/>
-                    <TextBlock   Text="{Binding SelectedItem.Information.ManifestType}"/>
+                    <Label Content="{Binding SelectedItem.Information.ManifestType}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource OPanel}">
                     <Label Content="Armada name"/>
@@ -35,7 +35,7 @@
                 <StackPanel Style="{StaticResource OPanel}">
                     <Button Command="{Binding UpdateManifestInfo}" Margin="3" Width="35" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                         <Grid >
-                            <mi:PackIcon x:Name="priceIcon" Kind="Rotate3d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <mi:PackIcon x:Name="priceIcon" Kind="ProgressCheck" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <mi:PackIcon.Style>
                                     <Style>
                                         <Style.Triggers>
@@ -75,7 +75,7 @@
                 <StackPanel Style="{StaticResource OPanel}">
                     <Button Command="{Binding UpdateManifestInfo}"  Margin="3" Width="35" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                         <Grid >
-                            <mi:PackIcon x:Name="priceIcon" Kind="Rotate3d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <mi:PackIcon x:Name="priceIcon" Kind="ProgressCheck" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <mi:PackIcon.Style>
                                     <Style>
                                         <Style.Triggers>
@@ -127,7 +127,7 @@
                 <Label Width="auto" Margin="10,0" VerticalAlignment="Center" Content="S/D"/>
                 <DatePicker SelectedDate="{Binding MainVM.ManifestOutgoingCollection.EndDate}"></DatePicker>
                 <Button Margin="5,0"  Width="30" Padding="0" Command="{Binding RefreshCommand}">
-                    <mi:PackIcon Foreground="White" Kind="FileFind"/>
+                    <mi:PackIcon  Kind="FileFind"/>
                 </Button>
             </WrapPanel>
         </Grid>
@@ -144,15 +144,15 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Refresh" Command="{Binding RefreshCommand}">
+                    <MenuItem Margin="10,5" Header="Refresh" Command="{Binding RefreshCommand}">
                         <MenuItem.Icon>
                             <mi:PackIcon Kind="Refresh"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Other Information">
+                    <MenuItem Margin="10,5" Header="Other Information">
                         <MenuItem.Template >
                             <ControlTemplate>
-                                <StackPanel>
+                                <StackPanel >
                                     <StackPanel Style="{StaticResource OPanel}">
                                         <Label Content="Origin"/>
                                         <TextBlock   Text="{Binding SelectedItem.OriginNavigation.Name}"/>
@@ -170,7 +170,7 @@
                                         <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding SelectedItem.OnDestinationPort, StringFormat='dd-MMM-yyyy HH:mm:ss tt',UpdateSourceTrigger=PropertyChanged}"/>
                                         <Button Width="30" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding UpdateDeparture}" >
                                             <Grid Width="30">
-                                                <mi:PackIcon x:Name="desIcon" Width="25" Height="25" Kind="Rotate3d" Margin="0">
+                                                <mi:PackIcon x:Name="desIcon" Width="25" Height="25" Kind="ProgressCheck" Margin="0">
                                                     <mi:PackIcon.Style>
                                                         <Style>
                                                             <Style.Triggers>
@@ -194,7 +194,7 @@
                                         <DatePicker  SelectedDateFormat="Long" SelectedDate="{Binding SelectedItem.OnOriginPort,StringFormat='dd MMMM yyyy HH:mm:ss tt',UpdateSourceTrigger=PropertyChanged}"/>
                                         <Button Width="30" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding UpdateOrigin}" >
                                             <Grid Width="30">
-                                                <mi:PackIcon x:Name="orIcon" Width="25" Height="25" Kind="Rotate3d" Margin="0">
+                                                <mi:PackIcon x:Name="orIcon" Width="25" Height="25" Kind="ProgressCheck" Margin="0">
                                                     <mi:PackIcon.Style>
                                                         <Style>
                                                             <Style.Triggers>
@@ -222,9 +222,7 @@
                         </MenuItem.Template>
                     </MenuItem>
                     <MenuItem Name="armada" Header="Armada Infomration">
-                        <MenuItem Style="{StaticResource Info }"/>
-
-
+                        <MenuItem Margin="10" Style="{StaticResource Info }"/>
                     </MenuItem>
                     <MenuItem Header="Details">
                         <MenuItem>
@@ -252,7 +250,7 @@
                             </MenuItem.Template>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Print Preview" CommandParameter="{Binding Agent.Name}" Command="{Binding Preview}"/>
+                    <MenuItem Margin="0,10" Header="Print Preview" CommandParameter="{Binding Agent.Name}" Command="{Binding Preview}"/>
 
                 </ContextMenu>
             </DataGrid.ContextMenu>

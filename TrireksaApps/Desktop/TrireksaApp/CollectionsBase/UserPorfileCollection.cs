@@ -27,13 +27,14 @@ namespace TrireksaApp.CollectionsBase
         {
             var result = await client.GetAsync<List<Userprofile>>("");
             if(result!=null)
-                foreach(var item in result)
+            {
+                Source.Clear();
+                foreach (var item in result)
                 {
                     Source.Add(item);
                 }
-
+            }
             SourceView.Refresh();
-
             ResourcesBase.UserIsLogin = await GetProfile();
         }
 
@@ -47,21 +48,42 @@ namespace TrireksaApp.CollectionsBase
 
         internal async Task<Roles> AddNewUserRole(Userprofile selectedItem, Roles role)
         {
-            string url = string.Format("AddNewRole?userId={0}", selectedItem.UserCodeNavigation.Id);
+            string url = string.Format("AddNewRole/{0}", selectedItem.User.Id);
             return await client.PostAsync<Roles>(url,role);
         }
 
-        internal async Task<Roles> RemoveRole(Userprofile selectedItem, Roles roleSelected)
+        internal Task Refresh()
         {
-            string url = string.Format("RemoveRole?userId={0}&roleId={1}", selectedItem.UserCodeNavigation.Id, roleSelected.Id); ;
+           InitAsync();
+           return Task.CompletedTask;
+        }
+
+        internal async Task<bool> RemoveRole(Userprofile selectedItem, Roles roleSelected)
+        {
+            string url = string.Format("RemoveRole/{0}/roleid?roleid={1}", selectedItem.User.Id, roleSelected.Id); ;
             var result= await client.ClientContext.DeleteAsync(url);
             if (result.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<Roles>(result.Content.ReadAsStringAsync().Result);
+                return JsonConvert.DeserializeObject<bool>(result.Content.ReadAsStringAsync().Result);
             }
             else
             {
-                return null;
+                return false;
+            }
+        }
+
+        internal async Task<User> Register(RegisterModel model)
+        {
+            try
+            {
+                var userClient = new Client("User");
+                
+                var user =await userClient.PostAsync<User>("register", model);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new SystemException(ex.Message);
             }
         }
 
@@ -135,10 +157,10 @@ namespace TrireksaApp.CollectionsBase
 
         internal async Task<bool> Update(Userprofile item)
         {
-            var res = await client.PutAsync<bool>("", item.UserId, item);
+            var res = await client.PutAsync<bool>("", item.Id, item);
             if (res)
             {
-                var userProfile = Source.Where(O => O.UserId == item.UserId).FirstOrDefault();
+                var userProfile = Source.Where(O => O.Id == item.Id).FirstOrDefault();
                 if(userProfile!=null)
                 {
                    item.FirstName= userProfile.FirstName;

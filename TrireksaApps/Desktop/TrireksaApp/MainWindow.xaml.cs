@@ -22,7 +22,7 @@ namespace TrireksaApp
     /// </summary>
     public partial class MainWindow : ModernWindow
     {
-        MainWindowVM viewmodel;
+        readonly MainWindowVM viewmodel;
         public MainWindow()
         {
             InitializeComponent();

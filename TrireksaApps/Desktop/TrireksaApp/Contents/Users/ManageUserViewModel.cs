@@ -1,13 +1,12 @@
-﻿using ModelsShared;
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using ModelsShared;
 using ModelsShared.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using TrireksaApp.Common;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TrireksaApp.Contents.Users
 {
@@ -24,19 +23,58 @@ namespace TrireksaApp.Contents.Users
         {
             AddNewRole = new CommandHandler { CanExecuteAction = AddNewRoleValidate, ExecuteAction = AddNewRoleAction };
             RemoveRole = new CommandHandler { CanExecuteAction = x => RoleSelected != null && SelectedItem!=null, ExecuteAction= RemoveRoleActio };
+            CreateUserCommand = new CommandHandler { CanExecuteAction = x => true, ExecuteAction = CreateUserAction };
+            RefreshCommand = new CommandHandler { CanExecuteAction = x => true, ExecuteAction = RefreshAction };
             this.MainVM= Common.ResourcesBase.GetMainWindowViewModel();
             RoleSource = new ObservableCollection<Roles>();
-            InitAsync();
             RolesView = (CollectionView)CollectionViewSource.GetDefaultView(RoleSource);
+            InitAsync();
             
+        }
+
+        private async void RefreshAction(object obj)
+        {
+           await MainVM.UserProfileCollections.Refresh();
+        }
+
+        private async void CreateUserAction(object obj)
+        {
+            var vm = new AddEditViewModel();
+            var cnt = new AddEditUser
+            {
+                DataContext = vm
+            };
+            var dlg = new ModernDialog
+            {
+                Title = "Create New User",
+                Content = cnt
+            };
+            dlg.Buttons = null;
+            vm.WindowClose= dlg.Close;
+
+            dlg.ShowDialog();
+
+            if (vm.ModelValid)
+            {
+
+                RegisterModel model = 
+                    new RegisterModel { Email=vm.Email, FullName=vm.FullName, Password=vm.Password, UserName=vm.UserName };
+                var user  = await MainVM.UserProfileCollections.Register(model);
+                if (user!=null)
+                {
+                  await  MainVM.UserProfileCollections.Refresh();
+                    ModernDialog.ShowMessage("User Berhasil Dibuat !", "Message Dialog", System.Windows.MessageBoxButton.OK);
+                }
+            }
         }
 
         private async void RemoveRoleActio(object obj)
         {
-          Roles role = await MainVM.UserProfileCollections.RemoveRole(SelectedItem, RoleSelected);
-            if(role!=null)
+          var removed = await MainVM.UserProfileCollections.RemoveRole(SelectedItem, RoleSelected);
+            if(removed)
             {
-                SelectedItem.Roles.Remove(RoleSelected);
+                var userRole = SelectedItem.User.Userrole.SingleOrDefault(x => x.RoleId == RoleSelected.Id);
+                SelectedItem.User.Userrole.Remove(userRole);
                 RoleSource.Remove(RoleSelected);
                 RolesView.Refresh();
                 Roles.Refresh();
@@ -51,7 +89,7 @@ namespace TrireksaApp.Contents.Users
                 var roleSaved = await MainVM.UserProfileCollections.AddNewUserRole(SelectedItem, role);
                 if(roleSaved!=null)
                 {
-                    SelectedItem.Roles.Add(role);
+                    SelectedItem.User.Userrole.Add(new Userrole { Role=role, RoleId=role.Id, User=SelectedItem.User, UserId=SelectedItem.UserId } );
                     RoleSource.Add(role);
                     RolesView.Refresh();
                     Roles.Refresh();
@@ -71,6 +109,8 @@ namespace TrireksaApp.Contents.Users
         public object UserLogin { get;  set; }
         public CommandHandler AddNewRole { get; }
         public CommandHandler RemoveRole { get; }
+        public CommandHandler CreateUserCommand { get; }
+        public CommandHandler RefreshCommand { get; }
         public MainWindowVM MainVM { get; }
 
         public bool IsShowData
@@ -85,16 +125,20 @@ namespace TrireksaApp.Contents.Users
             }
         }
 
+        private List<Roles> roles;
+
         public CollectionView Roles { get;  set; }
         public CollectionView RolesView { get; }
 
         private async void InitAsync()
         {
-            IsShowData = MainVM.UserProfileCollections.Source.Count > 0;
-            var result= await MainVM.UserProfileCollections.GetRoles();
-            if(result!=null)
+
+            if(ResourcesBase.User.Roles.Where(x=>x.ToLower()=="administrator").Count()>0)
+                IsShowData =true;
+            roles= await MainVM.UserProfileCollections.GetRoles();
+            if(roles!=null)
             {
-                Roles = (CollectionView)CollectionViewSource.GetDefaultView(result);
+                Roles = (CollectionView)CollectionViewSource.GetDefaultView(roles);
                 Roles.Filter = RolesFilter;
                 Roles.Refresh();
             }
@@ -104,11 +148,11 @@ namespace TrireksaApp.Contents.Users
         private bool RolesFilter(object obj)
         {
             Roles role = (Roles)obj;
-            if(role!=null && SelectedItem!=null && SelectedItem.Roles!=null)
+            if(role!=null && SelectedItem!=null && SelectedItem.User.Userrole!=null)
             {
-                foreach(var item in SelectedItem.Roles)
+                foreach(var item in SelectedItem.User.Userrole)
                 {
-                    if (role.Id == item.Id)
+                    if (role.Id == item.RoleId)
                         return false;
                 }
             }
@@ -121,7 +165,7 @@ namespace TrireksaApp.Contents.Users
             get { return _selected; }
             set
             {
-            SetProperty(ref    _selected , value);
+                SetProperty(ref    _selected , value);
                 ChangeRoleViews(_selected);
             }
         }
@@ -134,7 +178,7 @@ namespace TrireksaApp.Contents.Users
             }
             set
             {
-            SetProperty(ref    _AddRoleSelected , value);
+                SetProperty(ref    _AddRoleSelected , value);
                 if (_AddRoleSelected != null)
                     AddNewRole.Execute(_AddRoleSelected);
             }
@@ -145,18 +189,18 @@ namespace TrireksaApp.Contents.Users
             get { return _RoleSelected; }
             set
             {
-            SetProperty(ref    _RoleSelected , value);
+                 SetProperty(ref    _RoleSelected , value);
             }
         }
 
         private void ChangeRoleViews(Userprofile selected)
         {
-           if(selected!=null && selected.Roles!=null)
+           if(selected!=null && selected.User!=null)
             {
                 RoleSource.Clear();
-                foreach(var item in selected.Roles)
+                foreach(var item in selected.User.Userrole)
                 {
-                    RoleSource.Add(item);
+                    RoleSource.Add(item.Role);
                 }
                 RolesView.Refresh();
                 Roles.Refresh();

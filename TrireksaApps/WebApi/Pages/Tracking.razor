@@ -1,5 +1,9 @@
 ﻿@page "/tracking"
 
+@using TrireksaAppContext;
+@using TrireksaAppContext.Models;
+@inject TracingContext context;
+
 <div class="header">
     <div class="service-body">
         <div class="service-icon">
@@ -9,21 +13,129 @@
     </div>
 
     <div class="search-body">
-        <input type="text" class="search-input" placeholder="AWB/SPB">
-        <button @onclick="IncrementCount"><img src="/images/search.png" alt=""></button>
+        <input type="text" @bind-value="stt" class="search-input" placeholder="AWB/SPB">
+        <button @onclick="SearchAction"><img src="/images/search.png" alt=""></button>
     </div>
 </div>
 
 <div class="tracking container">
-    <h4>Hasil Pencarian</h4>
-    <h5>@message</h5>
+    <h6 style="margin-bottom:20px">@message</h6>
+    @if (model != null)
+    {
+        <h4>Hasil Pencarian</h4>
+        <h5 style="margin-top:50px">Data</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>STT</th>
+                    <th>Pengirim</th>
+                    <th>Penerima</th>
+                    <th>Isi Barang</th>
+                    <th>Coly</th>
+                    <th>Berat/Volume</th>
+                    <th>DO Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@model.ChangeDate.Value.ToString("dd/MM/yyyy")</td>
+                    <td>@model.STT.ToString("D5")</td>
+                    <td>@model.ShiperName</td>
+                    <td>@model.ReciverName</td>
+                    <td>@model.Content</td>
+                    <td>@model.Pcs</td>
+                    <td>@model.Weight.ToString("N2") @(model.TypeOfWeight== TypeOfWeight.Volume?"M3":"Kg")</td>
+                    <td>@model.DoNumber</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h5 style="margin-top:50px">Pengiriman</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Via</th>
+                    <th>Armada</th>
+                    <th>Dari</th>
+                    <th>Tujuan</th>
+                    <th>Berangkat</th>
+                    <th>Tiba</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (model.Manifests != null)
+                {
+                    foreach (var item in model.Manifests)
+                    {
+                        <tr>
+                            <td>@item.CreatedDate.Value.ToString("dd/MM/yyyy")</td>
+                            <td>@item.PortType</td>
+                            <td>@item.Information.ArmadaName</td>
+                            <td>@item.OriginNavigation.Name</td>
+                            <td>@item.DestinationNavigation.Name</td>
+                            <td>@(item.OnOriginPort == null ? "" : item.OnOriginPort.Value.ToString("dd/MM/yyyy"))</td>
+                            <td>@(item.OnDestinationPort == null ? "" : item.OnDestinationPort.Value.ToString("dd/MM/yyyy"))</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+
+
+        <h5 style="margin-top:50px">Status Pengantaran</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Nama Penerima</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@model.ReciveDate</td>
+                    <td>@model.ReciveName</td>
+                    <td>@model.ReciveCondition</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+
+
 </div>
 
 @code {
     private string message = "";
+    private string stt;
+    private TracingModel model;
 
-    private void IncrementCount()
+    private async void SearchAction()
     {
-        this.message = "Not Found !";
+        model = null;
+        try
+        {
+            if (string.IsNullOrEmpty(stt))
+            {
+                this.message = "INPUT NOMOR STT/AWB";
+                return;
+            }
+
+            var STT = Convert.ToInt32(stt);
+            model = await context.GetPenjualan(STT);
+
+            if (model == null)
+            {
+                this.message = "STT/AWB Tidak Ditemukan !";
+                return;
+            }
+            message = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            this.message = ex.Message;
+        }
     }
 }

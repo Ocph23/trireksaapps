@@ -9,7 +9,6 @@ namespace TrireksaAppContext.Models
         {
             Userclaims = new HashSet<Userclaims>();
             Userlogins = new HashSet<Userlogins>();
-            Userprofile = new HashSet<Userprofile>();
             Userrole = new HashSet<Userrole>();
         }
 
@@ -29,7 +28,7 @@ namespace TrireksaAppContext.Models
 
         public virtual ICollection<Userclaims> Userclaims { get; set; }
         public virtual ICollection<Userlogins> Userlogins { get; set; }
-        public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public virtual Userprofile Userprofile { get; set; }
         public virtual ICollection<Userrole> Userrole { get; set; }
     }
 }

@@ -27,10 +27,10 @@ namespace TrireksaApp.Contents.Users
                 }
                 else
                 {
-                    this.UserId = result.UserId;
+                    this.Id = result.Id;
                     this.FirstName = result.FirstName;
                     this.LastName = result.LastName;
-                    this.UserCode = result.UserCode;
+                    this.UserId = result.UserId;
                     this.Address = result.Address;
                     this.Photo = result.Photo;
 
@@ -45,8 +45,8 @@ namespace TrireksaApp.Contents.Users
                 Address = this.Address,
                 FirstName = this.FirstName,
                 LastName = this.LastName,
-                UserId = this.UserId,
-                Photo = this.Photo,   UserCode=this.UserCode           
+                Id = this.Id,
+                Photo = this.Photo,   UserId=this.UserId           
             };
 
             bool result;

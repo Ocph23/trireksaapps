@@ -743,15 +743,15 @@ namespace TrireksaAppContext
 
             modelBuilder.Entity<Userprofile>(entity =>
             {
-                entity.HasKey(e => e.UserId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("userprofile");
 
-                entity.HasIndex(e => e.UserCode)
+                entity.HasIndex(e => e.UserId)
                     .HasName("fk_userprofile_users1_idx");
 
-                entity.Property(e => e.UserId).HasColumnType("int(11)");
+                entity.Property(e => e.Id).HasColumnType("int(11)");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(255)
@@ -770,13 +770,12 @@ namespace TrireksaAppContext
                     .HasColumnType("longblob")
                     .HasDefaultValueSql("'NULL'");
 
-                entity.Property(e => e.UserCode)
+                entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(128);
 
-                entity.HasOne(d => d.UserCodeNavigation)
-                    .WithMany(p => p.Userprofile)
-                    .HasForeignKey(d => d.UserCode)
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.Userprofile)  
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_userprofile_users1");
             });

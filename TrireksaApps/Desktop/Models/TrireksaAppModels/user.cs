@@ -77,7 +77,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public DateTime LockoutEndDateUtc
+        public DateTime? LockoutEndDateUtc
         {
             get { return _lockoutenddateutc; }
             set
@@ -114,7 +114,7 @@ namespace ModelsShared.Models
         }
         public virtual ICollection<Userclaims> Userclaims { get; set; }
         public virtual ICollection<Userlogins> Userlogins { get; set; }
-        public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public virtual Userprofile Userprofile { get; set; }
         public virtual ICollection<Userrole> Userrole { get; set; }
 
         private string _id;
@@ -125,7 +125,7 @@ namespace ModelsShared.Models
         private string _phonenumber;
         private bool _phonenumberconfirmed;
         private bool _twofactorenabled;
-        private DateTime _lockoutenddateutc;
+        private DateTime? _lockoutenddateutc;
         private bool _lockoutenabled;
         private int _accessfailedcount;
         private string _username;

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrireksaMobile.Views.InvoiceDetailView"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding Source}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame BackgroundColor="WhiteSmoke" CornerRadius="8" Margin="3" HasShadow="True">
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label WidthRequest="75" FontAttributes="Bold" Text="Nomor Inv" />
+                                        <Label Text="{Binding NumberView}" />
+                                        <Label HorizontalOptions="EndAndExpand" FontSize="12" Text="{Binding CreateDate,StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label WidthRequest="75" FontAttributes="Bold" Text="Customer" />
+                                        <Label Text="{Binding CustomerName}" />
+                                        <Label HorizontalOptions="EndAndExpand" FontSize="12" Text="{Binding Total,StringFormat='Rp. {}{0}'}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label WidthRequest="75" FontAttributes="Bold" Text="Total" />
+                                        <Label Text="{Binding Total,StringFormat='Rp. {}{0}'}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

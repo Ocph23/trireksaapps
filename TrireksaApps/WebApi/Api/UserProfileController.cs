@@ -77,11 +77,11 @@ namespace WebApi.Api
 
         [ApiAuthorize(Roles = "Administrator")]
         [HttpDelete("RemoveRole/{userid}/roleid")]
-        public async Task<IActionResult> RemoveRole(string userId, string roleid)
+        public async Task<IActionResult> RemoveRole(string userid, string roleid)
         {
             try
             {
-                return Ok(await context.RemoveRole(userId, roleid));
+                return Ok(await context.RemoveRole(userid, roleid));
             }
             catch (Exception ex)
             {
@@ -110,33 +110,31 @@ namespace WebApi.Api
         [ApiAuthorize(Roles = "Admin, Manager")]
         public async Task<IActionResult> RegisterAgent(Agent cust)
         {
-            /*var email = cust.Email;
-            string code = string.Empty;
-            var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
-            if (ModelState.IsValid)
+            try
             {
-                var user = new ApplicationUser { UserName = email, Email = email };
-                var result = await UserManager.CreateAsync(user, string.Concat(email, "#3Rp"));
-                if (result.Succeeded)
+                var email = cust.Email;
+                if (ModelState.IsValid)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var registerModel = new RegisterModel { UserName = email, Email = email, Password = string.Concat(email, "#3Rp") };
+                    var user = await _userService.Register(registerModel);
+                    if (user != null)
+                    {
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        //code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        ////  var callbackUrl = Request.GetUrlHelper().Link  Request..Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + "\">here</a>");
+                        await _userService.AddToRole(user, "Agent");
+                        return Ok(user);
+                    }
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //  var callbackUrl = Request.GetUrlHelper().Link  Request..Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + "\">here</a>");
-                    await UserManager.AddToRoleAsync(user.Id, "Agent");
-                    return Ok(code);
                 }
-
+                throw new SystemException("User Not Created !");
             }
-            return Content(HttpStatusCode.NotAcceptable, code);
-            // If we got this far, something failed, redisplay form*/
-
-
-            return Ok(await Task.FromResult(0));
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
 
         }

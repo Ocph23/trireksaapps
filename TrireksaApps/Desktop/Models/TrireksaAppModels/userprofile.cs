@@ -5,7 +5,7 @@ namespace ModelsShared.Models
 
     public class Userprofile :  BaseNotify
     {
-        public int UserId
+        public int Id
         {
             get { return _userid; }
             set
@@ -15,7 +15,7 @@ namespace ModelsShared.Models
         }
 
 
-        public string UserCode
+        public string UserId
         {
             get { return _userCode; }
             set
@@ -61,8 +61,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public List<Roles> Roles { get; set; }
-        public virtual User UserCodeNavigation { get; set; }
+        public virtual User User { get; set; }
 
 
         private int _userid;

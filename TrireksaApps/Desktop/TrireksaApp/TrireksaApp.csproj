@@ -13,6 +13,9 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,13 +26,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <WebPage>publish.htm</WebPage>
+    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +53,24 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>trireksa.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>30586FB0361DE1360AF3D274BC4F7E14FEC701DD</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>TrireksaApp_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialDesignColors, Version=1.2.7.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
@@ -151,8 +172,12 @@
     <Compile Include="CollectionsBase\PortCollection.cs" />
     <Compile Include="Common\Client.cs" />
     <Compile Include="Common\CommandHandler.cs" />
+    <Compile Include="Common\CustomerAddressConverter.cs" />
     <Compile Include="Common\ErrorHandler.cs" />
+    <Compile Include="Common\IsNotConverter.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="Common\VisibilityBoleanConverter.cs" />
+    <Compile Include="Common\VisibilityConverter.cs" />
     <Compile Include="Contents\Agent\AgentCreateVM.cs" />
     <Compile Include="Contents\Agent\AgentDetailVM.cs" />
     <Compile Include="Contents\Agent\AgentEditVM.cs" />
@@ -303,6 +328,10 @@
     <Compile Include="Contents\Ship\ShipCreateVM.cs" />
     <Compile Include="Contents\Ship\ShipEditVM.cs" />
     <Compile Include="Contents\Ship\ShipListVM.cs" />
+    <Compile Include="Contents\Users\AddEditUser.xaml.cs">
+      <DependentUpon>AddEditUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\Users\AddEditViewModel.cs" />
     <Compile Include="Contents\Users\ChangeProfile.xaml.cs">
       <DependentUpon>ChangeProfile.xaml</DependentUpon>
     </Compile>
@@ -641,6 +670,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Contents\Users\AddEditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Contents\Users\ChangeProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -764,6 +797,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\ModelsShared.Models.invoice.datasource" />
     <None Include="Properties\DataSources\ModelsShared.Models.packinglist.datasource" />
     <None Include="Properties\DataSources\ModelsShared.Models.PackingListPrintModel.datasource" />
@@ -779,6 +813,7 @@
     <None Include="Properties\DataSources\TrireksaApp.Reports.Models.NotaReportModel.datasource" />
     <None Include="Properties\DataSources\TrireksaApp.Reports.Models.PenjualanReportModel.datasource" />
     <None Include="Properties\DataSources\TrireksaApp.Reports.MySetting.datasource" />
+    <None Include="TrireksaApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -807,9 +842,7 @@
       <Name>FirstFloor.ModernUI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contexts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Assets\background.papua.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

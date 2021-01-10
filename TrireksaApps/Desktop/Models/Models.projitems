@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ModelHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChanged.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Photo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegisterModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ReportModels\PenjualanReportModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\agent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\city.cs" />

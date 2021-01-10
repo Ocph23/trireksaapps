@@ -57,10 +57,12 @@ namespace WebApi
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 string id = jwtToken.Claims.First(x => x.Type == "id").Value;
                 var name = jwtToken.Claims.First(x => x.Type == "name").Value;
+                var roles = jwtToken.Claims.First(x => x.Type == "roles").Value;
                 var claims = new[]
                 {
                                new Claim(ClaimTypes.NameIdentifier, id),
                                new Claim(ClaimTypes.Name, name),
+                               new Claim(ClaimTypes.Role, roles),
                 };
                 var identity = new ClaimsIdentity(claims, "Bearer");
 

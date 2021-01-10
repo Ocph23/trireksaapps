@@ -24,7 +24,8 @@
 
                 <StackPanel Style="{StaticResource OPanel}">
                     <Label Content="City" />
-                    <ComboBox ItemsSource="{Binding Cities}" DisplayMemberPath="CityName" SelectedValuePath="Id" SelectedValue="{Binding CityID,Mode=TwoWay,ValidatesOnDataErrors=True}" Width="150" />
+                    <ComboBox ItemsSource="{Binding Cities}" DisplayMemberPath="CityName" SelectedValuePath="Id" 
+                             SelectedItem="{Binding City}" SelectedValue="{Binding CityID,Mode=TwoWay,ValidatesOnDataErrors=True}" Width="150" />
                 </StackPanel>
                 <StackPanel Style="{StaticResource OPanel}">
                     <Label Content="Port Code" />

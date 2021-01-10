@@ -25,7 +25,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonsProperty = DependencyProperty.Register("Buttons", typeof(IEnumerable<Button>), typeof(ModernDialog));
 
-        private ICommand closeCommand;
+        private readonly ICommand closeCommand;
 
         private Button okButton;
         private Button cancelButton;

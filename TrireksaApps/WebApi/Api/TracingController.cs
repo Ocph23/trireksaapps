@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApi.Api
 {
@@ -22,11 +23,11 @@ namespace WebApi.Api
         }
 
         [HttpGet("GetPenjualan/{stt}")]
-        public IActionResult GetPenjualan(int stt)
+        public async Task<IActionResult> GetPenjualan(int stt)
         {
             try
             {
-                return Ok(context.GetPenjualan(stt));
+                return Ok(await context.GetPenjualan(stt));
             }
             catch (Exception ex)
             {

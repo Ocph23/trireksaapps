@@ -13,7 +13,7 @@ namespace TrireksaApp.CollectionsBase
     {
         public ObservableCollection<ModelsShared.Models.Port> Source { get; set; }
         public CollectionView SourceView { get; set; }
-        private Client client = new Client("Ports");
+        private readonly Client client = new Client("Ports");
         private SignalRClient signalRClient;
 
         public ModelsShared.Models.Port SelectedItem { get; set; }
@@ -26,12 +26,18 @@ namespace TrireksaApp.CollectionsBase
             CompleteTask();
         }
 
+        public void Refresh()
+        {
+            CompleteTask();
+        }
+
 
         public async void CompleteTask()
         {
             var result = await client.GetAsync<List<Port>>("");
             if(result!=default(List<Port>))
             {
+                Source.Clear();
                 foreach (var item in result)
                 {
                     Source.Add(item);
@@ -74,24 +80,24 @@ namespace TrireksaApp.CollectionsBase
          
         }
 
-        internal async Task<Port> Update(int id, Port port)
+        internal async Task<bool> Update(int id, Port port)
         {
             var data = Source.Where(O => O.Id == id).FirstOrDefault();
             if (data != null)
             {
-                var item = await client.PutAsync<Port>("", id, port);
-                if (item != default(Port))
+                var saved = await client.PutAsync<bool>("", id, port);
+                if (saved)
                 {
-                    data.CityID = item.CityID;
-                    data.CityName = item.CityName;
-                    data.Code = item.Code;
-                    data.Name = item.Name;
-                    data.PortType = item.PortType;
+                    data.CityID = port.CityID;
+                    data.CityName = port.CityName;
+                    data.Code = port.Code;
+                    data.Name = port.Name;
+                    data.PortType = port.PortType;
                 }
-                return item;
+                return saved;
             }
             else
-                return null;
+                return false;
          
         }
 
@@ -109,7 +115,7 @@ namespace TrireksaApp.CollectionsBase
                 return result;
             }
 
-            return default(Port);
+            return default;
                
         }
     }
