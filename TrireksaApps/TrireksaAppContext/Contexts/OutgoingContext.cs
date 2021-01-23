@@ -154,11 +154,28 @@ namespace TrireksaAppContext
             }
         }
 
-        public IEnumerable<Manifestoutgoing> ManifestsByPenjualanId(int penjualanId)
+        public Task<IEnumerable<Manifestoutgoing>> ManifestsByPenjualanId(int penjualanId)
         {
             try
             {
-                return null;
+                var datas = db.Packinglist.Where(x => x.PenjualanId == penjualanId)
+                    .Include(x => x.Manifest).ThenInclude(x => x.Agent)
+                    .Include(x => x.Manifest).ThenInclude(x => x.DestinationNavigation)
+                    .Include(x => x.Manifest).ThenInclude(x => x.OriginNavigation)
+                    .Include(x => x.Manifest).ThenInclude(x => x.Packinglist)
+                    .Include(x => x.Manifest).ThenInclude(x => x.Information);
+
+
+                var list = new List<Manifestoutgoing>();
+                foreach (var item in datas.ToList().GroupBy(x => x.ManifestId))
+                {
+                    var pack = item.FirstOrDefault();
+                    list.Add(pack.Manifest);
+                }
+
+
+
+                return Task.FromResult(list.AsEnumerable());
             }
             catch (Exception ex)
             {

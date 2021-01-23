@@ -29,21 +29,21 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="PENJUALAN"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="DUA BULAN LALU"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding DuaBulanLalu, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding DuaBulanLalu, StringFormat='{}{0:N2}'}"></Label>
                     </StackLayout>
                 </Frame>
                 <Frame CornerRadius="8" Grid.Column="1" HasShadow="True"  BackgroundColor="#a51080">
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="PENJUALAN"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="BULAN LALU"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding DuaBulanLalu, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding BulanLalu, StringFormat='{}{0:N2}'}"></Label>
                     </StackLayout>
                 </Frame>
             </Grid>
             <Frame CornerRadius="8" Grid.Column="1" HasShadow="True"  BackgroundColor="#96b800">
                 <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                     <Label FontSize="12" HorizontalTextAlignment="Center" Text="PENJUALAN BULAN INI"></Label>
-                    <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding DuaBulanLalu, StringFormat='Rp. {}{0:N2}'}"></Label>
+                    <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding BulanIni, StringFormat='{}{0:N2}'}"></Label>
                 </StackLayout>
             </Frame>
             <Grid >
@@ -55,7 +55,7 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="NOTA/STT"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="BELUM DIKIRIM"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding  STTNotSend, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding  STTNotSend, StringFormat='Rp. {}{0:N2}'}"></Label>
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="1">
@@ -66,7 +66,7 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="NOTA/STT"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="BELUM DITERIMA"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding STTNotStatus, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding STTNotStatus, StringFormat='Rp. {}{0:N2}'}"></Label>
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="2">
@@ -78,7 +78,7 @@
                 <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                     <Label FontSize="12" HorizontalTextAlignment="Center" Text="NOTA/STT"></Label>
                     <Label FontSize="12" HorizontalTextAlignment="Center" Text="BELUM DITAGIH"></Label>
-                    <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding STTNotPaid, StringFormat='Rp. {}{0:N2}'}"></Label>
+                    <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding STTNotPaid, StringFormat='Rp. {}{0:N2}'}"></Label>
                 </StackLayout>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="3">
@@ -94,7 +94,7 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="INVOICE"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="BELUM DIKIRIM"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding InvoiceNotDelivery, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding InvoiceNotDelivery, StringFormat='Rp. {}{0:N2}'}"></Label>
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="4">
@@ -105,7 +105,7 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="INVOICE"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="BELUM DITERIMA"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding InvoiceNotRecive, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding InvoiceNotRecive, StringFormat='Rp. {}{0:N2}'}"></Label>
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="5">
@@ -122,7 +122,7 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="INVOICE"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="BELUM DIBAYAR"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding InvoiceNotPaid, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding InvoiceNotPaid, StringFormat='Rp. {}{0:N2}'}"></Label>
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="6">
@@ -133,7 +133,7 @@
                     <StackLayout HeightRequest="75" Spacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="INVOICE"></Label>
                         <Label FontSize="12" HorizontalTextAlignment="Center" Text="JATUH TEMPO"></Label>
-                        <Label FontSize="15" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding JatuhTempo, StringFormat='Rp. {}{0:N2}'}"></Label>
+                        <Label FontSize="17" HorizontalTextAlignment="Center" Margin="0,20" Text="{Binding JatuhTempo, StringFormat='Rp. {}{0:N2}'}"></Label>
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="7">

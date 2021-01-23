@@ -117,6 +117,24 @@ namespace TrireksaApp
             Print();
         }
 
+        internal void PrintDocument(List<ReportDataSource> source, string layout, ReportParameter[] parameters)
+        {
+            LocalReport report = new LocalReport
+            {
+                ReportEmbeddedResource = layout
+            };
+            if (parameters != null)
+                report.SetParameters(parameters);
+
+            foreach (var item in source)
+            {
+                report.DataSources.Add(item);
+            }
+            
+            Export(report);
+            Print();
+        }
+
 
         internal void PrintNota<T>(List<T> source, string layout, ReportParameter[] parameters)
         {

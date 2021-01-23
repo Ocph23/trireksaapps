@@ -18,6 +18,7 @@ namespace TrireksaApp.Contents.Penjualan
         private Manifestoutgoing _manSelect;
         private BitmapImage _qr;
         private ModelsShared.Photo _photo;
+        private ModelsShared.Models.Invoice _invoiceStatustView;
 
         public ModelsShared.Models.Penjualan PenjualanItem { get; set; }
         public ObservableCollection<Manifestoutgoing> ManifestSource { get; set; }
@@ -31,7 +32,11 @@ namespace TrireksaApp.Contents.Penjualan
                 OnPropertyChanged("ManifestSelectedItem");
             }
         }
-        public ModelsShared.Models.Invoice InvoiceStatusView { get; private set; }
+        public ModelsShared.Models.Invoice InvoiceStatusView {
+            get { return _invoiceStatustView; }
+            set { _invoiceStatustView=value; OnPropertyChanged("InvoiceStatusView"); }
+        
+        }
         public BitmapImage STTQRCode
         {
             get

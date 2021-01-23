@@ -21,7 +21,7 @@ namespace TrireksaApp.Contents.Invoice
     /// </summary>
     public partial class List : UserControl
     {
-        private InvoiceListVM viewmodel;
+        private readonly InvoiceListVM viewmodel;
 
         public List()
         {
@@ -32,9 +32,16 @@ namespace TrireksaApp.Contents.Invoice
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var data = ((ListView)sender).SelectedItem;
-     //       NavigationCommands.GoToPage.Execute($"/Contents/Invoice/Create.xaml#1", this);
+           // var data = ((ListView)sender).SelectedItem;
+     //      
         }
-       
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            var data = (ModelsShared.Models.Invoice)list.SelectedItem;
+            if(data!=null)
+                NavigationCommands.GoToPage.Execute($"/Contents/Invoice/Create.xaml#{data.Id}", this);
+        }
     }
 }

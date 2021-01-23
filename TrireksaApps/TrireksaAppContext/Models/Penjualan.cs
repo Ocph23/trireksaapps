@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace TrireksaAppContext.Models
 {
+
+    [Table("penjualan")]
     public partial class Penjualan
     {
         public Penjualan()

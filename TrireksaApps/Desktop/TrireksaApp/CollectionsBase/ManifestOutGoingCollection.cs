@@ -49,7 +49,7 @@ namespace TrireksaApp.CollectionsBase
 
         public Task<Manifestoutgoing> GetItemById(int Id)
         {
-            return client.GetAsync<Manifestoutgoing>("Get", Id);
+            return client.GetAsync<Manifestoutgoing>("", Id);
         }
 
         public async Task<Manifestoutgoing> Add(Manifestoutgoing item)
@@ -89,6 +89,8 @@ namespace TrireksaApp.CollectionsBase
 
         internal async Task<List<Manifestoutgoing>> ManifestsByPenjualanId(int id)
         {
+
+
             var res= await client.GetAsync<List<Manifestoutgoing>>("ManifestsByPenjualanId", id);
             return res;
         }

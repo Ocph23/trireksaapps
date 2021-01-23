@@ -86,12 +86,6 @@ namespace TrireksaAppContext
 
                 db.Entry(t.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
 
-                foreach (var item in t.Invoicedetail)
-                {
-                    db.Entry(item.Penjualan).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
-                }
-
-
                 if (t.Id <= 0)
                 {
                     if (!db.Invoices.Any())
@@ -102,13 +96,16 @@ namespace TrireksaAppContext
                         t.Number = lastINvoice + 1;
                     }
 
+                    foreach (var item in t.Invoicedetail)
+                    {
+                        db.Entry(item.Penjualan).State = EntityState.Unchanged;
+                    }
                     db.Invoices.Add(t);
-
-
                 }
                 else
                 {
                     var existInvoice = db.Invoices.Where(x => x.Id == t.Id).Include(x=>x.Invoicedetail).FirstOrDefault();
+                     db.Entry(existInvoice.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
                     db.Entry(existInvoice).CurrentValues.SetValues(t);
 
                     foreach (var item in t.Invoicedetail)

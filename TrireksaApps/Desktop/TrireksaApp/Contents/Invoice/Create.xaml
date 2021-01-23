@@ -82,19 +82,19 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" Opacity="0.6"></SolidColorBrush>
                 </Border.BorderBrush>
                 <StackPanel >
-                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{StaticResource OPanel}">
-                    <Label Width="auto" Content="Grand Total" FontSize="18"/>
-                    <TextBlock Text="{Binding GrandTotal,StringFormat='{}{0:N0}',UpdateSourceTrigger=PropertyChanged}" FontSize="18"/>
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{StaticResource OPanel}">
+                        <Label Width="auto" Content="Grand Total" FontSize="18"/>
+                        <TextBlock Text="{Binding GrandTotal,StringFormat='{}{0:N0}',UpdateSourceTrigger=PropertyChanged}" FontSize="18"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-                </Border>
+            </Border>
 
         </Grid>
         <StackPanel Margin="3" Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" Height="40"  HorizontalAlignment="Right">
             <Button HorizontalAlignment="Right" Command="{Binding Save}" Content="Create"/>
             <Button HorizontalAlignment="Right" Command="{Binding SaveAndPrint}"  Content="Create And Print"/>
             <Button HorizontalAlignment="Right" Command="{Binding PreviewManifest}" Content="Preview"/>
-            <Button Content="Cancel" Command="NavigationCommands.Refresh"/>
+            <Button Content="Cancel"  Click="Button_Click"/>
         </StackPanel>
         <mui:ModernProgressRing IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
     </Grid>

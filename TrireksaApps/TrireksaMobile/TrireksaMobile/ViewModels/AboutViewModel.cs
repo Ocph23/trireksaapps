@@ -84,7 +84,8 @@ namespace TrireksaMobile.ViewModels
         {
             var now = DateTime.Now;
             DashboardStore.GetPenjualanBulan(now).ContinueWith(async (x)=> {
-               BulanIni= await x;
+               var result= await x;
+               BulanIni = result;
             });
             DashboardStore.GetPenjualanBulan(now.AddMonths(1)).ContinueWith(async (x) => {
                 BulanLalu = await x;

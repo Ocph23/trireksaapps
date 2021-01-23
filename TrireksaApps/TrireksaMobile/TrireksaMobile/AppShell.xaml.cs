@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Accounts;
+using System;
 using System.Collections.Generic;
 using TrireksaMobile.ViewModels;
 using TrireksaMobile.Views;
@@ -13,6 +14,10 @@ namespace TrireksaMobile
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+
+
+            var data =Account.GetProfile().Result;
+            user.Text = data.Name;
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

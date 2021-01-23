@@ -27,6 +27,9 @@ namespace TrireksaMobile
             if (Account.UserIsLogin)
             {
                 MainPage = new AppShell();
+
+                  
+
                 //if (await Account.UserInRole("Administrator"))
                 //{
                 //}

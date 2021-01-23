@@ -34,8 +34,18 @@ namespace TrireksaApp.Contents.Invoice
 
         public async void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            var data = Convert.ToInt32(e.Fragment);
-           await viewmodel.SetInvoice(data);
+
+            if (e.Fragment != null)
+            {
+                var data = Convert.ToInt32(e.Fragment);
+                if (data > 0)
+                    await viewmodel.SetInvoice(data);
+            }
+            else
+            {
+                await viewmodel.SetInvoice(0);
+            }
+           
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -56,6 +66,11 @@ namespace TrireksaApp.Contents.Invoice
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
+        }
+
+        private  void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationCommands.GoToPage.Execute($"/Contents/Invoice/Create.xaml", this);
         }
     }
 }

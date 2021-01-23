@@ -214,8 +214,8 @@ namespace TrireksaApp.Contents.Invoice
            if(data!=null)
             {
 
-                var config = HelperPrint.GetReportSetting();
                 var dataSource = new ReportDataSource { Value = data.OrderBy(x => x.STT), Name="DataSet1" };
+                var config = HelperPrint.GetReportSetting();
                 var configSource = new ReportDataSource { Value = config , Name="Config" };
                 config.FirstOrDefault().SignName = ResourcesBase.User.FullName??ResourcesBase.User.UserName;
                 var datasources = new List<ReportDataSource> { dataSource, configSource };

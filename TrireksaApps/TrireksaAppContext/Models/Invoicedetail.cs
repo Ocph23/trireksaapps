@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrireksaAppContext.Models
 {
@@ -8,7 +9,10 @@ namespace TrireksaAppContext.Models
         public int Id { get; set; }
         public int InvoiceId { get; set; }
         public int PenjualanId { get; set; }
+
         public virtual Invoices Invoices { get; set; }
+
+        [NotMapped]
         public virtual Penjualan Penjualan { get; set; }
     }
 }

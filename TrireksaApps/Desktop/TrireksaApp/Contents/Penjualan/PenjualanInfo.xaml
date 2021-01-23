@@ -483,15 +483,15 @@
                                                             <Border>
                                                                 <WrapPanel>
                                                                     <Label Content="Origin Port"/>
-                                                                    <TextBlock Text="{Binding  OriginPort.Name}"/>
-                                                                    <TextBlock Text="{Binding  OriginPort.Code}"/>
+                                                                    <TextBlock Text="{Binding  OriginNavigation.Name}"/>
+                                                                    <TextBlock Text="{Binding  OriginNavigation.Code}"/>
                                                                 </WrapPanel>
                                                             </Border>
                                                             <Border>
                                                                 <WrapPanel>
                                                                     <Label Content="Destination Port"/>
-                                                                    <TextBlock Text="{Binding  DestinationPort.Name}"/>
-                                                                    <TextBlock Text="{Binding  DestinationPort.Code}"/>
+                                                                    <TextBlock Text="{Binding  DestinationNavigation.Name}"/>
+                                                                    <TextBlock Text="{Binding  DestinationNavigation.Code}"/>
                                                                 </WrapPanel>
                                                             </Border>
                                                             <Border>
@@ -568,7 +568,6 @@
                                                                     <Expander.Header>
                                                                         <WrapPanel>
                                                                             <Label Content="Packing List"/>
-                                                                            <TextBlock VerticalAlignment="Center" Text="{Binding Agent.Name}"/>
                                                                         </WrapPanel>
                                                                     </Expander.Header>
                                                                     <DockPanel Margin="20,0,0,5">
@@ -590,7 +589,6 @@
                                                                      MaxHeight="250" CanUserAddRows="False" CanUserDeleteRows="False">
                                                                             <DataGrid.Columns>
                                                                                 <DataGridTextColumn Header="Pack Number" Binding="{Binding PackNumber}"/>
-                                                                                <DataGridTextColumn Header="STT" Binding="{Binding STT,StringFormat='D5'}"/>
                                                                                 <DataGridTextColumn Header="Colly Number" Binding="{Binding CollyNumber}"/>
                                                                                 <DataGridTextColumn Header="Weight" Binding="{Binding Weight}"/>
                                                                             </DataGrid.Columns>

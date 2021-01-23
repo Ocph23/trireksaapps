@@ -7,6 +7,7 @@ using ModelsShared.Models;
 using System.Windows.Data;
 using System.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
+using Microsoft.Reporting.WinForms;
 
 namespace TrireksaApp.Contents.Invoice
 {
@@ -27,34 +28,63 @@ namespace TrireksaApp.Contents.Invoice
 
         internal async Task SetInvoice(int data)
         {
-            var invoice = MainVM.InvoiceCollections.SelectedItem;
-            if (invoice != null)
+            if (data > 0)
             {
 
-                this.CreateDate = invoice.CreateDate;
-                this.Customer = invoice.Customer;
-                this.CustomerId = invoice.CustomerId;
-                this.CustomerSelectedItem = invoice.Customer;
-                this.DeadLine = invoice.DeadLine;
-                this.DeliveryDate = invoice.DeliveryDate;
-                this.Id = invoice.Id;
-                this.InvoicePayType = invoice.InvoicePayType;
-                this.InvoiceStatus = invoice.InvoiceStatus;
-                this.IsDelivery = invoice.IsDelivery;
-                this.Number = invoice.Number;
-                this.PaidDate = invoice.PaidDate;
-                this.ReciveDate = invoice.ReciveDate;
-                this.ReciverBy = invoice.ReciverBy;
-                this.Tax = invoice.Tax;
-                await Task.Delay(3000);
-                foreach (var item in invoice.Invoicedetail)
-                {
-                    item.IsSelected = true;
-                    this.Invoicedetail.Add(item);
-                }
 
+                var invoice = MainVM.InvoiceCollections.SelectedItem;
+                if (invoice != null)
+                {
+
+                    this.CreateDate = invoice.CreateDate;
+                    this.Customer = invoice.Customer;
+                    this.CustomerId = invoice.CustomerId;
+                    this.CustomerSelectedItem = invoice.Customer;
+                    this.DeadLine = invoice.DeadLine;
+                    this.DeliveryDate = invoice.DeliveryDate;
+                    this.Id = invoice.Id;
+                    this.InvoicePayType = invoice.InvoicePayType;
+                    this.InvoiceStatus = invoice.InvoiceStatus;
+                    this.IsDelivery = invoice.IsDelivery;
+                    this.Number = invoice.Number;
+                    this.PaidDate = invoice.PaidDate;
+                    this.ReciveDate = invoice.ReciveDate;
+                    this.ReciverBy = invoice.ReciverBy;
+                    this.Tax = invoice.Tax;
+                    await Task.Delay(3000);
+                    foreach (var item in invoice.Invoicedetail)
+                    {
+                        item.IsSelected = true;
+                        this.Invoicedetail.Add(item);
+                    }
+
+                    this.SourceView.Refresh();
+                }
+            }
+            else
+            {
+                this.CreateDate = DateTime.Now;
+                this.Customer = null;
+                this.CustomerId = 0;
+                this.CustomerSelectedItem = null;
+                this.DeadLine = CreateDate.AddMonths(1);
+                this.DeliveryDate = null;
+                this.Id = 0;
+                this.InvoicePayType = InvoicePayType.None;
+                this.InvoiceStatus = InvoiceStatus.None;
+                this.IsDelivery = false;
+                this.Number = 0;
+                this.PaidDate = null;
+                this.ReciveDate = null;
+                this.ReciverBy = string.Empty;
+                this.Tax = 0;
+                await Task.Delay(3000);
+                this.Invoicedetail.Clear();
                 this.SourceView.Refresh();
             }
+
+
+
             
         }
 
@@ -91,16 +121,25 @@ namespace TrireksaApp.Contents.Invoice
             {
                 var print = new HelperPrint();
                 var data = this.GetInvoiceReportModel();
-                print.PrintDocument<Reports.Models.InvoiceReportModel>(data.OrderBy(x => x.STT).ToList(), "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
+                var config = HelperPrint.GetReportSetting();
+                var configSource = new ReportDataSource { Value = config, Name = "Config" };
+                config.FirstOrDefault().SignName = ResourcesBase.User.FullName ?? ResourcesBase.User.UserName;
+                var dataSource = new ReportDataSource { Value = data.OrderBy(x => x.STT), Name = "DataSet1" };
+                var datasources = new List<ReportDataSource> { dataSource, configSource };
+                print.PrintDocument(datasources, "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
             }
         }
 
         private void PreviewManifestAction()
         {
             var data = this.GetInvoiceReportModel();
-            var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value = data.OrderBy(O => O.STT) },
-                "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
+            var config = HelperPrint.GetReportSetting();
+            var configSource = new ReportDataSource { Value = config, Name = "Config" };
+            config.FirstOrDefault().SignName = ResourcesBase.User.FullName ?? ResourcesBase.User.UserName;
+            var dataSource = new ReportDataSource { Value = data.OrderBy(x => x.STT), Name = "DataSet1" };
+            var datasources = new List<ReportDataSource> { dataSource, configSource };
 
+            var content = new Reports.Contents.ReportContent(datasources, "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
             var dlg = new FirstFloor.ModernUI.Windows.Controls.ModernWindow
             {
                 Content = content,

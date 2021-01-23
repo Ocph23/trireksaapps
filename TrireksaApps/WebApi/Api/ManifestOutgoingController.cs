@@ -98,11 +98,11 @@ namespace WebApi.Api
         }
 
         [HttpGet("ManifestsByPenjualanId/{id}")]
-        public IActionResult ManifestsByPenjualanId(int Id)
+        public async Task<IActionResult> ManifestsByPenjualanId(int Id)
         {
             try
             {
-                var result = context.ManifestsByPenjualanId(Id);
+                var result = await context.ManifestsByPenjualanId(Id);
                 return Ok(result);
             }
             catch (Exception ex)
