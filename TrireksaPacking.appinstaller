@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppInstaller
+	Uri="https://ocph23.github.io/trireksaapps/TrireksaPacking.appinstaller"
+	Version="3.0.4.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	<MainBundle
+		Name="e293e55b-6216-4c04-82fb-491bc87140ca"
+		Version="3.0.4.0"
+		Publisher="CN=Yoseph Kungkung"
+		Uri="https://ocph23.github.io/trireksaapps/TrireksaPacking_3.0.4.0_Debug_Test/TrireksaPacking_3.0.4.0_x86_x64_Debug.appxbundle" />
+	<UpdateSettings>
+		<OnLaunch
+			HoursBetweenUpdateChecks="0" />
+	</UpdateSettings>
+</AppInstaller>

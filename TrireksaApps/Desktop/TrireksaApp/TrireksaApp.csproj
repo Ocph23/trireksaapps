@@ -55,10 +55,11 @@
     <ApplicationIcon>trireksa.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>30586FB0361DE1360AF3D274BC4F7E14FEC701DD</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>091D921F541A467C5D786D352DF50EDABC180032</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>TrireksaApp_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
