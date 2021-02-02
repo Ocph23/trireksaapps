@@ -24,28 +24,31 @@ namespace TrireksaApp.Models
         {
             Source.Clear();
             this._manifest = manifest;
-            var stt = _manifest.PackingList.GroupBy(O => O.PenjualanId).ToList();
-            foreach (var item in stt)
+            if (this._manifest.PackingList != null)
             {
-                var result = await MainVM.PenjualanCollection.GetItemById(item.Key);
-                if(result!=null)
+                var stt = _manifest.PackingList.GroupBy(O => O.PenjualanId).ToList();
+                foreach (var item in stt)
                 {
-                    var detail = from b in item.ToList()
-                                 join c in result.Colly on b.CollyNumber equals c.CollyNumber
-                                 select c;
+                    var result = await MainVM.PenjualanCollection.GetItemById(item.Key);
+                    if (result != null)
+                    {
+                        var detail = from b in item.ToList()
+                                     join c in result.Colly on b.CollyNumber equals c.CollyNumber
+                                     select c;
 
-                    var newItem = new Models.ManifestView();
-                    newItem.STT = string.Format("{0:D5}", result.STT);
-                    newItem.Code = _manifest.Code;
-                    newItem.PortType = manifest.PortType.ToString();
-                    newItem.PayType = result.PayType;
-                    newItem.Pcs = item.Count();
-                    newItem.WeightView = detail.Sum(O => O.Weight);
-                    newItem.ShiperName = MainVM.CustomerCollection.Source.Where(O => O.Id == result.ShiperID).FirstOrDefault().Name;
-                    newItem.ReciverName = MainVM.CustomerCollection.Source.Where(O => O.Id == result.ReciverID).FirstOrDefault().Name;
-                    newItem.AgentName = _manifest.Agent.Name;
-                    newItem.CreatedDate = _manifest.CreatedDate;
-                    Source.Add(newItem);
+                        var newItem = new Models.ManifestView();
+                        newItem.STT = string.Format("{0:D5}", result.STT);
+                        newItem.Code = _manifest.Code;
+                        newItem.PortType = manifest.PortType.ToString();
+                        newItem.PayType = result.PayType;
+                        newItem.Pcs = item.Count();
+                        newItem.WeightView = detail.Sum(O => O.Weight);
+                        newItem.ShiperName = MainVM.CustomerCollection.Source.Where(O => O.Id == result.ShiperID).FirstOrDefault().Name;
+                        newItem.ReciverName = MainVM.CustomerCollection.Source.Where(O => O.Id == result.ReciverID).FirstOrDefault().Name;
+                        newItem.AgentName = _manifest.Agent.Name;
+                        newItem.CreatedDate = _manifest.CreatedDate;
+                        Source.Add(newItem);
+                    }
                 }
             }
             SourceView.Refresh();

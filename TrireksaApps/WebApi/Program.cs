@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TrireksaAppContext;
 using WebApi.Middlewares;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -21,6 +22,9 @@ namespace WebApi
                 var services = scope.ServiceProvider;
                 try
                 {
+                    var telegram = services.GetRequiredService<TelegramService>();
+                    telegram.Auth("+628114810279");
+
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var userManager = services.GetRequiredService<IUserService>();
                     await DbInitializer.Initialize(context, userManager);
@@ -39,15 +43,19 @@ namespace WebApi
             Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-
                 webBuilder.UseStartup<Startup>()
-                .UseKestrel(options =>
-                    {
-                        options.Limits.MaxRequestBodySize = 52428800; //50MB
-                    })
-                 ;
-                webBuilder.UseUrls("http://localhost:5004")
-               ;
+
+                //IIS
+                .UseIISIntegration();
+
+
+                //Kestrell                
+                //.UseKestrel(options =>
+                //    {
+                //        options.Limits.MaxRequestBodySize = 52428800; //50MB
+                //    });
+                //;
+                //webBuilder.UseUrls("http://localhost:5004");
             });
     }
 

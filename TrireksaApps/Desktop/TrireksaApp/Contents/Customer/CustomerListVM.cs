@@ -135,6 +135,8 @@ namespace TrireksaApp.Contents.Customer
             {
                 string scr = this.Search.ToUpper();
                 var obj = (ModelsShared.Models.Customer)x;
+                if (string.IsNullOrEmpty(obj.ContactName))
+                    obj.ContactName = "";
                 return obj.Name.ToUpper().Contains(scr) || obj.CustomerType.ToString().ToUpper().Contains(scr)
                     || obj.ContactName.ToUpper().Contains(scr);
             }

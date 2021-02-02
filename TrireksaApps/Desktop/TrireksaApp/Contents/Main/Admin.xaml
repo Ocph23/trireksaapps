@@ -16,7 +16,6 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <mui:ModernProgressRing Name="busy" Grid.RowSpan="2"  Width="80" Height="20"  />
 
         <StackPanel Margin="10" HorizontalAlignment="Right" Grid.Row="0">
             <mi:MaterialDateDisplay />
@@ -52,8 +51,7 @@
                 <Pages:MainBoxItem Grid.Row="2" Grid.Column="3" Height="auto" x:Name="penjualanLalunya" Background="#FF03422B" />
             </Grid>
         </ScrollViewer>
-
-
+        <mui:ModernProgressRing Name="busy" Grid.RowSpan="2"  Width="80" Height="20"  />
 
     </Grid>
 </UserControl>

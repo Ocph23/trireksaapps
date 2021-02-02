@@ -11,14 +11,13 @@ namespace TrireksaAppContext
 {
     public class OutgoingContext
     {
-        private const string Sql = "CALL GetDocumentByName @p0";
         private ApplicationDbContext db;
 
         public OutgoingContext(ApplicationDbContext dbContext)
         {
             db = dbContext;
         }
-        public IEnumerable<Manifestoutgoing> Get()
+        public Task<IEnumerable<Manifestoutgoing>> Get()
         {
             var results = db.Manifestoutgoing
                 .Include(x => x.Agent)
@@ -26,11 +25,11 @@ namespace TrireksaAppContext
                 .Include(x => x.OriginNavigation)
                 .Include(x => x.Packinglist)
                 .Include(x => x.Information);
-            return results;
+            return Task.FromResult(results.AsEnumerable());
         }
 
 
-        public IEnumerable<Manifestoutgoing> GetByMount(int month)
+        public Task<IEnumerable<Manifestoutgoing>> GetByMount(int month)
         {
              var results = db.Manifestoutgoing.Where(O => O.CreatedDate.Value.Month == month)
                 .Include(x => x.Agent)
@@ -38,7 +37,18 @@ namespace TrireksaAppContext
                 .Include(x => x.OriginNavigation)
                 .Include(x => x.Packinglist)
                 .Include(x => x.Information);
-            return results;
+            return Task.FromResult(results.AsEnumerable());
+        }
+
+        public Task<IEnumerable<Manifestoutgoing>> GetByDate(DateTime startDate, DateTime endDate)
+        {
+            var results = db.Manifestoutgoing.Where(x => x.CreatedDate.Value >= startDate && x.CreatedDate.Value <= endDate)
+               .Include(x => x.Agent)
+               .Include(x => x.DestinationNavigation)
+               .Include(x => x.OriginNavigation)
+               .Include(x => x.Packinglist)
+               .Include(x => x.Information);
+            return Task.FromResult(results.AsEnumerable());
         }
 
         public async Task<bool> UpdateInformation(Manifestinformation obj)
@@ -70,8 +80,6 @@ namespace TrireksaAppContext
                        .Include(x => x.Information);
             return Task.FromResult(results.FirstOrDefault());
         }
-
-
 
         public async Task<Manifestoutgoing> InsertAndGetItem(Manifestoutgoing model)
         {

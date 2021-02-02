@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,5 +52,13 @@ namespace TrireksaApp
             return ModernDialog.ShowMessage(message, "Ask", MessageBoxButton.YesNo);
         }
 
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var dialog = ModernDialog.ShowMessage("Yakin Keluar Dari Aplikasi ?", "Keluar", MessageBoxButton.YesNo);
+            if (dialog != MessageBoxResult.Yes)
+                e.Cancel = true;
+        }
+      
     }
 }

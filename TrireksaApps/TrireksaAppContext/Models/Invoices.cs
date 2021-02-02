@@ -7,7 +7,7 @@ namespace TrireksaAppContext.Models
     {
         public Invoices()
         {
-            Invoicedetail = new HashSet<Invoicedetail>();
+           // Invoicedetail = new HashSet<Invoicedetail>();
         }
 
         public int Id { get; set; }

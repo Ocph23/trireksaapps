@@ -1,7 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace ModelsShared.Models
 {
     public class Packinglist : BaseNotify
     {
+
+
+     
+
         public int Id
         {
             get { return _id; }
@@ -11,7 +17,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int ManifestID
+        public int ManifestId
         {
             get { return _manifestid; }
             set
@@ -20,15 +26,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int STT
-        {
-            get { return _stt; }
-            set
-            {
-                SetProperty(ref _stt, value);
-            }
-        }
-
+      
         public int PenjualanId
         {
             get { return _penjualanId; }
@@ -65,20 +63,23 @@ namespace ModelsShared.Models
             }
         }
 
+        public virtual Colly Colly { get; set; }
+        public virtual Manifestoutgoing Manifest { get; set; }
 
-        private double _Wight;
 
-        public double Weight
+        [JsonIgnore]
+        public int STT
         {
-            get
-            {
-                return _Wight;
-            }
+            get { return _stt; }
             set
             {
-                SetProperty(ref _Wight, value);
+                SetProperty(ref _stt, value);
             }
         }
+
+
+        [JsonIgnore]
+        public double Weight { get; set; }
 
         private int _id;
         private int _manifestid;

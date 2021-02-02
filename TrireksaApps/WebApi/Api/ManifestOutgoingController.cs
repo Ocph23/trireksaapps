@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TrireksaAppContext;
 using TrireksaAppContext.Models;
+using System.Linq;
 
 namespace WebApi.Api
 {
@@ -29,11 +30,25 @@ namespace WebApi.Api
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                return Ok(context.Get());
+                return Ok(await context.Get());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorMessage(ex.Message));
+            }
+        }
+
+        [HttpGet("{startDate}/{endDate}")]
+        public async Task<ActionResult> GetByDate(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var data = await context.GetByDate(startDate, endDate);
+                return Ok(data.ToList());
             }
             catch (Exception ex)
             {
@@ -42,7 +57,7 @@ namespace WebApi.Api
         }
 
         [HttpGet("GetByMount")]
-        public IActionResult GetByMount(int month)
+        public async Task<IActionResult> GetByMount(int month)
         {
             try
             {
@@ -56,11 +71,11 @@ namespace WebApi.Api
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int Id)
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                return Ok(await context.Get(Id));
+                return Ok(await context.Get(id));
             }
             catch (Exception ex)
             {
@@ -174,3 +189,7 @@ namespace WebApi.Api
 
     }
 }
+
+
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkYmZlMzA4MDI3YTAwMDYzOWU4MTczZDhhM2NiNWM4IiwibmFtZSI6IkFkbWluaXN0cmF0b3IiLCJmdWxsbmFtZSI6IkFkbWluaXN0cmF0b3IiLCJyb2xlcyI6IlN5c3RlbS5TdHJpbmdbXSIsIm5iZiI6MTYxMjIwMTc2MSwiZXhwIjoxNjEyODA2NTYxLCJpYXQiOjE2MTIyMDE3NjF9.6SAY7iNKS94L3StcuDxOgbfZzRjNNt95xCd0A6KbDT4

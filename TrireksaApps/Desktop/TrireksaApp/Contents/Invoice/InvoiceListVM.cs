@@ -237,7 +237,8 @@ namespace TrireksaApp.Contents.Invoice
         private async Task<List<Reports.Models.InvoiceReportModel>> GetInvoiceReportModel()
         {
 
-            var selected = MainVM.InvoiceCollections.SelectedItem;
+            var selected = await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
+           // var selected = MainVM.InvoiceCollections.SelectedItem;
             await Task.Delay(100); //await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
             if(selected!=null)
             {

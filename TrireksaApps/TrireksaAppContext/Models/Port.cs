@@ -7,8 +7,8 @@ namespace TrireksaAppContext.Models
     {
         public Port()
         {
-            ManifestoutgoingDestinationNavigation = new HashSet<Manifestoutgoing>();
-            ManifestoutgoingOriginNavigation = new HashSet<Manifestoutgoing>();
+           // ManifestoutgoingDestinationNavigation = new HashSet<Manifestoutgoing>();
+            //ManifestoutgoingOriginNavigation = new HashSet<Manifestoutgoing>();
         }
 
         public int Id { get; set; }

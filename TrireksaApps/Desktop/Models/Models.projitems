@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\CityAgentCanAccess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\colly.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\customer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\DashboardModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\deliverystatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\ICloneable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\IController.cs" />

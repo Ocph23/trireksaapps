@@ -20,6 +20,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
         <StackPanel  Grid.Row="0">
             <TextBlock Text="Create New Invoice" Style="{StaticResource Heading2}"  />
         </StackPanel>
@@ -96,6 +97,6 @@
             <Button HorizontalAlignment="Right" Command="{Binding PreviewManifest}" Content="Preview"/>
             <Button Content="Cancel"  Click="Button_Click"/>
         </StackPanel>
-        <mui:ModernProgressRing IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
+        <mui:ModernProgressRing Grid.RowSpan="3" IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
     </Grid>
 </UserControl>

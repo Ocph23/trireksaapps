@@ -140,7 +140,8 @@
                 <DataGridTextColumn Header="Code" Binding="{Binding ManifestCode,Mode=OneWay}"/>
                 <DataGridTextColumn Header="Port Type" Binding="{Binding PortType}"/>
                 <DataGridTextColumn Header="Agent" Binding="{Binding Agent.Name}"/>
-                <DataGridTextColumn Header="Port" Binding="{Binding DestinationPort.Name}"/>
+                <DataGridTextColumn Header="Origin Port" Binding="{Binding OriginNavigation.Name}"/>
+                <DataGridTextColumn Header="Destination Port" Binding="{Binding DestinationNavigation.Name}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

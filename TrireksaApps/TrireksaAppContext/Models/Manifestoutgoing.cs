@@ -8,7 +8,7 @@ namespace TrireksaAppContext.Models
         public Manifestoutgoing()
         {
            // Manifestinformation = new HashSet<Manifestinformation>();
-            Packinglist = new HashSet<Packinglist>();
+          //  Packinglist = new HashSet<Packinglist>();
         }
 
         public int Id { get; set; }

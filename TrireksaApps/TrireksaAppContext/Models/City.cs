@@ -7,11 +7,11 @@ namespace TrireksaAppContext.Models
     {
         public City()
         {
-            PenjualanFromCityNavigation = new HashSet<Penjualan>();
-            PenjualanToCityNavigation = new HashSet<Penjualan>();
-            Port = new HashSet<Port>();
-            PriceFromCityNavigation = new HashSet<Price>();
-            PriceToCityNavigation = new HashSet<Price>();
+           // PenjualanFromCityNavigation = new HashSet<Penjualan>();
+           // PenjualanToCityNavigation = new HashSet<Penjualan>();
+           // Port = new HashSet<Port>();
+           // PriceFromCityNavigation = new HashSet<Price>();
+           // PriceToCityNavigation = new HashSet<Price>();
         }
 
         public int Id { get; set; }

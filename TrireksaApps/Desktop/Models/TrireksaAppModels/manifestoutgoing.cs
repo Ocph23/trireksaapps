@@ -127,8 +127,8 @@ namespace ModelsShared.Models
             }
         }
 
-        public ModelsShared.Models.ManifestInformation Information { get;  set; }
-        public List<ModelsShared.Models.Packinglist> PackingList { get; set; }
+        public ManifestInformation Information { get;  set; }
+       
         public Agent Agent {
             get
             {
@@ -157,6 +157,8 @@ namespace ModelsShared.Models
             }
         }
 
+        public List<Packinglist> PackingList { get; set; }
+
         private int _id;
         private int _code;
         private PortType _porttype;
@@ -172,6 +174,9 @@ namespace ModelsShared.Models
         private Agent _agent;
         private Port _originPort;
         private Port _destionationPort;
+
+
+
     }
 
 }

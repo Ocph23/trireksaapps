@@ -30,11 +30,12 @@ namespace TrireksaAppContext
         public Task<double> GetPenjualanBulan(int month, int year)
         {
 
+            double total = 0;
             var result = db.Penjualan.Where(O => O.ChangeDate.Value.Month == month && O.ChangeDate.Value.Year == year)
-                .Include(x=>x.Colly).AsEnumerable()
-                ;
+                .Include(x=>x.Colly).AsEnumerable();
 
-            var total = result.Sum(x => x.Total);
+            if(result!=null)
+                total = result.Sum(x => x.Total);
 
             return Task.FromResult(total);
         }
@@ -223,5 +224,35 @@ namespace TrireksaAppContext
 
         //    return Task.FromResult(list);
         //}
+
+
+
+        public async Task<DashboardModel> GetDashboard()
+        {
+            try
+            {
+                var model = new DashboardModel();
+                var date = DateTime.Now;
+                model.PenjualanBulanIni = await GetPenjualanBulan(date.Month, date.Year);
+                var blnLalu = date.AddMonths(-1);
+                model.PenjualanBulanLalu = await GetPenjualanBulan(blnLalu.Month, blnLalu.Year);
+                var duaBulanLalu = date.AddMonths(-2);
+                model.PenjualanDuaBulanLalu = await GetPenjualanBulan(duaBulanLalu.Month, duaBulanLalu.Year);
+                model.InvoiceNotPaid = await GetInvoiceNotYetPaid();
+                model.PenjualanNotHaveStatus = await GetPenjualanNotHaveStatus();
+                model.PenjualanNotYetSend = await GetPenjualanNotYetSend();
+                model.PenjualanNotPaid = await GetPenjualanNotPaid();
+                model.InvoiceNotYetDelivery = await GetInvoiceNotYetDelivery();
+                model.InvoiceJatuhTempo = await GetInvoiceJatuhTempo();
+                model.InvoiceNotYetRecive = await GetInvoiceNotYetRecive();
+                return model;
+            }
+            catch 
+            {
+                return new DashboardModel();
+            }
+        }
     }
+
+    
 }

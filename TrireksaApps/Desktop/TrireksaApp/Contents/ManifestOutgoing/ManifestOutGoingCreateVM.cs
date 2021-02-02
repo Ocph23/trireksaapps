@@ -95,52 +95,71 @@ namespace TrireksaApp.Contents.ManifestOutgoing
 
         private async void SaveAction()
         {
-            var item = new ModelsShared.Models.Manifestoutgoing
-            {
-                AgentId = this.AgentId,
-                Code = this.Code,
-                Destination = this.Destination,
-                Id = this.Id,
-                Information = this.Information,
-                Origin = this.Origin,
-                PackingList = this.PackingList,
-                PortType = this.PortType,
-                UserId = this.UserId
-            };
-          
-            var result = await vm.Add(item);
-            if (result != null)
-            {
-                this.Id = result.Id;
-                this.Code = result.Code;
-                this.CreatedDate = result.CreatedDate;
-                this.Destination = result.Destination;
-                this.Information = result.Information;
-                this.OnDestinationPort = result.OnDestinationPort;
-                this.OnOriginPort = result.OnDestinationPort;
-                this.Origin = result.Origin;
-                this.PackingList = result.PackingList;
-                this.PortType = result.PortType;
-                this.UpdateDate = result.UpdateDate;
-                this.UserId = result.UserId;
-                result.OriginNavigation = result.OriginNavigation;
-                result.DestinationNavigation = result.DestinationNavigation;
-                result.Agent = this.Agent;
-                result.PackingList = item.PackingList;
+            if (ProgressIsActive)
+                return ;
 
-                ModernDialog.ShowMessage("Data Is Saved... !", "Information", MessageBoxButton.OK);
-               
-                vm.SourceView.Refresh();
-            }
-            else
+            try
             {
-                ModernDialog.ShowMessage("Data Not Saved... !", "Error", MessageBoxButton.OK);
-            }
+                ProgressIsActive = true;
 
+                var item = new ModelsShared.Models.Manifestoutgoing
+                {
+                    AgentId = this.AgentId,
+                    Code = this.Code,
+                    Destination = this.Destination,
+                    Id = this.Id,
+                    Information = this.Information,
+                    Origin = this.Origin,
+                    PackingList = this.PackingList,
+                    PortType = this.PortType,
+                    UserId = this.UserId
+                };
+
+                var result = await vm.Add(item);
+                if (result != null)
+                {
+                    this.Id = result.Id;
+                    this.Code = result.Code;
+                    this.CreatedDate = result.CreatedDate;
+                    this.Destination = result.Destination;
+                    this.Information = result.Information;
+                    this.OnDestinationPort = result.OnDestinationPort;
+                    this.OnOriginPort = result.OnDestinationPort;
+                    this.Origin = result.Origin;
+                    this.PackingList = result.PackingList;
+                    this.PortType = result.PortType;
+                    this.UpdateDate = result.UpdateDate;
+                    this.UserId = result.UserId;
+                    result.OriginNavigation = result.OriginNavigation;
+                    result.DestinationNavigation = result.DestinationNavigation;
+                    result.Agent = this.Agent;
+                    result.PackingList = item.PackingList;
+
+                    ModernDialog.ShowMessage("Data Is Saved... !", "Information", MessageBoxButton.OK);
+
+                    vm.SourceView.Refresh();
+                }
+                else
+                {
+                    ModernDialog.ShowMessage("Data Not Saved... !", "Error", MessageBoxButton.OK);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ModernDialog.ShowMessage(ex.Message, "Error", MessageBoxButton.OK);
+            }
+            finally
+            {
+                ProgressIsActive = false;
+            }
         }
 
         private bool SaveValidation()
         {
+            if (ProgressIsActive)
+                return false;
             return true;
         }
 
@@ -264,6 +283,9 @@ namespace TrireksaApp.Contents.ManifestOutgoing
 
         }
 
+
+
+
         public PortCollection PortCollection { get; private set; }
         public List<ModelsShared.Models.PortType> PortTypes { get; private set; }
         public AgentCollection AgentCollection { get; private set; }
@@ -289,6 +311,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                 throw new NotImplementedException();
             }
         }
+
 
 
         public string this[string columnName]
@@ -341,6 +364,17 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                         }
                     }
                 }
+            }
+        }
+
+        private bool _isActive;
+
+        public bool ProgressIsActive
+        {
+            get { return _isActive; }
+            set
+            {
+                SetProperty(ref _isActive, value);
             }
         }
     }

@@ -16,7 +16,7 @@ namespace TrireksaApp.CollectionsBase
     {
         public ObservableCollection<Agent> Source { get; set; }
         public CollectionView SourceView { get; set; }
-        Client client = new Client("agents");
+      readonly  Client client = new Client("agents");
         public Agent SelectedItem { get; set; }
         public CitiesAgentCanAccessCollection AgenCanAccess = new CitiesAgentCanAccessCollection();
         private SignalRClient signalRClient;

@@ -7,7 +7,7 @@ namespace TrireksaAppContext.Models
     {
         public Colly()
         {
-            Packinglist = new HashSet<Packinglist>();
+           // Packinglist = new HashSet<Packinglist>();
         }
 
         public int Id { get; set; }

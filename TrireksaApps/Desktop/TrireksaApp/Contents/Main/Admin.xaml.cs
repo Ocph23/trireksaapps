@@ -28,6 +28,7 @@ namespace TrireksaApp.Contents.Main
     public partial class Admin : UserControl
     {
         public AdminBoard Board { get; }
+        public DashboardModel Dashboard { get; private set; }
 
         public Admin()
         {
@@ -44,6 +45,7 @@ namespace TrireksaApp.Contents.Main
 
         private async void Penjualan_Loaded()
         {
+            await Task.Delay(100);
             busy.IsActive = true;
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
             penjualanIni.Title.Text = "Bulan Ini";
@@ -58,44 +60,65 @@ namespace TrireksaApp.Contents.Main
             invoiceJatuhTempo.Title.Text = "Invoice Jatuh Tempo";
             spbbelumdikirim.Title.Text = "SPB Belum Dikirim";
 
-            OnCompleteInvoice(Board.GetInvoiceNotYetPaid(), invoiceNotPaid);
-            OnCompleteInvoice(Board.GetInvoiceJatuhTempo(), invoiceJatuhTempo);
-            OnCompleteInvoice(Board.GetInvoiceNotYetRecive(), invoiceNotRecive);
-            OnCompleteInvoice(Board.GetInvoiceNotYetDelivery(), invoiceNotDelivery);
+            OnGetDashboard(Board.Get());
 
-            DateTime date = DateTime.Now;
+            //OnCompleteInvoice(Board.GetInvoiceNotYetPaid(), invoiceNotPaid);
+            //OnCompleteInvoice(Board.GetInvoiceJatuhTempo(), invoiceJatuhTempo);
+            //OnCompleteInvoice(Board.GetInvoiceNotYetRecive(), invoiceNotRecive);
+            //OnCompleteInvoice(Board.GetInvoiceNotYetDelivery(), invoiceNotDelivery);
 
-            PenjualanBulan(Board.GetPenjualanBulan(date),penjualanIni);
-            PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-1)), penjualanLalu);
-            PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-2)), penjualanLalunya);
-            OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotPaid(), spbbelumditagih);
-            OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotStatus(), spbNotStatus);
-            OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotYetSend(), spbbelumdikirim);
-            await Task.Delay(5000);
+           // DateTime date = DateTime.Now;
+
+          ////  PenjualanBulan(Board.GetPenjualanBulan(date),penjualanIni);
+          //  PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-1)), penjualanLalu);
+          //  PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-2)), penjualanLalunya);
+            //OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotPaid(), spbbelumditagih);
+            //OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotStatus(), spbNotStatus);
+            //OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotYetSend(), spbbelumdikirim);
             busy.IsActive = false;
         }
 
-        private async void OnCompleteInvoice(Task<List<ModelsShared.Models.Invoice>> task, MainBoxItem obj)
+        private async void OnGetDashboard(Task<DashboardModel> task)
         {
             var res = await task;
-            if(res!=null)
-                 obj.ContentItem.Text = string.Format("{0} Inv", res.Count);
+            if (res != null && res.InvoiceJatuhTempo!=null)
+            {
+                Dashboard = res;
+                penjualanIni.ContentItem.Text = string.Format("Rp. {0:N}", res.PenjualanBulanIni);
+                penjualanLalu.ContentItem.Text = string.Format("Rp. {0:N}", res.PenjualanBulanLalu);
+                penjualanLalunya.ContentItem.Text = string.Format("Rp. {0:N}", res.PenjualanDuaBulanLalu);
+                invoiceJatuhTempo.ContentItem.Text = string.Format("{0} Inv", res.InvoiceJatuhTempo.Count());
+                invoiceNotPaid.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotPaid.Count());
+                invoiceNotRecive.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotYetRecive.Count());
+                invoiceNotDelivery.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotYetDelivery.Count());
+                
+                spbbelumdikirim.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotYetSend.Count());
+                spbbelumditagih.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotPaid.Count());
+                spbNotStatus.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotHaveStatus.Count());
+            }
         }
 
-        private async void OnCompletePenjualanNotHaveDeliveryStatus(Task<List<PenjualanReportModel>> task, MainBoxItem obj)
-        {
-            var res = await task;
-            if (res != null)
-                obj.ContentItem.Text = string.Format("{0} SPB", res.Count);
-        }
+        //private async void OnCompleteInvoice(Task<List<ModelsShared.Models.Invoice>> task, MainBoxItem obj)
+        //{
+        //    var res = await task;
+        //    if(res!=null)
+        //         obj.ContentItem.Text = string.Format("{0} Inv", res.Count);
+        //}
+
+        //private async void OnCompletePenjualanNotHaveDeliveryStatus(Task<List<PenjualanReportModel>> task, MainBoxItem obj)
+        //{
+        //    var res = await task;
+        //    if (res != null)
+        //        obj.ContentItem.Text = string.Format("{0} SPB", res.Count);
+        //}
         
 
-        private async void PenjualanBulan(Task<double> task, MainBoxItem obj)
-        {
-            double res = await task;
-            if (res >= 0)
-                obj.ContentItem.Text = string.Format("Rp. {0:N}", res);
-        }
+        //private async void PenjualanBulan(Task<double> task, MainBoxItem obj)
+        //{
+        //    double res = await task;
+        //    if (res >= 0)
+        //        obj.ContentItem.Text = string.Format("Rp. {0:N}", res);
+        //}
 
         private async void PenjualanPreview(object sender, MouseButtonEventArgs e)
         {
@@ -105,15 +128,15 @@ namespace TrireksaApp.Contents.Main
             {
              
                 case "spbbelumdikirim":
-                     list = await Board.GetPenjualanNotYetSend();
+                    list = Dashboard.PenjualanNotYetSend.ToList();// await Board.GetPenjualanNotYetSend();
                     CallReportPenjualan("Penjualan Belum Dikirim", list);
                     break;
                 case "spbbelumditagih":
-                   list= await Board.GetPenjualanNotPaid();
+                    list = Dashboard.PenjualanNotPaid.ToList();// await Board.GetPenjualanNotPaid();
                     CallReportPenjualan("Penjualan Belum Ditagih", list);
                     break;
                 case "spbNotStatus":
-                    list = await Board.GetPenjualanNotStatus();
+                    list = Dashboard.PenjualanNotHaveStatus.ToList();// await Board.GetPenjualanNotStatus();
                     CallReportPenjualan("Penjualan Belum Ada Status", list);
                     break;
 
@@ -141,25 +164,26 @@ namespace TrireksaApp.Contents.Main
 
         private async void InvoicePreview(object sender, MouseButtonEventArgs e)
         {
+            await Task.Delay(100);
             var mainbox = (MainBoxItem)sender;
             List<ModelsShared.Models.Invoice> list;
             switch (mainbox.Name)
             {
 
                 case "invoiceNotDelivery":
-                    list = await Board.GetInvoiceNotYetDelivery();
+                    list = Dashboard.InvoiceNotYetDelivery.ToList();// await Board.GetInvoiceNotYetDelivery();
                     CallReportInvoice("Invoice Belum Dikirim", list);
                     break;
                 case "invoiceNotRecive":
-                    list = await Board.GetInvoiceNotYetRecive();
+                    list = Dashboard.InvoiceNotYetRecive.ToList();// await Board.GetInvoiceNotYetRecive();
                     CallReportInvoice("Invoice Belum Diterima", list);
                     break;
                 case "invoiceNotPaid":
-                    list = await Board.GetInvoiceNotYetPaid();
+                    list = Dashboard.InvoiceNotPaid.ToList();// await Board.GetInvoiceNotYetPaid();
                     CallReportInvoice("Invoice Belum Dibayar", list);
                     break;
                 case "invoiceJatuhTempo":
-                    list = await Board.GetInvoiceJatuhTempo();
+                    list = Dashboard.InvoiceJatuhTempo.ToList();// await Board.GetInvoiceJatuhTempo();
                     CallReportInvoice("Invoice Jatuh Tempo", list);
                     break;
 

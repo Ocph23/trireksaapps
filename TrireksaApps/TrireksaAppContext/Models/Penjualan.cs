@@ -11,9 +11,9 @@ namespace TrireksaAppContext.Models
     {
         public Penjualan()
         {
-            Colly = new HashSet<Colly>();
-            Invoicedetail = new HashSet<Invoicedetail>();
-            Photo = new HashSet<Photo>();
+            //Colly = new HashSet<Colly>();
+            //Invoicedetail = new HashSet<Invoicedetail>();
+            //Photo = new HashSet<Photo>();
         }
 
         public int Stt { get; set; }

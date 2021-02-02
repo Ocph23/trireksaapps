@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,6 +64,16 @@ namespace TrireksaApp
             }
         }
 
+
+        private string version;
+
+        public string Version
+        {
+            get { return version; }
+            set { SetProperty(ref version , value); }
+        }
+
+
         public FormLoginVM()
         {
             appConfig = new ApplicationConfig();
@@ -72,6 +83,7 @@ namespace TrireksaApp
 
             UserName = config.GetUserName();
             //Password = "Sony@77";
+            Version ="Version "+ Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private bool LoginValidate(object obj)

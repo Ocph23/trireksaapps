@@ -58,9 +58,11 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
                                                 <ColumnDefinition />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Grid.Column="0" Style="{StaticResource lbl}"  FontSize="14" MinWidth="100" Text="{Binding NumberView}"></TextBlock>
-                                            <TextBlock Grid.Column="1" Style="{StaticResource lbl}"  FontSize="14" MinWidth="100" Text="{Binding Customer.Name}"  Margin="5,0,30,0"></TextBlock>
+                                            <TextBlock Grid.Column="1" Style="{StaticResource lbl}"  FontSize="14" MinWidth="100" Text="{Binding InvoiceStatus}"  Margin="5,0,30,0"></TextBlock>
+                                            <TextBlock Grid.Column="2" Style="{StaticResource lbl}"  FontSize="14" MinWidth="100" Text="{Binding Customer.Name}"  Margin="5,0,30,0"></TextBlock>
                                         </Grid>
                                     </StackPanel>
                                 </Expander.Header>

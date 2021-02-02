@@ -10,11 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System.Net;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using TrireksaAppContext;
 using WebApi.Middlewares;
 using WebApi.Models;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -36,10 +40,15 @@ namespace WebApi
             });
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddControllers();
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
+            services.AddControllers()
+             .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+            //services.AddControllers().AddJsonOptions(options =>
+            //{
+            //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            //    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            //});
 
 
 
@@ -67,6 +76,8 @@ namespace WebApi
             services.AddScoped<PhotoContext>();
             services.AddScoped<UserProfileContext>();
 
+            services.Configure<TelegramConfig>(Configuration.GetSection("Telegram"));
+            services.AddSingleton<TelegramService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });

@@ -30,9 +30,7 @@ namespace TrireksaApp.Contents.Invoice
         {
             if (data > 0)
             {
-
-
-                var invoice = MainVM.InvoiceCollections.SelectedItem;
+                var invoice = await MainVM.InvoiceCollections.GetItemById(data);
                 if (invoice != null)
                 {
 
@@ -170,38 +168,56 @@ namespace TrireksaApp.Contents.Invoice
 
         private async void SaveAction()
         {
-            var item = new ModelsShared.Models.Invoice
-            {                         
-                Customer=CustomerSelectedItem,
-                CustomerId = this.CustomerId,
-                CreateDate = this.CreateDate,
-                CustomerName = this.CustomerName,
-                DeadLine = this.DeadLine,
-                DeliveryDate = this.DeliveryDate,
-                Invoicedetail = this.Invoicedetail.Where(O=>O.IsSelected).ToList(), 
-                Id = this.Id, 
-                InvoicePayType = this.InvoicePayType,
-                InvoiceStatus = this.InvoiceStatus,
-                IsDelivery = this.IsDelivery,
-                Number = this.Number,
-                ReciveDate = this.ReciveDate,
-                ReciverBy = this.ReciverBy,
-                UserId = this.UserId
-            };
-           var result = await MainVM.InvoiceCollections.Add(item);
-            if(result==true)
+            if (ProgressIsActive)
+                return;
+
+            try
             {
-                MainVM.InvoiceCollections.SourceView.Refresh();
-                this.Number = MainVM.InvoiceCollections.SelectedItem.Number;
-                ModernDialog.ShowMessage("Data Is Saved... !", "Information", MessageBoxButton.OK);
-            }else
+                ProgressIsActive = true;
+                var item = new ModelsShared.Models.Invoice
+                {
+                    Customer = CustomerSelectedItem,
+                    CustomerId = this.CustomerId,
+                    CreateDate = this.CreateDate,
+                    CustomerName = this.CustomerName,
+                    DeadLine = this.DeadLine,
+                    DeliveryDate = this.DeliveryDate,
+                    Invoicedetail = this.Invoicedetail.Where(O => O.IsSelected).ToList(),
+                    Id = this.Id,
+                    InvoicePayType = this.InvoicePayType,
+                    InvoiceStatus = this.InvoiceStatus,
+                    IsDelivery = this.IsDelivery,
+                    Number = this.Number,
+                    ReciveDate = this.ReciveDate,
+                    ReciverBy = this.ReciverBy,
+                    UserId = this.UserId
+                };
+                var result = await MainVM.InvoiceCollections.Add(item);
+                if (result == true)
+                {
+                    MainVM.InvoiceCollections.SourceView.Refresh();
+                    this.Number = MainVM.InvoiceCollections.SelectedItem.Number;
+                    ModernDialog.ShowMessage("Data Is Saved... !", "Information", MessageBoxButton.OK);
+                }
+                else
+                {
+                    ModernDialog.ShowMessage("Data Not Saved... !", "Error", MessageBoxButton.OK);
+                }
+            }
+            catch (Exception ex)
             {
-                ModernDialog.ShowMessage("Data Not Saved... !", "Error", MessageBoxButton.OK);
+                ModernDialog.ShowMessage(ex.Message, "Error", MessageBoxButton.OK);
+            }
+            finally
+            {
+                ProgressIsActive = false;
             }
         }
 
         private bool SaveValidation()
         {
+            if (ProgressIsActive)
+                return false;
             if (this.Invoicedetail!=null && this.Invoicedetail.Where(x=>x.IsSelected).Count()>0)
                 return true;
             return false;
@@ -291,7 +307,7 @@ namespace TrireksaApp.Contents.Invoice
             }
         }
 
-     
+
 
         public MainWindowVM MainVM { get; private set; }
         public CollectionView SourceView { get; private set; }

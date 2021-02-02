@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,6 @@ namespace TrireksaApp.CollectionsBase
         private readonly Client client = new Client("ManifestOutgoing");
         public ObservableCollection<ModelsShared.Models.Manifestoutgoing> Source { get; set; }
         public CollectionView SourceView { get; set; }
-
 
         public virtual Manifestoutgoing SelectedItem { get; set; }
 
@@ -33,7 +33,9 @@ namespace TrireksaApp.CollectionsBase
         public async void InitAsync()
         {
             Source.Clear();
-            var result = await client.GetAsync<List<Manifestoutgoing>>("");
+            var url = string.Format("{0}-{1}-{2}/{3}-{4}-{5}", StartDate.Year, StartDate.Month, StartDate.Day, EndDate.Year, EndDate.Month, EndDate.Day);
+
+            var result = await client.GetAsync<List<Manifestoutgoing>>(url);
             if (result != null)
             {
                 var results = result.Where(O => O.CreatedDate >= StartDate && O.CreatedDate <= EndDate).ToList();
@@ -43,6 +45,8 @@ namespace TrireksaApp.CollectionsBase
                    
                 }
             }
+
+
             SourceView.Refresh();
             RefreshCompleted?.Invoke();
         }

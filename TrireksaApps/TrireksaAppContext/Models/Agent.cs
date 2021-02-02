@@ -8,8 +8,8 @@ namespace TrireksaAppContext.Models
     {
         public Agent()
         {
-            Cityagentcanaccess = new HashSet<Cityagentcanaccess>();
-            Manifestoutgoing = new HashSet<Manifestoutgoing>();
+           // Cityagentcanaccess = new HashSet<Cityagentcanaccess>();
+            //Manifestoutgoing = new HashSet<Manifestoutgoing>();
         }
 
         public int Id { get; set; }

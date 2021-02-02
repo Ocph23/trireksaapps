@@ -45,4 +45,16 @@ namespace TrireksaAppContext.Models
     {
        Unpaid, Pending, Paid, Cancel, None
     }
+
+
+    public enum UserType
+    {
+        Customer, Agent, Team
+    }
+
+
+    public enum MessageType
+    {
+        Text, Image, Imoji, Animation, File
+    }
 }

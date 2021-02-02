@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrireksaApp"
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d"  WindowStartupLocation="CenterScreen" Height="504.504" Width="379.094">
+             mc:Ignorable="d"  WindowStartupLocation="CenterScreen" Height="510" Width="370">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel   Margin="30,0,30,30" >
+        <StackPanel   Margin="30,0,30,10" >
             <Image Source="Assets/Trireksa.png" Stretch="Fill" Height="68" Width="150" Margin="10" HorizontalAlignment="Center" ></Image>
             <TextBlock Margin="10,0" FontSize="20" Text="LOGIN" FontWeight="Bold"></TextBlock>
             <TextBlock Margin="10,10,0,0" Name="tbmessage" Foreground="#FFFD4242" Text="{Binding Message,Mode=TwoWay}" />
@@ -24,11 +24,17 @@
 
         </StackPanel>
         <mui:ModernProgressRing IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
-        <Expander Grid.Row="1" Margin="15,10" Header="Host" >
-            <StackPanel>
-                <TextBox VerticalContentAlignment="Center" Name="txthost" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+        <StackPanel Grid.Row="1">
+            <Expander  Margin="15,0" Header="Host" >
+                <StackPanel>
+                    <TextBox VerticalContentAlignment="Center" Name="txthost" Text="{Binding Host, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                          Margin="10" Height="30" ></TextBox>
-            </StackPanel>
-        </Expander>
+                </StackPanel>
+            </Expander>
+
+            <Label Content="{Binding Version}" HorizontalAlignment="Center" Margin="10" HorizontalContentAlignment="Center" />
+
+        </StackPanel>
+        
     </Grid>
 </mui:ModernWindow>

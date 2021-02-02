@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrireksaApp.Contents.Penjualan"
              mc:Ignorable="d"  
-             d:DesignHeight="700" d:DesignWidth="600">
+             d:DesignHeight="750" d:DesignWidth="600">
     <UserControl.Resources>
         <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource {x:Type ListViewItem}}">
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -71,7 +71,7 @@
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Width" Value="100"/>
+            <Setter Property="Width" Value="auto"/>
             <Setter Property="FontWeight" Value="Heavy"/>
         </Style>
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -192,8 +192,8 @@
                             </Border>
                             <Border>
                                 <WrapPanel>
-                                    <Label Content="Pcs"/>
-                                    <TextBlock Text="{Binding  PenjualanItem.Pcs}"/>
+                                    <Label Content="Coly :"/>
+                                    <TextBlock Text="{Binding  PenjualanItem.Pcs,StringFormat='{}{0} Pcs'}"/>
                                 </WrapPanel>
                             </Border>
                             <Border>
@@ -204,11 +204,11 @@
                                     </WrapPanel>
                                     <WrapPanel >
                                         <Label Content=""/>
-                                        <TextBlock Width="150" Text="{Binding PenjualanItem.Shiper.Address}"/>
+                                        <TextBlock Width="auto" Text="{Binding PenjualanItem.Shiper.Address}"/>
                                     </WrapPanel>
                                     <WrapPanel >
                                         <Label Content=""/>
-                                        <TextBlock Width="150" Text="{Binding PenjualanItem.Shiper.City.Name}"/>
+                                        <TextBlock Width="auto" Text="{Binding PenjualanItem.Shiper.City.Name}"/>
                                     </WrapPanel>
                                 </StackPanel>
 

@@ -7,9 +7,9 @@ namespace TrireksaAppContext.Models
     {
         public Customer()
         {
-            PenjualanReciver = new HashSet<Penjualan>();
-            PenjualanShiper = new HashSet<Penjualan>();
-            Price = new HashSet<Price>();
+           // PenjualanReciver = new HashSet<Penjualan>();
+            //PenjualanShiper = new HashSet<Penjualan>();
+           // Price = new HashSet<Price>();
         }
 
         public int Id { get; set; }

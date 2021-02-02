@@ -16,6 +16,19 @@ namespace WebApi.Api
             context = _context;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                return Ok(await context.GetDashboard());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorMessage(ex.Message));
+            }
+        }
+
         [HttpGet("GetInvoiceNotYetPaid")]
         public async Task<IActionResult> GetInvoiceNotYetPaid()
         {
@@ -124,31 +137,6 @@ namespace WebApi.Api
             }
 
         }
-
-        //[HttpGet("GetPenjualanThreeYear")]
-        //public async Task<IActionResult> GetPenjualanThreeYear()
-        //{
-        //    try
-        //    {
-        //        return Ok(await context.GetPenjualanThreeYear());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new ErrorMessage(ex.Message));
-        //    }
-        //}
-        //[HttpGet("GetPenjualanOfMonth")]
-        //private async Task<IActionResult> GetPenjualanOfMonth(int tahun)
-        //{
-        //    try
-        //    {
-        //        return Ok(await context.GetInvoiceNotYetPaid());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new ErrorMessage(ex.Message));
-        //    }
-        //}
 
 
     }

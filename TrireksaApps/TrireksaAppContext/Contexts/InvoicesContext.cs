@@ -41,13 +41,7 @@ namespace TrireksaAppContext
                 .Include(x => x.Customer)
                 .Include(x => x.Invoicedetail)
                 .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
-                .ThenInclude(x=>x.Penjualan).ThenInclude(x=>x.ToCityNavigation)
-                .Include(x=>x.Invoicedetail)
-                .ThenInclude(x=>x.Penjualan).ThenInclude(x=>x.FromCityNavigation)
-                .Include(x => x.Invoicedetail)
-                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Reciver)
-                .Include(x => x.Invoicedetail)
-                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Shiper)
+
                 ;
             var datas = results.ToList();
 
@@ -60,9 +54,16 @@ namespace TrireksaAppContext
             try
             {
                 var inv = db.Invoices.Where(O => O.Id == Id)
-                    .Include(x => x.Invoicedetail)
-                    .ThenInclude(x => x.Penjualan)
-                    .ThenInclude(x => x.Colly)
+                     .Include(x => x.Customer)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.ToCityNavigation)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.FromCityNavigation)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Reciver)
+                .Include(x => x.Invoicedetail)
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Shiper)
                     .FirstOrDefault();
                 return Task.FromResult(inv);
 

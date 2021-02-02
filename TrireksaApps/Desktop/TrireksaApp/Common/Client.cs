@@ -1,15 +1,12 @@
-﻿using ModelsShared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using TrireksaApp.Repository;
-using Newtonsoft.Json;
 using System.Net;
 using System.Configuration;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TrireksaApp.Common
 {
@@ -301,17 +298,26 @@ namespace TrireksaApp.Common
             return default;
         }
 
+
+
         public T ConvertResponseToObject<T>(HttpResponseMessage response)
         {
             var strvalue = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<T>(strvalue);
+            return JsonSerializer.Deserialize<T>(strvalue,jsonOptions);
         }
 
 
         public HttpContent GetContent(object model)
         {
-            var strcontent = JsonConvert.SerializeObject(model);
+            var strcontent = JsonSerializer.Serialize(model,jsonOptions);
             return new StringContent(strcontent, Encoding.UTF8, "application/json");
         }
+
+        public JsonSerializerOptions jsonOptions = new JsonSerializerOptions()
+        {
+            //ReferenceHandler = ReferenceHandler.Preserve,
+            //PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNameCaseInsensitive=true
+        };
     }
 }

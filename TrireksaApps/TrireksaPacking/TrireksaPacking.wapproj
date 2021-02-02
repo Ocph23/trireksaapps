@@ -64,7 +64,7 @@
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppInstallerUri>https://ocph23.github.io/trireksaapps/</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppxPackageDir>C:\Ocph23\Repos\github\trireksaapps\</AppxPackageDir>
+    <AppxPackageDir>C:\Ocph23\Repos\github\trireksaapps\TrireksaApps\TrireksaPacking\AppPackages</AppxPackageDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AppxBundle>Always</AppxBundle>
