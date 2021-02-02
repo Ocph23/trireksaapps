@@ -34,7 +34,7 @@ namespace WebApi.Api
             try
             {
                 
-                return Ok(await _telegram.MakeAuth(id));
+                return Ok(await _telegram.GetUserProfilePhotosAsync(id));
             }
             catch (Exception ex)
             {
@@ -50,8 +50,7 @@ namespace WebApi.Api
         {
             try
             {
-                await _telegram.Auth("+"+id);
-                return Ok();
+                return Ok(await _telegram.GetMeAsync());
             }
             catch (Exception ex)
             {

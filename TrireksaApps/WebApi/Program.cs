@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -23,7 +22,7 @@ namespace WebApi
                 try
                 {
                     var telegram = services.GetRequiredService<TelegramService>();
-                    telegram.Auth("+628114810279");
+                    telegram.StartReceiving();
 
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var userManager = services.GetRequiredService<IUserService>();
