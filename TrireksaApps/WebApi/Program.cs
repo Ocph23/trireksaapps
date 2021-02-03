@@ -23,7 +23,6 @@ namespace WebApi
                 {
                     var telegram = services.GetRequiredService<TelegramService>();
                     telegram.StartReceiving();
-
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var userManager = services.GetRequiredService<IUserService>();
                     await DbInitializer.Initialize(context, userManager);
@@ -45,16 +44,16 @@ namespace WebApi
                 webBuilder.UseStartup<Startup>()
 
                 //IIS
-                .UseIISIntegration();
+                // .UseIISIntegration();
 
 
                 //Kestrell                
-                //.UseKestrel(options =>
-                //    {
-                //        options.Limits.MaxRequestBodySize = 52428800; //50MB
-                //    });
-                //;
-                //webBuilder.UseUrls("http://localhost:5004");
+                .UseKestrel(options =>
+                    {
+                        options.Limits.MaxRequestBodySize = 52428800; //50MB
+                    });
+                ;
+                webBuilder.UseUrls("http://localhost:5004");
             });
     }
 
