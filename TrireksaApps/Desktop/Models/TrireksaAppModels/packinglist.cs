@@ -1,11 +1,8 @@
-using System.Text.Json.Serialization;
 
 namespace ModelsShared.Models
 {
     public class Packinglist : BaseNotify
     {
-
-
      
 
         public int Id
@@ -67,7 +64,6 @@ namespace ModelsShared.Models
         public virtual Manifestoutgoing Manifest { get; set; }
 
 
-        [JsonIgnore]
         public int STT
         {
             get { return _stt; }
@@ -78,7 +74,6 @@ namespace ModelsShared.Models
         }
 
 
-        [JsonIgnore]
         public double Weight { get; set; }
 
         private int _id;

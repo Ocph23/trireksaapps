@@ -2,6 +2,7 @@
 using ModelsShared.ReportModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TrireksaMobile.Views;
@@ -38,26 +39,26 @@ namespace TrireksaMobile.ViewModels
                 switch (obj.ToString())
                 {
                     case "1":
-                        ShowPenjualan(DataSTTNotSend, "STT Belum Dikirim");
+                        ShowPenjualan(DataSource.PenjualanNotYetSend.ToList(), "STT Belum Dikirim");
                         break;
                     case "2":
-                        ShowPenjualan(DataSTTNotStatus, "STT Belum Ada Status");
+                        ShowPenjualan(DataSource.PenjualanNotHaveStatus.ToList(), "STT Belum Ada Status");
                         break;
                     case "3":
-                        ShowPenjualan(DataSTTNotPaid, "STT Belum Ditagih");
+                        ShowPenjualan(DataSource.PenjualanNotPaid.ToList(), "STT Belum Ditagih");
                         break;
 
                     case "4":
-                        ShowInvoice(DataInvoiceNotDelivery, "Invoice Belum Dikirim");
+                        ShowInvoice(DataSource.InvoiceNotYetDelivery.ToList(), "Invoice Belum Dikirim");
                         break;
                     case "5":
-                        ShowInvoice(DataInvoiceNotRecive, "Invoice Belum Diterima");
+                        ShowInvoice(DataSource.InvoiceNotYetRecive.ToList(), "Invoice Belum Diterima");
                         break;
                     case "6":
-                        ShowInvoice(DataInvoiceNotPaid, "Invoice Belum Dibayar");
+                        ShowInvoice(DataSource.InvoiceNotPaid.ToList(), "Invoice Belum Dibayar");
                         break;
                     case "7":
-                        ShowInvoice(InvoiceJatuhTempo, "Invoice Jatuh Tempo");
+                        ShowInvoice(DataSource.InvoiceJatuhTempo.ToList(), "Invoice Jatuh Tempo");
                         break;
 
                     default:
@@ -82,51 +83,24 @@ namespace TrireksaMobile.ViewModels
 
         private  void Load()
         {
-            var now = DateTime.Now;
-            DashboardStore.GetPenjualanBulan(now).ContinueWith(async (x)=> {
-               var result= await x;
-               BulanIni = result;
-            });
-            DashboardStore.GetPenjualanBulan(now.AddMonths(1)).ContinueWith(async (x) => {
-                BulanLalu = await x;
-            });
-            DashboardStore.GetPenjualanBulan(now.AddMonths(2)).ContinueWith(async(x) => {
-                DuaBulanLalu = await x;
-            });
-
-            DashboardStore.GetInvoiceJatuhTempo().ContinueWith(async (x) => {
-                InvoiceJatuhTempo = await x;
-                JatuhTempo = InvoiceJatuhTempo == null ? 0 : InvoiceJatuhTempo.Count;
-            });
-
-            DashboardStore.GetInvoiceNotYetDelivery().ContinueWith(async (x) => {
-                DataInvoiceNotDelivery= await x;
-                InvoiceNotDelivery = DataInvoiceNotDelivery == null ? 0 : DataInvoiceNotDelivery.Count;
-            });
-
-            DashboardStore.GetInvoiceNotYetPaid().ContinueWith(async (x) => {
-                DataInvoiceNotPaid= await x;
-                InvoiceNotPaid= DataInvoiceNotPaid == null ? 0 : DataInvoiceNotPaid.Count;
-            });
-
-            DashboardStore.GetInvoiceNotYetRecive().ContinueWith(async (x) => {
-                DataInvoiceNotRecive= await x;
-                InvoiceNotRecive = DataInvoiceNotRecive == null ? 0 : DataInvoiceNotRecive.Count;
-            });
-
-            DashboardStore.GetPenjualanNotPaid().ContinueWith(async (x) => {
-                DataSTTNotPaid = await x;
-                STTNotPaid= DataSTTNotPaid == null ? 0 : DataSTTNotPaid.Count;
-            });
-            DashboardStore.GetPenjualanNotStatus().ContinueWith(async (x) => {
-                DataSTTNotStatus= await x;
-                STTNotStatus= DataSTTNotStatus == null ? 0 : DataSTTNotStatus.Count;
-
-            });
-
-            DashboardStore.GetPenjualanNotYetSend().ContinueWith(async (x) => {
-                DataSTTNotSend= await x;
-                STTNotSend= DataSTTNotSend== null ? 0 : DataSTTNotSend.Count;
+            IsBusy = true;
+            var model = DashboardStore.Get().ContinueWith(async (x) => {
+                var result = await x;
+                if (result != null)
+                {
+                    BulanIni = result.PenjualanBulanIni;
+                    BulanLalu = result.PenjualanBulanLalu;
+                    DuaBulanLalu = result.PenjualanDuaBulanLalu;
+                    JatuhTempo = result.InvoiceJatuhTempo == null ? 0 : result.InvoiceJatuhTempo.Count();
+                    InvoiceNotDelivery = result.InvoiceNotYetDelivery == null ? 0 : result.InvoiceNotYetDelivery.Count();
+                    InvoiceNotPaid = result.InvoiceNotPaid == null ? 0 : result.InvoiceNotPaid.Count();
+                    InvoiceNotRecive = result.InvoiceNotYetRecive == null ? 0 : result.InvoiceNotYetRecive.Count();
+                    STTNotPaid = result.PenjualanNotPaid == null ? 0 : result.PenjualanNotPaid.Count();
+                    STTNotSend = result.PenjualanNotYetSend == null ? 0 : result.PenjualanNotYetSend.Count();
+                    STTNotStatus = result.PenjualanNotHaveStatus == null ? 0 : result.PenjualanNotHaveStatus.Count();
+                    DataSource = result;
+                    IsBusy = false;
+                }
             });
         }
 
@@ -137,22 +111,12 @@ namespace TrireksaMobile.ViewModels
         public double DuaBulanLalu { get => duaBulan; set => SetProperty(ref duaBulan, value); }
         public double STTNotPaid{ get => sttNotPaid; set => SetProperty(ref sttNotPaid, value); }
         public double STTNotStatus { get => sttNotStatus; set => SetProperty(ref sttNotStatus, value); }
+        public DashboardModel DataSource { get; private set; }
         public double STTNotSend { get => sttNotSend; set => SetProperty(ref sttNotSend, value); }
 
         public double JatuhTempo { get => jatuhTempo; set => SetProperty(ref jatuhTempo, value); }
         public double InvoiceNotDelivery { get => invoiceNotDelivery; set => SetProperty(ref invoiceNotDelivery, value); }
         public double InvoiceNotPaid{ get => invoiceNotPaid; set => SetProperty(ref invoiceNotPaid, value); }
         public double InvoiceNotRecive { get => invoiceNotRecive; set => SetProperty(ref invoiceNotRecive, value); }
-       
-
-
-
-        public List<Invoice> InvoiceJatuhTempo { get; private set; }
-        public List<Invoice> DataInvoiceNotDelivery { get; private set; }
-        public List<Invoice> DataInvoiceNotPaid { get; private set; }
-        public List<Invoice> DataInvoiceNotRecive { get; private set; }
-        public List<PenjualanReportModel> DataSTTNotPaid { get; private set; }
-        public List<PenjualanReportModel> DataSTTNotStatus { get; private set; }
-        public List<PenjualanReportModel> DataSTTNotSend { get; private set; }
     }
 }

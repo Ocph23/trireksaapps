@@ -2,13 +2,13 @@
 using ModelsShared.ReportModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TrireksaMobile.Services
 {
     public interface IDashboardService
     {
+        public Task<DashboardModel> Get();
         public Task<double> GetPenjualanBulan(DateTime date);
         public Task<List<PenjualanReportModel>> GetPenjualanNotPaid();
         public Task<List<PenjualanReportModel>> GetPenjualanNotStatus();
@@ -22,6 +22,22 @@ namespace TrireksaMobile.Services
     public class DashboardService: IDashboardService
     {
         private string controller = "api/dashboard";
+
+        public async Task<DashboardModel> Get()
+        {
+            using (var client = new RestService())
+            {
+                var uri = $"{controller}";
+                var response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.GetResult<DashboardModel>();
+                }
+                return null;
+            }
+        }
+
+
         public async Task<double> GetPenjualanBulan(DateTime date)
         {
             using (var client= new RestService())

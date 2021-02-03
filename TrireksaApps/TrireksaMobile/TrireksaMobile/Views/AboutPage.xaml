@@ -18,6 +18,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <Grid>
     <ScrollView>
         <StackLayout Margin="5" >
             <Grid >
@@ -144,4 +145,6 @@
         </StackLayout>
 
     </ScrollView>
+        <ActivityIndicator WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+    </Grid>
 </ContentPage>
