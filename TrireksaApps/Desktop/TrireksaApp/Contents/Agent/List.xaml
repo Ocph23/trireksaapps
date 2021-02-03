@@ -18,9 +18,9 @@
                 <ColumnDefinition Width="163*"/>
             </Grid.ColumnDefinitions>
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="DAFTAR AGENT/PERWAKILAN" Style="{StaticResource Heading2}" Grid.ColumnSpan="2" />
-            <WrapPanel HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,0,0,16" >
-                <TextBox Width="150" Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <mi:PackIcon Kind="Yeast"/>
+            <WrapPanel HorizontalAlignment="Right" Grid.ColumnSpan="2" >
+                <TextBox HorizontalAlignment="Left"  Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}" MinWidth="111" Height="30"></TextBox>
+                <mi:PackIcon Kind="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30"    />
             </WrapPanel>
         </Grid>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Collection.SourceView}"  Margin="10"

@@ -7,8 +7,8 @@ namespace TrireksaAppContext.Models
     {
         public int Id { get; set; }
         public int ShiperId { get; set; }
-        public bool PortType { get; set; }
-        public bool PayType { get; set; }
+        public PortType PortType { get; set; }
+        public PayType PayType { get; set; }
         public int? FromCity { get; set; }
         public int? ToCity { get; set; }
         public double PriceValue { get; set; }

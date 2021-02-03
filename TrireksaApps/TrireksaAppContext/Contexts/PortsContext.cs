@@ -27,7 +27,7 @@ namespace TrireksaAppContext
 
         public Task< Port> Get(int id)
         {
-            var result = db.Port.Include(x=>x.City).Where(O => O.Id == id).FirstOrDefault();
+            var result = db.Port.Where(O=>O.Id==id).Include(x=>x.City).FirstOrDefault();
             return Task.FromResult( result);
         }
 
@@ -45,7 +45,11 @@ namespace TrireksaAppContext
             if (existsData == null)
                 throw new SystemException("Data Not Found !");
 
-            db.Entry(existsData).CurrentValues.SetValues(value);
+
+            existsData.CityId = value.CityId;
+            existsData.Code = value.Code;
+            existsData.Name = value.Name;
+            existsData.PortType = value.PortType;
             if (await db.SaveChangesAsync() <= 0)
                 throw new SystemException("Data Not Saved !");
 

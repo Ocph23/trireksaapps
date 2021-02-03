@@ -42,7 +42,10 @@ namespace WebApi
             services.AddServerSideBlazor();
             services.AddControllers()
              .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+             {
+                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                 options.UseCamelCasing(true);
+             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {

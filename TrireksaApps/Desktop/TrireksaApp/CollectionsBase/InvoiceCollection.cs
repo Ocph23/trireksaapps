@@ -104,5 +104,20 @@ namespace TrireksaApp.CollectionsBase
             InitAsync();
             return Task.FromResult(0);
         }
+
+        internal async Task<bool> Update(Invoice item)
+        {
+            var x = await client.PutAsync<Invoice>($"",item.Id, item);
+            if (x != null)
+            {
+                this.SelectedItem = x;
+                SourceView.Refresh();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

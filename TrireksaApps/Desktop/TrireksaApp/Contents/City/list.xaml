@@ -14,20 +14,11 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="List Of City" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
-            <WrapPanel HorizontalAlignment="Right" Height="22">
-                <WrapPanel.Resources>
-                    <PathGeometry x:Key="HomeIconData">F1 M 15.0021,35.0049L 15.0021,33.0046L 15.0021,24.2034L 14.002,25.0035L
-                        12.0017,22.0031L 24.0033,13.0018L 29.004,16.7523L 29.004,14.002L 31.0043,13.502L 31.0043,18.2525L 36.005,22.0031L 34.0047,25.0035L 33.0046,24.2034L 33.0046,33.0046L 33.0046,35.0049L 15.0021,35.0049 Z M 24.0033,17.0024L 17.0024,22.6032L 17.0024,33.0046L 21.0029,33.0046L 21.0029,27.0038L 27.0038,27.0038L 27.0038,33.0046L 31.0043,33.0046L 31.0043,22.6032L 24.0033,17.0024 Z</PathGeometry>
-                    <Style TargetType="mui:ModernButton">
-                        <Setter Property="IconData" Value="{StaticResource HomeIconData}" />
-                        <Setter Property="Margin" Value="0,0,8,0" />
-                        <Setter Property="BorderThickness" Value="2" />
-                    </Style>
-                </WrapPanel.Resources>
-                <TextBox HorizontalAlignment="Left" Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}" Width="111" Height="20"></TextBox>
-                <mui:ModernButton EllipseDiameter="16" EllipseStrokeThickness="1" IconWidth="10" IconHeight="42" />
+            <WrapPanel HorizontalAlignment="Right" Grid.ColumnSpan="2" >
+                <TextBox HorizontalAlignment="Left"  Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}" MinWidth="111" Height="30"></TextBox>
+                <mi:PackIcon Kind="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30"    />
             </WrapPanel>
-             </Grid>
+        </Grid>
         <DataGrid Grid.Row="1" Margin="10" ItemsSource="{Binding Collection.SourceView,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False"
                   CanUserDeleteRows="False" SelectedItem="{Binding Collection.SelectedItem}">
             <DataGrid.Columns>

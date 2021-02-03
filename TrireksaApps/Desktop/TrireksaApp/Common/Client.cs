@@ -309,14 +309,13 @@ namespace TrireksaApp.Common
 
         public HttpContent GetContent(object model)
         {
-            var strcontent = JsonSerializer.Serialize(model,jsonOptions);
+            var strcontent = JsonSerializer.Serialize(model);
             return new StringContent(strcontent, Encoding.UTF8, "application/json");
         }
 
         public JsonSerializerOptions jsonOptions = new JsonSerializerOptions()
         {
-            //ReferenceHandler = ReferenceHandler.Preserve,
-            //PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive=true
         };
     }
