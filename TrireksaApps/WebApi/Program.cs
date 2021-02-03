@@ -44,16 +44,16 @@ namespace WebApi
                 webBuilder.UseStartup<Startup>()
 
                 //IIS
-                 .UseIISIntegration();
+                //  .UseIISIntegration();
 
 
                 //Kestrell                
-                //.UseKestrel(options =>
-                //    {
-                //        options.Limits.MaxRequestBodySize = 52428800; //50MB
-                //    });
-                //;
-                //webBuilder.UseUrls("http://localhost:5004");
+                .UseKestrel(options =>
+                    {
+                        options.Limits.MaxRequestBodySize = 52428800; //50MB
+                    });
+                ;
+                webBuilder.UseUrls("http://localhost:5004");
             });
     }
 
