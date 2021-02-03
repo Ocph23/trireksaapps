@@ -9,8 +9,10 @@ using TrireksaApp.Common;
 
 namespace TrireksaApp.CollectionsBase
 {
-    public class PortCollection
+    public class PortCollection: BaseCollection
     {
+
+        public event RefreshComplete RefreshCompleted;
         public ObservableCollection<ModelsShared.Models.Port> Source { get; set; }
         public CollectionView SourceView { get; set; }
         private readonly Client client = new Client("Ports");
@@ -34,6 +36,7 @@ namespace TrireksaApp.CollectionsBase
 
         public async void CompleteTask()
         {
+
             var result = await client.GetAsync<List<Port>>("");
             if(result!=default(List<Port>))
             {
@@ -43,10 +46,9 @@ namespace TrireksaApp.CollectionsBase
                     Source.Add(item);
                
                 }
-
                 SourceView.Refresh();
+                RefreshCompleted?.Invoke();
             }
-           
 
             signalRClient = ResourcesBase.GetSignalClient();
             signalRClient.OnAddPort += SignalRClient_OnAddPort;

@@ -74,7 +74,51 @@ namespace TrireksaAppContext
             }
         }
 
+        public async Task<Invoices> Put(int id, Invoices model)
+        {
+            try
+            {
+                var existInvoice = db.Invoices.Include(x => x.Customer).Where(x => x.Id == id)
+                    .Include(x => x.Invoicedetail).FirstOrDefault();
+                if (existInvoice != null)
+                {
 
+                    db.Entry(existInvoice.Customer).State = EntityState.Detached;
+                    existInvoice.DeadLine = model.DeadLine;
+
+                    foreach (var item in model.Invoicedetail)
+                    {
+                        if (item.Id <= 0)
+                        {
+                            db.Entry(item.Penjualan).State = EntityState.Unchanged;
+                            item.InvoiceId = existInvoice.Id;
+                            db.Invoicedetail.Add(item);
+                        }
+                    }
+
+                    foreach (var item in existInvoice.Invoicedetail)
+                    {
+                        var itemExists = model.Invoicedetail.SingleOrDefault(x => x.Id == item.Id);
+                        if (itemExists == null)
+                        {
+                            db.Invoicedetail.Remove(item);
+                        }
+                    }
+
+                    if (await db.SaveChangesAsync() <= 0)
+                        throw new SystemException("Data Not Saved");
+
+                    return existInvoice;
+                }
+                else
+                    throw new SystemException("Not Found !");
+            }
+            catch (Exception ex)
+            {
+
+                throw new SystemException(ex.Message);
+            }
+        }
 
         public async Task<Invoices> InsertAndGetItem(Invoices t)
         {
@@ -86,50 +130,23 @@ namespace TrireksaAppContext
                     throw new SystemException("Lengkapi Data STT !");
 
                 db.Entry(t.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
-
-                if (t.Id <= 0)
-                {
-                    if (!db.Invoices.Any())
-                        t.Number++;
-                    else
-                    {
-                        var lastINvoice = db.Invoices.Max(x => x.Number);
-                        t.Number = lastINvoice + 1;
-                    }
-
-                    foreach (var item in t.Invoicedetail)
-                    {
-                        db.Entry(item.Penjualan).State = EntityState.Unchanged;
-                    }
-                    db.Invoices.Add(t);
-                }
+                if (!db.Invoices.Any())
+                    t.Number++;
                 else
                 {
-                    var existInvoice = db.Invoices.Where(x => x.Id == t.Id).Include(x=>x.Invoicedetail).FirstOrDefault();
-                     db.Entry(existInvoice.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
-                    db.Entry(existInvoice).CurrentValues.SetValues(t);
-
-                    foreach (var item in t.Invoicedetail)
-                    {
-                        if (item.Id <= 0)
-                        {
-                            db.Invoicedetail.Add(item);
-                        }
-                    }
-
-
-                    foreach (var item in existInvoice.Invoicedetail)
-                    {
-                        var itemExists = t.Invoicedetail.SingleOrDefault(x => x.Id == item.Id);
-                        if (itemExists == null)
-                        {
-                            db.Invoicedetail.Remove(item);
-                        }
-                    }
+                    var lastINvoice = db.Invoices.Max(x => x.Number);
+                    t.Number = lastINvoice + 1;
                 }
+
+                foreach (var item in t.Invoicedetail)
+                {
+                    db.Entry(item.Penjualan).State = EntityState.Unchanged;
+                }
+                db.Invoices.Add(t);
 
                 if (await db.SaveChangesAsync() <= 0)
                     throw new SystemException("Data Not Saved");
+
                 return t;
             }
             catch (Exception ex)

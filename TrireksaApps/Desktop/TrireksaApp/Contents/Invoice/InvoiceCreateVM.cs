@@ -61,6 +61,7 @@ namespace TrireksaApp.Contents.Invoice
             }
             else
             {
+                this.Invoicedetail.Clear();
                 this.CreateDate = DateTime.Now;
                 this.Customer = null;
                 this.CustomerId = 0;
@@ -77,7 +78,6 @@ namespace TrireksaApp.Contents.Invoice
                 this.ReciverBy = string.Empty;
                 this.Tax = 0;
                 await Task.Delay(3000);
-                this.Invoicedetail.Clear();
                 this.SourceView.Refresh();
             }
 
@@ -192,9 +192,22 @@ namespace TrireksaApp.Contents.Invoice
                     ReciverBy = this.ReciverBy,
                     UserId = this.UserId
                 };
-                var result = await MainVM.InvoiceCollections.Add(item);
-                if (result == true)
+
+                var saved = false;
+
+                if(item.Id<=0)
                 {
+                    saved = await MainVM.InvoiceCollections.Add(item);
+                }
+
+                else
+                {
+                    saved = await MainVM.InvoiceCollections.Update(item);
+                }
+
+                if (saved)
+                {
+                    this.Id = MainVM.InvoiceCollections.SelectedItem.Id; ;
                     MainVM.InvoiceCollections.SourceView.Refresh();
                     this.Number = MainVM.InvoiceCollections.SelectedItem.Number;
                     ModernDialog.ShowMessage("Data Is Saved... !", "Information", MessageBoxButton.OK);

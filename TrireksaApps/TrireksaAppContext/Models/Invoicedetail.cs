@@ -12,7 +12,6 @@ namespace TrireksaAppContext.Models
 
         public virtual Invoices Invoices { get; set; }
 
-        [NotMapped]
         public virtual Penjualan Penjualan { get; set; }
     }
 }

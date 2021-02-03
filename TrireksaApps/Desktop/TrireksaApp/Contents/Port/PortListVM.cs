@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
+using ModelsShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,15 @@ namespace TrireksaApp.Contents.Port
     {
         private string _search;
 
+        private PortType portfilter;
+
+        public PortType PortFilter
+        {
+            get { return portfilter; }
+            set { portfilter = value; Collection.SourceView.Refresh(); }
+        }
+
+
         public CollectionsBase.PortCollection Collection { get; set; }
         public PortListVM()
         {
@@ -21,12 +31,21 @@ namespace TrireksaApp.Contents.Port
             Edit = new CommandHandler { CanExecuteAction = x => EditValidation(), ExecuteAction = x => EditAction() };
             this.Collection = MainVM.PortCollection;
             Collection.SourceView.Filter = FilterItem;
+            PortFilter = PortType.Sea;
+            MainVM.PortCollection.RefreshCompleted += PortCollection_RefreshCompleted;
 
+        }
+
+        private void PortCollection_RefreshCompleted()
+        {
+            Collection.SourceView.Refresh();
         }
 
         protected  override void RefreshAction(object obj)
         {
             ProgressIsActive = true;
+            Collection.SourceView.Filter = null;
+            Collection.SourceView.Filter = FilterItem;
             MainVM.PortCollection.Refresh();
         }
 
@@ -104,16 +123,21 @@ namespace TrireksaApp.Contents.Port
 
         private bool FilterItem(object x)
         {
+            var obj = (ModelsShared.Models.Port)x;
+
             if (!string.IsNullOrEmpty(this.Search))
             {
                 var scr = this.Search.ToUpper();
-                var obj = (ModelsShared.Models.Port)x;
-                return (obj.Code.ToUpper().Contains(scr)
-                    || obj.CityName.ToUpper().Contains(scr)
-                    || obj.Name.ToUpper().Contains(scr));
+                return (PortFilter== PortType.None ? true : obj.PortType==PortFilter) &&( (obj.Code.ToUpper().Contains(scr)
+                    || obj.City.CityName.ToUpper().Contains(scr)
+                    || obj.Name.ToUpper().Contains(scr)));
             }
             else
+            {
+                if (obj != null && PortFilter != PortType.None)
+                    return obj.PortType == PortFilter;
                 return true;
+            }
                
         }
 

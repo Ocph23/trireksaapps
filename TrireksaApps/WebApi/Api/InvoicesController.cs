@@ -81,6 +81,21 @@ namespace WebApi.Api
             }
         }
 
+
+        [HttpPut("{id}")]
+        [ApiAuthorize(Roles = "Administrator, Accounting")]
+        public async Task<IActionResult> Put(int id, Invoices model)
+        {
+            try
+            {
+                return Ok(await context.Put(id, model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorMessage(ex.Message));
+            }
+        }
+
         [HttpPut("UpdateDeliveryDataAction/{Id}")]
         [ApiAuthorize(Roles = "Administrator, Accounting")]
         public async Task<IActionResult> UpdateDeliveryDataAction(int Id, Invoices t)

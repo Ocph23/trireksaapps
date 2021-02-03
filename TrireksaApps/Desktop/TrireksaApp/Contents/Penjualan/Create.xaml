@@ -37,16 +37,16 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel  Grid.ColumnSpan="3">
-            <StackPanel Margin="2" HorizontalAlignment="Right" Height="30" Style="{StaticResource OPanel}">
+            <StackPanel Margin="2" HorizontalAlignment="Right"  Style="{StaticResource OPanel}">
                 <StackPanel.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" Opacity="0.015"/>
                 </StackPanel.Background>
                 <Label Content="STT/AWB"></Label>
                 <TextBox x:Name="keyboar" KeyDown="SearchPress"  KeyboardNavigation.TabIndex="1000" 
                          Text="{Binding STTModel.STT,StringFormat='D6',Mode=TwoWay,ValidatesOnDataErrors=True}" 
-                         Height="40" Width="200" FontWeight="Bold" FontSize="16"></TextBox>
-                <Button Width="30" Padding="0" Margin="2" Command="{Binding Search}" CommandParameter="{Binding STTModel.STT}" >
-                    <mi:PackIcon Kind="FileFind"/>
+                         Height="30" Width="200" FontWeight="Bold" FontSize="16"></TextBox>
+                <Button Padding="0" Height="30" Margin="0" Command="{Binding Search}" CommandParameter="{Binding STTModel.STT}" >
+                    <mi:PackIcon VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="28" Height="28" Kind="FileFind"/>
                 </Button>
             </StackPanel>
         </StackPanel>

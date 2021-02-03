@@ -29,8 +29,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
             this.OriginView = (CollectionView)CollectionViewSource.GetDefaultView(this.PortCollection.Source);
             DestinationSource = new ObservableCollection<ModelsShared.Models.Port>();
             this.DestinationView = (CollectionView)CollectionViewSource.GetDefaultView(DestinationSource);
-            this.OriginView.Filter = PortFilter;
-            DestinationView.Filter = PortFilter;
+           
 
             this.AgentCollection = ResourcesBase.GetMainWindowViewModel().AgentCollection;
             BrowseManifestCommand = new CommandHandler { CanExecuteAction = x => BrowseManifestCommandValidate(), ExecuteAction = x => BrowseManifestCommandAction() };
@@ -41,6 +40,22 @@ namespace TrireksaApp.Contents.ManifestOutgoing
             Save = new CommandHandler { CanExecuteAction = x => SaveValidation(), ExecuteAction = x => SaveAction() };
             Preview = new CommandHandler { ExecuteAction = x => PreviewAction(), CanExecuteAction = x => PreviewValidation() };
             Cancel = new CommandHandler { ExecuteAction = CancelAction, CanExecuteAction = x => true };
+            PortCollection.RefreshCompleted += PortCollection_RefreshCompleted;
+
+
+            if (PortCollection.Source.Count <= 0)
+            {
+                PortCollection.Refresh();
+            }
+            this.OriginView.Filter = PortFilter;
+            DestinationView.Filter = PortFilter;
+
+        }
+
+        private void PortCollection_RefreshCompleted()
+        {
+            
+            OriginView.Refresh();
         }
 
         private void CancelAction(object obj)
@@ -235,6 +250,8 @@ namespace TrireksaApp.Contents.ManifestOutgoing
             get { return _port; }
             set
             {
+                this.OriginView.Filter = PortFilter;
+                DestinationView.Filter = PortFilter;
                 OriginView.Refresh();
                 SetDestinationSource();
                 SetProperty(ref _port, value);
