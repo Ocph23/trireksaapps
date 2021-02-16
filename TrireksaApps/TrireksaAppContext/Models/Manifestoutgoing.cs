@@ -21,11 +21,10 @@ namespace TrireksaAppContext.Models
         public DateTime? OnOriginPort { get; set; }
         public DateTime? OnDestinationPort { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public int? UserId { get; set; }
-
+        public string UsersId { get; set; }
         public DateTime? UpdateDate { get; set; }
-
         public virtual Agent Agent { get; set; }
+        public virtual Users Users{ get; set; }
         public virtual Port DestinationNavigation { get; set; }
         public virtual Port OriginNavigation { get; set; }
         public virtual Manifestinformation Information { get; set; }

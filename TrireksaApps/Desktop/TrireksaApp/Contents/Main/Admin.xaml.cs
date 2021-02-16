@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Controls;
-using ModelsShared.Models;
-using ModelsShared.ReportModels;
+using ShareModel;
 using TrireksaApp.CollectionsBase;
 using TrireksaApp.Pages;
 using TrireksaApp.Reports.Models;
@@ -59,43 +49,29 @@ namespace TrireksaApp.Contents.Main
             invoiceNotRecive.Title.Text = "Invoice Belum Diterima";
             invoiceJatuhTempo.Title.Text = "Invoice Jatuh Tempo";
             spbbelumdikirim.Title.Text = "SPB Belum Dikirim";
-
             OnGetDashboard(Board.Get());
-
-            //OnCompleteInvoice(Board.GetInvoiceNotYetPaid(), invoiceNotPaid);
-            //OnCompleteInvoice(Board.GetInvoiceJatuhTempo(), invoiceJatuhTempo);
-            //OnCompleteInvoice(Board.GetInvoiceNotYetRecive(), invoiceNotRecive);
-            //OnCompleteInvoice(Board.GetInvoiceNotYetDelivery(), invoiceNotDelivery);
-
-           // DateTime date = DateTime.Now;
-
-          ////  PenjualanBulan(Board.GetPenjualanBulan(date),penjualanIni);
-          //  PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-1)), penjualanLalu);
-          //  PenjualanBulan(Board.GetPenjualanBulan(date.AddMonths(-2)), penjualanLalunya);
-            //OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotPaid(), spbbelumditagih);
-            //OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotStatus(), spbNotStatus);
-            //OnCompletePenjualanNotHaveDeliveryStatus(Board.GetPenjualanNotYetSend(), spbbelumdikirim);
-            busy.IsActive = false;
         }
 
         private async void OnGetDashboard(Task<DashboardModel> task)
         {
             var res = await task;
-            if (res != null && res.InvoiceJatuhTempo!=null)
+            if (res != null)
             {
                 Dashboard = res;
                 penjualanIni.ContentItem.Text = string.Format("Rp. {0:N}", res.PenjualanBulanIni);
                 penjualanLalu.ContentItem.Text = string.Format("Rp. {0:N}", res.PenjualanBulanLalu);
                 penjualanLalunya.ContentItem.Text = string.Format("Rp. {0:N}", res.PenjualanDuaBulanLalu);
-                invoiceJatuhTempo.ContentItem.Text = string.Format("{0} Inv", res.InvoiceJatuhTempo.Count());
-                invoiceNotPaid.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotPaid.Count());
-                invoiceNotRecive.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotYetRecive.Count());
-                invoiceNotDelivery.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotYetDelivery.Count());
+                invoiceJatuhTempo.ContentItem.Text = string.Format("{0} Inv", res.InvoiceJatuhTempo);
+                invoiceNotPaid.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotPaid);
+                invoiceNotRecive.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotYetRecive);
+                invoiceNotDelivery.ContentItem.Text = string.Format("{0} Inv", res.InvoiceNotYetDelivery);
                 
-                spbbelumdikirim.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotYetSend.Count());
-                spbbelumditagih.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotPaid.Count());
-                spbNotStatus.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotHaveStatus.Count());
+                spbbelumdikirim.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotYetSend);
+                spbbelumditagih.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotPaid);
+                spbNotStatus.ContentItem.Text = string.Format("{0} SPB", res.PenjualanNotHaveStatus);
             }
+
+            busy.IsActive = false;
         }
 
         //private async void OnCompleteInvoice(Task<List<ModelsShared.Models.Invoice>> task, MainBoxItem obj)
@@ -128,15 +104,15 @@ namespace TrireksaApp.Contents.Main
             {
              
                 case "spbbelumdikirim":
-                    list = Dashboard.PenjualanNotYetSend.ToList();// await Board.GetPenjualanNotYetSend();
+                    list =  await Board.GetPenjualanNotYetSend();
                     CallReportPenjualan("Penjualan Belum Dikirim", list);
                     break;
                 case "spbbelumditagih":
-                    list = Dashboard.PenjualanNotPaid.ToList();// await Board.GetPenjualanNotPaid();
+                    list =  await Board.GetPenjualanNotPaid();
                     CallReportPenjualan("Penjualan Belum Ditagih", list);
                     break;
                 case "spbNotStatus":
-                    list = Dashboard.PenjualanNotHaveStatus.ToList();// await Board.GetPenjualanNotStatus();
+                    list = await Board.GetPenjualanNotStatus();
                     CallReportPenjualan("Penjualan Belum Ada Status", list);
                     break;
 
@@ -171,19 +147,19 @@ namespace TrireksaApp.Contents.Main
             {
 
                 case "invoiceNotDelivery":
-                    list = Dashboard.InvoiceNotYetDelivery.ToList();// await Board.GetInvoiceNotYetDelivery();
+                    list =  await Board.GetInvoiceNotYetDelivery();
                     CallReportInvoice("Invoice Belum Dikirim", list);
                     break;
                 case "invoiceNotRecive":
-                    list = Dashboard.InvoiceNotYetRecive.ToList();// await Board.GetInvoiceNotYetRecive();
+                    list = await Board.GetInvoiceNotYetRecive();
                     CallReportInvoice("Invoice Belum Diterima", list);
                     break;
                 case "invoiceNotPaid":
-                    list = Dashboard.InvoiceNotPaid.ToList();// await Board.GetInvoiceNotYetPaid();
+                    list = await Board.GetInvoiceNotYetPaid();
                     CallReportInvoice("Invoice Belum Dibayar", list);
                     break;
                 case "invoiceJatuhTempo":
-                    list = Dashboard.InvoiceJatuhTempo.ToList();// await Board.GetInvoiceJatuhTempo();
+                    list = await Board.GetInvoiceJatuhTempo();
                     CallReportInvoice("Invoice Jatuh Tempo", list);
                     break;
 

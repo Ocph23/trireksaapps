@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrireksaAppContext.Models;
+using TrireksaAppContext.ReportModels;
 
 namespace TrireksaAppContext
 {
@@ -41,11 +42,8 @@ namespace TrireksaAppContext
                 .Include(x => x.Customer)
                 .Include(x => x.Invoicedetail)
                 .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
-
-                ;
-            var datas = results.ToList();
-
-            return Task.FromResult(results.ToList().AsEnumerable());
+                .AsNoTracking();
+            return Task.FromResult(results.AsEnumerable());
         }
 
 
@@ -63,8 +61,7 @@ namespace TrireksaAppContext
                 .Include(x => x.Invoicedetail)
                 .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Reciver)
                 .Include(x => x.Invoicedetail)
-                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Shiper)
-                    .FirstOrDefault();
+                .ThenInclude(x => x.Penjualan).ThenInclude(x => x.Shiper).FirstOrDefault();
                 return Task.FromResult(inv);
 
             }
@@ -223,6 +220,38 @@ namespace TrireksaAppContext
             }
 
         }
+
+
+        public async Task<IEnumerable<InvoiceReportModel>> GetInvoiceReport(int id)
+        {
+            var inv = await Get(id);
+            var result = from item in inv.Invoicedetail
+                         select new InvoiceReportModel
+                         {
+                             Id = item.Id,
+                             Pcs = item.Penjualan.Colly.Count(),
+                             PortType = item.Penjualan.PortType,
+                             Price = item.Penjualan.Price,
+                             Reciver = item.Penjualan.Reciver.Name,
+                             Shiper = item.Penjualan.Shiper.Name,
+                             PenjualanId = item.PenjualanId,
+                             Total = item.Penjualan.Total,
+                             DoNumber = item.Penjualan.DoNumber,
+                             Tujuan = item.Penjualan.ToCityNavigation.CityName,
+                             Via = item.Penjualan.PortType.ToString(),
+                             Weight = item.Penjualan.Colly.Sum(x => x.Weight),
+                             Etc = item.Penjualan.Etc,
+                             InvoiceId = item.InvoiceId,
+                             PackingCosts = item.Penjualan.PackingCosts,
+                             Tax = item.Penjualan.Tax,
+                             CustomerName = inv.Customer.Name,
+                             DeadLine = inv.DeadLine.Value,
+                             CreateDate = item.Penjualan.ChangeDate.Value,
+                             STT = item.Penjualan.Stt,
+                         };
+            return result.AsEnumerable();
+        }
+
 
     }
 }

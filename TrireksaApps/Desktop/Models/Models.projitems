@@ -19,13 +19,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)NotifyPropertyChanged.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Photo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegisterModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ReportModels\PenjualanReportModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\agent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\AppVersion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\city.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\CityAgentCanAccess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\colly.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\customer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\DashboardModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\deliverystatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\ICloneable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrireksaAppModels\IController.cs" />

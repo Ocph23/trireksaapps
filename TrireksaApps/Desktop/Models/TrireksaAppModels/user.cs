@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ModelsShared.Models
 {
-    public class User : BaseNotify
+    public class Users : BaseNotify
     {
         public string Id
         {

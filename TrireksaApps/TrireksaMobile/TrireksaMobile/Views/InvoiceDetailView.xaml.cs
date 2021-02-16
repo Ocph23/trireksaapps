@@ -1,5 +1,4 @@
 ﻿using ModelsShared.Models;
-using ModelsShared.ReportModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

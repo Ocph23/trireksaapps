@@ -36,6 +36,7 @@ namespace TrireksaAppContext
         public virtual DbSet<Userprofile> Userprofile { get; set; }
         public virtual DbSet<Userrole> Userrole { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<AppVersion> AppVersion{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -401,10 +402,6 @@ namespace TrireksaAppContext
                 entity.Property(e => e.ReferenceId)
                     .HasColumnName("ReferenceID")
                     .HasColumnType("int(11)")
-                    .HasDefaultValueSql("'NULL'");
-
-                entity.Property(e => e.UserId)
-                    .HasColumnType("int(5)")
                     .HasDefaultValueSql("'NULL'");
 
                 entity.HasOne(d => d.Agent)

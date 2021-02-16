@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
 using TrireksaApp.Common;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace TrireksaApp.Contents.Users

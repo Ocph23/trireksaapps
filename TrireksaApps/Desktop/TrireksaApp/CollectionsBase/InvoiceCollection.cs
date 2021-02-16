@@ -6,6 +6,7 @@ using ModelsShared.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using TrireksaApp.Common;
+using TrireksaApp.Reports.Models;
 
 namespace TrireksaApp.CollectionsBase
 {
@@ -72,6 +73,13 @@ namespace TrireksaApp.CollectionsBase
         public async Task<Invoice> GetItemById(int Id)
         {
             var result = await client.GetAsync<Invoice>("", Id);
+            return result;
+        }
+
+
+        public async Task<IEnumerable<InvoiceReportModel>> GetInvoiceReport(int Id)
+        {
+            var result = await client.GetAsync<IEnumerable<InvoiceReportModel>>("GetInvoiceReport", Id);
             return result;
         }
 

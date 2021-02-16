@@ -21,7 +21,7 @@ namespace ModelsShared.Models
         }
 
         public virtual Roles Role { get; set; }
-        public virtual User User { get; set; }
+        public virtual Users User { get; set; }
 
         private string _roleid;
         private string _userid;

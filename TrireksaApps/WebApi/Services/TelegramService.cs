@@ -6,9 +6,7 @@ namespace WebApi.Services
 {
     public class TelegramService:Telegram.Bot.TelegramBotClient
     {
-        private string hash;
-        private string _phoneNumber;
-
+        
         public TelegramService(IOptionsMonitor<TelegramConfig> option) : base(option.CurrentValue.ApiToken) {
             this.OnUpdate += TelegramService_OnUpdate;
             this.OnInlineResultChosen += TelegramService_OnInlineResultChosen;

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -61,5 +62,19 @@ namespace WebApi
                 return false;
            }
        }
+
+
+        public static string GetUserId(this ClaimsPrincipal climes)
+        {
+            try
+            {
+                var claim = climes.FindFirst(ClaimTypes.NameIdentifier);
+                return claim.Value;
+            }
+            catch
+            {
+                return default;
+            }
+        }
     }
 }

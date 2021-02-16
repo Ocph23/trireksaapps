@@ -23,7 +23,7 @@ namespace TrireksaApp.Common
         public MainWindowVM MainVM { get; private set; }
         public CommandHandler RefreshCommand { get; }
 
-        public bool ProgressIsActive
+        public bool ProgressIsActive 
         {
             get { return _isActive; }
             set

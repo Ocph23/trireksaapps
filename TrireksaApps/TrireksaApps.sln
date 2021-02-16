@@ -21,12 +21,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrireksaMobile", "TrireksaM
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TrireksaAppSetup", "TrireksaAppSetup\TrireksaAppSetup.vdproj", "{BC3544F2-9B01-406F-A5D0-F6BCED0A8ED3}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ShareModel", "ShareModel\ShareModel.shproj", "{4460C960-6457-4B7B-8DC8-3BB7A4AE36CF}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Desktop\Models\Models.projitems*{080d1ae5-d476-41c5-af26-8483aaf30e1a}*SharedItemsImports = 13
+		ShareModel\ShareModel.projitems*{17abec46-b78e-4b94-917f-0f005c781aa7}*SharedItemsImports = 5
+		ShareModel\ShareModel.projitems*{4460c960-6457-4b7b-8dc8-3bb7a4ae36cf}*SharedItemsImports = 13
 		Desktop\Shared\Shared.projitems*{9a653a28-fe46-40e8-a14f-48b0e325165d}*SharedItemsImports = 4
 		Desktop\Models\Models.projitems*{e584e416-94e5-412b-95bf-4edce06289d4}*SharedItemsImports = 4
+		ShareModel\ShareModel.projitems*{e584e416-94e5-412b-95bf-4edce06289d4}*SharedItemsImports = 4
 		Desktop\Models\Models.projitems*{ecb9aaa9-106a-47ca-9d46-e6adec60eeb0}*SharedItemsImports = 5
+		ShareModel\ShareModel.projitems*{ecb9aaa9-106a-47ca-9d46-e6adec60eeb0}*SharedItemsImports = 5
 		Desktop\Shared\Shared.projitems*{eeda74fc-ca5a-4c06-9654-2600b74e2d1d}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

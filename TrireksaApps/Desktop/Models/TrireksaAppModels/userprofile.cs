@@ -61,7 +61,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public virtual User User { get; set; }
+        public virtual Users User { get; set; }
 
 
         private int _userid;

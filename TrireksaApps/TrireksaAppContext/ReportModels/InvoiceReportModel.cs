@@ -1,8 +1,7 @@
 ﻿using System;
-using ModelsShared;
-using ModelsShared.Models;
+using TrireksaAppContext.Models;
 
-namespace TrireksaApp.Reports.Models
+namespace TrireksaAppContext.ReportModels
 {
     public class InvoiceReportModel : BaseNotify
     {
@@ -63,28 +62,5 @@ namespace TrireksaApp.Reports.Models
         private string _via;
     }
 
-    public class InvoiceReport : ModelsShared.Models.Invoice
-    {
-        public InvoiceReport(Invoice item)
-        {
-            this.Number = item.Number;
-            this.InvoiceStatus = item.InvoiceStatus;
-            this.InvoicePayType = item.InvoicePayType;
-            this.Biaya = item.Biaya;
-            this.CreateDate = item.CreateDate;
-            this.CustomerName = item.Customer==null?item.CustomerName:item.Customer.Name;
-            this.Tax = item.Tax;
-            this.Biaya = item.Biaya;
-            Total = item.Total;
-            PaidDate = item.PaidDate;
-            DeadLine = item.DeadLine;
-        }
-
-        public string Status
-        {
-            get { return this.InvoiceStatus.ToString(); }
-        }
-
-        public string PaymentType { get { return InvoicePayType.ToString(); } }
-    }
+    
 }

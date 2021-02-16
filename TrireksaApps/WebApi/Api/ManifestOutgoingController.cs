@@ -1,8 +1,4 @@
-﻿
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TrireksaAppContext;
@@ -61,7 +57,7 @@ namespace WebApi.Api
         {
             try
             {
-                return Ok(context.GetByMount(month));
+                return Ok(await context.GetByMount(month));
             }
             catch (Exception ex)
             {
@@ -89,6 +85,7 @@ namespace WebApi.Api
         {
             try
             {
+                t.UsersId = User.GetUserId();
                 return Ok(await context.InsertAndGetItem(t));
             }
             catch (Exception ex)
@@ -99,11 +96,12 @@ namespace WebApi.Api
 
         [HttpPost("UpdateInformation")]
         [ApiAuthorize(Roles = "Administrator, Operational")]
-        public IActionResult UpdateInformation(Manifestinformation obj)
+        public async Task<IActionResult> UpdateInformation(Manifestinformation obj)
         {
             try
             {
-                var result = context.InsertInformation(obj);
+               
+                var result = await context.InsertInformation(obj);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -20,7 +20,9 @@ namespace TrireksaMobile.Droid
     {
         protected override SSLSocketFactory ConfigureCustomSSLSocketFactory(HttpsURLConnection connection)
         {
-            return SSLCertificateSocketFactory.GetInsecure(1000, null);
+            #pragma warning disable CS0618 // Type or member is obsolete
+                        return SSLCertificateSocketFactory.GetInsecure(1000, null);
+            #pragma warning restore CS0618 // Type or member is obsolete
         }
 
         protected override IHostnameVerifier GetSSLHostnameVerifier(HttpsURLConnection connection)

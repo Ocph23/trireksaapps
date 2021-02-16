@@ -197,6 +197,6 @@
 
 
         </ListView>
-        <mui:ModernProgressRing Grid.Row="1" IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
+        <mui:ModernProgressRing Grid.RowSpan="2" IsActive="{Binding ProgressIsActive}" Width="80" Height="20"  />
     </Grid>
 </UserControl>

@@ -72,13 +72,13 @@ namespace TrireksaApp.CollectionsBase
             }
         }
 
-        internal async Task<User> Register(RegisterModel model)
+        internal async Task<Users> Register(RegisterModel model)
         {
             try
             {
                 var userClient = new Client("User");
                 
-                var user =await userClient.PostAsync<User>("register", model);
+                var user =await userClient.PostAsync<Users>("register", model);
                 return user;
             }
             catch (Exception ex)

@@ -1,5 +1,5 @@
 ﻿using ModelsShared.Models;
-using ModelsShared.ReportModels;
+using ShareModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

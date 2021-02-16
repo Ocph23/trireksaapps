@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShareModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrireksaAppContext.Models;
-using TrireksaAppContext.ReportModels;
 
 namespace TrireksaAppContext
 {
@@ -17,15 +17,7 @@ namespace TrireksaAppContext
         {
             db = dbContext;
         }
-        public Task<IEnumerable<Invoices>> GetInvoiceNotYetPaid()
-        {
-
-            var result = db.Invoices.Where(x => x.PaidDate == null)
-                .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
-                .Include(x => x.Customer).AsEnumerable();
-            return Task.FromResult(result);
-        }
-
+       
 
         public Task<double> GetPenjualanBulan(int month, int year)
         {
@@ -59,8 +51,9 @@ namespace TrireksaAppContext
                          Reciver = p.Reciver.Name,
                          Shiper = p.Shiper.Name,
                          ReciverCity = p.ToCityNavigation.CityName,
-                         ShiperCity = p.FromCityNavigation.CityName , PayType= p.PayType.ToString(),
-                          Weight= p.Colly.Sum(x=>x.Weight)
+                         ShiperCity = p.FromCityNavigation.CityName , 
+                         PayType= p.PayType.ToString(),
+                         Weight= p.Colly.Sum(x=>x.Weight)
                      });
                 return Task.FromResult(result.AsEnumerable());
             }
@@ -134,13 +127,22 @@ namespace TrireksaAppContext
             }
         }
 
+
+        public Task<IEnumerable<Invoices>> GetInvoiceNotYetPaid()
+        {
+
+            var result = db.Invoices.Where(x => x.PaidDate == null)
+                .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+                .Include(x => x.Customer).AsEnumerable();
+            return Task.FromResult(result);
+        }
+
         public Task<IEnumerable<Invoices>> GetInvoiceNotYetDelivery()
         {
 
             var invoices = db.Invoices.Where(x => !x.IsDelivery)
                 .Include(x=>x.Invoicedetail).ThenInclude(x=>x.Penjualan).ThenInclude(x=>x.Colly)
-                .Include(x=>x.Customer)
-                ;
+                .Include(x=>x.Customer);
             return Task.FromResult(invoices.AsEnumerable());
 
         }
@@ -148,7 +150,7 @@ namespace TrireksaAppContext
         public Task<IEnumerable<Invoices>> GetInvoiceJatuhTempo()
         {
 
-            var invoices = db.Invoices.Where(x => x.DeadLine <= DateTime.Now)
+            var invoices = db.Invoices.Where(x =>x.InvoicePayType== InvoicePayType.None && x.DeadLine <= DateTime.Now)
                 .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
                 .Include(x => x.Customer)
                 ;
@@ -233,18 +235,35 @@ namespace TrireksaAppContext
             {
                 var model = new DashboardModel();
                 var date = DateTime.Now;
-                model.PenjualanBulanIni = await GetPenjualanBulan(date.Month, date.Year);
                 var blnLalu = date.AddMonths(-1);
-                model.PenjualanBulanLalu = await GetPenjualanBulan(blnLalu.Month, blnLalu.Year);
                 var duaBulanLalu = date.AddMonths(-2);
-                model.PenjualanDuaBulanLalu = await GetPenjualanBulan(duaBulanLalu.Month, duaBulanLalu.Year);
-                model.InvoiceNotPaid = await GetInvoiceNotYetPaid();
-                model.PenjualanNotHaveStatus = await GetPenjualanNotHaveStatus();
-                model.PenjualanNotYetSend = await GetPenjualanNotYetSend();
-                model.PenjualanNotPaid = await GetPenjualanNotPaid();
-                model.InvoiceNotYetDelivery = await GetInvoiceNotYetDelivery();
-                model.InvoiceJatuhTempo = await GetInvoiceJatuhTempo();
-                model.InvoiceNotYetRecive = await GetInvoiceNotYetRecive();
+                var result = db.Penjualan.Where(O => O.ChangeDate.Value >= duaBulanLalu && O.ChangeDate.Value <= date)
+                    .Include(x => x.Colly).AsEnumerable();
+
+                if (result != null)
+                {
+                    model.PenjualanBulanIni = result.Where(x => x.ChangeDate.Value.Month == date.Month && x.ChangeDate.Value.Year == date.Year).Sum(x => x.Total);
+                    model.PenjualanBulanLalu = result.Where(x => x.ChangeDate.Value.Month == blnLalu.Month && x.ChangeDate.Value.Year == blnLalu.Year).Sum(x => x.Total);
+                    model.PenjualanDuaBulanLalu = result.Where(x => x.ChangeDate.Value.Month == duaBulanLalu.Month && x.ChangeDate.Value.Year == duaBulanLalu.Year).Sum(x => x.Total);
+                }
+                //model.PenjualanDuaBulanLalu = await GetPenjualanBulan(duaBulanLalu.Month, duaBulanLalu.Year);
+
+
+                var invoices = db.Invoices.Where(x => x.PaidDate == null || !x.IsDelivery || x.PaidDate==null || x.ReciveDate == null || string.IsNullOrEmpty(x.ReciverBy))
+               .Include(x => x.Invoicedetail).ThenInclude(x => x.Penjualan).ThenInclude(x => x.Colly)
+               .Include(x => x.Customer).AsEnumerable();
+
+                if (invoices != null)
+                {
+                    model.InvoiceNotPaid = invoices.Where(x => x.PaidDate == null).Count();
+                    model.InvoiceNotYetDelivery = invoices.Where(x => !x.IsDelivery).Count();
+                    model.InvoiceNotYetRecive = invoices.Where(x => x.ReciveDate == null || string.IsNullOrEmpty(x.ReciverBy)).Count();
+                    model.InvoiceJatuhTempo = (await GetInvoiceJatuhTempo()).Count();
+                }
+
+                model.PenjualanNotHaveStatus = (await GetPenjualanNotHaveStatus()).Count();
+                model.PenjualanNotYetSend = (await GetPenjualanNotYetSend()).Count();
+                model.PenjualanNotPaid = (await GetPenjualanNotPaid()).Count();
                 return model;
             }
             catch 

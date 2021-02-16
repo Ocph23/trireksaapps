@@ -106,7 +106,7 @@ namespace ModelsShared.Models
             }
         }
 
-        public int UserId
+        public string UsersId
         {
             get { return _userid; }
             set
@@ -128,6 +128,7 @@ namespace ModelsShared.Models
         }
 
         public ManifestInformation Information { get;  set; }
+        public Users Users{ get;  set; }
        
         public Agent Agent {
             get
@@ -169,7 +170,7 @@ namespace ModelsShared.Models
         private DateTime? _ondestinationport;
         private DateTime _createddate;
         private DateTime _updatedate;
-        private int _userid;
+        private string _userid;
         private int _agentid;
         private Agent _agent;
         private Port _originPort;

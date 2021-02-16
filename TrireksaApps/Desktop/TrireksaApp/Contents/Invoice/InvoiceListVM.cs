@@ -210,66 +210,51 @@ namespace TrireksaApp.Contents.Invoice
 
         private async void PreviewManifestAction()
         {
-            var data = await this.GetInvoiceReportModel();
-           if(data!=null)
+            ProgressIsActive = true;
+            try
             {
-
-                var dataSource = new ReportDataSource { Value = data.OrderBy(x => x.STT), Name="DataSet1" };
-                var config = HelperPrint.GetReportSetting();
-                var configSource = new ReportDataSource { Value = config , Name="Config" };
-                config.FirstOrDefault().SignName = ResourcesBase.User.FullName??ResourcesBase.User.UserName;
-                var datasources = new List<ReportDataSource> { dataSource, configSource };
-
-                var content = new Reports.Contents.ReportContent(datasources , "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
-                var dlg = new FirstFloor.ModernUI.Windows.Controls.ModernWindow
+                var data = await this.GetInvoiceReportModel();
+                if (data != null)
                 {
-                    Content = content,
-                    Title = "Invoice",
-                    Style = (Style)App.Current.Resources["BlankWindow"],
-                    ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip,
-                    WindowState = WindowState.Maximized,
-                };
 
-                dlg.ShowDialog();
+                    var dataSource = new ReportDataSource { Value = data.OrderBy(x => x.STT), Name = "DataSet1" };
+                    var config = HelperPrint.GetReportSetting();
+                    var configSource = new ReportDataSource { Value = config, Name = "Config" };
+                    config.FirstOrDefault().SignName = ResourcesBase.User.FullName ?? ResourcesBase.User.UserName;
+                    var datasources = new List<ReportDataSource> { dataSource, configSource };
+
+                    var content = new Reports.Contents.ReportContent(datasources, "TrireksaApp.Reports.Layouts.InvoiceLayout.rdlc", null);
+                    var dlg = new FirstFloor.ModernUI.Windows.Controls.ModernWindow
+                    {
+                        Content = content,
+                        Title = "Invoice",
+                        Style = (Style)App.Current.Resources["BlankWindow"],
+                        ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip,
+                        WindowState = WindowState.Maximized,
+                    };
+
+                    dlg.ShowDialog();
+                }
             }
+            finally
+            {
+                ProgressIsActive = false;
+            }
+
         }
 
         private async Task<List<Reports.Models.InvoiceReportModel>> GetInvoiceReportModel()
         {
-
-            var selected = await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
-           // var selected = MainVM.InvoiceCollections.SelectedItem;
-            await Task.Delay(100); //await MainVM.InvoiceCollections.GetItemById(MainVM.InvoiceCollections.SelectedItem.Id);
-            if(selected!=null)
+            var result = await MainVM.InvoiceCollections.GetInvoiceReport(MainVM.InvoiceCollections.SelectedItem.Id);
+            if(result!=null && result.Count() > 0)
             {
-                var result = from item in selected.Invoicedetail
-                             select new Reports.Models.InvoiceReportModel
-                             {
-                                 Id = item.Id,
-                                 Pcs = item.Penjualan.Pcs, PortType=item.Penjualan.PortType,
-                                 Price = item.Penjualan.Price,
-                                 Reciver = item.Penjualan.Reciver.Name,
-                                 Shiper = item.Penjualan.Shiper.Name,
-                                 PenjualanId = item.PenjualanId,
-                                 Total = item.Penjualan.Total,
-                                 DoNumber = item.Penjualan.DoNumber,
-                                 Tujuan = item.Penjualan.ToCityNavigation.CityName,
-                                 Via = item.Penjualan.PortType.ToString(),
-                                 Weight = item.Penjualan.Weight,
-                                 Etc = item.Penjualan.Etc,
-                                 InvoiceId = item.InvoiceId,
-                                 PackingCosts = item.Penjualan.PackingCosts,
-                                 Tax = item.Penjualan.Tax,
-                                 NumberView = selected.NumberView,
-                                 CustomerName = selected.Customer.Name,
-                                 DeadLine = selected.DeadLine,
-                                  CreateDate=item.Penjualan.ChangeDate,
-                                 STT = item.Penjualan.STT,
-                                 Terbilang = selected.Invoicedetail.Sum(O=>O.Penjualan.Total).Terbilang()
-                             };
+                var data = result.FirstOrDefault();
+                data.Terbilang = result.Sum(x=>x.Total).Terbilang();
+                data.NumberView = Helper.GenerateInvoiceCode(MainVM.InvoiceCollections.SelectedItem.Number, data.CreateDate);
                 return result.ToList();
             }
             return null;
+
         }
 
         private bool PreviewManifestValidation()

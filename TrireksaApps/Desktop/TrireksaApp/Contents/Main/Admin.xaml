@@ -51,7 +51,7 @@
                 <Pages:MainBoxItem Grid.Row="2" Grid.Column="3" Height="auto" x:Name="penjualanLalunya" Background="#FF03422B" />
             </Grid>
         </ScrollViewer>
-        <mui:ModernProgressRing Name="busy" Grid.RowSpan="2"  Width="80" Height="20"  />
+        <mui:ModernProgressRing Name="busy" Grid.RowSpan="2"   Width="80" Height="20"  />
 
     </Grid>
 </UserControl>

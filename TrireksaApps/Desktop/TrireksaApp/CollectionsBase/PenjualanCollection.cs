@@ -4,15 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using ModelsShared;
 using ModelsShared.Models;
-using ModelsShared.ReportModels;
+using ShareModel;
 using TrireksaApp.Common;
-using TrireksaApp.Models;
 
 namespace TrireksaApp.CollectionsBase
 {
-   
+
     public class PenjualanCollection:BaseCollection
     {
 

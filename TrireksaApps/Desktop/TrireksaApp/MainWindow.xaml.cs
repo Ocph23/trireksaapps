@@ -1,8 +1,10 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,6 +37,44 @@ namespace TrireksaApp
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
           viewmodel.SignalClient.ConnectAsync();
+          _=CheckUpdated();
+        }
+
+        private async Task CheckUpdated()
+        {
+            try
+            {
+                var thisVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                using (var client = new Client())
+                {
+                    var response = await client.ClientContext.GetAsync("api/appversion/last");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = JsonConvert.DeserializeObject<ModelsShared.Models.AppVersion>(response.Content.ReadAsStringAsync().Result);
+                        if (result != null)
+                        {
+                            if(result.Version != thisVersion)
+                            {
+                                ShowMessage($"Terdapat Update Versi Baru ({result.Version}) !");
+                            }
+                        }
+                        else
+                        {
+
+                            throw new SystemException("User Or Password Invalid !..");
+                        }
+
+                    }
+                    else
+                    {
+                        throw new SystemException("You Not Connect to Server");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         internal void ShowMessage(string message)

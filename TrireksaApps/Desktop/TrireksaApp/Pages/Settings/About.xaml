@@ -28,6 +28,7 @@
             <StackPanel Margin="10" Grid.Row="2">
                 <Image  Source="../../Assets/Trireksa.png" Stretch="Fill" Height="61" Width="200" />
                 <Label x:Name="copyRight" HorizontalAlignment="Center" Width="auto" Content="@Ocph23  2016 - 2018"/>
+                <Label x:Name="version" HorizontalAlignment="Center" Width="auto" Content="1.0.0.0"/>
             </StackPanel>
         </Grid>
     </Grid>

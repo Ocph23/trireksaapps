@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -70,6 +69,7 @@ namespace WebApi
             services.AddScoped<TracingContext>();
             services.AddScoped<PhotoContext>();
             services.AddScoped<UserProfileContext>();
+            services.AddScoped<AppVersionContext>();
 
             services.Configure<TelegramConfig>(Configuration.GetSection("Telegram"));
             services.AddSingleton<TelegramService>();

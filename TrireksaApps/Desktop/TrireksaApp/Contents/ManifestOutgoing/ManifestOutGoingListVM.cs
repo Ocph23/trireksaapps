@@ -50,7 +50,13 @@ namespace TrireksaApp.Contents.ManifestOutgoing
         private async void PrintPackingListAction(object obj)
         {
             var list = await MainVM.ManifestOutgoingCollection.GetPackingList(SelectedItem.Id);
-            var content = new Reports.Contents.ReportContent(new Microsoft.Reporting.WinForms.ReportDataSource { Value =list },
+            var config = HelperPrint.GetReportSetting();
+            var sources = new List<Microsoft.Reporting.WinForms.ReportDataSource>() {
+                new Microsoft.Reporting.WinForms.ReportDataSource(){ Name="DataSet1", Value=list},
+                new Microsoft.Reporting.WinForms.ReportDataSource(){ Name="Config", Value=config}
+                };
+
+            var content = new Reports.Contents.ReportContent(sources,
                    "TrireksaApp.Reports.Layouts.PackingListLayout.rdlc", null);
             var dlg = new ModernWindow
             {
@@ -73,8 +79,8 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                 var list = new List<Titipankapal>
                 {
                     new Titipankapal{ AgentContactName= item.Agent.ContactName,  AgentName =   item.Agent.Name, AgentHandphone=item.Agent.Handphone, AgentPhone=item.Agent.Phone,
-                     ArmadaName=item.Information.ArmadaName, Code = item.Id, CrewAddress= item.Information.Address, Jumlah=item.PackingList.Count, CrewContact=item.Information.Contact,  CrewName=item.Information.CrewName,
-                     Destination=item.DestinationNavigation.Name, Origin=item.OriginNavigation.Name, PackNumber=item.PackingList.Count,
+                     ArmadaName=item.Information.ArmadaName, Code = item.Id, CrewAddress= item.Information.Address, Jumlah=item.PackingList.GroupBy(x=>x.PackNumber).Count(), CrewContact=item.Information.Contact,  CrewName=item.Information.CrewName,
+                     Destination=item.DestinationNavigation.Name, Origin=item.OriginNavigation.Name, PackNumber=item.PackingList.GroupBy(x=>x.PackNumber).Count(),
                         DestinationCode=item.DestinationNavigation.Code, OriginCode=item.OriginNavigation.Code, PortType=item.PortType, ReferenceNumber=item.Information.ReferenceNumber}
                 };
 

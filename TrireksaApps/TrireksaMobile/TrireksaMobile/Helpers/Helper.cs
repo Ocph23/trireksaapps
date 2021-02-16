@@ -31,7 +31,9 @@ namespace Helpers
     public class MyDatePicker : DatePicker
     {
         private string _format = null;
-        public static readonly BindableProperty NullableDateProperty = BindableProperty.Create<MyDatePicker, DateTime?>(p => p.NullableDate, null);
+        #pragma warning disable CS0618 // Type or member is obsolete
+                public static readonly BindableProperty NullableDateProperty = BindableProperty.Create<MyDatePicker, DateTime?>(p => p.NullableDate, null);
+        #pragma warning restore CS0618 // Type or member is obsolete
 
         public DateTime? NullableDate
         {

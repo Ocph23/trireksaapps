@@ -127,7 +127,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                     Origin = this.Origin,
                     PackingList = this.PackingList,
                     PortType = this.PortType,
-                    UserId = this.UserId
+                    UsersId = this.UsersId
                 };
 
                 var result = await vm.Add(item);
@@ -144,7 +144,7 @@ namespace TrireksaApp.Contents.ManifestOutgoing
                     this.PackingList = result.PackingList;
                     this.PortType = result.PortType;
                     this.UpdateDate = result.UpdateDate;
-                    this.UserId = result.UserId;
+                    this.UsersId = result.UsersId;
                     result.OriginNavigation = result.OriginNavigation;
                     result.DestinationNavigation = result.DestinationNavigation;
                     result.Agent = this.Agent;

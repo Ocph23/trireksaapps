@@ -7,9 +7,9 @@ namespace TrireksaAppContext.Models
     {
         public Users()
         {
-            Userclaims = new HashSet<Userclaims>();
-            Userlogins = new HashSet<Userlogins>();
-            Userrole = new HashSet<Userrole>();
+            //Userclaims = new HashSet<Userclaims>();
+            //Userlogins = new HashSet<Userlogins>();
+            //Userrole = new HashSet<Userrole>();
         }
 
         public string Id { get; set; }

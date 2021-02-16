@@ -1,5 +1,5 @@
 ﻿using ModelsShared.Models;
-using ModelsShared.ReportModels;
+using ShareModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,33 +32,33 @@ namespace TrireksaMobile.ViewModels
             Load();
         }
 
-        private void PenjualanAction(object obj)
+        private async void PenjualanAction(object obj)
         {
             if(!string.IsNullOrEmpty(obj.ToString()))
             {
                 switch (obj.ToString())
                 {
                     case "1":
-                        ShowPenjualan(DataSource.PenjualanNotYetSend.ToList(), "STT Belum Dikirim");
+                        ShowPenjualan(await DashboardStore.GetPenjualanNotYetSend(), "STT Belum Dikirim");
                         break;
                     case "2":
-                        ShowPenjualan(DataSource.PenjualanNotHaveStatus.ToList(), "STT Belum Ada Status");
+                        ShowPenjualan(await DashboardStore.GetPenjualanNotStatus(), "STT Belum Ada Status");
                         break;
                     case "3":
-                        ShowPenjualan(DataSource.PenjualanNotPaid.ToList(), "STT Belum Ditagih");
+                        ShowPenjualan(await DashboardStore.GetPenjualanNotPaid(), "STT Belum Ditagih");
                         break;
 
                     case "4":
-                        ShowInvoice(DataSource.InvoiceNotYetDelivery.ToList(), "Invoice Belum Dikirim");
+                        ShowInvoice(await DashboardStore.GetInvoiceNotYetDelivery(), "Invoice Belum Dikirim");
                         break;
                     case "5":
-                        ShowInvoice(DataSource.InvoiceNotYetRecive.ToList(), "Invoice Belum Diterima");
+                        ShowInvoice(await DashboardStore.GetInvoiceNotYetRecive(), "Invoice Belum Diterima");
                         break;
                     case "6":
-                        ShowInvoice(DataSource.InvoiceNotPaid.ToList(), "Invoice Belum Dibayar");
+                        ShowInvoice(await DashboardStore.GetInvoiceNotYetPaid(), "Invoice Belum Dibayar");
                         break;
                     case "7":
-                        ShowInvoice(DataSource.InvoiceJatuhTempo.ToList(), "Invoice Jatuh Tempo");
+                        ShowInvoice(await DashboardStore.GetInvoiceJatuhTempo(), "Invoice Jatuh Tempo");
                         break;
 
                     default:
@@ -91,13 +91,13 @@ namespace TrireksaMobile.ViewModels
                     BulanIni = result.PenjualanBulanIni;
                     BulanLalu = result.PenjualanBulanLalu;
                     DuaBulanLalu = result.PenjualanDuaBulanLalu;
-                    JatuhTempo = result.InvoiceJatuhTempo == null ? 0 : result.InvoiceJatuhTempo.Count();
-                    InvoiceNotDelivery = result.InvoiceNotYetDelivery == null ? 0 : result.InvoiceNotYetDelivery.Count();
-                    InvoiceNotPaid = result.InvoiceNotPaid == null ? 0 : result.InvoiceNotPaid.Count();
-                    InvoiceNotRecive = result.InvoiceNotYetRecive == null ? 0 : result.InvoiceNotYetRecive.Count();
-                    STTNotPaid = result.PenjualanNotPaid == null ? 0 : result.PenjualanNotPaid.Count();
-                    STTNotSend = result.PenjualanNotYetSend == null ? 0 : result.PenjualanNotYetSend.Count();
-                    STTNotStatus = result.PenjualanNotHaveStatus == null ? 0 : result.PenjualanNotHaveStatus.Count();
+                    JatuhTempo = result.InvoiceJatuhTempo;
+                    InvoiceNotDelivery = result.InvoiceNotYetDelivery;
+                    InvoiceNotPaid = result.InvoiceNotPaid;
+                    InvoiceNotRecive = result.InvoiceNotYetRecive;
+                    STTNotPaid = result.PenjualanNotPaid ;
+                    STTNotSend = result.PenjualanNotYetSend ;
+                    STTNotStatus = result.PenjualanNotHaveStatus;
                     DataSource = result;
                     IsBusy = false;
                 }

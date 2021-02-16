@@ -54,7 +54,7 @@ namespace WebApi.Api
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult >Get(int Id)
+        public async Task<IActionResult>Get(int Id)
         {
             try
             {
@@ -131,6 +131,20 @@ namespace WebApi.Api
             try
             {
                 return Ok(await context.GetInvoiceForPenjualanInfo(Id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorMessage(ex.Message));
+            }
+        }
+
+
+        [HttpGet("GetInvoiceReport/{id}")]
+        public async Task<IActionResult> GetInvoiceReport(int id)
+        {
+            try
+            {
+                return Ok(await context.GetInvoiceReport(id));
             }
             catch (Exception ex)
             {
