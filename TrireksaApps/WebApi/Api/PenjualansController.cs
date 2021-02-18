@@ -141,7 +141,8 @@ namespace WebApi.Api
         {
             try
             {
-                return Ok(await context.GetPenjualanNotPaid(Id));
+                var data = await context.GetPenjualanNotPaid(Id);
+                return Ok(data);
             }
             catch (Exception ex)
             {

@@ -43,10 +43,10 @@ namespace WebApi
             {
                 webBuilder.UseStartup<Startup>()
                 //IIS
-                //.UseIISIntegration();
-                
+                // .UseIISIntegration();
+
                 //Kestrell
-                .UseKestrel(options =>{options.Limits.MaxRequestBodySize = 52428800;});
+                .UseKestrel(options => { options.Limits.MaxRequestBodySize = 52428800; });
                 webBuilder.UseUrls("http://localhost:5004");
             });
     }

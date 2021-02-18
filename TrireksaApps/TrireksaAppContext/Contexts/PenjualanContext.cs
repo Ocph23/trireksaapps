@@ -242,12 +242,12 @@ namespace TrireksaAppContext
         public Task<IEnumerable<Penjualan>> GetPenjualanNotPaid(int Id)
         {
             var result = db.Penjualan.Where(O => O.PayType == PayType.Credit && O.CustomerIdIsPay == Id && O.IsPaid == false)
-                .Include(x => x.Colly)
-                .Include(x => x.Shiper)
-                .Include(x => x.ToCityNavigation)
-                .Include(x => x.FromCityNavigation)
-                .Include(x => x.Reciver)
-                .Include(x => x.Deliverystatus);
+                .Include(x => x.Colly).AsNoTracking()
+                .Include(x => x.Shiper).AsNoTracking()
+                .Include(x => x.ToCityNavigation).AsNoTracking()
+                .Include(x => x.FromCityNavigation).AsNoTracking()
+                .Include(x => x.Reciver).AsNoTracking()
+                .Include(x => x.Deliverystatus).AsNoTracking();
 
             return Task.FromResult(result.AsEnumerable());
         }
