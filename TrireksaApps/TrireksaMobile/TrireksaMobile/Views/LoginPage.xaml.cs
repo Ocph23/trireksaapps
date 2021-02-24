@@ -98,6 +98,15 @@ namespace TrireksaMobile.Views
                 if (Account.UserIsLogin)
                 {
                     Application.Current.MainPage = new AppShell();
+
+                    if (await Account.UserInRole("Operational"))
+                    {
+                        Application.Current.MainPage = new OperationalShell();
+                    }
+                    else
+                    {
+                        Application.Current.MainPage = new AppShell();
+                    }
                 }
                 else
                 {

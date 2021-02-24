@@ -169,7 +169,7 @@ namespace WebApi.Api
         }
 
         [ApiAuthorize]
-        [HttpPut("UpdateDeliveryStatusBySTT")]
+        [HttpPut("UpdateDeliveryStatusBySTT/{id}")]
         public async Task<IActionResult> UpdateDeliveryStatusBySTT(int id, Deliverystatus obj)
         {
 

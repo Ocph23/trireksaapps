@@ -1,5 +1,6 @@
 ﻿using Accounts;
 using System;
+using System.Threading.Tasks;
 using TrireksaMobile.Services;
 using TrireksaMobile.Views;
 using Xamarin.Forms;
@@ -16,10 +17,11 @@ namespace TrireksaMobile
 
             DependencyService.Register<IUserServices, UserService>();
             DependencyService.Register<IDashboardService, DashboardService>();
-            Load();
+            DependencyService.Register<IPenjualanService, PenjualanService>();
+            _ = Load();
         }
 
-        private void Load()
+        private async Task Load()
         {
 
             MainPage = new Views.LoginPage();
@@ -28,19 +30,14 @@ namespace TrireksaMobile
             {
                 MainPage = new AppShell();
 
-                  
-
-                //if (await Account.UserInRole("Administrator"))
-                //{
-                //}
-                //else if (await Account.UserInRole("Sales"))
-                //{
-                //    MainPage = new SalesShell();
-                //}
-                //else
-                //{
-                //    MainPage = new AppShell();
-                //}
+                if (await Account.UserInRole("Operational"))
+                {
+                    MainPage = new OperationalShell();
+                }
+                else
+                {
+                    MainPage = new AppShell();
+                }
             }
             else
             {

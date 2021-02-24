@@ -14,6 +14,7 @@ namespace TrireksaMobile.ViewModels
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IUserServices UserService => DependencyService.Get<IUserServices>();
         public IDashboardService DashboardStore => DependencyService.Get<IDashboardService>();
+        public IPenjualanService PenjualanStore=> DependencyService.Get<IPenjualanService>();
 
         bool isBusy = false;
         public bool IsBusy

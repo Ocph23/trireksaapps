@@ -13,11 +13,11 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackLayout Margin="0,20" >
-                <Image Source="Trireksa.png" WidthRequest="100" VerticalOptions="CenterAndExpand"/>
+            <StackLayout Margin="0,50,0,0" >
+                <Image Source="Trireksa.png" WidthRequest="150" VerticalOptions="CenterAndExpand"/>
                 <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
             </StackLayout>
-            <StackLayout VerticalOptions="StartAndExpand" Grid.Row="1" Margin="30,0">
+            <StackLayout VerticalOptions="Center" Grid.Row="1" Margin="30,0">
                 <Label Text="Login" FontSize="Title" Margin="0,20"/>
                 <Label Text="User Name"/>
                 <Entry Text="{Binding UserName}"/>
