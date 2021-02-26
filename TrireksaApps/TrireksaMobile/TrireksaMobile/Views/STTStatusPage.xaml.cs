@@ -61,7 +61,7 @@ namespace TrireksaMobile.Views
                   UpdateStatusCommand.ChangeCanExecute();
               };
 
-           // Model.DeliveryStatus.PropertyChanged += (_, __) => UpdateStatusCommand.ChangeCanExecute();
+           
         }
 
         private bool UpdateStatusValidate(object arg)
@@ -119,8 +119,11 @@ namespace TrireksaMobile.Views
                 if (result != null)
                 {
                     IsFound = true;
+                    result.Colly = result.Colly.OrderBy(x => x.CollyNumber).ToList();
                     Model = result;
-                    
+                    Model.DeliveryStatus.IsSignIn = true;
+                    Model.DeliveryStatus.PropertyChanged += (_, __) => UpdateStatusCommand.ChangeCanExecute();
+
                 }
                 else
                 {

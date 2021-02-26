@@ -14,14 +14,16 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackLayout>
-                <Grid Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <SearchBar Placeholder="STT" BackgroundColor="LightGray" x:Name="stt" TextChanged="stt_TextChanged"/>
-                    <Button Grid.Column="1" Command="{Binding SearchCommand}" Text="Cari" />
-                </Grid>
+                <Frame CornerRadius="70" Padding="0" Margin="5" BackgroundColor="#bee1fb">
+                    <Grid Margin="20,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Margin="5" BackgroundColor="Transparent" Placeholder="Nomor STT/AWB" x:Name="stt" TextChanged="stt_TextChanged"/>
+                        <ImageButton BackgroundColor="Transparent"  Margin="5,0" HeightRequest="25" WidthRequest="30"  Source="search.png" Grid.Column="1" Command="{Binding SearchCommand}"   />
+                    </Grid>
+                </Frame>
             </StackLayout>
             <Grid Grid.Row="1" IsVisible="{Binding IsFound}">
                 <Grid.RowDefinitions>
